@@ -6,7 +6,7 @@ import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { toast } from 'react-hot-toast';
 import Image from 'next/image';
-import axios from 'axios';
+import axios, { AxiosResponse, ResponseType } from 'axios';
 import { StyledInput } from '../Input';
 import { AuthLoginButton } from '../Buttons';
 import { FcGoogle } from 'react-icons/fc';
@@ -14,6 +14,10 @@ import { BsFacebook } from 'react-icons/bs';
 import { AiFillApple } from 'react-icons/ai';
 import { BiLogInCircle } from 'react-icons/bi';
 import { signup } from './signUp';
+import { createUser } from '@/app/services';
+import { CreateUserDto } from '@/app/types/Dtos';
+import { Http2ServerResponse } from 'http2';
+import { ApiResponse } from '@/app/types/Types';
 
 export const RegisterModal = () => {
   const loginModal = useLoginModal();
@@ -34,30 +38,24 @@ export const RegisterModal = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      username: '',
+      name: '',
       email: '',
       password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = data => {
-    console.log(data);
-    // axios
-    //   .post('/api/register', data)
-    //   .then(() => {
-    //     toast.success('Cadastro feito com sucesso');
-    //     reset();
-    //     loginModal.onOpen();
-    //     registerModal.onClose();
-    //   })
-    //   .catch(error => {
-    //     if (error.response.status === 400)
-    //       return toast.error('Email ja cadastrado');
-    //     if (error.response.status === 401)
-    //       return toast.error('Nome de usuario já existe');
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    const createUserDto = data as CreateUserDto;
+    const response = await createUser(createUserDto);
 
-    //     toast.error('Algo deu errado! Tente novamente');
-    //   });
+    if (response.status === 400) {
+      return toast.error(response.data.message);
+    } else if (response.status === 201) {
+      toast.success('Conta criada com sucesso!');
+      reset();
+      registerModal.onClose();
+      loginModal.onOpen();
+    }
   };
 
   return (
@@ -100,7 +98,7 @@ export const RegisterModal = () => {
 
           <div className='flex flex-col gap-y-3 mx-auto w-11/12 '>
             <StyledInput
-              id='username'
+              id='name'
               required
               placeholder='Nome:'
               label='Nome:'
@@ -113,6 +111,7 @@ export const RegisterModal = () => {
               placeholder='Email:'
               label='Email:'
               register={register}
+              type='email'
             />
 
             <StyledInput
