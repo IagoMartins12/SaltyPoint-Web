@@ -4,4 +4,5 @@ export interface AuthButton {
   icon?: IconType;
   text: string;
   bgColor: string;
+  onClick: () => void;
 }

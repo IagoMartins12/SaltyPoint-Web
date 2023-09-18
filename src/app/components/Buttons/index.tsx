@@ -34,11 +34,13 @@ export const AuthLoginButton: React.FC<AuthButton> = ({
   bgColor,
   icon: Icon,
   text,
+  onClick,
 }) => {
   return (
     <div className='px-6 sm:px-0 max-w-sm'>
       <button
         type='button'
+        onClick={onClick}
         className={`text-white text-base font-semibold w-full ${bgColor} rounded-lg  px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2`}
       >
         {Icon && <Icon size={25} />}
