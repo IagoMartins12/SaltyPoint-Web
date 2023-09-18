@@ -1,5 +1,6 @@
 import { FaPizzaSlice } from 'react-icons/fa';
-import { AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { LoginButton, RegisterButton } from '../Buttons/ClientButtons';
 
 export const Header = () => {
   return (
@@ -22,15 +23,8 @@ export const Header = () => {
           />
         </div>
         <div className='flex gap-6'>
-          <button className='flex items-center gap-3 px-6 py-3 bg-white min-w-[7rem] rounded-xl shadow-md'>
-            <AiOutlineUser size={25} />
-            <span className='font-semibold text-xl text-black'> Login</span>
-          </button>
-          <button className='flex items-center gap-3 px-6 py-3 bg-black min-w-[7rem] rounded-xl shadow-md'>
-            <span className='font-semibold text-lg  text-white'>
-              Cadastre-se
-            </span>
-          </button>
+          <LoginButton />
+          <RegisterButton />
         </div>
       </div>
     </div>

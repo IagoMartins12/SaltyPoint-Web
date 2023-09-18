@@ -1,3 +1,4 @@
+import { AuthButton } from '@/app/types/ComponentTypes';
 import { AiFillApple } from 'react-icons/ai';
 import { FaGooglePlay } from 'react-icons/fa';
 
@@ -26,5 +27,23 @@ export const GoogleButton = () => {
         <div className='text-xl'>Play Store</div>
       </div>
     </button>
+  );
+};
+
+export const AuthLoginButton: React.FC<AuthButton> = ({
+  bgColor,
+  icon: Icon,
+  text,
+}) => {
+  return (
+    <div className='px-6 sm:px-0 max-w-sm'>
+      <button
+        type='button'
+        className={`text-white text-base font-semibold w-full ${bgColor} rounded-lg  px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2`}
+      >
+        {Icon && <Icon size={25} />}
+        <span className='text-center'>{text}</span> <div></div>
+      </button>
+    </div>
   );
 };

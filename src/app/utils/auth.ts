@@ -1,4 +1,4 @@
-import { User } from '../types';
+import { User } from '../types/ModelsType';
 
 export const setUserLocalStorage = (user: User) => {
   if (user && user.token !== undefined) {
