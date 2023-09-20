@@ -1,4 +1,8 @@
-import { AiOutlineSearch } from 'react-icons/ai';
+import {
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+  AiOutlineUser,
+} from 'react-icons/ai';
 import { MenuHeader } from '../MenuHeader';
 import Image from 'next/image';
 
@@ -16,7 +20,17 @@ export const Header = () => {
       <div className='flex gap-6 items-center'>
         <div className='cursor-pointer flex gap-4'>
           <AiOutlineSearch size={25} />
-          <span className='font-light text-xl'>Buscar</span>
+        </div>
+        <div className='cursor-pointer flex gap-4'>
+          <AiOutlineUser size={25} />
+        </div>
+        <div className='cursor-pointer flex gap-4 relative'>
+          <div className='z-10'>
+            <AiOutlineShoppingCart size={25} />
+          </div>
+          {/* <span className='h-6 w-6 bottom-0 right-0 top-2 z-50 text-center  bg-red-700 absolute rounded-full'>
+            1
+          </span> */}
         </div>
       </div>
     </div>
