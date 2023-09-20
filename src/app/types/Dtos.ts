@@ -3,3 +3,8 @@ export type CreateUserDto = {
   name: string;
   password: string;
 };
+
+export type LoginUserDto = {
+  email: string;
+  password: string;
+};

@@ -52,6 +52,8 @@ export const RegisterModal = () => {
       reset();
       registerModal.onClose();
       loginModal.onOpen();
+    } else {
+      toast.error('Erro ao realizar cadastro!');
     }
   };
 

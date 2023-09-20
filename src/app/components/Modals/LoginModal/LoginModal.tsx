@@ -13,12 +13,16 @@ import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton } from '../../Buttons';
 import { AiFillApple } from 'react-icons/ai';
+import { LoginUserDto } from '@/app/types/Dtos';
+import { loginUser } from '@/app/services';
+import useAuth from '@/app/hooks/auth/useAuth';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
   const isOpen = loginModal.isOpen;
+  const auth = useAuth();
 
   const handleOpenRegisterModal = () => {
     loginModal.onClose();
@@ -29,18 +33,35 @@ export const LoginModal = () => {
     loginModal.onClose();
     forgetPasswordModal.onOpen();
   };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
+
+  const setUserLocalStorage = (acessToken: string) => {
+    auth.setToken(acessToken);
+    localStorage.setItem('secret', JSON.stringify(acessToken));
+    auth.setIsLogged();
+  };
+
+  const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = data => {};
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    const loginUserDto = data as LoginUserDto;
+    const response = await loginUser(loginUserDto);
+
+    if (response.status === 400 || response.status === 401) {
+      return toast.error(response.data.message);
+    } else if (response.status === 200) {
+      toast.success('Login feito com sucesso!');
+      setUserLocalStorage(response.data.access_token);
+      reset();
+      loginModal.onClose();
+    } else {
+      toast.error('Erro ao realizar login!');
+    }
+  };
 
   return (
     <div

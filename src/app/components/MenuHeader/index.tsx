@@ -1,10 +1,8 @@
 'use client';
 
-import useLoginModal, {
-  LoginModalStore,
-} from '@/app/hooks/modals/useLoginModal';
+import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
-import { ModalsStore } from '@/app/types/Types';
+import { ModalStore } from '@/app/types/Types';
 import { useState } from 'react';
 import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 import { BiMessageAlt } from 'react-icons/bi';
@@ -20,7 +18,7 @@ export const MenuHeader = () => {
     setMenuOpen(prevState => !prevState);
   };
 
-  const menuAction = (store: ModalsStore) => {
+  const menuAction = (store: ModalStore) => {
     store.onOpen();
     setMenuOpen(false);
   };

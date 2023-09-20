@@ -1,9 +1,11 @@
+import useAuth from '../hooks/auth/useAuth';
+import { LoginUserDto } from '../types/Dtos';
 import { User } from '../types/ModelsType';
 
-export const setUserLocalStorage = (user: User) => {
-  if (user && user.token !== undefined) {
-    localStorage.setItem('a', JSON.stringify(user.token));
-  }
+export const setUserLocalStorage = (acessToken: string) => {
+  const auth = useAuth();
+  auth.setToken(acessToken);
+  localStorage.setItem('secret', JSON.stringify(acessToken));
 };
 
 export const getUserLocalStorage = () => {

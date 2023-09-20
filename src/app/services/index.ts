@@ -1,5 +1,5 @@
 import { Api } from '../api/Api';
-import { CreateUserDto } from '../types/Dtos';
+import { CreateUserDto, LoginUserDto } from '../types/Dtos';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -15,9 +15,20 @@ export const getCategories = async () => {
 export const createUser = async (createUserDto: CreateUserDto) => {
   try {
     const response = await Api.post('/register', createUserDto);
-    console.log(response);
-    return response; // Retorna a resposta em caso de sucesso
+    return response;
   } catch (error: any) {
-    return error.response; // Retorna a resposta de erro em caso de falha
+    return error.response;
+  }
+};
+
+export const loginUser = async (loginUserDto: LoginUserDto) => {
+  try {
+    console.log('loginUserDto', loginUserDto);
+    const response = await Api.post('/login', loginUserDto);
+    console.log('response', response);
+
+    return response;
+  } catch (error: any) {
+    return error.response;
   }
 };

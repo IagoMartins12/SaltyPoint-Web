@@ -1,12 +1,7 @@
+import { ModalStore } from '@/app/types/Types';
 import { create } from 'zustand';
 
-export interface ForgetPasswordStore {
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-}
-
-const useForgetPasswordModal = create<ForgetPasswordStore>(set => ({
+const useForgetPasswordModal = create<ModalStore>(set => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
