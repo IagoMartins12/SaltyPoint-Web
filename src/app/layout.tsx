@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import ModalsProvider from './providers/ModalsProvider';
 import ToasterProvider from './providers/ToasterProvider';
+import { ModalsBackground } from './components/ModalsBackground/ModalsBackground';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ModalsProvider />
         <ToasterProvider />
+        <ModalsBackground />
         {children}
       </body>
     </html>
