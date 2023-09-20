@@ -1,13 +1,5 @@
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { StyledInputProps } from '@/app/types/ComponentTypes';
 
-interface StyledInputProps {
-  id: string;
-  type?: string;
-  placeholder?: string;
-  register: UseFormRegister<FieldValues>;
-  label?: string;
-  required: boolean;
-}
 export const StyledInput: React.FC<StyledInputProps> = ({
   id,
   label,

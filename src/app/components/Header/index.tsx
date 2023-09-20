@@ -14,16 +14,14 @@ export const Header = () => {
       </div>
 
       <div>
-        <Image src='/logo.png' alt='/logo.png' width={100} height={100} />
+        <Image src='/logo.png' alt='/logo.png' width={80} height={80} />
       </div>
 
       <div className='flex gap-6 items-center'>
         <div className='cursor-pointer flex gap-4'>
           <AiOutlineSearch size={25} />
         </div>
-        <div className='cursor-pointer flex gap-4'>
-          <AiOutlineUser size={25} />
-        </div>
+
         <div className='cursor-pointer flex gap-4 relative'>
           <div className='z-10'>
             <AiOutlineShoppingCart size={25} />

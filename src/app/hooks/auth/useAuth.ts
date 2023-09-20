@@ -1,12 +1,5 @@
+import { AuthStore } from '@/app/types/ComponentTypes';
 import { create } from 'zustand';
-
-export interface AuthStore {
-  isLogged: boolean;
-  setIsLogged: () => void;
-  setLogout: () => void;
-  token: string | null;
-  setToken: (token: string | null) => void;
-}
 
 const useAuth = create<AuthStore>(set => ({
   isLogged: false,

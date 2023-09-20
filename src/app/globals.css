@@ -83,7 +83,7 @@ input:-webkit-autofill:active {
 }
 
 .menu-open {
-  transform: translateX(-25%);
+  transform: translateX(-115px);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 

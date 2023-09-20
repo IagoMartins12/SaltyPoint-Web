@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { AppleButton, GoogleButton, OrderButton } from '../Buttons';
+import { AppleButton, GoogleButton } from '../Buttons';
 
 export const Hero = () => {
   return (
-    <div className='w-full h-[40vh] lg:h-[60vh] flex justify-between'>
-      <div className='w-10/12 lg:w-5/12 xl:w-4/12 mx-auto self-center flex flex-col items-center justify-center gap-12'>
+    <div className='w-10/12 mx-auto h-[40vh] lg:h-[60vh] flex justify-between'>
+      <div className='w-10/12 lg:w-5/12 xl:w-6/12 mx-auto self-center flex flex-col items-center justify-center gap-12'>
         <div className='flex flex-col gap-6'>
           <span className='font-bold text-4xl xl:text-6xl'>
             A MELHOR PIZZA DA REGIÃO

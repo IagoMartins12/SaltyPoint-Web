@@ -1,4 +1,4 @@
-import { ModalStore } from '@/app/types/Types';
+import { ModalStore } from '@/app/types/ComponentTypes';
 import { create } from 'zustand';
 
 const useForgetPasswordModal = create<ModalStore>(set => ({

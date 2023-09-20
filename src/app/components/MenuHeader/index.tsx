@@ -19,14 +19,16 @@ import useAuth, {
 } from '@/app/hooks/auth/useAuth';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
-import { ModalStore } from '@/app/types/Types';
 import { BsBag } from 'react-icons/bs';
+import { ModalStore } from '@/app/types/ComponentTypes';
 
 export const MenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
   const authOptions = useAuth();
+
+  const iconsSize = 28;
 
   const toggleMenu = () => {
     setMenuOpen(prevState => !prevState);
@@ -48,28 +50,28 @@ export const MenuHeader = () => {
   const menuOptions = [
     {
       label: 'Entrar ou cadastrar',
-      icon: <AiOutlineUser size={25} />,
+      icon: <AiOutlineUser size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Fale conosco',
-      icon: <BiMessageAlt size={25} />,
+      icon: <BiMessageAlt size={iconsSize} />,
       onclick: () => {
         menuAction(talkToUsModal);
       },
     },
     {
       label: 'Termos de uso e privacidade',
-      icon: <MdOutlinePrivacyTip size={25} />,
+      icon: <MdOutlinePrivacyTip size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Baixe nosso app',
-      icon: <HiOutlineDeviceMobile size={25} />,
+      icon: <HiOutlineDeviceMobile size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
@@ -79,56 +81,56 @@ export const MenuHeader = () => {
   const userMenuOptions = [
     {
       label: 'Minha conta',
-      icon: <MdOutlineAccountCircle size={25} />,
+      icon: <MdOutlineAccountCircle size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Meus favoritos',
-      icon: <GrFavorite size={25} />,
+      icon: <GrFavorite size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Meus endereços',
-      icon: <AiOutlineHome size={25} />,
+      icon: <AiOutlineHome size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Meus pedidos',
-      icon: <BsBag size={25} />,
+      icon: <BsBag size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Fale conosco',
-      icon: <BiMessageAlt size={25} />,
+      icon: <BiMessageAlt size={iconsSize} />,
       onclick: () => {
         menuAction(talkToUsModal);
       },
     },
     {
       label: 'Termos de uso e privacidade',
-      icon: <MdOutlinePrivacyTip size={25} />,
+      icon: <MdOutlinePrivacyTip size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Baixe nosso app',
-      icon: <HiOutlineDeviceMobile size={25} />,
+      icon: <HiOutlineDeviceMobile size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
     },
     {
       label: 'Sair',
-      icon: <AiOutlineLogout size={25} />,
+      icon: <AiOutlineLogout size={iconsSize} />,
       onclick: () => {
         logoout();
       },
@@ -162,7 +164,7 @@ export const MenuHeader = () => {
             menuOpen ? 'menu-open' : 'menu-closed'
           } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 bg-white border-r overflow-y-auto`}
         >
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-6 px-4 py-3'>
             {authOptions.isLogged
               ? userMenuOptions.map((option, index) => (
                   <div
@@ -173,7 +175,7 @@ export const MenuHeader = () => {
                     }}
                   >
                     {option.icon && option.icon}
-                    <span className='text-base'>{option.label}</span>
+                    <span className='text-lg'>{option.label}</span>
                   </div>
                 ))
               : menuOptions.map((option, index) => (
@@ -185,13 +187,13 @@ export const MenuHeader = () => {
                     }}
                   >
                     {option.icon && option.icon}
-                    <span className='text-base'>{option.label}</span>
+                    <span className='text-lg'>{option.label}</span>
                   </div>
                 ))}
           </div>
           <div className='mt-auto'>
             <p className='my-4 text-xs text-center text-gray-400'>
-              <span>Copyright © 2021</span>
+              <span>Salty point © 2023</span>
             </p>
           </div>
         </nav>
