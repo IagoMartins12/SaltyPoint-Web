@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface ForgetPasswordStore {
+export interface ForgetPasswordStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;

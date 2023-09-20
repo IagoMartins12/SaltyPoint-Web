@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-export interface RegisterModalStore {
+export interface PrivacyTermStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
 }
 
-const useRegisterModal = create<RegisterModalStore>(set => ({
+const usePrivacyTerms = create<PrivacyTermStore>(set => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useRegisterModal;
+export default usePrivacyTerms;

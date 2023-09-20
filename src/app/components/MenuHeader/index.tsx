@@ -1,5 +1,10 @@
 'use client';
 
+import useLoginModal, {
+  LoginModalStore,
+} from '@/app/hooks/modals/useLoginModal';
+import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
+import { ModalsStore } from '@/app/types/Types';
 import { useState } from 'react';
 import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 import { BiMessageAlt } from 'react-icons/bi';
@@ -9,18 +14,45 @@ import { MdOutlinePrivacyTip } from 'react-icons/md';
 export const MenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const loginModal = useLoginModal();
+  const talkToUsModal = useTalkToUsModal();
   const toggleMenu = () => {
     setMenuOpen(prevState => !prevState);
   };
 
+  const menuAction = (store: ModalsStore) => {
+    store.onOpen();
+    setMenuOpen(false);
+  };
   const menuOptions = [
-    { label: 'Entrar ou cadastrar', icon: <AiOutlineUser size={25} /> },
-    { label: 'Fale conosco', icon: <BiMessageAlt size={25} /> },
+    {
+      label: 'Entrar ou cadastrar',
+      icon: <AiOutlineUser size={25} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Fale conosco',
+      icon: <BiMessageAlt size={25} />,
+      onclick: () => {
+        menuAction(talkToUsModal);
+      },
+    },
     {
       label: 'Termos de uso e privacidade',
       icon: <MdOutlinePrivacyTip size={25} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
     },
-    { label: 'Baixe nosso app', icon: <HiOutlineDeviceMobile size={25} /> },
+    {
+      label: 'Baixe nosso app',
+      icon: <HiOutlineDeviceMobile size={25} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
   ];
   return (
     <>
@@ -49,6 +81,9 @@ export const MenuHeader = () => {
               <div
                 className='mb-1 flex items-center justify-start gap-3 cursor-pointer'
                 key={index}
+                onClick={() => {
+                  option.onclick();
+                }}
               >
                 {option.icon && option.icon}
                 <span className=' text-base'>{option.label}</span>

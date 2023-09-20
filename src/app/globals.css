@@ -2,8 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 .modalPosition {
   width: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
+
+.menuModalsPosition {
+  width: 30%;
+  height: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -66,11 +82,14 @@
   font-weight: 700;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px white inset !important;
+.menu-open {
+  transform: translateX(-25%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.menu-closed {
+  transform: translateX(-150%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 @media (max-width: 620px) {
