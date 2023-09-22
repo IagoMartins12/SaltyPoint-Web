@@ -62,3 +62,8 @@ export interface Store {
   products: Product[] | [];
   setProducts: (products: Product[]) => void;
 }
+
+export interface ImageComponentType {
+  src: string;
+  alt: string;
+}

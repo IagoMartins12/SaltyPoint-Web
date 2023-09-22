@@ -16,6 +16,7 @@ import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton } from '../../Buttons';
 import { useTheme } from 'next-themes';
+import { ImageComponent } from '../../ImageComponent';
 
 export const RegisterModal = () => {
   const loginModal = useLoginModal();
@@ -158,12 +159,7 @@ export const RegisterModal = () => {
         </div>
         <div className='w-full sm:w-5/12 lg:w-4/12'>
           <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
-            <Image
-              fill
-              className=' h-1 w-full group-hover:scale-110 transition'
-              src='/register.svg'
-              alt='register'
-            />
+            <ImageComponent src='register.svg' alt='register' />
           </div>
         </div>
       </div>

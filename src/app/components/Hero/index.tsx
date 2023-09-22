@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { AppleButton, GoogleButton } from '../Buttons';
+import { ImageComponent } from '../ImageComponent';
 
 export const Hero = () => {
   return (
@@ -28,8 +29,8 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className='hidden lg:flex w-6/12 relative'>
-        <Image fill src='/hero.svg' alt='hero' />
+      <div className='hidden lg:flex w-5/12 relative'>
+        <ImageComponent src='hero.svg' alt='hero' />
       </div>
     </div>
   );

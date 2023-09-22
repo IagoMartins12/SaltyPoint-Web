@@ -1,30 +1,33 @@
-import useAppDownload from '@/app/hooks/modals/useAppDownload';
 import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
-import { AppleButton, GoogleButton } from '../../Buttons';
 import useCoupons from '@/app/hooks/modals/useCoupons';
 import { useEffect, useState } from 'react';
 import { Discount_cupom } from '@/app/types/ModelsType';
-import { getCategories, getCoupons } from '@/app/services';
+import { getCoupons } from '@/app/services';
 import { CouponCard } from '../../CouponCard';
+import useAuth from '@/app/hooks/auth/useAuth';
 
 export const CouponsModal = () => {
   const [coupons, setCoupons] = useState<Discount_cupom[] | []>([]);
   const { theme } = useTheme();
   const couponModal = useCoupons();
+  const { isLogged } = useAuth();
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const couponsData = await getCoupons();
+    if (isLogged) {
+      const fetchData = async () => {
+        try {
+          const couponsData = await getCoupons();
 
-        setCoupons(couponsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+          setCoupons(couponsData);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }
+  }, [isLogged]);
 
   return (
     <div
@@ -45,9 +48,10 @@ export const CouponsModal = () => {
 
       <div className='overflow-auto privacyScroll'>
         <div className='flex flex-col gap-6 w-10/12 mx-auto'>
-          {coupons.map(coupon => (
-            <CouponCard coupon={coupon} key={coupon.id} />
-          ))}
+          {coupons &&
+            coupons.map(coupon => (
+              <CouponCard coupon={coupon} key={coupon.id} />
+            ))}
         </div>
       </div>
     </div>

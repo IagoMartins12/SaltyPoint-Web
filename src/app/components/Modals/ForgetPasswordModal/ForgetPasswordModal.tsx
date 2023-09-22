@@ -10,6 +10,7 @@ import { useState } from 'react';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { StyledInput } from '../../Input';
 import { recoverPassword } from '@/app/services';
+import { ImageComponent } from '../../ImageComponent';
 
 enum STEPS {
   RECEIVE_EMAIL = 0,
@@ -37,7 +38,6 @@ export const ForgetPasswordModal = () => {
 
       const response = await recoverPassword(object);
 
-      console.log(response);
       if (response.status === 400) {
         return toast.error(response.data.message);
       }
@@ -104,12 +104,7 @@ export const ForgetPasswordModal = () => {
 
   let imageContent = (
     <div className='aspect-video w-full h-2/5   relative overflow-hidden rounded-xl'>
-      <Image
-        fill
-        className='sm:object-cover h-1 w-full group-hover:scale-110 transition'
-        src='/forget.svg'
-        alt='forgetPassword'
-      />
+      <ImageComponent src='forget.svg' alt='forgetPassword' />
     </div>
   );
 

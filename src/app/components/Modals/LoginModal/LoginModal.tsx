@@ -17,6 +17,7 @@ import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
 import { useTheme } from 'next-themes';
+import { ImageComponent } from '../../ImageComponent';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();
@@ -160,12 +161,7 @@ export const LoginModal = () => {
         </div>
         <div className='w-full sm:w-5/12 lg:w-4/12'>
           <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
-            <Image
-              fill
-              className='sm:object-cover h-1 w-full group-hover:scale-110 transition'
-              src='/login.svg'
-              alt='login'
-            />
+            <ImageComponent src='login.svg' alt='login' />
           </div>
         </div>
       </div>

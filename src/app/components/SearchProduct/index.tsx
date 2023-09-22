@@ -14,6 +14,7 @@ export const SearchProduct: React.FC<SearchProductBox> = ({ product }) => {
           src={product.product_image}
           alt='product_image'
           className='object-cover rounded-md'
+          sizes='100%'
         />
       </div>
     </div>
