@@ -1,14 +1,28 @@
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
-import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   AiOutlineMail,
   AiOutlinePhone,
   AiOutlineWhatsApp,
 } from 'react-icons/ai';
+import { IoCloseOutline } from 'react-icons/io5';
 
 export const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
-  const isOpen = talkToUsModal.isOpen;
+  const { theme } = useTheme();
+
+  const { register, handleSubmit, reset } = useForm<FieldValues>({
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    console.log(data);
+  };
 
   const talkOptions = [
     {
@@ -27,30 +41,89 @@ export const TalkToUsModal = () => {
       icon: <AiOutlineMail size={30} />,
     },
   ];
+
+  const emailOptions = [
+    {
+      id: 'name',
+      label: 'Nome',
+      type: 'text',
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      type: 'email',
+    },
+    {
+      id: 'message',
+      label: 'Mensagem',
+      type: 'textarea',
+    },
+  ];
   return (
     <div
-      className={`menuModalsPosition bg-white border-2 flex-col-reverse z-50 ${
-        isOpen ? 'flex' : 'hidden'
-      }`}
+      className={`menuModalsPosition rounded-md gap-6 ${
+        theme === 'light' ? 'bg-white' : 'bg-black'
+      }  flex-col z-50 ${talkToUsModal.isOpen ? 'flex' : 'hidden'}`}
     >
-      <div className='flex w-full h-2/6'>
-        <div className='flex flex-col w-full justify-center gap-2'>
-          {talkOptions.map((op, i) => (
+      <div className='flex items-center justify-between ml-5 mt-2'>
+        <IoCloseOutline
+          size={30}
+          onClick={() => talkToUsModal.onClose()}
+          style={{ cursor: 'pointer' }}
+        />
+      </div>
+
+      <span className='text-3xl font-semibold w-10/12 mx-auto'>
+        Fale conosco
+      </span>
+
+      <form className='flex flex-col w-10/12 mx-auto gap-3'>
+        {emailOptions.map((option, i) => (
+          <div className='flex flex-col gap-2' key={i}>
+            <span>{option.label}</span>
+            {option.type !== 'textarea' ? (
+              <input
+                type={option.type}
+                className='border-b-2 px-2 py-2'
+                {...register(option.id, { required: true })}
+              />
+            ) : (
+              <textarea
+                rows={3}
+                className=' p-2 resize-none border-b-2'
+                id={option.id}
+                {...register(option.id, { required: true })}
+              />
+            )}
+          </div>
+        ))}
+        <button
+          className='mx-auto w-full px-1 py-3 rounded-md text-white bg-red-900 my-4 '
+          onClick={handleSubmit(onSubmit)}
+        >
+          <span className='font-semibold text-medium'>Enviar</span>
+        </button>
+      </form>
+
+      <span className='text-xl font-medium w-10/12 mx-auto'>
+        Ou entre em contato:
+      </span>
+
+      <div className='flex w-full '>
+        <div className='flex flex-col  justify-center items-start w-10/12 mx-auto gap-2'>
+          {talkOptions.map((option, i) => (
             <div className='flex gap-5 items-start justify-center ' key={i + 1}>
               <div className='flex gap-4 items-center'>
-                {op.icon}
-                <span className='font-light text-lg text-end'>{op.label}</span>
+                {option.icon}
+                <span className='font-light text-lg text-end'>
+                  {option.label}
+                </span>
               </div>
               <span className='font-light text-lg underline cursor-pointer'>
-                {op.text}
+                {option.text}
               </span>
             </div>
           ))}
-        </div>
-      </div>
-      <div className='w-full h-3/6 relative'>
-        <div className='aspect-video w-full  overflow-hidden rounded-xl m-1'>
-          <Image fill className='' src='/talk.svg' alt='talk' />
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ export const RegisterModal = () => {
 
   return (
     <div
-      className={`modalPosition flex-col z-50 ${
+      className={`modalPosition rounded-md flex-col z-50 ${
         registerModal.isOpen ? 'flex' : 'hidden'
       } ${theme === 'light' ? 'bg-white' : 'bg-black'} 
       `}

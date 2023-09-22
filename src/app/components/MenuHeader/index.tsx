@@ -1,154 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import {
-  AiOutlineHome,
-  AiOutlineLogout,
-  AiOutlineMenu,
-  AiOutlineUser,
-} from 'react-icons/ai';
-import { BiMessageAlt } from 'react-icons/bi';
-import { HiOutlineDeviceMobile } from 'react-icons/hi';
-import {
-  MdOutlineAccountCircle,
-  MdOutlineFavoriteBorder,
-  MdOutlinePrivacyTip,
-} from 'react-icons/md';
-import { GrFavorite } from 'react-icons/gr';
-
-// Importando useAuth e checkAndSetToken corretamente
-import useAuth, {
-  checkAndSetToken,
-  removeToken,
-} from '@/app/hooks/auth/useAuth';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
-import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
-import { BsBag } from 'react-icons/bs';
-import { ModalStore } from '@/app/types/ComponentTypes';
+import { AiOutlineMenu } from 'react-icons/ai';
 import ThemeSwitch from '../ThemeSwitcher/ThemeSwitch';
-import { useTheme } from 'next-themes';
+import { useMenuHeader } from './useMenuHeader';
 
 export const MenuHeader = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const { theme } = useTheme();
-  const loginModal = useLoginModal();
-  const talkToUsModal = useTalkToUsModal();
-  const authOptions = useAuth();
-
-  const iconsSize = 28;
-
-  const toggleMenu = () => {
-    setMenuOpen(prevState => !prevState);
-  };
-
-  const menuAction = (store: ModalStore) => {
-    store.onOpen();
-    setMenuOpen(false);
-  };
-
-  const logoout = () => {
-    setMenuOpen(false);
-
-    setTimeout(() => {
-      removeToken();
-    }, 1000);
-  };
-
-  const menuOptions = [
-    {
-      label: 'Entrar ou cadastrar',
-      icon: <AiOutlineUser size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Fale conosco',
-      icon: <BiMessageAlt size={iconsSize} />,
-      onclick: () => {
-        menuAction(talkToUsModal);
-      },
-    },
-    {
-      label: 'Termos de uso e privacidade',
-      icon: <MdOutlinePrivacyTip size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Baixe nosso app',
-      icon: <HiOutlineDeviceMobile size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-  ];
-
-  const userMenuOptions = [
-    {
-      label: 'Minha conta',
-      icon: <MdOutlineAccountCircle size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Meus favoritos',
-      icon: <MdOutlineFavoriteBorder size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Meus endereços',
-      icon: <AiOutlineHome size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Meus pedidos',
-      icon: <BsBag size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Fale conosco',
-      icon: <BiMessageAlt size={iconsSize} />,
-      onclick: () => {
-        menuAction(talkToUsModal);
-      },
-    },
-    {
-      label: 'Termos de uso e privacidade',
-      icon: <MdOutlinePrivacyTip size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Baixe nosso app',
-      icon: <HiOutlineDeviceMobile size={iconsSize} />,
-      onclick: () => {
-        menuAction(loginModal);
-      },
-    },
-    {
-      label: 'Sair',
-      icon: <AiOutlineLogout size={iconsSize} />,
-      onclick: () => {
-        logoout();
-      },
-    },
-  ];
-
-  useEffect(() => {
-    // Chamando a função checkAndSetToken corretamente
-    checkAndSetToken();
-  }, []);
+  const {
+    menuOptions,
+    toggleMenu,
+    userMenuOptions,
+    menuOpen,
+    theme,
+    authOptions,
+  } = useMenuHeader();
 
   return (
     <>

@@ -66,9 +66,9 @@ export const LoginModal = () => {
 
   return (
     <div
-      className={`modalPosition ${loginModal.isOpen ? 'flex' : 'hidden'} ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }   flex-col z-50 `}
+      className={`modalPosition rounded-md ${
+        loginModal.isOpen ? 'flex' : 'hidden'
+      } ${theme === 'light' ? 'bg-white' : 'bg-black'}   flex-col z-50 `}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

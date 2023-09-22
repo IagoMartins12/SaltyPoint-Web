@@ -1,0 +1,133 @@
+import useAuth, {
+  checkAndSetToken,
+  removeToken,
+} from '@/app/hooks/auth/useAuth';
+import useLoginModal from '@/app/hooks/modals/useLoginModal';
+import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
+import { ModalStore } from '@/app/types/ComponentTypes';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
+import { BiMessageAlt } from 'react-icons/bi';
+import { BsBag } from 'react-icons/bs';
+import { HiOutlineDeviceMobile } from 'react-icons/hi';
+import {
+  MdOutlineAccountCircle,
+  MdOutlineFavoriteBorder,
+  MdOutlinePrivacyTip,
+} from 'react-icons/md';
+
+export const useMenuHeader = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const { theme } = useTheme();
+  const loginModal = useLoginModal();
+  const talkToUsModal = useTalkToUsModal();
+  const authOptions = useAuth();
+
+  const iconsSize = 28;
+
+  const toggleMenu = () => {
+    setMenuOpen(prevState => !prevState);
+  };
+
+  const menuAction = (store: ModalStore) => {
+    store.onOpen();
+    setMenuOpen(false);
+  };
+
+  const logoout = () => {
+    setMenuOpen(false);
+
+    setTimeout(() => {
+      removeToken();
+    }, 1000);
+  };
+
+  const commomOptions = [
+    {
+      label: 'Fale conosco',
+      icon: <BiMessageAlt size={iconsSize} />,
+      onclick: () => {
+        menuAction(talkToUsModal);
+      },
+    },
+    {
+      label: 'Termos de uso e privacidade',
+      icon: <MdOutlinePrivacyTip size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Baixe nosso app',
+      icon: <HiOutlineDeviceMobile size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+  ];
+
+  const menuOptions = [
+    {
+      label: 'Entrar ou cadastrar',
+      icon: <AiOutlineUser size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    ...commomOptions,
+  ];
+
+  const userMenuOptions = [
+    {
+      label: 'Minha conta',
+      icon: <MdOutlineAccountCircle size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Meus favoritos',
+      icon: <MdOutlineFavoriteBorder size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Meus endereços',
+      icon: <AiOutlineHome size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Meus pedidos',
+      icon: <BsBag size={iconsSize} />,
+      onclick: () => {
+        menuAction(loginModal);
+      },
+    },
+    ...commomOptions,
+    {
+      label: 'Sair',
+      icon: <AiOutlineLogout size={iconsSize} />,
+      onclick: () => {
+        logoout();
+      },
+    },
+  ];
+
+  useEffect(() => {
+    checkAndSetToken();
+  }, []);
+
+  return {
+    userMenuOptions,
+    menuOptions,
+    toggleMenu,
+    menuOpen,
+    theme,
+    authOptions,
+  };
+};
