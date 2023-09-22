@@ -9,7 +9,11 @@ import {
 } from 'react-icons/ai';
 import { BiMessageAlt } from 'react-icons/bi';
 import { HiOutlineDeviceMobile } from 'react-icons/hi';
-import { MdOutlineAccountCircle, MdOutlinePrivacyTip } from 'react-icons/md';
+import {
+  MdOutlineAccountCircle,
+  MdOutlineFavoriteBorder,
+  MdOutlinePrivacyTip,
+} from 'react-icons/md';
 import { GrFavorite } from 'react-icons/gr';
 
 // Importando useAuth e checkAndSetToken corretamente
@@ -21,9 +25,13 @@ import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
 import { BsBag } from 'react-icons/bs';
 import { ModalStore } from '@/app/types/ComponentTypes';
+import ThemeSwitch from '../ThemeSwitcher/ThemeSwitch';
+import { useTheme } from 'next-themes';
 
 export const MenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { theme } = useTheme();
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
   const authOptions = useAuth();
@@ -88,7 +96,7 @@ export const MenuHeader = () => {
     },
     {
       label: 'Meus favoritos',
-      icon: <GrFavorite size={iconsSize} />,
+      icon: <MdOutlineFavoriteBorder size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
       },
@@ -162,7 +170,9 @@ export const MenuHeader = () => {
         <nav
           className={`fixed top-0 ${
             menuOpen ? 'menu-open' : 'menu-closed'
-          } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 bg-white border-r overflow-y-auto`}
+          } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 ${
+            theme === 'light' ? 'bg-white' : 'bg-black'
+          } overflow-y-auto`}
         >
           <div className='flex flex-col gap-6 px-4 py-3'>
             {authOptions.isLogged
@@ -175,7 +185,7 @@ export const MenuHeader = () => {
                     }}
                   >
                     {option.icon && option.icon}
-                    <span className='text-lg'>{option.label}</span>
+                    <span className='text-lg '>{option.label}</span>
                   </div>
                 ))
               : menuOptions.map((option, index) => (
@@ -192,6 +202,7 @@ export const MenuHeader = () => {
                 ))}
           </div>
           <div className='mt-auto'>
+            <ThemeSwitch />
             <p className='my-4 text-xs text-center text-gray-400'>
               <span>Salty point © 2023</span>
             </p>

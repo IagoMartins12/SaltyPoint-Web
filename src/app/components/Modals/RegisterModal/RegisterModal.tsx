@@ -15,12 +15,12 @@ import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton } from '../../Buttons';
+import { useTheme } from 'next-themes';
 
 export const RegisterModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
-
-  const isOpen = registerModal.isOpen;
+  const { theme } = useTheme();
 
   const openLoginModal = () => {
     console.log('clicou');
@@ -59,9 +59,9 @@ export const RegisterModal = () => {
 
   return (
     <div
-      className={`modalPosition bg-white border-2 flex-col z-50 ${
-        isOpen ? 'flex' : 'hidden'
-      }
+      className={`modalPosition flex-col z-50 ${
+        registerModal.isOpen ? 'flex' : 'hidden'
+      } ${theme === 'light' ? 'bg-white' : 'bg-black'} 
       `}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
@@ -77,14 +77,14 @@ export const RegisterModal = () => {
           <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
             <div>
               <span className='font-bold text-2xl'>Salty </span>
-              <span className=' text-black	text-2xl'>Point</span>
+              <span className=' 	text-2xl'>Point</span>
             </div>
             <div className='flex flex-col py-4'>
               <h1 className='font-bold text-xl'>Seja bem vindo</h1>
               <p className='font-medium text-xl'>
                 Já é inscrito? {''}
                 <span
-                  className='text-black text-xl cursor-pointer underline'
+                  className=' text-xl cursor-pointer underline'
                   onClick={() => {
                     openLoginModal();
                   }}

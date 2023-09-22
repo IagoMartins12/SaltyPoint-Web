@@ -16,12 +16,13 @@ import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
+import { useTheme } from 'next-themes';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();
+  const { theme } = useTheme();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
-  const isOpen = loginModal.isOpen;
   const auth = useAuth();
 
   const handleOpenRegisterModal = () => {
@@ -65,9 +66,9 @@ export const LoginModal = () => {
 
   return (
     <div
-      className={`modalPosition bg-white border-2 flex-col z-50 ${
-        isOpen ? 'flex' : 'hidden'
-      }`}
+      className={`modalPosition ${loginModal.isOpen ? 'flex' : 'hidden'} ${
+        theme === 'light' ? 'bg-white' : 'bg-black'
+      }   flex-col z-50 `}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline
@@ -82,14 +83,14 @@ export const LoginModal = () => {
           <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
             <div>
               <span className='font-bold text-2xl'>Salty </span>
-              <span className=' text-black	text-2xl'>Point</span>
+              <span className=' 	text-2xl'>Point</span>
             </div>
             <div className='flex flex-col py-4'>
               <h1 className='font-bold text-xl'>Bem vindo de volta</h1>
               <p className='font-medium text-xl'>
                 Não é inscrito? {''}
                 <span
-                  className='text-black text-xl cursor-pointer underline'
+                  className='text-xl cursor-pointer underline'
                   onClick={() => {
                     handleOpenRegisterModal();
                   }}

@@ -9,6 +9,25 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
+.dark {
+  --bg-color-dark: #1c1c1c;
+  --text-color-dark: #fafafa;
+  --border-color-dark: #0f0f0f;
+  --reactIcons-color-dark: rgba(0, 0, 0, 0.99);
+}
+
+.light {
+  --bg-color-white: #fafafa;
+  --text-color-white: #1c1c1c;
+  --border-color-white: #1d1d1d;
+  --reactIcons-color-white: hsla(0, 0%, 100%, 0.99);
+}
+
+body {
+  color: var(--text-color-white);
+  background-color: var(--bg-color-white);
+}
+
 .modalPosition {
   width: 60%;
   top: 50%;

@@ -29,11 +29,10 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
         gap-2
         p-3
         border-b-2
-        hover:text-neutral-800
+        hover:text-neutral-400
         transition
         cursor-pointer
-        ${selected === label ? 'border-b-neutral-800' : 'border-transparent'}
-        ${selected === label ? 'text-neutral-800' : 'text-neutral-500'}
+        ${selected === label ? 'border-b-red-500' : 'border-transparent'}
         `}
       onClick={() => {
         onClick(label);

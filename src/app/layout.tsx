@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import ModalsProvider from './providers/ModalsProvider';
 import ToasterProvider from './providers/ToasterProvider';
 import { ModalsBackground } from './components/ModalsBackground/ModalsBackground';
+import ThemeProv from './providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <ModalsProvider />
-        <ToasterProvider />
-        <ModalsBackground />
-        {children}
+        <ThemeProv>
+          <ModalsProvider />
+          <ToasterProvider />
+          <ModalsBackground />
+          {children}
+        </ThemeProv>
       </body>
     </html>
   );
