@@ -128,12 +128,22 @@ body {
 }
 
 .menu-open {
-  transform: translateX(-115px);
+  transform: translateX(-30%);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .menu-closed {
   transform: translateX(-150%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.cart-open {
+  transform: translateX(-55%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.cart-closed {
+  transform: translateX(150%);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 .modalBackground {

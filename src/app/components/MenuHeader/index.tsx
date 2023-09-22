@@ -21,7 +21,7 @@ export const MenuHeader = () => {
           className='navbar-burger flex items-center p-3'
           onClick={toggleMenu}
         >
-          <AiOutlineMenu />
+          <AiOutlineMenu size={25} />
         </button>
       </div>
       <div className={`relative z-50 w-6/12`}>
