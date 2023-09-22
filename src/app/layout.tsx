@@ -5,6 +5,7 @@ import ModalsProvider from './providers/ModalsProvider';
 import ToasterProvider from './providers/ToasterProvider';
 import { ModalsBackground } from './components/ModalsBackground/ModalsBackground';
 import ThemeProv from './providers/ThemeProvider';
+import { FetchData } from './components/FetchData';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <ModalsProvider />
           <ToasterProvider />
           <ModalsBackground />
+          <FetchData />
           {children}
         </ThemeProv>
       </body>

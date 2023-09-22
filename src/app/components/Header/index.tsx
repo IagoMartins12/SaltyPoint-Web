@@ -1,10 +1,7 @@
-import {
-  AiOutlineSearch,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-} from 'react-icons/ai';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { MenuHeader } from '../MenuHeader';
 import Image from 'next/image';
+import { SearchIcon } from '../Icons';
 
 export const Header = () => {
   return (
@@ -18,10 +15,7 @@ export const Header = () => {
       </div>
 
       <div className='flex gap-6 items-center'>
-        <div className='cursor-pointer flex gap-4'>
-          <AiOutlineSearch size={25} />
-        </div>
-
+        <SearchIcon />
         <div className='cursor-pointer flex gap-4 relative'>
           <div className='z-10'>
             <AiOutlineShoppingCart size={25} />

@@ -4,6 +4,7 @@ import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
 import { LoginModal } from '../components/Modals/LoginModal/LoginModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
+import { SearchModal } from '../components/Modals/SearchModal';
 import { TalkToUsModal } from '../components/Modals/TalkToUsModal';
 import { TermPrivacyModal } from '../components/Modals/TermPrivacyModal';
 
@@ -16,6 +17,7 @@ const ModalsProvider = () => {
       <TermPrivacyModal />
       <AppDownloadModal />
       <ForgetPasswordModal />
+      <SearchModal />
     </>
   );
 };

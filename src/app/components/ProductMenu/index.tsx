@@ -1,31 +1,14 @@
 'use client';
-import { getCategories, getProducts } from '@/app/services';
-import { Category, Product } from '@/app/types/ModelsType';
-import { useEffect, useState } from 'react';
+
 import { ProductCard } from '../ProductCard';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 export const ProductMenu = () => {
-  const [category, setCategory] = useState<Category[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoryData = await getCategories();
-        const productData = await getProducts();
-        setCategory(categoryData);
-        setProducts(productData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { categorys, products } = useGlobalStore();
 
   return (
     <div className='w-10/12 mx-auto pt-4 flex flex-col gap-8'>
-      {category
+      {categorys
         .filter(c => c.category_name !== 'Bordas')
         .map(item => (
           <div className='flex flex-col w-full gap-6' key={item.id}>

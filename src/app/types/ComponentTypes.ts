@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { Product } from './ModelsType';
+import { Category, Product } from './ModelsType';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface AuthButton {
@@ -40,4 +40,15 @@ export interface AuthStore {
   setLogout: () => void;
   token: string | null;
   setToken: (token: string | null) => void;
+}
+
+export interface SearchCategoryBox {
+  category: Category;
+}
+
+export interface Store {
+  categorys: Category[] | [];
+  setCategorys: (category: Category[]) => void;
+  products: Product[] | [];
+  setProducts: (products: Product[]) => void;
 }
