@@ -1,5 +1,5 @@
 export const getUserLocalStorage = () => {
-  const json = localStorage.getItem('a');
+  const json = localStorage.getItem('secret');
 
   if (!json) {
     return null;
@@ -9,4 +9,4 @@ export const getUserLocalStorage = () => {
   return user ?? null;
 };
 
-export const removeFromStorage = () => localStorage.removeItem('a');
+export const removeFromStorage = () => localStorage.removeItem('secret');

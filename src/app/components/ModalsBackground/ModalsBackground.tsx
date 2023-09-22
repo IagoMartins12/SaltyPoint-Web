@@ -1,10 +1,12 @@
 'use client';
 
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
+import useCoupons from '@/app/hooks/modals/useCoupons';
 import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
 import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
+import useSearchModal from '@/app/hooks/modals/useSearchModal';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
 import { useEffect } from 'react';
 
@@ -16,6 +18,8 @@ export const ModalsBackground = () => {
     useAppDownload(),
     usePrivacyTerms(),
     useForgetPasswordModal(),
+    useSearchModal(),
+    useCoupons(),
   ];
 
   useEffect(() => {

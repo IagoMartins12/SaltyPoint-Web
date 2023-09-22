@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { Category, Product } from './ModelsType';
+import { Category, Discount_cupom, Product } from './ModelsType';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface AuthButton {
@@ -46,6 +46,10 @@ export interface SearchCategoryBox {
   category: Category;
   selected?: string | null;
   onClick: (Category_id: string) => void;
+}
+
+export interface CouponCardType {
+  coupon: Discount_cupom;
 }
 
 export interface SearchProductBox {

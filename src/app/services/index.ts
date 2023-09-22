@@ -1,6 +1,6 @@
 import { Api } from '../api/Api';
 import { CreateUserDto, LoginUserDto, RecoverPasswordDto } from '../types/Dtos';
-import { Category, Product } from '../types/ModelsType';
+import { Category, Discount_cupom, Product } from '../types/ModelsType';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -43,6 +43,15 @@ export const getCategories = async (): Promise<Category[]> => {
   try {
     const response = await Api.get('/category');
     return response.data as Category[];
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getCoupons = async (): Promise<Discount_cupom[]> => {
+  try {
+    const response = await Api.get('/coupon');
+    return response.data as Discount_cupom[];
   } catch (error: any) {
     return error;
   }

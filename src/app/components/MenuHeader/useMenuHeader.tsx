@@ -13,11 +13,13 @@ import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
 import { BiMessageAlt } from 'react-icons/bi';
 import { BsBag } from 'react-icons/bs';
 import { HiOutlineDeviceMobile } from 'react-icons/hi';
+import { RiCoupon2Line } from 'react-icons/ri';
 import {
   MdOutlineAccountCircle,
   MdOutlineFavoriteBorder,
   MdOutlinePrivacyTip,
 } from 'react-icons/md';
+import useCoupons from '@/app/hooks/modals/useCoupons';
 
 export const useMenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,6 +29,7 @@ export const useMenuHeader = () => {
   const talkToUsModal = useTalkToUsModal();
   const termPrivacyModal = usePrivacyTerms();
   const appModal = useAppDownload();
+  const couponModal = useCoupons();
 
   const authOptions = useAuth();
 
@@ -111,6 +114,13 @@ export const useMenuHeader = () => {
       icon: <BsBag size={iconsSize} />,
       onclick: () => {
         menuAction(loginModal);
+      },
+    },
+    {
+      label: 'Meus cupons',
+      icon: <RiCoupon2Line size={iconsSize} />,
+      onclick: () => {
+        menuAction(couponModal);
       },
     },
     ...commomOptions,

@@ -56,7 +56,7 @@ body {
 /* Estilize a faixa da barra de rolagem */
 .privacyScroll::-webkit-scrollbar-track {
   border-radius: 20px;
-  background-color: #f0f0f0; /* Cor de fundo da faixa */
+  background-color: transparent; /* Cor de fundo da faixa */
 }
 
 /* Estilize a peça da faixa da barra de rolagem */
