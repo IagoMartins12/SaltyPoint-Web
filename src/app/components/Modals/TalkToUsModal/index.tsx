@@ -84,13 +84,13 @@ export const TalkToUsModal = () => {
             {option.type !== 'textarea' ? (
               <input
                 type={option.type}
-                className='border-b-2 px-2 py-2'
+                className='border-b-2 px-2 py-2 bg-transparent'
                 {...register(option.id, { required: true })}
               />
             ) : (
               <textarea
                 rows={3}
-                className=' p-2 resize-none border-b-2'
+                className=' p-2 bg-transparent resize-none border-b-2'
                 id={option.id}
                 {...register(option.id, { required: true })}
               />

@@ -1,5 +1,5 @@
 import { Api } from '../api/Api';
-import { CreateUserDto, LoginUserDto } from '../types/Dtos';
+import { CreateUserDto, LoginUserDto, RecoverPasswordDto } from '../types/Dtos';
 import { Category, Product } from '../types/ModelsType';
 
 const headers = {
@@ -17,10 +17,22 @@ export const createUser = async (createUserDto: CreateUserDto) => {
 
 export const loginUser = async (loginUserDto: LoginUserDto) => {
   try {
-    console.log('loginUserDto', loginUserDto);
     const response = await Api.post('/login', loginUserDto);
-    console.log('response', response);
 
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const recoverPassword = async (
+  recoverPasswordDto: RecoverPasswordDto,
+) => {
+  try {
+    const response = await Api.post(
+      '/emails/recoverPassword',
+      recoverPasswordDto,
+    );
     return response;
   } catch (error: any) {
     return error.response;

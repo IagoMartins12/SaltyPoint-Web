@@ -119,7 +119,7 @@ export const LoginModal = () => {
             />
             <div className='flex justify-end my-3'>
               <span
-                className='text-black text-base cursor-pointer underline'
+                className=' text-base cursor-pointer underline'
                 onClick={handleOpenForgetPasswordModal}
               >
                 Esqueci minha senha

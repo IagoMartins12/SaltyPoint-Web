@@ -12,7 +12,7 @@ export const StyledInput: React.FC<StyledInputProps> = ({
     <div className='form__group field'>
       <input
         type={type}
-        className='form__field'
+        className='form__field bg-transparent'
         placeholder={placeholder}
         {...register(id, { required })}
       />

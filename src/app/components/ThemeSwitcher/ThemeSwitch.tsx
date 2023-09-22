@@ -21,7 +21,6 @@ const ThemeSwitch = () => {
     return null;
   }
 
-  console.log(theme);
   return (
     <div className='cursor-pointer flex items-center justify-center'>
       {theme === 'light' ? (

@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+/* Estilos padrão para o preenchimento automático */
+input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/* Estilos para o preenchimento automático quando o tema é escuro */
+[data-theme='dark'] input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px black inset !important;
 }
 
 .dark {
@@ -43,6 +46,29 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
+}
+
+/* Defina a largura da barra de rolagem */
+.privacyScroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Estilize a faixa da barra de rolagem */
+.privacyScroll::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background-color: #f0f0f0; /* Cor de fundo da faixa */
+}
+
+/* Estilize a peça da faixa da barra de rolagem */
+.privacyScroll::-webkit-scrollbar-track-piece {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilize o polegar da barra de rolagem */
+.privacyScroll::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #9b9b9b;
 }
 
 .form__group {
@@ -121,7 +147,8 @@ body {
 }
 
 @media (max-width: 620px) {
-  .modalPosition {
+  .modalPosition,
+  .menuModalsPosition {
     width: 100%;
     min-height: 100vh;
     top: 0;

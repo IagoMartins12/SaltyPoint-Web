@@ -1,6 +1,7 @@
 'use client';
 
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
+import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
 import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
@@ -14,6 +15,7 @@ export const ModalsBackground = () => {
     useTalkToUsModal(),
     useAppDownload(),
     usePrivacyTerms(),
+    useForgetPasswordModal(),
   ];
 
   useEffect(() => {
