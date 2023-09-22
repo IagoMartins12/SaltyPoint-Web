@@ -2,7 +2,9 @@ import useAuth, {
   checkAndSetToken,
   removeToken,
 } from '@/app/hooks/auth/useAuth';
+import useAppDownload from '@/app/hooks/modals/useAppDownload';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
+import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
 import { ModalStore } from '@/app/types/ComponentTypes';
 import { useTheme } from 'next-themes';
@@ -23,6 +25,9 @@ export const useMenuHeader = () => {
   const { theme } = useTheme();
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
+  const termPrivacyModal = usePrivacyTerms();
+  const appModal = useAppDownload();
+
   const authOptions = useAuth();
 
   const iconsSize = 28;
@@ -56,14 +61,14 @@ export const useMenuHeader = () => {
       label: 'Termos de uso e privacidade',
       icon: <MdOutlinePrivacyTip size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(termPrivacyModal);
       },
     },
     {
       label: 'Baixe nosso app',
       icon: <HiOutlineDeviceMobile size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(appModal);
       },
     },
   ];
