@@ -10,12 +10,18 @@ export const ProductMenu = () => {
     <div className='w-10/12 mx-auto pt-4 flex flex-col gap-8'>
       {categorys
         .filter(c => c.category_name !== 'Bordas')
-        .map(item => (
-          <div className='flex flex-col w-full gap-6' key={item.id}>
-            <span className='font-medium text-3xl'>{item.category_name}</span>
-            <div className='flex gap-4 flex-wrap justify-center'>
+        .map(category => (
+          <div
+            className='flex flex-col w-full gap-6'
+            key={category.id}
+            id={category.category_name}
+          >
+            <span className='font-medium text-3xl px-3'>
+              {category.category_name}
+            </span>
+            <div className='flex gap-x-2 gap-y-6 flex-wrap '>
               {products
-                .filter(p => p.category_id === item.id)
+                .filter(p => p.category_id === category.id)
                 .map(product => (
                   <ProductCard product={product} key={product.id} />
                 ))}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export const ProductCard: React.FC<ProductCardType> = ({ product }) => {
   return (
-    <div className='w-5/12 flex shadow-md h-60 p-2 rounded-2xl cursor-pointer'>
+    <div className='w-[48%] flex shadow-md min-h-[20vh] p-2 rounded-2xl cursor-pointer'>
       <div className='relative w-5/12 h-full'>
         <Image
           fill
