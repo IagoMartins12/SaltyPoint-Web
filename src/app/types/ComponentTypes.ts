@@ -44,6 +44,12 @@ export interface AuthStore {
 
 export interface SearchCategoryBox {
   category: Category;
+  selected?: string | null;
+  onClick: (Category_id: string) => void;
+}
+
+export interface SearchProductBox {
+  product: Product;
 }
 
 export interface Store {
