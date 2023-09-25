@@ -61,9 +61,11 @@ export const TalkToUsModal = () => {
   ];
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-6 ${
+      className={`menuModalsPosition rounded-md gap-6  ${
         theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 ${talkToUsModal.isOpen ? 'flex' : 'hidden'}`}
+      }  flex-col z-50 flex ${
+        talkToUsModal.isOpen ? 'modal-open' : 'modal-closed'
+      }`}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

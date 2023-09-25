@@ -32,8 +32,8 @@ export const CouponsModal = () => {
   return (
     <div
       className={`menuModalsPosition rounded-md gap-6 ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 ${couponModal.isOpen ? 'flex' : 'hidden'}`}
+        couponModal.isOpen ? 'modal-open' : 'modal-closed'
+      } ${theme === 'light' ? 'bg-white' : 'bg-black'}  flex-col z-50 flex`}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

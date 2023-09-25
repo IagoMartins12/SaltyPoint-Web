@@ -34,7 +34,7 @@ body {
 .modalPosition {
   width: 60%;
   top: 50%;
-  left: 50%;
+  left: 20%;
   transform: translate(-50%, -50%);
   position: fixed;
 }
@@ -43,9 +43,9 @@ body {
   width: 30%;
   height: 80%;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 35%;
   position: fixed;
+  transform: translate(-50%, -50%);
 }
 
 /* Defina a largura da barra de rolagem */
@@ -144,6 +144,16 @@ body {
 
 .cart-closed {
   transform: translateX(150%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.modal-open {
+  transform: translateY(-55%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.modal-closed {
+  transform: translateY(150%);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 .modalBackground {
