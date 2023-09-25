@@ -4,7 +4,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { toast } from 'react-hot-toast';
-import Image from 'next/image';
 import { IoCloseOutline } from 'react-icons/io5';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
@@ -16,12 +15,10 @@ import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
-import { useTheme } from 'next-themes';
 import { ImageComponent } from '../../ImageComponent';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();
-  const { theme } = useTheme();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
   const auth = useAuth();
@@ -69,7 +66,7 @@ export const LoginModal = () => {
     <div
       className={`modalPosition rounded-md flex ${
         loginModal.isOpen ? 'modal-open' : 'modal-closed'
-      } ${theme === 'light' ? 'bg-white' : 'bg-black'}   flex-col z-50 `}
+      } modalsBackground   flex-col z-50 `}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

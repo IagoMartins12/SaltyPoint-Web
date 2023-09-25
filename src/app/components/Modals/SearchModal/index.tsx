@@ -1,6 +1,5 @@
 import useSearchModal from '@/app/hooks/modals/useSearchModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
-import { useTheme } from 'next-themes';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { IoCloseOutline } from 'react-icons/io5';
 import { SearchCategory } from '../../SearchCategory';
@@ -13,7 +12,6 @@ export const SearchModal = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
   const searchModal = useSearchModal();
-  const { theme } = useTheme();
   const { categorys, products } = useGlobalStore();
 
   const handleSetSelected = (category_id: string) => {
@@ -41,9 +39,9 @@ export const SearchModal = () => {
   };
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-6 flex ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 ${searchModal.isOpen ? 'modal-open' : 'modal-closed'}`}
+      className={`menuModalsPosition rounded-md gap-6 flex modalsBackground  flex-col z-50 ${
+        searchModal.isOpen ? 'modal-open' : 'modal-closed'
+      }`}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

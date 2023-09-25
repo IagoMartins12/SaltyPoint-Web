@@ -5,8 +5,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { toast } from 'react-hot-toast';
-import Image from 'next/image';
-
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import { AiFillApple } from 'react-icons/ai';
@@ -15,13 +13,11 @@ import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
-import { useTheme } from 'next-themes';
 import { ImageComponent } from '../../ImageComponent';
 
 export const RegisterModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
-  const { theme } = useTheme();
 
   const openLoginModal = () => {
     console.log('clicou');
@@ -62,7 +58,7 @@ export const RegisterModal = () => {
     <div
       className={`modalPosition rounded-md flex-col z-50 flex ${
         registerModal.isOpen ? 'modal-open' : 'modal-closed'
-      } ${theme === 'light' ? 'bg-white' : 'bg-black'} 
+      } modalsBackground
       `}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>

@@ -1,16 +1,12 @@
 import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
-import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
 
 export const TermPrivacyModal = () => {
-  const { theme } = useTheme();
   const termPrivacyModal = usePrivacyTerms();
 
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-3 ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 flex ${
+      className={`menuModalsPosition rounded-md gap-3 modalsBackground  flex-col z-50 flex ${
         termPrivacyModal.isOpen ? 'modal-open' : 'modal-closed'
       }`}
     >

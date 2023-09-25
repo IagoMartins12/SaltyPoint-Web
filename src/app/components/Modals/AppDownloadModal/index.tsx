@@ -1,17 +1,15 @@
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
-import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
 import { AppleButton, GoogleButton } from '../../Buttons';
 
 export const AppDownloadModal = () => {
-  const { theme } = useTheme();
   const appModal = useAppDownload();
 
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-3 ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 flex ${appModal.isOpen ? 'modal-open' : 'modal-closed'}`}
+      className={`menuModalsPosition rounded-md gap-3 modalsBackground flex-col z-50 flex ${
+        appModal.isOpen ? 'modal-open' : 'modal-closed'
+      }`}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

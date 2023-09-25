@@ -85,6 +85,13 @@ export interface PrivateStore {
   setAddress: (address: User_Adress[]) => void;
 }
 
+export interface deleteProps {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  currentItem: string | null;
+  setCurrentItem: (item: string) => void;
+}
 export interface ImageComponentType {
   src: string;
   alt: string;

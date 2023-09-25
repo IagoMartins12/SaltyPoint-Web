@@ -5,14 +5,8 @@ import ThemeSwitch from '../ThemeSwitcher/ThemeSwitch';
 import { useMenuHeader } from './useMenuHeader';
 
 export const MenuHeader = () => {
-  const {
-    menuOptions,
-    toggleMenu,
-    userMenuOptions,
-    menuOpen,
-    theme,
-    authOptions,
-  } = useMenuHeader();
+  const { menuOptions, toggleMenu, userMenuOptions, menuOpen, authOptions } =
+    useMenuHeader();
 
   return (
     <>
@@ -34,9 +28,7 @@ export const MenuHeader = () => {
         <nav
           className={`fixed top-0 ${
             menuOpen ? 'menu-open' : 'menu-closed'
-          } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 ${
-            theme === 'light' ? 'bg-white' : 'bg-black'
-          } overflow-y-auto`}
+          } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 modalsBackground overflow-y-auto`}
         >
           <div className='flex flex-col gap-6 px-4 py-3'>
             {authOptions.isLogged

@@ -1,4 +1,3 @@
-import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
 import useCoupons from '@/app/hooks/modals/useCoupons';
 import { useEffect, useState } from 'react';
@@ -9,7 +8,6 @@ import useAuth from '@/app/hooks/auth/useAuth';
 
 export const CouponsModal = () => {
   const [coupons, setCoupons] = useState<Discount_cupom[] | []>([]);
-  const { theme } = useTheme();
   const couponModal = useCoupons();
   const { isLogged } = useAuth();
 
@@ -33,7 +31,7 @@ export const CouponsModal = () => {
     <div
       className={`menuModalsPosition rounded-md gap-3 ${
         couponModal.isOpen ? 'modal-open' : 'modal-closed'
-      } ${theme === 'light' ? 'bg-white' : 'bg-black'}  flex-col z-50 flex`}
+      } modalsBackground  flex-col z-50 flex`}
     >
       <div className='flex items-center justify-between ml-5 mt-2'>
         <IoCloseOutline

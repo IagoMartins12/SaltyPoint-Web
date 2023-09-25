@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
 import { AiOutlineSearch } from 'react-icons/ai';
 import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { getAddressPerCep, sendAddressUser } from '@/app/services';
 import toast from 'react-hot-toast';
-import { AddressUserDto, CEPInfoDto } from '@/app/types/Dtos';
+import { CEPInfoDto } from '@/app/types/Dtos';
 import { AddressInput, InfoAddressInput } from '../../Input';
 import { AddressRadio } from '../../RadioButton';
 import { BsHouseFill } from 'react-icons/bs';
@@ -25,7 +24,6 @@ export const AddAddressModal = () => {
   const [isValid, setIsValid] = useState(false);
   const [isSelected, setIsSelected] = useState<null | number>(null);
 
-  const { theme } = useTheme();
   const addAddress = useAddAddress();
   const { address, setAddress } = usePrivateStore();
 
@@ -108,9 +106,7 @@ export const AddAddressModal = () => {
 
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-3 ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 flex ${
+      className={`menuModalsPosition rounded-md gap-3 modalsBackground flex-col z-50 flex ${
         addAddress.isOpen ? 'modal-open' : 'modal-closed'
       }`}
     >

@@ -7,7 +7,6 @@ import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
 import { ModalStore } from '@/app/types/ComponentTypes';
-import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
 import { BiMessageAlt } from 'react-icons/bi';
@@ -25,7 +24,6 @@ import useAddress from '@/app/hooks/modals/useAddress';
 export const useMenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { theme } = useTheme();
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
   const termPrivacyModal = usePrivacyTerms();
@@ -144,7 +142,6 @@ export const useMenuHeader = () => {
     menuOptions,
     toggleMenu,
     menuOpen,
-    theme,
     authOptions,
   };
 };

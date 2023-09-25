@@ -4,6 +4,7 @@ import { AddAddressModal } from '../components/Modals/AddAddressModal';
 import { AddressModal } from '../components/Modals/AddressModal';
 import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
 import { CouponsModal } from '../components/Modals/CouponsModal';
+import { DeleteItemModal } from '../components/Modals/DeleteItemModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
 import { LoginModal } from '../components/Modals/LoginModal/LoginModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
@@ -24,6 +25,7 @@ const ModalsProvider = () => {
       <CouponsModal />
       <AddressModal />
       <AddAddressModal />
+      <DeleteItemModal />
     </>
   );
 };

@@ -37,6 +37,14 @@ body {
   background-color: var(--bg-color-white);
 }
 
+.modalsBackground {
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] .modalsBackground {
+  background-color: #000000;
+}
+
 .modalPosition {
   width: 60%;
   top: 50%;
@@ -54,6 +62,12 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.deleteModalPosition {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
 /* Defina a largura da barra de rolagem */
 .privacyScroll::-webkit-scrollbar {
   width: 5px;

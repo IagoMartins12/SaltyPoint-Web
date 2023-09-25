@@ -1,4 +1,3 @@
-import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
 import useAddress from '@/app/hooks/modals/useAddress';
 import { BsFillHouseDoorFill } from 'react-icons/bs';
@@ -7,29 +6,17 @@ import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
 import { VscEdit } from 'react-icons/vsc';
 import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { deleteAddress } from '@/app/services';
-import toast from 'react-hot-toast';
+import useDelete from '@/app/hooks/modals/useDelete';
 
 export const AddressModal = () => {
-  const { theme } = useTheme();
   const { address } = usePrivateStore();
   const addressModal = useAddress();
   const addAddress = useAddAddress();
+  const deleteAddressModal = useDelete();
 
-  const handleDeleteAddress = async (addressId: string) => {
-    const response = await deleteAddress(addressId);
-
-    if (response.status === 200) {
-      return toast.success('Endereço excluido');
-    } else {
-      return toast.error('Erro ao deletar endereço');
-    }
-  };
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-6 ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 flex ${
+      className={`menuModalsPosition rounded-md gap-6 modalsBackground flex-col z-50 flex ${
         addressModal.isOpen ? 'modal-open' : 'modal-closed'
       }`}
     >
@@ -78,7 +65,8 @@ export const AddressModal = () => {
                     size={25}
                     className='cursor-pointer'
                     onClick={() => {
-                      handleDeleteAddress(address.id);
+                      deleteAddressModal.setCurrentItem(address.id);
+                      deleteAddressModal.onOpen();
                     }}
                   />
                 </div>

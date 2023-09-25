@@ -1,5 +1,4 @@
 import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
-import { useTheme } from 'next-themes';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   AiOutlineMail,
@@ -10,7 +9,6 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 export const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
-  const { theme } = useTheme();
 
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
@@ -61,9 +59,7 @@ export const TalkToUsModal = () => {
   ];
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-3  ${
-        theme === 'light' ? 'bg-white' : 'bg-black'
-      }  flex-col z-50 flex ${
+      className={`menuModalsPosition rounded-md gap-3  modalsBackground flex-col z-50 flex ${
         talkToUsModal.isOpen ? 'modal-open' : 'modal-closed'
       }`}
     >

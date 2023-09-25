@@ -4,6 +4,7 @@ import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import useAddress from '@/app/hooks/modals/useAddress';
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
 import useCoupons from '@/app/hooks/modals/useCoupons';
+import useDelete from '@/app/hooks/modals/useDelete';
 import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
@@ -24,6 +25,7 @@ export const ModalsBackground = () => {
     useCoupons(),
     useAddress(),
     useAddAddress(),
+    useDelete(),
   ];
 
   useEffect(() => {
