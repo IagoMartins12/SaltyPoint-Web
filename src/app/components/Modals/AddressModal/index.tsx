@@ -14,6 +14,12 @@ export const AddressModal = () => {
   const addAddress = useAddAddress();
   const deleteAddressModal = useDelete();
 
+  const handleOpenDeleteModal = (addressId: string) => {
+    deleteAddressModal.setCurrentItem(addressId);
+
+    addressModal.onClose();
+    deleteAddressModal.onOpen();
+  };
   return (
     <div
       className={`menuModalsPosition rounded-md gap-6 modalsBackground flex-col z-50 flex ${
@@ -65,8 +71,7 @@ export const AddressModal = () => {
                     size={25}
                     className='cursor-pointer'
                     onClick={() => {
-                      deleteAddressModal.setCurrentItem(address.id);
-                      deleteAddressModal.onOpen();
+                      handleOpenDeleteModal(address.id);
                     }}
                   />
                 </div>
