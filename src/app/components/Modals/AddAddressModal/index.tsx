@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineQuestionCircle, AiOutlineSearch } from 'react-icons/ai';
 import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { getAddressPerCep, sendAddressUser } from '@/app/services';
@@ -143,7 +143,6 @@ export const AddAddressModal = () => {
                   {...register('cep', {
                     required: true,
                   })}
-                  value={cepState}
                   onChange={ev => {
                     handleOnChange(ev.target.value);
                   }}
@@ -166,6 +165,14 @@ export const AddAddressModal = () => {
               >
                 <AiOutlineSearch size={25} />
                 <span className='font-medium text-lg'>Buscar CEP</span>
+              </button>
+
+              <button
+                type='submit'
+                className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg`}
+              >
+                <AiOutlineQuestionCircle size={25} />
+                <span className='font-medium text-sm'>Não sei meu cep</span>
               </button>
             </form>
           )}
