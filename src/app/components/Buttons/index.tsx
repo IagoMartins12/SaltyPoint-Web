@@ -50,6 +50,22 @@ export const AuthLoginButton: React.FC<AuthButton> = ({
   );
 };
 
+export const AuthLoginButtonRounded: React.FC<AuthButton> = ({
+  bgColor,
+  icon: Icon,
+  onClick,
+}) => {
+  return (
+    <button
+      type='button'
+      onClick={onClick}
+      className={`text-white text-base flex items-center justify-center font-semibold w-12 h-12 ${bgColor} rounded-full`}
+    >
+      {Icon && <Icon size={30} />}
+    </button>
+  );
+};
+
 export const OrderButton = () => {
   return (
     <button

@@ -1,5 +1,6 @@
 'use client';
 
+import useAddress from '@/app/hooks/modals/useAddress';
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
 import useCoupons from '@/app/hooks/modals/useCoupons';
 import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
@@ -20,6 +21,7 @@ export const ModalsBackground = () => {
     useForgetPasswordModal(),
     useSearchModal(),
     useCoupons(),
+    useAddress(),
   ];
 
   useEffect(() => {

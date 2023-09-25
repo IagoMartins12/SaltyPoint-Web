@@ -147,9 +147,9 @@ export const ForgetPasswordModal = () => {
 
   return (
     <div
-      className={`menuModalsPosition  flex-col gap-12 z-50 ${
-        forgetPasswordModal.isOpen ? 'flex' : 'hidden'
-      }
+      className={`menuModalsPosition  flex-col gap-12 z-50 flex ${
+        forgetPasswordModal.isOpen ? 'modal-open' : 'modal-closed'
+      } 
 ${theme === 'light' ? 'bg-white' : 'bg-black'}
       `}
     >

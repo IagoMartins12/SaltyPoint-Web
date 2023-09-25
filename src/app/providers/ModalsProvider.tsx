@@ -1,5 +1,6 @@
 'use client';
 
+import { AddressModal } from '../components/Modals/AddressModal';
 import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
 import { CouponsModal } from '../components/Modals/CouponsModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
@@ -20,6 +21,7 @@ const ModalsProvider = () => {
       <ForgetPasswordModal />
       <SearchModal />
       <CouponsModal />
+      <AddressModal />
     </>
   );
 };

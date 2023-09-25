@@ -20,6 +20,7 @@ import {
   MdOutlinePrivacyTip,
 } from 'react-icons/md';
 import useCoupons from '@/app/hooks/modals/useCoupons';
+import useAddress from '@/app/hooks/modals/useAddress';
 
 export const useMenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ export const useMenuHeader = () => {
   const termPrivacyModal = usePrivacyTerms();
   const appModal = useAppDownload();
   const couponModal = useCoupons();
+  const addressModal = useAddress();
 
   const authOptions = useAuth();
 
@@ -106,7 +108,7 @@ export const useMenuHeader = () => {
       label: 'Meus endereços',
       icon: <AiOutlineHome size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(addressModal);
       },
     },
     {

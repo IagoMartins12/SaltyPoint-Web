@@ -11,7 +11,7 @@ import { BsFacebook } from 'react-icons/bs';
 import { BiLogInCircle } from 'react-icons/bi';
 import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import { StyledInput } from '../../Input';
-import { AuthLoginButton } from '../../Buttons';
+import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
@@ -138,6 +138,26 @@ export const LoginModal = () => {
                 <span className='text-center'>Ou entre com: </span>
                 <hr className='w-3/12 ml-2' />
               </div>
+              {/* <div className='flex gap-6 items-center justify-center'>
+                <AuthLoginButtonRounded
+                  text='Continuar com Google'
+                  icon={FcGoogle}
+                  bgColor='bg-[#4285F4] '
+                  onClick={() => console.log('clicou')}
+                />
+                <AuthLoginButtonRounded
+                  text='Continuar com Facebook'
+                  icon={BsFacebook}
+                  bgColor='bg-blue-800 '
+                  onClick={() => console.log('clicou')}
+                />
+                <AuthLoginButtonRounded
+                  text='Continuar com Apple'
+                  icon={AiFillApple}
+                  bgColor='bg-black '
+                  onClick={() => console.log('clicou')}
+                />
+              </div> */}
               <AuthLoginButton
                 text='Continuar com Google'
                 icon={FcGoogle}
