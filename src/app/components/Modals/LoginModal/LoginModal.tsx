@@ -138,7 +138,7 @@ export const LoginModal = () => {
                 <span className='text-center'>Ou entre com: </span>
                 <hr className='w-3/12 ml-2' />
               </div>
-              {/* <div className='flex gap-6 items-center justify-center'>
+              <div className='flex items-center justify-evenly'>
                 <AuthLoginButtonRounded
                   text='Continuar com Google'
                   icon={FcGoogle}
@@ -157,8 +157,8 @@ export const LoginModal = () => {
                   bgColor='bg-black '
                   onClick={() => console.log('clicou')}
                 />
-              </div> */}
-              <AuthLoginButton
+              </div>
+              {/* <AuthLoginButton
                 text='Continuar com Google'
                 icon={FcGoogle}
                 bgColor='bg-[#4285F4] '
@@ -175,7 +175,7 @@ export const LoginModal = () => {
                 icon={AiFillApple}
                 bgColor='bg-black '
                 onClick={() => console.log('clicou')}
-              />
+              /> */}
             </div>
           </div>
         </div>

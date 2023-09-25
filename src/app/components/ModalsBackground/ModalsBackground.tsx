@@ -1,5 +1,6 @@
 'use client';
 
+import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import useAddress from '@/app/hooks/modals/useAddress';
 import useAppDownload from '@/app/hooks/modals/useAppDownload';
 import useCoupons from '@/app/hooks/modals/useCoupons';
@@ -22,6 +23,7 @@ export const ModalsBackground = () => {
     useSearchModal(),
     useCoupons(),
     useAddress(),
+    useAddAddress(),
   ];
 
   useEffect(() => {

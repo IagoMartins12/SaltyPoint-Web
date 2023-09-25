@@ -31,7 +31,7 @@ export const CouponsModal = () => {
 
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-6 ${
+      className={`menuModalsPosition rounded-md gap-3 ${
         couponModal.isOpen ? 'modal-open' : 'modal-closed'
       } ${theme === 'light' ? 'bg-white' : 'bg-black'}  flex-col z-50 flex`}
     >
@@ -42,16 +42,18 @@ export const CouponsModal = () => {
           style={{ cursor: 'pointer' }}
         />
       </div>
-      <span className='text-3xl font-semibold mx-auto w-10/12 text-center'>
-        Cupons disponiveis
-      </span>
+      <div className='flex flex-col w-10/12 mx-auto gap-6'>
+        <span className='text-3xl font-semibold text-center'>
+          Cupons disponiveis
+        </span>
 
-      <div className='overflow-auto privacyScroll'>
-        <div className='flex flex-col gap-6 w-10/12 mx-auto'>
-          {coupons &&
-            coupons.map(coupon => (
-              <CouponCard coupon={coupon} key={coupon.id} />
-            ))}
+        <div className='overflow-auto privacyScroll'>
+          <div className='flex flex-col gap-6'>
+            {coupons &&
+              coupons.map(coupon => (
+                <CouponCard coupon={coupon} key={coupon.id} />
+              ))}
+          </div>
         </div>
       </div>
     </div>

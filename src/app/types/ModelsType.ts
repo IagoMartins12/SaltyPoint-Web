@@ -42,6 +42,9 @@ export type User_Adress = {
   cep?: string | null;
   address: string;
   number: number;
+  city: String;
+  uf: String;
+  district: String;
   reference?: string | null;
   type_adress: number;
 

@@ -7,6 +7,12 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
+input:focus {
+  outline: none;
+}
+
+/* Estilo quando o mouse está sobre o input */
+
 /* Estilos para o preenchimento automático quando o tema é escuro */
 [data-theme='dark'] input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px black inset !important;
@@ -41,7 +47,7 @@ body {
 
 .menuModalsPosition {
   width: 30%;
-  height: 80%;
+  height: 85%;
   top: 50%;
   left: 35%;
   position: fixed;

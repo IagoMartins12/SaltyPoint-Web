@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons';
-import { Category, Discount_cupom, Product } from './ModelsType';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { Category, Discount_cupom, Product, User_Adress } from './ModelsType';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 
 export interface AuthButton {
   icon?: IconType;
@@ -9,6 +9,13 @@ export interface AuthButton {
   onClick: () => void;
 }
 
+export interface AddressRadioButton {
+  icon: IconType;
+  text: string;
+  index: number; // Adicione o índice como propriedade
+  name: string; // Adicione o nome como propriedade
+  onChange: (index: number, name: string) => void; // Função de retorno para lidar com mudanças
+}
 export interface ProductCardType {
   product: Product;
 }
@@ -20,6 +27,16 @@ export interface StyledInputProps {
   register: UseFormRegister<FieldValues>;
   label?: string;
   required: boolean;
+}
+
+export interface AdressInputProps {
+  id: string;
+  type?: string;
+  placeholder?: string;
+  register: UseFormRegister<FieldValues>;
+  label?: string;
+  disabled?: boolean;
+  errors: FieldErrors<FieldValues>;
 }
 
 export interface CategoryBoxProps {
@@ -61,6 +78,11 @@ export interface Store {
   setCategorys: (category: Category[]) => void;
   products: Product[] | [];
   setProducts: (products: Product[]) => void;
+}
+
+export interface PrivateStore {
+  address: User_Adress[] | [];
+  setAddress: (address: User_Adress[]) => void;
 }
 
 export interface ImageComponentType {

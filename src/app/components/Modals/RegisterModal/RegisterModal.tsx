@@ -14,7 +14,7 @@ import { BiLogInCircle } from 'react-icons/bi';
 import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
-import { AuthLoginButton } from '../../Buttons';
+import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import { useTheme } from 'next-themes';
 import { ImageComponent } from '../../ImageComponent';
 
@@ -136,7 +136,27 @@ export const RegisterModal = () => {
                 <hr className='w-3/12 ml-2' />
               </div>
 
-              <AuthLoginButton
+              <div className='flex items-center justify-evenly'>
+                <AuthLoginButtonRounded
+                  text='Continuar com Google'
+                  icon={FcGoogle}
+                  bgColor='bg-[#4285F4] '
+                  onClick={() => console.log('clicou')}
+                />
+                <AuthLoginButtonRounded
+                  text='Continuar com Facebook'
+                  icon={BsFacebook}
+                  bgColor='bg-blue-800 '
+                  onClick={() => console.log('clicou')}
+                />
+                <AuthLoginButtonRounded
+                  text='Continuar com Apple'
+                  icon={AiFillApple}
+                  bgColor='bg-black '
+                  onClick={() => console.log('clicou')}
+                />
+              </div>
+              {/* <AuthLoginButton
                 text='Continuar com Google'
                 icon={FcGoogle}
                 bgColor='bg-[#4285F4]'
@@ -153,7 +173,7 @@ export const RegisterModal = () => {
                 icon={AiFillApple}
                 bgColor='bg-black '
                 onClick={() => console.log('clicou')}
-              />
+              /> */}
             </div>
           </div>
         </div>

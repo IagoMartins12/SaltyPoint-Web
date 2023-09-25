@@ -1,11 +1,15 @@
 'use client';
 
+import useAuth from '@/app/hooks/auth/useAuth';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
-import { getCategories, getProducts } from '@/app/services';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import { getAddress, getCategories, getProducts } from '@/app/services';
 import { useEffect } from 'react';
 
 export const FetchData = () => {
   const { setCategorys, setProducts } = useGlobalStore();
+  const { setAddress } = usePrivateStore();
+  const { isLogged } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,5 +26,19 @@ export const FetchData = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (isLogged) {
+      const fetchData = async () => {
+        try {
+          const addressData = await getAddress();
+          setAddress(addressData);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [isLogged]);
   return <></>;
 };

@@ -1,12 +1,30 @@
 import { useTheme } from 'next-themes';
 import { IoCloseOutline } from 'react-icons/io5';
-import { AppleButton, GoogleButton } from '../../Buttons';
 import useAddress from '@/app/hooks/modals/useAddress';
+import { BsFillHouseDoorFill } from 'react-icons/bs';
+import { FaSuitcase } from 'react-icons/fa';
+import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
+import { VscEdit } from 'react-icons/vsc';
+import useAddAddress from '@/app/hooks/modals/useAddAddress';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import { deleteAddress } from '@/app/services';
+import toast from 'react-hot-toast';
 
 export const AddressModal = () => {
   const { theme } = useTheme();
+  const { address } = usePrivateStore();
   const addressModal = useAddress();
+  const addAddress = useAddAddress();
 
+  const handleDeleteAddress = async (addressId: string) => {
+    const response = await deleteAddress(addressId);
+
+    if (response.status === 200) {
+      return toast.success('Endereço excluido');
+    } else {
+      return toast.error('Erro ao deletar endereço');
+    }
+  };
   return (
     <div
       className={`menuModalsPosition rounded-md gap-6 ${
@@ -22,26 +40,70 @@ export const AddressModal = () => {
           style={{ cursor: 'pointer' }}
         />
       </div>
-      <span className='text-3xl font-semibold mx-auto w-10/12 text-center'>
-        Baixe nosso aplicativo
-      </span>
 
-      <div className='flex flex-col mx-auto w-10/12 gap-12'>
-        <span className='font-medium text-lg'>
-          Ao baixar nosso aplicativo você terá a melhor experiência de compra
-          com acesso a promoções exclusivas, notificações dos seus pedidos,
-          cupons promocionais e muito mais.
-        </span>
+      {/* <BsFillHouseDoorFill /> */}
+      <div className='flex flex-col w-10/12 mx-auto gap-12'>
+        <div className='flex flex-col gap-4'>
+          <span className='font-semibold text-xl'>Meus endereços </span>
+          {address.length > 0 ? (
+            address.map((address, i) => (
+              <div
+                className='flex items-center px-2 py-3 border-b-2 gap-3'
+                key={i}
+              >
+                <div className='w-2/12 flex items-center justify-center'>
+                  {address.type_adress === 0 ? (
+                    <BsFillHouseDoorFill size={30} />
+                  ) : (
+                    <FaSuitcase size={30} />
+                  )}
+                </div>
 
-        <span className='font-medium text-lg'>
-          Clique no link abaixo para efetuar o download diretamente da sua loja
-          de aplicativos
-        </span>
-      </div>
+                <div className='w-8/12 flex flex-col'>
+                  <span className='font-medium text-lg'>
+                    {address.type_adress === 0 ? 'Casa' : 'Trabalho'}
+                  </span>
+                  <span className='text-sm font-light'>
+                    {address.address}, {address.number}
+                  </span>
+                  <span className='text-sm font-light'>{address.district}</span>
+                  <span className='text-sm font-light'>
+                    {address.city} / {address.uf}
+                  </span>
+                </div>
 
-      <div className='mx-auto w-10/12 flex gap-6 items-center justify-center my-12'>
-        <AppleButton />
-        <GoogleButton />
+                <div className='w-2/12 flex items-end gap-2 justify-center'>
+                  <VscEdit size={25} />
+                  <AiOutlineDelete
+                    size={25}
+                    className='cursor-pointer'
+                    onClick={() => {
+                      handleDeleteAddress(address.id);
+                    }}
+                  />
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className='h-60 flex items-center justify-center'>
+              <span className='font-semibold text-xl text-center'>
+                Sem endereço cadastrado!
+              </span>
+            </div>
+          )}
+
+          <div
+            className='flex items-center justify-center gap-3 my-3 cursor-pointer'
+            onClick={() => {
+              addAddress.onOpen();
+            }}
+          >
+            <AiOutlinePlus size={25} color='red' fill='red' />
+            <span className='font-semibold text-lg text-red-500 hover:text-red-700'>
+              Adicionar endereço
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

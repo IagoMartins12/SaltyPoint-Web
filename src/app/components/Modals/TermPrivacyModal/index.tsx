@@ -8,7 +8,7 @@ export const TermPrivacyModal = () => {
 
   return (
     <div
-      className={`menuModalsPosition rounded-md gap-6 ${
+      className={`menuModalsPosition rounded-md gap-3 ${
         theme === 'light' ? 'bg-white' : 'bg-black'
       }  flex-col z-50 flex ${
         termPrivacyModal.isOpen ? 'modal-open' : 'modal-closed'
