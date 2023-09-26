@@ -113,3 +113,18 @@ export const deleteAddress = async (addressId: string) => {
     return error;
   }
 };
+
+export const getAddressPerGeoLocation = async (
+  lat: any,
+  lng: any,
+  apiKey: string,
+) => {
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`,
+    );
+    return response;
+  } catch (error: any) {
+    return error;
+  }
+};
