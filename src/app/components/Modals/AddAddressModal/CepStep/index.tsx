@@ -9,6 +9,7 @@ export const CepStep: React.FC<CepStepProps> = ({
   handleOnChange,
   isValid,
   setStep,
+  formatCep,
 }) => {
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
@@ -25,7 +26,8 @@ export const CepStep: React.FC<CepStepProps> = ({
             required: true,
           })}
           onChange={ev => {
-            handleOnChange(ev.target.value);
+            const formattedCep = formatCep(ev.target.value);
+            handleOnChange(formattedCep);
           }}
         />
         {errors.cep && (

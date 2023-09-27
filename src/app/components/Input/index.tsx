@@ -29,6 +29,7 @@ export const AddressInput: React.FC<AdressInputProps> = ({
   placeholder,
   errors,
   disabled,
+  value,
 }) => {
   return (
     <div
@@ -36,22 +37,36 @@ export const AddressInput: React.FC<AdressInputProps> = ({
         disabled ? 'pointer-events-none opacity-70' : ''
       }`}
     >
-      <span className='font-light text-base '>{label}</span>
-      <input
-        type={type}
-        id={id}
-        className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
-        placeholder={placeholder}
-        {...register(id, {
-          required: 'Campo obrigatório',
-        })}
-      />
-      {errors[id] &&
-        typeof errors[id]?.message === 'string' && ( // Verifique se errors[id] é uma string
-          <span className='text-red-500'>
-            {errors[id]?.message?.toString()}
-          </span>
-        )}
+      <span className='font-light text-base'>{label}</span>
+      {value !== undefined ? (
+        <input
+          type={type}
+          id={id}
+          className={`px-2 py-2 border-b-2 ${
+            errors[id] ? 'border-red-500' : ''
+          }`}
+          placeholder={placeholder}
+          {...register(id, {
+            required: false,
+          })}
+          value={value}
+        />
+      ) : (
+        <input
+          type={type}
+          id={id}
+          className={`px-2 py-2 border-b-2 ${
+            errors[id] ? 'border-red-500' : ''
+          }`}
+          placeholder={placeholder}
+          {...register(id, {
+            required: 'Campo obrigatório',
+          })}
+        />
+      )}
+      {errors[id] && typeof errors[id]?.message === 'string' && (
+        <span className='text-red-500'>{errors[id]?.message?.toString()}</span>
+      )}
     </div>
   );
 };

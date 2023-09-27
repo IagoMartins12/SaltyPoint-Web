@@ -45,6 +45,7 @@ export interface AdressInputProps {
   label?: string;
   disabled?: boolean;
   errors: FieldErrors<FieldValues>;
+  value?: string;
 }
 
 export interface CepStepProps {
@@ -53,6 +54,7 @@ export interface CepStepProps {
   errors: FieldErrors<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
   handleOnChange: (value: string) => void;
+  formatCep: (value: string) => any;
   setStep: React.Dispatch<React.SetStateAction<STEPS>>;
   isValid: boolean;
 }
@@ -62,6 +64,12 @@ export interface AddAddressInfoStepProps {
   errors: FieldErrors<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
   setIsSelected: React.Dispatch<React.SetStateAction<number | null>>;
+  handleOnChange?: (value: string) => void;
+  formatCep?: (value: string) => any;
+}
+
+export interface GeoLocationProps {
+  setStep: React.Dispatch<React.SetStateAction<STEPS>>;
 }
 
 export interface CategoryBoxProps {

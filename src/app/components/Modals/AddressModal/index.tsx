@@ -3,7 +3,6 @@ import useAddress from '@/app/hooks/modals/useAddress';
 import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
-import { VscEdit } from 'react-icons/vsc';
 import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import useDelete from '@/app/hooks/modals/useDelete';
@@ -66,7 +65,6 @@ export const AddressModal = () => {
                 </div>
 
                 <div className='w-2/12 flex items-end gap-2 justify-center'>
-                  <VscEdit size={25} />
                   <AiOutlineDelete
                     size={25}
                     className='cursor-pointer'

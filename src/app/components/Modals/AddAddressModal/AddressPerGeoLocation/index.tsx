@@ -4,24 +4,49 @@ import { AddAddressInfoStepProps } from '@/app/types/ComponentTypes';
 import { BsHouseFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 
-export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
+export const AddressPerGeoLocation: React.FC<AddAddressInfoStepProps> = ({
   errors,
   register,
   saveAddress,
   handleSubmit,
   setIsSelected,
+  formatCep,
+  handleOnChange,
 }) => {
+  const optionsDistrict = [
+    { name: 'Residencial Sol Nascente' },
+    { name: 'Vila sulina' },
+    { name: 'Décima área' },
+  ];
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(saveAddress)}>
       <div className='flex flex-col gap-3'>
-        <AddressInput
-          errors={errors}
-          id='cep'
-          register={register}
-          disabled
-          label='Cep'
-        />
-
+        <div className='flex flex-col gap-1'>
+          <span className='font-light text-sm'>CEP</span>
+          <input
+            type='text'
+            id='cep'
+            className={`px-2 py-2 border-b-2 ${
+              errors.cep ? 'border-red-500' : ''
+            }`}
+            {...register('cep', {
+              required: true,
+            })}
+            onChange={ev => {
+              if (formatCep && handleOnChange) {
+                const formattedCep = formatCep(ev.target.value);
+                handleOnChange(formattedCep);
+              }
+            }}
+          />
+          {errors.cep && (
+            <span className='text-red-500'>
+              {typeof errors.cep.message === 'string'
+                ? errors.cep.message
+                : 'CEP inválido'}
+            </span>
+          )}
+        </div>
         <AddressInput
           errors={errors}
           id='address'
@@ -40,20 +65,31 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
           label='Complemento'
           required={false}
         />
-        <AddressInput
-          errors={errors}
-          id='district'
-          register={register}
-          disabled
-          label='Bairro'
-        />
+
+        <div className='flex flex-col gap-1 focus:outline-none '>
+          <label htmlFor='' className='font-light text-base'>
+            Bairro
+          </label>
+          <select
+            id='district'
+            className='block w-full p-2 text-sm border-b-2 rounded-lg bg-transparent'
+            {...register('district', { required: true })}
+          >
+            {optionsDistrict.map((option, i) => (
+              <option value={option.name} key={i}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <AddressInput
           errors={errors}
           id='city'
           register={register}
-          disabled
           label='Cidade'
+          disabled
+          value='São Paulo'
         />
 
         <AddressInput
@@ -62,6 +98,7 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
           register={register}
           disabled
           label='Estado'
+          value='SP'
         />
 
         <div className='flex items-center justify-center gap-4 my-3 '>
