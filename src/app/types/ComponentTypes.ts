@@ -7,7 +7,7 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
 } from 'react-hook-form';
-import { GoogleMapsApiResponse } from './GeolocationType';
+import { GoogleMapsApiResponse, Result } from './GeolocationType';
 import { STEPS } from '../components/Modals/AddAddressModal';
 
 export interface AuthButton {
@@ -20,9 +20,9 @@ export interface AuthButton {
 export interface AddressRadioButton {
   icon: IconType;
   text: string;
-  index: number; // Adicione o índice como propriedade
-  name: string; // Adicione o nome como propriedade
-  onChange: (index: number, name: string) => void; // Função de retorno para lidar com mudanças
+  index: number;
+  name: string;
+  onChange: (index: number, name: string) => void;
 }
 export interface ProductCardType {
   product: Product;
@@ -37,7 +37,7 @@ export interface StyledInputProps {
   required: boolean;
 }
 
-export interface AdressInputProps {
+export interface AddressInputProps {
   id: string;
   type?: string;
   placeholder?: string;
@@ -48,28 +48,48 @@ export interface AdressInputProps {
   value?: string;
 }
 
+export interface InfoAddressInputProps {
+  id: string;
+  type?: string;
+  placeholder?: string;
+  register: UseFormRegister<FieldValues>;
+  label?: string;
+  required: boolean;
+  errors: FieldErrors<FieldValues>;
+}
+
 export interface CepStepProps {
   register: UseFormRegister<FieldValues>;
   onSubmit: SubmitHandler<FieldValues>;
   errors: FieldErrors<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
   handleOnChange: (value: string) => void;
-  formatCep: (value: string) => any;
   setStep: React.Dispatch<React.SetStateAction<STEPS>>;
   isValid: boolean;
 }
+
+export interface CepInputProps {
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  handleOnChange: (value: string) => void;
+}
+
 export interface AddAddressInfoStepProps {
   register: UseFormRegister<FieldValues>;
   saveAddress: SubmitHandler<FieldValues>;
   errors: FieldErrors<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
   setIsSelected: React.Dispatch<React.SetStateAction<number | null>>;
-  handleOnChange?: (value: string) => void;
-  formatCep?: (value: string) => any;
+}
+
+export interface AddAddressGeoStepProps extends AddAddressInfoStepProps {
+  handleOnChange: (value: string) => void;
+  result?: Result | null;
 }
 
 export interface GeoLocationProps {
   setStep: React.Dispatch<React.SetStateAction<STEPS>>;
+  setResult: React.Dispatch<React.SetStateAction<Result | null>>;
 }
 
 export interface CategoryBoxProps {
@@ -133,4 +153,8 @@ export interface deleteProps {
 export interface ImageComponentType {
   src: string;
   alt: string;
+}
+
+export interface SelectDistrictProps {
+  register: UseFormRegister<FieldValues>;
 }

@@ -11,19 +11,19 @@ export const AppDownloadModal = () => {
         appModal.isOpen ? 'modal-open' : 'modal-closed'
       }`}
     >
-      <div className='flex items-center justify-between ml-5 mt-2'>
-        <IoCloseOutline
-          size={30}
-          onClick={() => appModal.onClose()}
-          style={{ cursor: 'pointer' }}
-        />
+      <div className='flex items-center justify-center w-full py-3'>
+        <span className='font-semibold text-xl text-center'>
+          Baixe nosso aplicativo{' '}
+        </span>
       </div>
+      <IoCloseOutline
+        className='absolute top-2 left-2'
+        size={30}
+        onClick={() => appModal.onClose()}
+        style={{ cursor: 'pointer' }}
+      />
 
       <div className='flex flex-col gap-6 w-10/12 mx-auto'>
-        <span className='text-3xl font-semibold  text-center'>
-          Baixe nosso aplicativo
-        </span>
-
         <div className='flex flex-col  gap-12'>
           <span className='font-medium text-lg'>
             Ao baixar nosso aplicativo você terá a melhor experiência de compra

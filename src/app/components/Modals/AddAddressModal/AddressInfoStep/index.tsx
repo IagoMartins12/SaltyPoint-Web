@@ -33,12 +33,14 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
           register={register}
           required
           label='Numero'
+          errors={errors}
         />
         <InfoAddressInput
           id='complement'
           register={register}
           label='Complemento'
           required={false}
+          errors={errors}
         />
         <AddressInput
           errors={errors}

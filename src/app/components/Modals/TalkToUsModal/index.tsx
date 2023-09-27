@@ -18,9 +18,7 @@ export const TalkToUsModal = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async data => {
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<FieldValues> = async data => {};
 
   const talkOptions = [
     {

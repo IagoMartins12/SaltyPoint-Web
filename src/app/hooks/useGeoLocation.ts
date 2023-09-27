@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-type Coordinates = {
-  lat: number;
-  lng: number;
-};
-
-type Location = {
-  loaded: boolean;
-  coordinates?: Coordinates;
-  error?: GeolocationPositionError;
-};
+import { Location } from '../types/GeolocationType';
 
 const useGeoLocation = (): Location => {
   const [location, setLocation] = useState<Location>({

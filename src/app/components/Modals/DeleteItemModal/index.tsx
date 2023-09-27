@@ -13,7 +13,6 @@ export const DeleteItemModal: React.FC = () => {
   const handleDeleteAddress = async () => {
     if (deleteModal.currentItem) {
       const response = await deleteAddress(deleteModal.currentItem);
-      console.log(response);
 
       if (response.status === 200) {
         const updatedAddressList = address.filter(

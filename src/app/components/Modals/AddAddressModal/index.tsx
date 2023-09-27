@@ -11,6 +11,7 @@ import { GetGeoLocation } from '../../Geolocation';
 import { AddressInfoStep } from './AddressInfoStep';
 import { CepStep } from './CepStep';
 import { AddressPerGeoLocation } from './AddressPerGeoLocation';
+import { Result } from '@/app/types/GeolocationType';
 
 export enum STEPS {
   CEP = 0,
@@ -23,6 +24,7 @@ export const AddAddressModal = () => {
   const [step, setStep] = useState(STEPS.CEP);
   const [isValid, setIsValid] = useState(false);
   const [isSelected, setIsSelected] = useState<null | number>(null);
+  const [result, setResult] = useState<Result | null>(null);
 
   const addAddress = useAddAddress();
   const { address, setAddress } = usePrivateStore();
@@ -39,8 +41,8 @@ export const AddAddressModal = () => {
       district: '',
       number: '',
       complement: '',
-      city: '',
       address: '',
+      city: '',
       uf: '',
     },
   });
@@ -97,14 +99,29 @@ export const AddAddressModal = () => {
     }
   };
 
-  const formatCep = (value: string) => {
-    const numericValue = value.replace(/\D/g, '');
-    const formattedCep =
-      numericValue.length <= 5
-        ? numericValue
-        : numericValue.slice(0, 5) + '-' + numericValue.slice(5, 8);
+  const saveGeoAddress: SubmitHandler<FieldValues> = async data => {
+    const object = {
+      address: data.address,
+      cep: data.cep,
+      number: data.number,
+      reference: data.complement,
+      district: data.district,
+      city: data.cityGeo,
+      uf: data.ufGeo,
+      type_adress: isSelected,
+    } as User_Adress;
 
-    return formattedCep;
+    const response = await sendAddressUser(object);
+    if (response.status === 201) {
+      setAddress([...address, response.data]);
+      setStep(0);
+      reset();
+
+      addAddress.onClose();
+      return toast.success('Endereço criado!');
+    } else {
+      return toast.error('Erro ao cadastrar endereço');
+    }
   };
 
   const handleOnChange = (value: string) => {
@@ -143,7 +160,6 @@ export const AddAddressModal = () => {
               onSubmit={onSubmit}
               register={register}
               setStep={setStep}
-              formatCep={formatCep}
             />
           )}
 
@@ -157,17 +173,19 @@ export const AddAddressModal = () => {
             />
           )}
 
-          {step === STEPS.GEOLOCATION && <GetGeoLocation setStep={setStep} />}
+          {step === STEPS.GEOLOCATION && (
+            <GetGeoLocation setStep={setStep} setResult={setResult} />
+          )}
 
           {step === STEPS.ADDRESS_PER_GEOLOCATION && (
             <AddressPerGeoLocation
               errors={errors}
               handleSubmit={handleSubmit}
               register={register}
-              saveAddress={saveAddress}
+              saveAddress={saveGeoAddress}
               setIsSelected={setIsSelected}
-              formatCep={formatCep}
               handleOnChange={handleOnChange}
+              result={result}
             />
           )}
         </div>

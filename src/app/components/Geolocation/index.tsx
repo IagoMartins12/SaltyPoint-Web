@@ -1,11 +1,14 @@
-import useGeoLocation from '@/app/hooks/customHooks/useGeoLocation';
+import useGeoLocation from '@/app/hooks/useGeoLocation';
 import useGeoAddressLocation from '@/app/hooks/store/useGeoAddressLocation';
 import { getAddressPerGeoLocation } from '@/app/services';
 import { GeoLocationProps } from '@/app/types/ComponentTypes';
 import { useEffect } from 'react';
 import { PuffLoader } from 'react-spinners';
 
-export const GetGeoLocation: React.FC<GeoLocationProps> = ({ setStep }) => {
+export const GetGeoLocation: React.FC<GeoLocationProps> = ({
+  setStep,
+  setResult,
+}) => {
   const location = useGeoLocation();
   const { setGeoAddress, GeoAddress } = useGeoAddressLocation();
   const apiKey = 'AIzaSyDu0NBwZWMwvPMDy5gTJZ6EDyptHSv2cdg';
@@ -20,6 +23,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({ setStep }) => {
         );
         if (response.ok) {
           const data = await response.json();
+
           setGeoAddress(data);
         } else {
           console.error('Failed to fetch data:', response.statusText);
@@ -33,6 +37,16 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({ setStep }) => {
       fetchData();
     }
   }, [location, apiKey]);
+
+  const requiredTypes = [
+    'street_address',
+    'route',
+    'postal_code',
+    'establishment',
+    'point_of_interest',
+    'premise',
+    'sublocality',
+  ];
 
   return (
     <>
@@ -56,11 +70,49 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({ setStep }) => {
             </button>
           </div>
         ) : (
-          GeoAddress?.results.map(result => {
-            console.log('result:', result);
-
-            return <span>{result.formatted_address}</span>;
-          })
+          <div className='flex flex-col gap-4'>
+            <span className='text-xl font-medium'>
+              Selecione um dos resultados abaixo
+            </span>
+            <div className='flex flex-col gap-6 overflow-auto'>
+              {GeoAddress?.results ? (
+                <>
+                  {GeoAddress.results
+                    .filter(result =>
+                      result.types.some(type => requiredTypes.includes(type)),
+                    )
+                    .map((result, i) => {
+                      return (
+                        <div
+                          className='flex flex-col border-b-2 gap-2 cursor-pointer'
+                          key={i}
+                          onClick={() => {
+                            setResult(result);
+                            setStep(2);
+                          }}
+                        >
+                          <span>{result.formatted_address}</span>
+                        </div>
+                      );
+                    })}
+                  <button
+                    onClick={() => {
+                      setStep(3);
+                    }}
+                    className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
+                  >
+                    <span className='font-medium text-lg'>
+                      Não achei meu endereço
+                    </span>
+                  </button>
+                </>
+              ) : (
+                <div>
+                  <PuffLoader />
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
     </>

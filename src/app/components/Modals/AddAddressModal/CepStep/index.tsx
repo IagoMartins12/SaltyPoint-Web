@@ -1,3 +1,4 @@
+import { CepInput } from '@/app/components/Input';
 import { CepStepProps } from '@/app/types/ComponentTypes';
 import { AiOutlineQuestionCircle, AiOutlineSearch } from 'react-icons/ai';
 
@@ -9,35 +10,14 @@ export const CepStep: React.FC<CepStepProps> = ({
   handleOnChange,
   isValid,
   setStep,
-  formatCep,
 }) => {
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
-      <div className='flex flex-col gap-1'>
-        <span className='font-light text-sm'>CEP</span>
-        <input
-          type='text'
-          id='cep'
-          className={`px-2 py-2 border-b-2 ${
-            errors.cep ? 'border-red-500' : ''
-          }`}
-          placeholder='Exemplo: 05280-000'
-          {...register('cep', {
-            required: true,
-          })}
-          onChange={ev => {
-            const formattedCep = formatCep(ev.target.value);
-            handleOnChange(formattedCep);
-          }}
-        />
-        {errors.cep && (
-          <span className='text-red-500'>
-            {typeof errors.cep.message === 'string'
-              ? errors.cep.message
-              : 'CEP inválido'}
-          </span>
-        )}
-      </div>
+      <CepInput
+        errors={errors}
+        handleOnChange={handleOnChange}
+        register={register}
+      />
 
       <button
         type='submit'

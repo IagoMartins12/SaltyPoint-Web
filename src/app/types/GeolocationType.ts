@@ -1,7 +1,13 @@
-interface Location {
+type Coordinates = {
   lat: number;
   lng: number;
-}
+};
+
+export type Location = {
+  loaded: boolean;
+  coordinates?: Coordinates;
+  error?: GeolocationPositionError;
+};
 
 interface NortheastSouthwest {
   northeast: Location;

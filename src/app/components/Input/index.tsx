@@ -1,4 +1,10 @@
-import { AdressInputProps, StyledInputProps } from '@/app/types/ComponentTypes';
+import {
+  AddressInputProps,
+  CepInputProps,
+  InfoAddressInputProps,
+  StyledInputProps,
+} from '@/app/types/ComponentTypes';
+import { formatCep } from '@/app/utils';
 
 export const StyledInput: React.FC<StyledInputProps> = ({
   id,
@@ -21,7 +27,7 @@ export const StyledInput: React.FC<StyledInputProps> = ({
   );
 };
 
-export const AddressInput: React.FC<AdressInputProps> = ({
+export const AddressInput: React.FC<AddressInputProps> = ({
   id,
   label,
   type = 'text',
@@ -38,7 +44,7 @@ export const AddressInput: React.FC<AdressInputProps> = ({
       }`}
     >
       <span className='font-light text-base'>{label}</span>
-      {value !== undefined ? (
+      {typeof value === 'string' ? (
         <input
           type={type}
           id={id}
@@ -50,6 +56,7 @@ export const AddressInput: React.FC<AdressInputProps> = ({
             required: false,
           })}
           value={value}
+          readOnly={disabled}
         />
       ) : (
         <input
@@ -59,25 +66,22 @@ export const AddressInput: React.FC<AdressInputProps> = ({
             errors[id] ? 'border-red-500' : ''
           }`}
           placeholder={placeholder}
-          {...register(id, {
-            required: 'Campo obrigatório',
-          })}
+          {...register(id)}
+          readOnly={disabled}
         />
-      )}
-      {errors[id] && typeof errors[id]?.message === 'string' && (
-        <span className='text-red-500'>{errors[id]?.message?.toString()}</span>
       )}
     </div>
   );
 };
 
-export const InfoAddressInput: React.FC<StyledInputProps> = ({
+export const InfoAddressInput: React.FC<InfoAddressInputProps> = ({
   id,
   label,
   type = 'text',
   register,
   placeholder,
   required,
+  errors,
 }) => {
   return (
     <div className='flex flex-col gap-1 focus:outline-none '>
@@ -86,10 +90,42 @@ export const InfoAddressInput: React.FC<StyledInputProps> = ({
       <input
         type={type}
         id={id}
-        className='px-2 py-2 border-b-2 focus:border-3'
+        className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
         placeholder={placeholder}
         {...register(id, { required })}
       />
+    </div>
+  );
+};
+
+export const CepInput: React.FC<CepInputProps> = ({
+  errors,
+  register,
+  handleOnChange,
+}) => {
+  return (
+    <div className='flex flex-col gap-1'>
+      <span className='font-light text-sm'>CEP</span>
+      <input
+        type='text'
+        id='cep'
+        className={`px-2 py-2 border-b-2 ${errors.cep ? 'border-red-500' : ''}`}
+        placeholder='Exemplo: 05280-000'
+        {...register('cep', {
+          required: true,
+        })}
+        onChange={ev => {
+          const formattedCep = formatCep(ev.target.value);
+          handleOnChange(formattedCep);
+        }}
+      />
+      {errors.cep && (
+        <span className='text-red-500'>
+          {typeof errors.cep.message === 'string'
+            ? errors.cep.message
+            : 'CEP inválido'}
+        </span>
+      )}
     </div>
   );
 };
