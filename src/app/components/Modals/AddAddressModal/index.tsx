@@ -12,10 +12,14 @@ import { BsHouseFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { User_Adress } from '@/app/types/ModelsType';
+import { GeoLocation } from '@/app/hooks/useLocation';
+import { GetGeoLocation } from '../../Geolocation';
+import useGeoAddressLocation from '@/app/hooks/store/useGeoAddressLocation';
 
 enum STEPS {
   CEP = 0,
   ADDRESS_INFO = 1,
+  GEOLOCATION = 2,
 }
 
 export const AddAddressModal = () => {
@@ -23,6 +27,7 @@ export const AddAddressModal = () => {
   const [cepState, setCepState] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isSelected, setIsSelected] = useState<null | number>(null);
+  const { GeoAddress } = useGeoAddressLocation();
 
   const addAddress = useAddAddress();
   const { address, setAddress } = usePrivateStore();
@@ -87,7 +92,7 @@ export const AddAddressModal = () => {
 
     const response = await sendAddressUser(object);
     if (response.status === 201) {
-      setAddress([...address, object]);
+      setAddress([...address, response.data]);
       addAddress.onClose();
       return toast.success('Endereço criado!');
     }
@@ -168,8 +173,10 @@ export const AddAddressModal = () => {
               </button>
 
               <button
-                type='submit'
                 className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg`}
+                onClick={() => {
+                  setStep(2);
+                }}
               >
                 <AiOutlineQuestionCircle size={25} />
                 <span className='font-medium text-sm'>Não sei meu cep</span>
@@ -262,6 +269,8 @@ export const AddAddressModal = () => {
               </div>
             </form>
           )}
+
+          {step === STEPS.GEOLOCATION && <GetGeoLocation />}
         </div>
       </div>
     </div>

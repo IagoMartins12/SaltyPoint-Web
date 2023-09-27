@@ -1,15 +1,15 @@
 'use client';
 
-import useGeoLocation from '@/app/hooks/useGeoLocation';
+import useGeoLocation from '@/app/hooks/customHooks/useGeoLocation';
+import useGeoAddressLocation from '@/app/hooks/store/useGeoAddressLocation';
 import { getAddressPerGeoLocation } from '@/app/services';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const GetGeoLocation = () => {
   const location = useGeoLocation();
-  const [addressData, setAddressData] = useState(null);
+  const { setGeoAddress, GeoAddress } = useGeoAddressLocation();
 
   const apiKey = 'AIzaSyDu0NBwZWMwvPMDy5gTJZ6EDyptHSv2cdg';
-  const key = process.env.MAPS_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ export const GetGeoLocation = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setAddressData(data);
+          setGeoAddress(data);
         } else {
           console.error('Failed to fetch data:', response.statusText);
         }
@@ -35,8 +35,13 @@ export const GetGeoLocation = () => {
     }
   }, [location, apiKey]);
 
-  return {
-    location,
-    addressData,
-  };
+  return (
+    <div>
+      <div className='flex flex-col gap-2'>
+        {GeoAddress?.results.map(result => (
+          <span>{result.formatted_address}</span>
+        ))}
+      </div>
+    </div>
+  );
 };

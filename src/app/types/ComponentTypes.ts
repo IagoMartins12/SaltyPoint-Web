@@ -1,6 +1,7 @@
 import { IconType } from 'react-icons';
 import { Category, Discount_cupom, Product, User_Adress } from './ModelsType';
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { GoogleMapsApiResponse } from './GeolocationType';
 
 export interface AuthButton {
   icon?: IconType;
@@ -83,6 +84,11 @@ export interface Store {
 export interface PrivateStore {
   address: User_Adress[] | [];
   setAddress: (address: User_Adress[]) => void;
+}
+
+export interface GeoLocationStore {
+  GeoAddress: GoogleMapsApiResponse | null;
+  setGeoAddress: (address: GoogleMapsApiResponse) => void;
 }
 
 export interface deleteProps {

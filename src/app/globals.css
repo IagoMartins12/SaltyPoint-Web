@@ -18,6 +18,10 @@ input:focus {
   -webkit-box-shadow: 0 0 0 30px black inset !important;
 }
 
+[data-theme='dark'] input {
+  background-color: transparent;
+}
+
 .dark {
   --bg-color-dark: #1c1c1c;
   --text-color-dark: #fafafa;
