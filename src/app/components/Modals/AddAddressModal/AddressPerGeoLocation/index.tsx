@@ -6,6 +6,7 @@ import {
 import { AddressRadio } from '@/app/components/RadioButton';
 import { SelectDistrict } from '@/app/components/Selects';
 import { AddAddressGeoStepProps } from '@/app/types/ComponentTypes';
+import { useEffect } from 'react';
 import { BsHouseFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 
@@ -17,8 +18,31 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   setIsSelected,
   handleOnChange,
   result,
+  setValue,
 }) => {
-  console.log('result', result);
+  const onlyDistrict = ['sublocality', 'postal_code'];
+
+  const addressTypes = [
+    'street_address',
+    'route',
+    'postal_code',
+    'establishment',
+    'point_of_interest',
+  ];
+
+  useEffect(() => {
+    if (!result) return;
+
+    if (result.types.some(type => addressTypes.includes(type))) {
+      setValue('address', result.address_components[1].long_name);
+    }
+
+    if (result.types.some(type => onlyDistrict.includes(type))) {
+      setValue('district', result.address_components[1].long_name);
+      console.log('result', result);
+    }
+  }, [result]);
+
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(saveAddress)}>
       <div className='flex flex-col gap-3'>

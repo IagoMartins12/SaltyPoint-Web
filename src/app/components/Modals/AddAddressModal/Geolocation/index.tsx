@@ -4,6 +4,8 @@ import { getAddressPerGeoLocation } from '@/app/services';
 import { GeoLocationProps } from '@/app/types/ComponentTypes';
 import { useEffect } from 'react';
 import { PuffLoader } from 'react-spinners';
+import { checkIfAddressIsValid } from '@/app/utils';
+import toast from 'react-hot-toast';
 
 export const GetGeoLocation: React.FC<GeoLocationProps> = ({
   setStep,
@@ -12,6 +14,8 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
   const location = useGeoLocation();
   const { setGeoAddress, GeoAddress } = useGeoAddressLocation();
   const apiKey = 'AIzaSyDu0NBwZWMwvPMDy5gTJZ6EDyptHSv2cdg';
+
+  console.log(location);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,8 +91,17 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
                           className='flex flex-col border-b-2 gap-2 cursor-pointer'
                           key={i}
                           onClick={() => {
+                            const check = checkIfAddressIsValid(
+                              result.address_components[1].long_name,
+                            );
+
+                            if (!check) {
+                              return toast.error(
+                                'Esse endereço não está na nossa área de entrega',
+                              );
+                            }
                             setResult(result);
-                            setStep(2);
+                            setStep(3);
                           }}
                         >
                           <span>{result.formatted_address}</span>

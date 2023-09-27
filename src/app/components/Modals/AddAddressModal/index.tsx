@@ -7,11 +7,12 @@ import toast from 'react-hot-toast';
 import { CEPInfoDto } from '@/app/types/Dtos';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { User_Adress } from '@/app/types/ModelsType';
-import { GetGeoLocation } from '../../Geolocation';
+import { GetGeoLocation } from './Geolocation';
 import { AddressInfoStep } from './AddressInfoStep';
 import { CepStep } from './CepStep';
 import { AddressPerGeoLocation } from './AddressPerGeoLocation';
 import { Result } from '@/app/types/GeolocationType';
+import { checkIfAddressIsValid } from '@/app/utils';
 
 export enum STEPS {
   CEP = 0,
@@ -76,6 +77,11 @@ export const AddAddressModal = () => {
   };
 
   const saveAddress: SubmitHandler<FieldValues> = async data => {
+    const checkAddress = checkIfAddressIsValid(data.district);
+
+    if (!checkAddress)
+      return toast.error('Esse endereço não está na nossa área de entrega');
+
     const object = {
       address: data.address,
       cep: data.cep,
@@ -186,6 +192,7 @@ export const AddAddressModal = () => {
               setIsSelected={setIsSelected}
               handleOnChange={handleOnChange}
               result={result}
+              setValue={setValue}
             />
           )}
         </div>

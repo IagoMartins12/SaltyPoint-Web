@@ -6,6 +6,7 @@ import {
   SubmitHandler,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 import { GoogleMapsApiResponse, Result } from './GeolocationType';
 import { STEPS } from '../components/Modals/AddAddressModal';
@@ -85,6 +86,7 @@ export interface AddAddressInfoStepProps {
 export interface AddAddressGeoStepProps extends AddAddressInfoStepProps {
   handleOnChange: (value: string) => void;
   result?: Result | null;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 export interface GeoLocationProps {

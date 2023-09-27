@@ -32,3 +32,21 @@ export const formatCep = (value: string) => {
 
   return formattedCep;
 };
+
+export const checkIfAddressIsValid = (address: string) => {
+  const validDistricts = [
+    'Sol nascente',
+    'Sulina',
+    'Décima',
+    'area',
+    'Bandeirantes',
+  ];
+
+  // Transforma o endereço em letras minúsculas para tornar a busca case-insensitive
+  const lowercaseAddress = address.toLowerCase();
+
+  // Verifica se o endereço contém pelo menos uma das palavras-chave
+  return validDistricts.some(district =>
+    lowercaseAddress.includes(district.toLowerCase()),
+  );
+};
