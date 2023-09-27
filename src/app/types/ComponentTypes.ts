@@ -1,7 +1,14 @@
 import { IconType } from 'react-icons';
 import { Category, Discount_cupom, Product, User_Adress } from './ModelsType';
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import {
+  FieldErrors,
+  FieldValues,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from 'react-hook-form';
 import { GoogleMapsApiResponse } from './GeolocationType';
+import { STEPS } from '../components/Modals/AddAddressModal';
 
 export interface AuthButton {
   icon?: IconType;
@@ -38,6 +45,23 @@ export interface AdressInputProps {
   label?: string;
   disabled?: boolean;
   errors: FieldErrors<FieldValues>;
+}
+
+export interface CepStepProps {
+  register: UseFormRegister<FieldValues>;
+  onSubmit: SubmitHandler<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  handleOnChange: (value: string) => void;
+  setStep: React.Dispatch<React.SetStateAction<STEPS>>;
+  isValid: boolean;
+}
+export interface AddAddressInfoStepProps {
+  register: UseFormRegister<FieldValues>;
+  saveAddress: SubmitHandler<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  setIsSelected: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export interface CategoryBoxProps {

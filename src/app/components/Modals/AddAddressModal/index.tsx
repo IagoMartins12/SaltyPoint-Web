@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import { AiOutlineQuestionCircle, AiOutlineSearch } from 'react-icons/ai';
 import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { getAddressPerCep, sendAddressUser } from '@/app/services';
 import toast from 'react-hot-toast';
 import { CEPInfoDto } from '@/app/types/Dtos';
-import { AddressInput, InfoAddressInput } from '../../Input';
-import { AddressRadio } from '../../RadioButton';
-import { BsHouseFill } from 'react-icons/bs';
-import { FaSuitcase } from 'react-icons/fa';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { User_Adress } from '@/app/types/ModelsType';
-import { GeoLocation } from '@/app/hooks/useLocation';
 import { GetGeoLocation } from '../../Geolocation';
 import useGeoAddressLocation from '@/app/hooks/store/useGeoAddressLocation';
+import { AddressInfoStep } from './AddressInfoStep';
+import { CepStep } from './CepStep';
 
-enum STEPS {
+export enum STEPS {
   CEP = 0,
   ADDRESS_INFO = 1,
   GEOLOCATION = 2,
@@ -132,142 +128,25 @@ export const AddAddressModal = () => {
           <span className='font-semibold text-xl'>Adicionar endereço</span>
 
           {step === STEPS.CEP && (
-            <form
-              className='flex flex-col gap-3'
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className='flex flex-col gap-1'>
-                <span className='font-light text-sm'>CEP</span>
-                <input
-                  type='text'
-                  id='cep'
-                  className={`px-2 py-2 border-b-2 ${
-                    errors.cep ? 'border-red-500' : ''
-                  }`}
-                  placeholder='Exemplo: 05280-000'
-                  {...register('cep', {
-                    required: true,
-                  })}
-                  onChange={ev => {
-                    handleOnChange(ev.target.value);
-                  }}
-                />
-                {errors.cep && (
-                  <span className='text-red-500'>
-                    {typeof errors.cep.message === 'string'
-                      ? errors.cep.message
-                      : 'CEP inválido'}
-                  </span>
-                )}
-              </div>
-
-              <button
-                type='submit'
-                className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white ${
-                  isValid ? '' : 'opacity-60'
-                }`}
-                disabled={!isValid}
-              >
-                <AiOutlineSearch size={25} />
-                <span className='font-medium text-lg'>Buscar CEP</span>
-              </button>
-
-              <button
-                className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg`}
-                onClick={() => {
-                  setStep(2);
-                }}
-              >
-                <AiOutlineQuestionCircle size={25} />
-                <span className='font-medium text-sm'>Não sei meu cep</span>
-              </button>
-            </form>
+            <CepStep
+              errors={errors}
+              handleOnChange={handleOnChange}
+              handleSubmit={handleSubmit}
+              isValid={isValid}
+              onSubmit={onSubmit}
+              register={register}
+              setStep={setStep}
+            />
           )}
 
           {step === STEPS.ADDRESS_INFO && (
-            <form
-              className='flex flex-col gap-3'
-              onSubmit={handleSubmit(saveAddress)}
-            >
-              <div className='flex flex-col gap-3'>
-                <AddressInput
-                  errors={errors}
-                  id='cep'
-                  register={register}
-                  disabled
-                  label='Bairro'
-                />
-
-                <AddressInput
-                  errors={errors}
-                  id='address'
-                  register={register}
-                  label='Endereço'
-                />
-                <InfoAddressInput
-                  id='number'
-                  register={register}
-                  required
-                  label='Numero'
-                />
-                <InfoAddressInput
-                  id='complement'
-                  register={register}
-                  label='Complemento'
-                  required={false}
-                />
-                <AddressInput
-                  errors={errors}
-                  id='district'
-                  register={register}
-                  disabled
-                  label='Bairro'
-                />
-
-                <AddressInput
-                  errors={errors}
-                  id='city'
-                  register={register}
-                  disabled
-                  label='Cidade'
-                />
-
-                <AddressInput
-                  errors={errors}
-                  id='uf'
-                  register={register}
-                  disabled
-                  label='Estado'
-                />
-
-                <div className='flex items-center justify-center gap-4 my-3 '>
-                  <AddressRadio
-                    icon={BsHouseFill}
-                    text='Casa'
-                    index={0}
-                    name='addressType'
-                    onChange={(index, name) => {
-                      setIsSelected(index);
-                    }}
-                  />
-                  <AddressRadio
-                    icon={FaSuitcase}
-                    text='Trabalho'
-                    index={1}
-                    name='addressType'
-                    onChange={(index, name) => {
-                      setIsSelected(index);
-                    }}
-                  />
-                </div>
-                <button
-                  type='submit'
-                  className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
-                >
-                  <span className='font-medium text-lg'>Salvar </span>
-                </button>
-              </div>
-            </form>
+            <AddressInfoStep
+              errors={errors}
+              handleSubmit={handleSubmit}
+              register={register}
+              saveAddress={saveAddress}
+              setIsSelected={setIsSelected}
+            />
           )}
 
           {step === STEPS.GEOLOCATION && <GetGeoLocation />}

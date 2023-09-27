@@ -38,9 +38,11 @@ export const GetGeoLocation = () => {
   return (
     <div>
       <div className='flex flex-col gap-2'>
-        {GeoAddress?.results.map(result => (
-          <span>{result.formatted_address}</span>
-        ))}
+        {GeoAddress?.results.map(result => {
+          console.log('result:', result);
+
+          return <span>{result.formatted_address}</span>;
+        })}
       </div>
     </div>
   );
