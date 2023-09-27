@@ -6,6 +6,7 @@ import { SearchCategory } from '../../SearchCategory';
 import { useState } from 'react';
 import { SearchProduct } from '../../SearchProduct';
 import { Product } from '@/app/types/ModelsType';
+import Modal from '../Modal';
 
 export const SearchModal = () => {
   const [productState, setProductState] = useState<[] | Product[]>([]);
@@ -37,20 +38,10 @@ export const SearchModal = () => {
 
     return setProductState(newProducts);
   };
-  return (
-    <div
-      className={`menuModalsPosition rounded-md gap-6 flex modalsBackground  flex-col z-50 ${
-        searchModal.isOpen ? 'modal-open' : 'modal-closed'
-      }`}
-    >
-      <div className='flex items-center justify-between ml-5 mt-2'>
-        <IoCloseOutline
-          size={30}
-          onClick={() => searchModal.onClose()}
-          style={{ cursor: 'pointer' }}
-        />
-      </div>
-      <div className='relative flex w-10/12 mx-auto'>
+
+  const body = (
+    <div className='flex flex-col gap-5'>
+      <div className='relative flex w-11/12 mx-auto'>
         <input
           type='text'
           className='w-full px-2 py-2 rounded-md border-b-2 bg-transparent'
@@ -85,5 +76,14 @@ export const SearchModal = () => {
         </div>
       </div>
     </div>
+  );
+  return (
+    <>
+      <Modal
+        onClose={searchModal.onClose}
+        body={body}
+        isOpen={searchModal.isOpen}
+      />
+    </>
   );
 };

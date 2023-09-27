@@ -16,6 +16,8 @@ import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
 import { ImageComponent } from '../../ImageComponent';
+import Modal from '../Modal';
+import Image from 'next/image';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();
@@ -62,100 +64,87 @@ export const LoginModal = () => {
     }
   };
 
-  return (
-    <div
-      className={`modalPosition rounded-md flex ${
-        loginModal.isOpen ? 'modal-open' : 'modal-closed'
-      } modalsBackground   flex-col z-50 `}
-    >
-      <div className='flex items-center justify-between ml-5 mt-2'>
-        <IoCloseOutline
-          size={30}
-          onClick={() => loginModal.onClose()}
-          style={{ cursor: 'pointer' }}
-        />
-      </div>
-
-      <div className='flex flex-col-reverse sm:flex-row justify-around'>
-        <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-4'>
-          <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
-            <div>
-              <span className='font-bold text-2xl'>Salty </span>
-              <span className=' 	text-2xl'>Point</span>
-            </div>
-            <div className='flex flex-col py-4'>
-              <h1 className='font-bold text-xl'>Bem vindo de volta</h1>
-              <p className='font-medium text-xl'>
-                Não é inscrito? {''}
-                <span
-                  className='text-xl cursor-pointer underline'
-                  onClick={() => {
-                    handleOpenRegisterModal();
-                  }}
-                >
-                  Crie sua conta
-                </span>
-              </p>
-            </div>
+  const body = (
+    <div className='flex flex-col-reverse sm:flex-row justify-around'>
+      <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-4'>
+        <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
+          <div>
+            <span className='font-bold text-2xl'>Salty </span>
+            <span className=' 	text-2xl'>Point</span>
           </div>
-
-          <div className='flex flex-col gap-y-3 mx-auto w-11/12 '>
-            <StyledInput
-              id='email'
-              required
-              placeholder='Email'
-              label='Email'
-              register={register}
-            />
-            <StyledInput
-              type='password'
-              id='password'
-              required
-              placeholder='Senha'
-              label='Senha'
-              register={register}
-            />
-            <div className='flex justify-end my-3'>
+          <div className='flex flex-col py-4'>
+            <h1 className='font-bold text-xl'>Bem vindo de volta</h1>
+            <p className='font-medium text-xl'>
+              Não é inscrito? {''}
               <span
-                className=' text-base cursor-pointer underline'
-                onClick={handleOpenForgetPasswordModal}
+                className='text-xl cursor-pointer underline'
+                onClick={() => {
+                  handleOpenRegisterModal();
+                }}
               >
-                Esqueci minha senha
+                Crie sua conta
               </span>
+            </p>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-y-3 mx-auto w-11/12 '>
+          <StyledInput
+            id='email'
+            required
+            placeholder='Email'
+            label='Email'
+            register={register}
+          />
+          <StyledInput
+            type='password'
+            id='password'
+            required
+            placeholder='Senha'
+            label='Senha'
+            register={register}
+          />
+          <div className='flex justify-end my-3'>
+            <span
+              className=' text-base cursor-pointer underline'
+              onClick={handleOpenForgetPasswordModal}
+            >
+              Esqueci minha senha
+            </span>
+          </div>
+          <div className='flex flex-col w-full gap-y-4'>
+            <AuthLoginButton
+              text='Entrar'
+              icon={BiLogInCircle}
+              bgColor='bg-red-400'
+              onClick={handleSubmit(onSubmit)}
+            />
+            <div className='flex items-center justify-center  '>
+              <hr className='w-3/12 mr-2' />
+              <span className='text-center'>Ou entre com: </span>
+              <hr className='w-3/12 ml-2' />
             </div>
-            <div className='flex flex-col w-full gap-y-4'>
-              <AuthLoginButton
-                text='Entrar'
-                icon={BiLogInCircle}
-                bgColor='bg-red-400'
-                onClick={handleSubmit(onSubmit)}
+            <div className='flex items-center justify-evenly'>
+              <AuthLoginButtonRounded
+                text='Continuar com Google'
+                icon={FcGoogle}
+                bgColor='bg-[#4285F4] '
+                onClick={() => console.log('clicou')}
               />
-              <div className='flex items-center justify-center  '>
-                <hr className='w-3/12 mr-2' />
-                <span className='text-center'>Ou entre com: </span>
-                <hr className='w-3/12 ml-2' />
-              </div>
-              <div className='flex items-center justify-evenly'>
-                <AuthLoginButtonRounded
-                  text='Continuar com Google'
-                  icon={FcGoogle}
-                  bgColor='bg-[#4285F4] '
-                  onClick={() => console.log('clicou')}
-                />
-                <AuthLoginButtonRounded
-                  text='Continuar com Facebook'
-                  icon={BsFacebook}
-                  bgColor='bg-blue-800 '
-                  onClick={() => console.log('clicou')}
-                />
-                <AuthLoginButtonRounded
-                  text='Continuar com Apple'
-                  icon={AiFillApple}
-                  bgColor='bg-black '
-                  onClick={() => console.log('clicou')}
-                />
-              </div>
-              {/* <AuthLoginButton
+              <AuthLoginButtonRounded
+                text='Continuar com Facebook'
+                icon={BsFacebook}
+                bgColor='bg-blue-800 '
+                onClick={() => console.log('clicou')}
+              />
+              <AuthLoginButtonRounded
+                text='Continuar com Apple'
+                icon={AiFillApple}
+                bgColor='bg-black '
+                onClick={() => console.log('clicou')}
+              />
+            </div>
+            {/* <AuthLoginButton
                 text='Continuar com Google'
                 icon={FcGoogle}
                 bgColor='bg-[#4285F4] '
@@ -173,15 +162,31 @@ export const LoginModal = () => {
                 bgColor='bg-black '
                 onClick={() => console.log('clicou')}
               /> */}
-            </div>
-          </div>
-        </div>
-        <div className='w-full sm:w-5/12 lg:w-4/12'>
-          <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
-            <ImageComponent src='login.svg' alt='login' />
           </div>
         </div>
       </div>
+      <div className='w-full sm:w-5/12 lg:w-4/12 relative'>
+        <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
+          <Image
+            fill
+            className='sm:object-cover -z-10 !static '
+            src={`/login.svg`}
+            alt={'login.svg'}
+            sizes='100%'
+          />
+        </div>
+      </div>
     </div>
+  );
+
+  return (
+    <>
+      <Modal
+        onClose={loginModal.onClose}
+        body={body}
+        isOpen={loginModal.isOpen}
+        authModal
+      />
+    </>
   );
 };

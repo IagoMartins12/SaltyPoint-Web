@@ -13,6 +13,7 @@ import { CepStep } from './CepStep';
 import { AddressPerGeoLocation } from './AddressPerGeoLocation';
 import { Result } from '@/app/types/GeolocationType';
 import { checkIfAddressIsValid } from '@/app/utils';
+import Modal from '../Modal';
 
 export enum STEPS {
   CEP = 0,
@@ -135,68 +136,59 @@ export const AddAddressModal = () => {
     setIsValid(value.length === 9);
   };
 
-  return (
-    <div
-      className={`menuModalsPosition rounded-md gap-3 modalsBackground flex-col z-50 flex ${
-        addAddress.isOpen ? 'modal-open' : 'modal-closed'
-      }`}
-    >
-      <div className='flex items-center justify-between ml-5 mt-2'>
-        <IoCloseOutline
-          size={30}
-          onClick={() => {
-            setStep(0);
-            addAddress.onClose();
-            reset();
-          }}
-          style={{ cursor: 'pointer' }}
-        />
-      </div>
+  const body = (
+    <div className='flex flex-col w-11/12 mx-auto h-full '>
+      <div className='flex flex-col gap-4 h-full'>
+        {step === STEPS.CEP && (
+          <CepStep
+            errors={errors}
+            handleOnChange={handleOnChange}
+            handleSubmit={handleSubmit}
+            isValid={isValid}
+            onSubmit={onSubmit}
+            register={register}
+            setStep={setStep}
+          />
+        )}
 
-      <div className='flex flex-col w-10/12 mx-auto h-full '>
-        <div className='flex flex-col gap-4 h-full'>
-          <span className='font-semibold text-xl'>Adicionar endereço</span>
+        {step === STEPS.ADDRESS_INFO && (
+          <AddressInfoStep
+            errors={errors}
+            handleSubmit={handleSubmit}
+            register={register}
+            saveAddress={saveAddress}
+            setIsSelected={setIsSelected}
+          />
+        )}
 
-          {step === STEPS.CEP && (
-            <CepStep
-              errors={errors}
-              handleOnChange={handleOnChange}
-              handleSubmit={handleSubmit}
-              isValid={isValid}
-              onSubmit={onSubmit}
-              register={register}
-              setStep={setStep}
-            />
-          )}
+        {step === STEPS.GEOLOCATION && (
+          <GetGeoLocation setStep={setStep} setResult={setResult} />
+        )}
 
-          {step === STEPS.ADDRESS_INFO && (
-            <AddressInfoStep
-              errors={errors}
-              handleSubmit={handleSubmit}
-              register={register}
-              saveAddress={saveAddress}
-              setIsSelected={setIsSelected}
-            />
-          )}
-
-          {step === STEPS.GEOLOCATION && (
-            <GetGeoLocation setStep={setStep} setResult={setResult} />
-          )}
-
-          {step === STEPS.ADDRESS_PER_GEOLOCATION && (
-            <AddressPerGeoLocation
-              errors={errors}
-              handleSubmit={handleSubmit}
-              register={register}
-              saveAddress={saveGeoAddress}
-              setIsSelected={setIsSelected}
-              handleOnChange={handleOnChange}
-              result={result}
-              setValue={setValue}
-            />
-          )}
-        </div>
+        {step === STEPS.ADDRESS_PER_GEOLOCATION && (
+          <AddressPerGeoLocation
+            errors={errors}
+            handleSubmit={handleSubmit}
+            register={register}
+            saveAddress={saveGeoAddress}
+            setIsSelected={setIsSelected}
+            handleOnChange={handleOnChange}
+            result={result}
+            setValue={setValue}
+          />
+        )}
       </div>
     </div>
+  );
+
+  return (
+    <>
+      <Modal
+        onClose={addAddress.onClose}
+        body={body}
+        isOpen={addAddress.isOpen}
+        title='Adicionar endereço'
+      />
+    </>
   );
 };
