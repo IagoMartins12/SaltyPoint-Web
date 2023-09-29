@@ -11,6 +11,7 @@ import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal'
 import { SearchModal } from '../components/Modals/SearchModal';
 import { TalkToUsModal } from '../components/Modals/TalkToUsModal';
 import { TermPrivacyModal } from '../components/Modals/TermPrivacyModal';
+import { UserInfoModal } from '../components/Modals/UserInfoModal';
 
 const ModalsProvider = () => {
   return (
@@ -26,6 +27,7 @@ const ModalsProvider = () => {
       <AddressModal />
       <AddAddressModal />
       <DeleteItemModal />
+      <UserInfoModal />
     </>
   );
 };

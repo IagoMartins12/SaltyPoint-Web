@@ -10,6 +10,7 @@ import {
   Category,
   Discount_cupom,
   Product,
+  User,
   User_Adress,
 } from '../types/ModelsType';
 
@@ -124,6 +125,15 @@ export const getAddressPerGeoLocation = async (
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`,
     );
     return response;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getMe = async (): Promise<User> => {
+  try {
+    const response = await Api.get('/me');
+    return response.data;
   } catch (error: any) {
     return error;
   }

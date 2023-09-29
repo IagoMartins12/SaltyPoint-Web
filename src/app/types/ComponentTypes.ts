@@ -1,5 +1,11 @@
 import { IconType } from 'react-icons';
-import { Category, Discount_cupom, Product, User_Adress } from './ModelsType';
+import {
+  Category,
+  Discount_cupom,
+  Product,
+  User,
+  User_Adress,
+} from './ModelsType';
 import {
   FieldErrors,
   FieldValues,
@@ -139,6 +145,8 @@ export interface Store {
 export interface PrivateStore {
   address: User_Adress[] | [];
   setAddress: (address: User_Adress[]) => void;
+  user: User | null;
+  setUser: (user: User) => void;
 }
 
 export interface GeoLocationStore {
@@ -160,4 +168,11 @@ export interface ImageComponentType {
 
 export interface SelectDistrictProps {
   register: UseFormRegister<FieldValues>;
+}
+
+export interface SelectAddressProps {
+  register: UseFormRegister<FieldValues>;
+  address: User_Adress[];
+  userAddressId: string | null | undefined;
+  id: string;
 }

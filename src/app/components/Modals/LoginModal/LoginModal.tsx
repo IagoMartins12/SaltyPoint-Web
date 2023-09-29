@@ -4,7 +4,6 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
 import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { toast } from 'react-hot-toast';
-import { IoCloseOutline } from 'react-icons/io5';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import { BiLogInCircle } from 'react-icons/bi';
@@ -15,7 +14,6 @@ import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
-import { ImageComponent } from '../../ImageComponent';
 import Modal from '../Modal';
 import Image from 'next/image';
 
@@ -144,24 +142,6 @@ export const LoginModal = () => {
                 onClick={() => console.log('clicou')}
               />
             </div>
-            {/* <AuthLoginButton
-                text='Continuar com Google'
-                icon={FcGoogle}
-                bgColor='bg-[#4285F4] '
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButton
-                text='Continuar com Facebook'
-                icon={BsFacebook}
-                bgColor='bg-blue-800 '
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButton
-                text='Continuar com Apple'
-                icon={AiFillApple}
-                bgColor='bg-black '
-                onClick={() => console.log('clicou')}
-              /> */}
           </div>
         </div>
       </div>

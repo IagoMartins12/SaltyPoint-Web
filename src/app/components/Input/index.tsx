@@ -4,7 +4,7 @@ import {
   InfoAddressInputProps,
   StyledInputProps,
 } from '@/app/types/ComponentTypes';
-import { formatCep } from '@/app/utils';
+import { formatCep, handleInputChange } from '@/app/utils';
 
 export const StyledInput: React.FC<StyledInputProps> = ({
   id,
@@ -125,6 +125,41 @@ export const CepInput: React.FC<CepInputProps> = ({
             : 'CEP inválido'}
         </span>
       )}
+    </div>
+  );
+};
+
+export const PhoneInput: React.FC<AddressInputProps> = ({
+  id,
+  label,
+  type = 'text',
+  register,
+  placeholder,
+  errors,
+  disabled,
+  value,
+  required,
+}) => {
+  return (
+    <div
+      className={`flex flex-col gap-1 focus:outline-none  ${
+        disabled ? 'pointer-events-none opacity-70' : ''
+      }`}
+    >
+      <span className='font-light text-base'>{label}</span>
+      <input
+        type={type}
+        id={id}
+        className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
+        placeholder={placeholder}
+        {...register(id, { required })}
+        value={value}
+        maxLength={15} // Define o máximo de caracteres permitidos
+        readOnly={disabled}
+        onChange={ev => {
+          handleInputChange(ev, id);
+        }} // Aplica o formato no evento onChange
+      />
     </div>
   );
 };

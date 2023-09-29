@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
 
@@ -50,4 +52,44 @@ export const checkIfAddressIsValid = (address: string) => {
   return validDistricts.some(district =>
     lowercaseAddress.includes(district.toLowerCase()),
   );
+};
+
+const formatPhoneNumber = (inputValue: string) => {
+  // Remove todos os caracteres não numéricos
+  const numericPhoneNumber = inputValue.replace(/\D/g, '');
+
+  // Aplica o formato "(xx) xxxxx-xxxx"
+  let formattedPhoneNumber = '';
+
+  for (let i = 0; i < numericPhoneNumber.length; i++) {
+    if (i === 0) {
+      formattedPhoneNumber = `(${numericPhoneNumber[i]}`;
+    } else if (i === 2) {
+      formattedPhoneNumber += `) ${numericPhoneNumber[i]}`;
+    } else if (i === 7) {
+      formattedPhoneNumber += `-${numericPhoneNumber[i]}`;
+    } else {
+      formattedPhoneNumber += numericPhoneNumber[i];
+    }
+  }
+
+  return formattedPhoneNumber;
+};
+
+// Função chamada quando o campo é alterado
+export const handleInputChange = (
+  event: ChangeEvent<HTMLInputElement>,
+  id: string,
+) => {
+  let inputValue = event.target.value;
+
+  // Aplica o formato se o campo for um número de telefone
+  if (id === 'phone') {
+    inputValue = formatPhoneNumber(inputValue);
+  }
+
+  // Define o valor formatado no campo
+  event.target.value = inputValue;
+
+  return inputValue;
 };

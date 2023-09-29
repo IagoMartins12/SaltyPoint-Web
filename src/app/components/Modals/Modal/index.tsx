@@ -57,12 +57,12 @@ const Modal: React.FC<ModalProps> = ({
             className={`translate h-full border-0 rounded-lg shadow-lg relative flex flex-col w-full modalsBackground outline-none self-center focus:outline-none`}
           >
             {/* Cabeçalho */}
-            <div className='flex items-center p-6 justify-center border-b-[1px]'>
+            <div className='flex items-center p-6 justify-center'>
               <button
                 className='p-1 border-0 hover:opacity-70 transition absolute left-9'
                 onClick={handleClose}
               >
-                <IoMdClose size={18} />
+                <IoMdClose size={25} />
               </button>
               <div className='text-lg font-semibold'>{title}</div>
             </div>

@@ -98,7 +98,6 @@ export const AddAddressModal = () => {
     if (response.status === 201) {
       setAddress([...address, response.data]);
       setStep(0);
-
       addAddress.onClose();
       return toast.success('Endereço criado!');
     } else {

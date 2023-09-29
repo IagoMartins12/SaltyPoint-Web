@@ -20,6 +20,7 @@ import {
 } from 'react-icons/md';
 import useCoupons from '@/app/hooks/modals/useCoupons';
 import useAddress from '@/app/hooks/modals/useAddress';
+import useUserInfoModal from '@/app/hooks/modals/useUserInfoModal';
 
 export const useMenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ export const useMenuHeader = () => {
   const appModal = useAppDownload();
   const couponModal = useCoupons();
   const addressModal = useAddress();
+  const userInfoModal = useUserInfoModal();
 
   const authOptions = useAuth();
 
@@ -92,7 +94,7 @@ export const useMenuHeader = () => {
       label: 'Minha conta',
       icon: <MdOutlineAccountCircle size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(userInfoModal);
       },
     },
     {
