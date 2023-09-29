@@ -59,8 +59,6 @@ export const UserInfoModal = () => {
     toast.success('Foto atualizada!');
   };
 
-  console.log(user);
-
   useEffect(() => {
     setValue('name', user?.name);
     setValue('email', user?.email);

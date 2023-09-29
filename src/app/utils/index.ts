@@ -36,7 +36,6 @@ export const formatCep = (value: string) => {
 };
 
 export const checkIfAddressIsValid = (address: string) => {
-  console.log('address', address);
   const validDistricts = [
     'Sol nascente',
     'Sulina',
@@ -45,20 +44,16 @@ export const checkIfAddressIsValid = (address: string) => {
     'Bandeirantes',
   ];
 
-  // Transforma o endereço em letras minúsculas para tornar a busca case-insensitive
   const lowercaseAddress = address.toLowerCase();
 
-  // Verifica se o endereço contém pelo menos uma das palavras-chave
   return validDistricts.some(district =>
     lowercaseAddress.includes(district.toLowerCase()),
   );
 };
 
 const formatPhoneNumber = (inputValue: string) => {
-  // Remove todos os caracteres não numéricos
   const numericPhoneNumber = inputValue.replace(/\D/g, '');
 
-  // Aplica o formato "(xx) xxxxx-xxxx"
   let formattedPhoneNumber = '';
 
   for (let i = 0; i < numericPhoneNumber.length; i++) {

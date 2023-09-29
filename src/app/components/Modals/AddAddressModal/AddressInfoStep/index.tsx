@@ -12,7 +12,10 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
   setIsSelected,
 }) => {
   return (
-    <form className='flex flex-col gap-3' onSubmit={handleSubmit(saveAddress)}>
+    <form
+      className='flex flex-col gap-3  pb-3'
+      onSubmit={handleSubmit(saveAddress)}
+    >
       <div className='flex flex-col gap-3'>
         <AddressInput
           errors={errors}
