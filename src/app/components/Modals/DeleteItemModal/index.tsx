@@ -8,10 +8,15 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 export const DeleteItemModal: React.FC = () => {
   const deleteModal = useDelete();
   const addressModal = useAddress();
-  const { address, setAddress } = usePrivateStore();
+  const { address, setAddress, user } = usePrivateStore();
 
   const handleDeleteAddress = async () => {
     if (deleteModal.currentItem) {
+      if (user?.user_Adress_id === deleteModal.currentItem) {
+        return toast.error(
+          'Não é possível excluir o endereço que está vinculado a sua conta!',
+        );
+      }
       const response = await deleteAddress(deleteModal.currentItem);
 
       if (response.status === 200) {

@@ -8,21 +8,23 @@ import ProfileImage from '../../UserImage';
 import toast from 'react-hot-toast';
 import { SelectAddress } from '../../Selects';
 import { AuthLoginButton } from '../../Buttons';
+import { UpdateUserDto } from '@/app/types/Dtos';
+import { updatedMe } from '@/app/services';
+import { formatPhoneNumberUser } from '@/app/utils';
+import { User } from '@/app/types/ModelsType';
 
 export const UserInfoModal = () => {
-  const userInfoModal = useUserInfoModal();
+  const UserInfoModal = useUserInfoModal();
   const { user, address, setUser } = usePrivateStore();
 
-  const checkAddress = () => {
-    return address.find(a => a.id === user?.user_Adress_id);
-  };
+  const setUserWithCallback = (callback: (user: User) => User) => {
+    if (!user) return;
 
-  const formatPhoneNumber = (phoneNumber: string) => {
-    // Remove todos os caracteres não numéricos
-    const numericPhoneNumber = phoneNumber.replace(/\D/g, '');
+    // Call the callback function to update the user object
+    const updatedUser = callback(user);
 
-    // Aplica o regex para formatar como (xx) xxxxx-xxxx
-    return numericPhoneNumber.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    // Update the user state
+    setUser(updatedUser);
   };
 
   const {
@@ -39,7 +41,33 @@ export const UserInfoModal = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async data => {};
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    if (!user) return;
+
+    const object = {
+      name: data.name,
+      phone: data.phone,
+      user_Adress_id: data.address,
+    } as UpdateUserDto;
+
+    try {
+      const response = await updatedMe(object);
+
+      // Update the user object with the new phone and address
+      setUserWithCallback(oldUser => ({
+        ...oldUser,
+        phone: response.phone,
+        user_Adress_id: data.address,
+        name: data.name,
+      }));
+
+      toast.success('Perfil atualizado com sucesso!');
+    } catch (error) {
+      // Handle errors here
+      console.error(error);
+      toast.error('Erro ao atualizar o perfil.');
+    }
+  };
 
   const userImage = watch('userImage');
   const setCustomValue = async (id: string, value: string) => {
@@ -53,20 +81,32 @@ export const UserInfoModal = () => {
 
     const object = {
       image: value,
-    };
+    } as UpdateUserDto;
 
-    setUser({ ...user, image: value });
-    toast.success('Foto atualizada!');
+    try {
+      const response = await updatedMe(object);
+
+      setUser({ ...user, image: value });
+      toast.success('Foto atualizada!');
+    } catch (error) {
+      // Handle errors here
+      console.error(error);
+      toast.error('Erro ao atualizar foto.');
+    }
   };
 
   useEffect(() => {
     setValue('name', user?.name);
     setValue('email', user?.email);
-    setValue('phone', formatPhoneNumber(user?.phone || ''));
+    setValue('phone', formatPhoneNumberUser(user?.phone || ''));
+    setValue('userImage', user?.image);
   }, [user]);
 
   const body = (
-    <div className='flex flex-col gap-6 w-11/12 mx-auto'>
+    <form
+      className='flex flex-col gap-6 w-11/12 mx-auto'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className='flex items-center justify-center'>
         <ProfileImage
           onChange={value => setCustomValue('userImage', value)}
@@ -119,16 +159,16 @@ export const UserInfoModal = () => {
           </span>
         </div>
       </div>
-    </div>
+    </form>
   );
 
   return (
     <>
       <Modal
-        onClose={userInfoModal.onClose}
+        onClose={UserInfoModal.onClose}
         body={body}
         title='Minha conta'
-        isOpen={userInfoModal.isOpen}
+        isOpen={UserInfoModal.isOpen}
       />
     </>
   );

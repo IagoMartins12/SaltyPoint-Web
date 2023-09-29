@@ -71,6 +71,14 @@ const formatPhoneNumber = (inputValue: string) => {
   return formattedPhoneNumber;
 };
 
+export const formatPhoneNumberUser = (phoneNumber: string) => {
+  // Remove todos os caracteres não numéricos
+  const numericPhoneNumber = phoneNumber.replace(/\D/g, '');
+
+  // Aplica o regex para formatar como (xx) xxxxx-xxxx
+  return numericPhoneNumber.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+};
+
 // Função chamada quando o campo é alterado
 export const handleInputChange = (
   event: ChangeEvent<HTMLInputElement>,

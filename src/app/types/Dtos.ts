@@ -37,3 +37,10 @@ export type AddressUserDto = {
   reference: string;
   type_adress: number;
 };
+
+export type UpdateUserDto = {
+  image?: string;
+  name?: string;
+  phone?: string;
+  user_Adress_id?: string;
+};

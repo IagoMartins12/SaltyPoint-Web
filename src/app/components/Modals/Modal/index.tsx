@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 interface ModalProps {
-  isOpen?: boolean;
-  onClose: () => void;
+  isOpen?: any;
+  onClose: any;
   title?: string;
   body?: React.ReactElement;
   authModal?: boolean;

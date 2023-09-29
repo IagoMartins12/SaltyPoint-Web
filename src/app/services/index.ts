@@ -5,6 +5,7 @@ import {
   CreateUserDto,
   LoginUserDto,
   RecoverPasswordDto,
+  UpdateUserDto,
 } from '../types/Dtos';
 import {
   Category,
@@ -136,5 +137,16 @@ export const getMe = async (): Promise<User> => {
     return response.data;
   } catch (error: any) {
     return error;
+  }
+};
+
+export const updatedMe = async (
+  updateUserDto: UpdateUserDto,
+): Promise<UpdateUserDto> => {
+  try {
+    const response = await Api.patch('/me/update', updateUserDto);
+    return response.data;
+  } catch (error: any) {
+    return error.response;
   }
 };
