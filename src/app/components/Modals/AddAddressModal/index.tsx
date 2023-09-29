@@ -136,9 +136,14 @@ export const AddAddressModal = () => {
     setIsValid(value.length === 9);
   };
 
+  const handleClose = () => {
+    reset();
+    setStep(0);
+    addAddress.onClose();
+  };
   const body = (
     <div className='flex flex-col w-11/12 mx-auto h-full '>
-      <div className='flex flex-col gap-4 h-full'>
+      <div className='flex flex-col gap-4 h-full '>
         {step === STEPS.CEP && (
           <CepStep
             errors={errors}
@@ -184,7 +189,7 @@ export const AddAddressModal = () => {
   return (
     <>
       <Modal
-        onClose={addAddress.onClose}
+        onClose={handleClose}
         body={body}
         isOpen={addAddress.isOpen}
         title='Adicionar endereço'

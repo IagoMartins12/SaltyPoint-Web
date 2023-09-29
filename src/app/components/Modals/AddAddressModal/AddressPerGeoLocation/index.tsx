@@ -10,6 +10,16 @@ import { useEffect } from 'react';
 import { BsHouseFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 
+export const onlyDistrict = ['sublocality', 'postal_code'];
+
+export const addressTypes = [
+  'street_address',
+  'route',
+  'postal_code',
+  'establishment',
+  'point_of_interest',
+];
+
 export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   errors,
   register,
@@ -20,16 +30,6 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   result,
   setValue,
 }) => {
-  const onlyDistrict = ['sublocality', 'postal_code'];
-
-  const addressTypes = [
-    'street_address',
-    'route',
-    'postal_code',
-    'establishment',
-    'point_of_interest',
-  ];
-
   useEffect(() => {
     if (!result) return;
 
@@ -39,7 +39,6 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
 
     if (result.types.some(type => onlyDistrict.includes(type))) {
       setValue('district', result.address_components[1].long_name);
-      console.log('result', result);
     }
   }, [result]);
 
@@ -51,11 +50,12 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
           handleOnChange={handleOnChange}
           register={register}
         />
-        <AddressInput
+        <InfoAddressInput
           errors={errors}
           id='address'
           register={register}
           label='Endereço'
+          required
         />
         <InfoAddressInput
           id='number'

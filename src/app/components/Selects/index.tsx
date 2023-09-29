@@ -18,7 +18,7 @@ export const SelectDistrict: React.FC<SelectDistrictProps> = ({ register }) => {
         {...register('district', { required: true })}
       >
         {optionsDistrict.map((option, i) => (
-          <option value={option.name} key={i}>
+          <option value={option.name} key={i} className='text-sm my-2'>
             {option.name}
           </option>
         ))}

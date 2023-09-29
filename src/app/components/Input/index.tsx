@@ -36,6 +36,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   errors,
   disabled,
   value,
+  required,
 }) => {
   return (
     <div
@@ -52,9 +53,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
             errors[id] ? 'border-red-500' : ''
           }`}
           placeholder={placeholder}
-          {...register(id, {
-            required: false,
-          })}
+          {...register(id, { required })}
           value={value}
           readOnly={disabled}
         />

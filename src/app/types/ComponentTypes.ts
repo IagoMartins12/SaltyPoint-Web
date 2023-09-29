@@ -47,6 +47,7 @@ export interface AddressInputProps {
   disabled?: boolean;
   errors: FieldErrors<FieldValues>;
   value?: string;
+  required?: boolean;
 }
 
 export interface InfoAddressInputProps {

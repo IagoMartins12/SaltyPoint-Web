@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { PuffLoader } from 'react-spinners';
 import { checkIfAddressIsValid } from '@/app/utils';
 import toast from 'react-hot-toast';
+import { Result } from '@/app/types/GeolocationType';
+import { BsWifiOff } from 'react-icons/bs';
 
 export const GetGeoLocation: React.FC<GeoLocationProps> = ({
   setStep,
@@ -15,7 +17,33 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
   const { setGeoAddress, GeoAddress } = useGeoAddressLocation();
   const apiKey = 'AIzaSyDu0NBwZWMwvPMDy5gTJZ6EDyptHSv2cdg';
 
-  console.log(location);
+  const requiredTypes = [
+    'street_address',
+    'route',
+    'postal_code',
+    'establishment',
+    'point_of_interest',
+    'premise',
+    'sublocality',
+  ];
+
+  const getAddressFromResult = (result: Result) => {
+    if (result.types.some(type => type === 'postal_code_prefix')) {
+      return result.address_components[1].long_name;
+    } else if (result.types.some(type => type === 'sublocality')) {
+      return result.address_components[0].long_name;
+    } else {
+      return result.address_components[2].long_name;
+    }
+  };
+
+  const handleResultClick = (result: Result, isValidAddress: boolean) => {
+    if (!isValidAddress) {
+      return toast.error('Esse endereço não está na nossa área de entrega');
+    }
+    setResult(result);
+    setStep(3);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,28 +70,27 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
     }
   }, [location, apiKey]);
 
-  const requiredTypes = [
-    'street_address',
-    'route',
-    'postal_code',
-    'establishment',
-    'point_of_interest',
-    'premise',
-    'sublocality',
-  ];
-
   return (
     <>
       <div className='flex flex-col gap-2 h-full'>
         {!location.loaded ? (
           <div className='flex items-center justify-center h-4/6'>
-            <PuffLoader />
+            <div className='flex flex-col gap-4 items-center justify-center'>
+              <PuffLoader />
+              <span className='text-2xl font-medium '>
+                Aguardando localização...
+              </span>
+            </div>
           </div>
         ) : location.error ? (
           <div className='flex flex-col items-center justify-center gap-8 h-3/6'>
-            <span className='text-2xl font-medium text-red-700'>
-              Erro ao buscar localização
-            </span>
+            <div className='flex flex-col gap-3 items-center justify-center'>
+              <BsWifiOff size={55} />
+              <span className='text-2xl font-medium text-red-700'>
+                Erro ao buscar localização
+              </span>
+            </div>
+
             <button
               onClick={() => {
                 setStep(3);
@@ -86,22 +113,15 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
                       result.types.some(type => requiredTypes.includes(type)),
                     )
                     .map((result, i) => {
+                      const address = getAddressFromResult(result);
+                      const isValidAddress = checkIfAddressIsValid(address);
+
                       return (
                         <div
                           className='flex flex-col border-b-2 gap-2 cursor-pointer'
                           key={i}
                           onClick={() => {
-                            const check = checkIfAddressIsValid(
-                              result.address_components[1].long_name,
-                            );
-
-                            if (!check) {
-                              return toast.error(
-                                'Esse endereço não está na nossa área de entrega',
-                              );
-                            }
-                            setResult(result);
-                            setStep(3);
+                            handleResultClick(result, isValidAddress);
                           }}
                         >
                           <span>{result.formatted_address}</span>
@@ -119,11 +139,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
                     </span>
                   </button>
                 </>
-              ) : (
-                <div>
-                  <PuffLoader />
-                </div>
-              )}
+              ) : null}
             </div>
           </div>
         )}

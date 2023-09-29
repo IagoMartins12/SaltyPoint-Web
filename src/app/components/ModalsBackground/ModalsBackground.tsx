@@ -40,11 +40,12 @@ export const ModalsBackground = () => {
 
   return (
     <div
-      className='modalBackground'
+      // className='modalBackground z-10'
       style={{
         display: modals.some(modal => modal.isOpen) ? 'flex' : 'none',
       }}
       onClick={() => {
+        console.log('clicou');
         modals.forEach(modal => {
           if (modal.isOpen) {
             modal.onClose();

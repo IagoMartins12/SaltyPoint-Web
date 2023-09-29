@@ -22,6 +22,14 @@ input:focus {
   background-color: transparent;
 }
 
+option {
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] option {
+  background-color: #000000;
+}
+
 .dark {
   --bg-color-dark: #1c1c1c;
   --text-color-dark: #fafafa;
@@ -54,7 +62,7 @@ body {
   top: 50%;
   left: 20%;
   transform: translate(-50%, -50%);
-  position: fixed;
+  position: absolute;
 }
 
 .menuModalsPosition {

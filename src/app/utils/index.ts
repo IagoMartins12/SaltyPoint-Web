@@ -34,6 +34,7 @@ export const formatCep = (value: string) => {
 };
 
 export const checkIfAddressIsValid = (address: string) => {
+  console.log('address', address);
   const validDistricts = [
     'Sol nascente',
     'Sulina',
