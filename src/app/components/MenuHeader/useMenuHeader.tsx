@@ -2,10 +2,6 @@ import useAuth, {
   checkAndSetToken,
   removeToken,
 } from '@/app/hooks/auth/useAuth';
-import useAppDownload from '@/app/hooks/modals/useAppDownload';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
-import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
-import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
 import { ModalStore } from '@/app/types/ComponentTypes';
 import { useEffect, useState } from 'react';
 import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
@@ -18,13 +14,18 @@ import {
   MdOutlineFavoriteBorder,
   MdOutlinePrivacyTip,
 } from 'react-icons/md';
-import useCoupons from '@/app/hooks/modals/useCoupons';
-import useAddress from '@/app/hooks/modals/useAddress';
-import useUserInfoModal from '@/app/hooks/modals/useUserInfoModal';
+import {
+  useAddress,
+  useAppDownload,
+  useCoupons,
+  useLoginModal,
+  usePrivacyTerms,
+  useTalkToUsModal,
+  useUserInfoModal,
+} from '@/app/hooks/modals/useModal';
 
 export const useMenuHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
   const termPrivacyModal = usePrivacyTerms();

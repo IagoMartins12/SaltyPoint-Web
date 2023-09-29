@@ -1,5 +1,5 @@
-import useAddress from '@/app/hooks/modals/useAddress';
 import useDelete from '@/app/hooks/modals/useDelete';
+import { useAddress } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { deleteAddress } from '@/app/services';
 import toast from 'react-hot-toast';

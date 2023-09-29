@@ -1,6 +1,6 @@
 'use client';
 
-import useSearchModal from '@/app/hooks/modals/useSearchModal';
+import { useSearchModal } from '@/app/hooks/modals/useModal';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 export const SearchIcon = () => {

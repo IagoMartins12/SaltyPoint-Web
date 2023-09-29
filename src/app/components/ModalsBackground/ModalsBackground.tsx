@@ -1,16 +1,18 @@
 'use client';
 
-import useAddAddress from '@/app/hooks/modals/useAddAddress';
-import useAddress from '@/app/hooks/modals/useAddress';
-import useAppDownload from '@/app/hooks/modals/useAppDownload';
-import useCoupons from '@/app/hooks/modals/useCoupons';
 import useDelete from '@/app/hooks/modals/useDelete';
-import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
-import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
-import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
-import useSearchModal from '@/app/hooks/modals/useSearchModal';
-import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
+import {
+  useAddAddress,
+  useAddress,
+  useAppDownload,
+  useCoupons,
+  useForgetPasswordModal,
+  useLoginModal,
+  usePrivacyTerms,
+  useRegisterModal,
+  useSearchModal,
+  useTalkToUsModal,
+} from '@/app/hooks/modals/useModal';
 import { useEffect } from 'react';
 
 export const ModalsBackground = () => {

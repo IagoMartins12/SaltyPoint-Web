@@ -5,12 +5,15 @@ import { toast } from 'react-hot-toast';
 import Image from 'next/image';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useTheme } from 'next-themes';
-import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import { useState } from 'react';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { StyledInput } from '../../Input';
 import { recoverPassword } from '@/app/services';
 import { ImageComponent } from '../../ImageComponent';
+import {
+  useForgetPasswordModal,
+  useLoginModal,
+} from '@/app/hooks/modals/useModal';
+import Modal from '../Modal';
 
 enum STEPS {
   RECEIVE_EMAIL = 0,
@@ -103,8 +106,14 @@ export const ForgetPasswordModal = () => {
   );
 
   let imageContent = (
-    <div className='aspect-video w-full h-2/5   relative overflow-hidden rounded-xl'>
-      <ImageComponent src='forget.svg' alt='forgetPassword' />
+    <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
+      <Image
+        fill
+        className='sm:object-cover -z-10 !static '
+        src={`/forget.svg`}
+        alt={'forget.svg'}
+        sizes='100%'
+      />
     </div>
   );
 
@@ -145,29 +154,20 @@ export const ForgetPasswordModal = () => {
     );
   }
 
-  return (
-    <div
-      className={`menuModalsPosition  flex-col gap-12 z-50 flex ${
-        forgetPasswordModal.isOpen ? 'modal-open' : 'modal-closed'
-      } 
-${theme === 'light' ? 'bg-white' : 'bg-black'}
-      `}
-    >
-      <div className='flex items-center justify-between ml-5 h-[5%] mt-2'>
-        <IoCloseOutline
-          size={30}
-          onClick={() => {
-            forgetPasswordModal.onClose();
-            setStep(STEPS.RECEIVE_EMAIL);
-          }}
-          style={{ cursor: 'pointer' }}
-        />
-      </div>
-
+  const body = (
+    <>
       <div className='flex flex-col justify-center items-center'>
         {imageContent}
         {bodyContent}
       </div>
-    </div>
+    </>
+  );
+  return (
+    <Modal
+      onClose={forgetPasswordModal.onClose}
+      body={body}
+      isOpen={forgetPasswordModal.isOpen}
+      title='Esqueci minha senha'
+    />
   );
 };

@@ -40,8 +40,9 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ onChange, value }) => {
           >
             <Image
               fill
-              className='object-cover rounded-full h-1 w-full '
+              className='object-cover rounded-full w-full '
               src={value}
+              sizes='100%'
               alt='Post'
             />
             <FcPlus size={28} className='absolute bottom-1 right-3' />

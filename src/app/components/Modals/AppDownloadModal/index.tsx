@@ -1,5 +1,4 @@
-import useAppDownload from '@/app/hooks/modals/useAppDownload';
-import { IoCloseOutline } from 'react-icons/io5';
+import { useAppDownload } from '@/app/hooks/modals/useModal';
 import { AppleButton, GoogleButton } from '../../Buttons';
 import Modal from '../Modal';
 

@@ -52,7 +52,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
               value={option.id} // Use uma propriedade identificadora adequada aqui
               key={i}
               className='text-sm my-2'
-              selected={option.id === userAddressId}
+              defaultChecked={option.id === userAddressId}
             >
               {option.address}, {option.number} / {option.district}
             </option>
@@ -67,7 +67,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
                 value={option.id} // Use uma propriedade identificadora adequada aqui
                 key={i}
                 className='text-sm my-2'
-                selected={option.id === userAddressId}
+                defaultChecked={option.id === userAddressId}
               >
                 {option.address}, {option.number} / {option.district}
               </option>

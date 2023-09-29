@@ -1,13 +1,10 @@
 'use client';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
 import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import { BiLogInCircle } from 'react-icons/bi';
-import useForgetPasswordModal from '@/app/hooks/modals/useForgetPassword';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import { AiFillApple } from 'react-icons/ai';
@@ -16,6 +13,11 @@ import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
 import Modal from '../Modal';
 import Image from 'next/image';
+import {
+  useForgetPasswordModal,
+  useLoginModal,
+  useRegisterModal,
+} from '@/app/hooks/modals/useModal';
 
 export const LoginModal = () => {
   const loginModal = useLoginModal();

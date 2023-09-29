@@ -1,9 +1,7 @@
 'use client';
 
-import { IoCloseOutline } from 'react-icons/io5';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
+
 import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
@@ -13,9 +11,9 @@ import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
-import { ImageComponent } from '../../ImageComponent';
 import Image from 'next/image';
 import Modal from '../Modal';
+import { useLoginModal, useRegisterModal } from '@/app/hooks/modals/useModal';
 
 export const RegisterModal = () => {
   const loginModal = useLoginModal();

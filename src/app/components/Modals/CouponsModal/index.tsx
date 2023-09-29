@@ -1,10 +1,10 @@
-import useCoupons from '@/app/hooks/modals/useCoupons';
 import { useEffect, useState } from 'react';
 import { Discount_cupom } from '@/app/types/ModelsType';
 import { getCoupons } from '@/app/services';
 import { CouponCard } from '../../CouponCard';
 import useAuth from '@/app/hooks/auth/useAuth';
 import Modal from '../Modal';
+import { useCoupons } from '@/app/hooks/modals/useModal';
 
 export const CouponsModal = () => {
   const [coupons, setCoupons] = useState<Discount_cupom[] | []>([]);

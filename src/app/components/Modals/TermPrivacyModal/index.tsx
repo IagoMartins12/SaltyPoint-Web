@@ -1,4 +1,4 @@
-import usePrivacyTerms from '@/app/hooks/modals/usePrivacyTerms';
+import { usePrivacyTerms } from '@/app/hooks/modals/useModal';
 import Modal from '../Modal';
 
 export const TermPrivacyModal = () => {

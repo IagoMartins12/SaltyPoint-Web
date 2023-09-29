@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
-import useAddAddress from '@/app/hooks/modals/useAddAddress';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { getAddressPerCep, sendAddressUser } from '@/app/services';
 import toast from 'react-hot-toast';
@@ -14,6 +12,7 @@ import { AddressPerGeoLocation } from './AddressPerGeoLocation';
 import { Result } from '@/app/types/GeolocationType';
 import { checkIfAddressIsValid } from '@/app/utils';
 import Modal from '../Modal';
+import { useAddAddress } from '@/app/hooks/modals/useModal';
 
 export enum STEPS {
   CEP = 0,

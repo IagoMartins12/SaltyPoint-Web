@@ -1,4 +1,4 @@
-import useTalkToUsModal from '@/app/hooks/modals/useTalkToUs';
+import { useTalkToUsModal } from '@/app/hooks/modals/useModal';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   AiOutlineMail,

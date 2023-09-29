@@ -1,6 +1,5 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '../Modal';
-import useUserInfoModal from '@/app/hooks/modals/useUserInfoModal';
 import { AddressInput, PhoneInput } from '../../Input';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useEffect } from 'react';
@@ -12,6 +11,7 @@ import { UpdateUserDto } from '@/app/types/Dtos';
 import { updatedMe } from '@/app/services';
 import { formatPhoneNumberUser } from '@/app/utils';
 import { User } from '@/app/types/ModelsType';
+import { useUserInfoModal } from '@/app/hooks/modals/useModal';
 
 export const UserInfoModal = () => {
   const UserInfoModal = useUserInfoModal();

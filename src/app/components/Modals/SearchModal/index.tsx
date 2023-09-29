@@ -1,12 +1,11 @@
-import useSearchModal from '@/app/hooks/modals/useSearchModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { IoCloseOutline } from 'react-icons/io5';
 import { SearchCategory } from '../../SearchCategory';
 import { useState } from 'react';
 import { SearchProduct } from '../../SearchProduct';
 import { Product } from '@/app/types/ModelsType';
 import Modal from '../Modal';
+import { useSearchModal } from '@/app/hooks/modals/useModal';
 
 export const SearchModal = () => {
   const [productState, setProductState] = useState<[] | Product[]>([]);
