@@ -5,6 +5,13 @@ import {
   StyledInputProps,
 } from '@/app/types/ComponentTypes';
 import { formatCep, handleInputChange } from '@/app/utils';
+import { useState } from 'react';
+import {
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from 'react-icons/ai';
 
 export const StyledInput: React.FC<StyledInputProps> = ({
   id,
@@ -160,6 +167,47 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
           handleInputChange(ev, id);
         }} // Aplica o formato no evento onChange
       />
+    </div>
+  );
+};
+
+export const PasswordInput: React.FC<InfoAddressInputProps> = ({
+  id,
+  label,
+  register,
+  placeholder,
+  required,
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  return (
+    <div className='flex flex-col gap-1 focus:outline-none w-full '>
+      <span className='font-light text-base'>{label}</span>
+      <div className='w-full flex relative'>
+        <input
+          type={isVisible ? 'text' : 'password'}
+          id={id}
+          className={`px-2 py-2 border-b-2 w-full `}
+          placeholder={placeholder}
+          {...register(id, { required })}
+        />
+        {isVisible ? (
+          <AiOutlineEyeInvisible
+            size={25}
+            className='absolute right-1 top-2 cursor-pointer'
+            onClick={() => {
+              setIsVisible(!isVisible);
+            }}
+          />
+        ) : (
+          <AiOutlineEye
+            size={25}
+            className='absolute right-1 top-2 cursor-pointer'
+            onClick={() => {
+              setIsVisible(!isVisible);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };

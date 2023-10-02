@@ -19,3 +19,4 @@ export const useRegisterModal = createModalStore();
 export const useSearchModal = createModalStore();
 export const useTalkToUsModal = createModalStore();
 export const useUserInfoModal = createModalStore();
+export const useChangePasswordModal = createModalStore();

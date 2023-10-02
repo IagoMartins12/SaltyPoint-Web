@@ -35,45 +35,28 @@ export interface ProductCardType {
   product: Product;
 }
 
-export interface StyledInputProps {
+interface BaseInputProps {
   id: string;
   type?: string;
   placeholder?: string;
   register: UseFormRegister<FieldValues>;
   label?: string;
-  required: boolean;
 }
 
-export interface AddressInputProps {
-  id: string;
-  type?: string;
-  placeholder?: string;
-  register: UseFormRegister<FieldValues>;
-  label?: string;
+interface RequiredInputProps extends BaseInputProps {
+  required: boolean;
+}
+export interface StyledInputProps extends RequiredInputProps {}
+
+export interface AddressInputProps extends BaseInputProps {
   disabled?: boolean;
   errors: FieldErrors<FieldValues>;
   value?: string;
   required?: boolean;
 }
 
-export interface InfoAddressInputProps {
-  id: string;
-  type?: string;
-  placeholder?: string;
-  register: UseFormRegister<FieldValues>;
-  label?: string;
-  required: boolean;
+export interface InfoAddressInputProps extends RequiredInputProps {
   errors: FieldErrors<FieldValues>;
-}
-
-export interface CepStepProps {
-  register: UseFormRegister<FieldValues>;
-  onSubmit: SubmitHandler<FieldValues>;
-  errors: FieldErrors<FieldValues>;
-  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-  handleOnChange: (value: string) => void;
-  setStep: React.Dispatch<React.SetStateAction<STEPS>>;
-  isValid: boolean;
 }
 
 export interface CepInputProps {
@@ -94,6 +77,16 @@ export interface AddAddressGeoStepProps extends AddAddressInfoStepProps {
   handleOnChange: (value: string) => void;
   result?: Result | null;
   setValue: UseFormSetValue<FieldValues>;
+}
+
+export interface CepStepProps {
+  register: UseFormRegister<FieldValues>;
+  onSubmit: SubmitHandler<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  handleOnChange: (value: string) => void;
+  setStep: React.Dispatch<React.SetStateAction<STEPS>>;
+  isValid: boolean;
 }
 
 export interface GeoLocationProps {

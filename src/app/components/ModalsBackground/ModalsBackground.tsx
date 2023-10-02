@@ -12,47 +12,38 @@ import {
   useRegisterModal,
   useSearchModal,
   useTalkToUsModal,
+  useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 import { useEffect } from 'react';
 
+const modals = [
+  useLoginModal,
+  useRegisterModal,
+  useTalkToUsModal,
+  useAppDownload,
+  usePrivacyTerms,
+  useForgetPasswordModal,
+  useSearchModal,
+  useCoupons,
+  useAddress,
+  useAddAddress,
+  useDelete,
+  useUserInfoModal,
+];
+
 export const ModalsBackground = () => {
-  const modals = [
-    useLoginModal(),
-    useRegisterModal(),
-    useTalkToUsModal(),
-    useAppDownload(),
-    usePrivacyTerms(),
-    useForgetPasswordModal(),
-    useSearchModal(),
-    useCoupons(),
-    useAddress(),
-    useAddAddress(),
-    useDelete(),
-  ];
+  const openModals = modals.map(modal => modal().isOpen);
 
   useEffect(() => {
-    const isOpen = modals.some(modal => modal.isOpen);
+    const isOpen = openModals.some(isOpen => isOpen);
 
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [modals]);
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [openModals]);
 
   return (
     <div
-      // className='modalBackground z-10'
       style={{
-        display: modals.some(modal => modal.isOpen) ? 'flex' : 'none',
-      }}
-      onClick={() => {
-        console.log('clicou');
-        modals.forEach(modal => {
-          if (modal.isOpen) {
-            modal.onClose();
-          }
-        });
+        display: openModals.some(isOpen => isOpen) ? 'flex' : 'none',
       }}
     />
   );

@@ -44,3 +44,7 @@ export type UpdateUserDto = {
   phone?: string;
   user_Adress_id?: string;
 };
+
+export type UpdatePasswordDto = {
+  newPassword: string;
+};

@@ -5,6 +5,7 @@ import {
   CreateUserDto,
   LoginUserDto,
   RecoverPasswordDto,
+  UpdatePasswordDto,
   UpdateUserDto,
 } from '../types/Dtos';
 import {
@@ -146,6 +147,15 @@ export const updatedMe = async (
   try {
     const response = await Api.patch('/me/update', updateUserDto);
     return response.data;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const updatedPassword = async (updatePasswordDto: UpdatePasswordDto) => {
+  try {
+    const response = await Api.patch('/resetPassword', updatePasswordDto);
+    return response;
   } catch (error: any) {
     return error.response;
   }

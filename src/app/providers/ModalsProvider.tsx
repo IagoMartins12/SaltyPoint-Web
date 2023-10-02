@@ -3,6 +3,7 @@
 import { AddAddressModal } from '../components/Modals/AddAddressModal';
 import { AddressModal } from '../components/Modals/AddressModal';
 import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
+import { ChangePasswordModal } from '../components/Modals/ChangePasswordModal';
 import { CouponsModal } from '../components/Modals/CouponsModal';
 import { DeleteItemModal } from '../components/Modals/DeleteItemModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
@@ -28,6 +29,7 @@ const ModalsProvider = () => {
       <AddAddressModal />
       <DeleteItemModal />
       <UserInfoModal />
+      <ChangePasswordModal />
     </>
   );
 };

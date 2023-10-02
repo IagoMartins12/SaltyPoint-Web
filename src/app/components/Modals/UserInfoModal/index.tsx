@@ -11,19 +11,22 @@ import { UpdateUserDto } from '@/app/types/Dtos';
 import { updatedMe } from '@/app/services';
 import { formatPhoneNumberUser } from '@/app/utils';
 import { User } from '@/app/types/ModelsType';
-import { useUserInfoModal } from '@/app/hooks/modals/useModal';
+import {
+  useChangePasswordModal,
+  useUserInfoModal,
+} from '@/app/hooks/modals/useModal';
 
 export const UserInfoModal = () => {
   const UserInfoModal = useUserInfoModal();
+  const changePasswordModal = useChangePasswordModal();
+
   const { user, address, setUser } = usePrivateStore();
 
   const setUserWithCallback = (callback: (user: User) => User) => {
     if (!user) return;
 
-    // Call the callback function to update the user object
     const updatedUser = callback(user);
 
-    // Update the user state
     setUser(updatedUser);
   };
 
@@ -95,12 +98,9 @@ export const UserInfoModal = () => {
     }
   };
 
-  useEffect(() => {
-    setValue('name', user?.name);
-    setValue('email', user?.email);
-    setValue('phone', formatPhoneNumberUser(user?.phone || ''));
-    setValue('userImage', user?.image);
-  }, [user]);
+  const handleOpenPasswordModal = () => {
+    changePasswordModal.onOpen();
+  };
 
   const body = (
     <form
@@ -149,7 +149,10 @@ export const UserInfoModal = () => {
           onClick={handleSubmit(onSubmit)}
         />
 
-        <div className='flex items-center justify-center cursor-pointer'>
+        <div
+          className='flex items-center justify-center cursor-pointer'
+          onClick={handleOpenPasswordModal}
+        >
           <span className='text-sm font-light text-red-600'>Alterar senha</span>
         </div>
 
@@ -161,6 +164,13 @@ export const UserInfoModal = () => {
       </div>
     </form>
   );
+
+  useEffect(() => {
+    setValue('name', user?.name);
+    setValue('email', user?.email);
+    setValue('phone', formatPhoneNumberUser(user?.phone || ''));
+    setValue('userImage', user?.image);
+  }, [user]);
 
   return (
     <>
