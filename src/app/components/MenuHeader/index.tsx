@@ -18,17 +18,17 @@ export const MenuHeader = () => {
           <AiOutlineMenu size={25} />
         </button>
       </div>
-      <div className={`relative z-50 w-6/12`}>
+      <div className={`relative  w-6/12`}>
         <div
-          className={`navbar-backdrop ${
+          className={`navbar-backdrop z-40 ${
             menuOpen ? 'fixed' : ''
           } inset-0 bg-gray-800 opacity-25`}
           onClick={toggleMenu}
-        ></div>
+        />
         <nav
-          className={`fixed top-0 ${
+          className={`fixed top-0 z-50 ${
             menuOpen ? 'menu-open' : 'menu-closed'
-          } bottom-0 flex flex-col w-[70%] lg:w-[25%] py-6 px-6 modalsBackground overflow-y-auto`}
+          } bottom-0 flex flex-col w-[70%] lg:w-[20%] py-6 px-6 modalsBackground overflow-y-auto`}
         >
           <div className='flex flex-col gap-6 px-4 py-3'>
             {authOptions.isLogged

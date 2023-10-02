@@ -23,6 +23,8 @@ export const UserInfoModal = () => {
   const deleteModal = useDeleteUser();
   const { user, address, setUser } = usePrivateStore();
 
+  //"651b0262e471b239c7e9c1ed"
+
   const setUserWithCallback = (callback: (user: User) => User) => {
     if (!user) return;
 
@@ -53,6 +55,8 @@ export const UserInfoModal = () => {
       phone: data.phone,
       user_Adress_id: data.address,
     } as UpdateUserDto;
+    console.log('user', user);
+    console.log('object', object);
 
     try {
       const response = await updatedMe(object);

@@ -3,15 +3,11 @@ import {
   CepInputProps,
   InfoAddressInputProps,
   StyledInputProps,
+  TextAreaInputProps,
 } from '@/app/types/ComponentTypes';
 import { formatCep, handleInputChange } from '@/app/utils';
 import { useState } from 'react';
-import {
-  AiFillEye,
-  AiFillEyeInvisible,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from 'react-icons/ai';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 export const StyledInput: React.FC<StyledInputProps> = ({
   id,
@@ -208,6 +204,19 @@ export const PasswordInput: React.FC<InfoAddressInputProps> = ({
           />
         )}
       </div>
+    </div>
+  );
+};
+
+export const TextArea: React.FC<TextAreaInputProps> = ({ register }) => {
+  return (
+    <div className='form__group field'>
+      <input
+        type={'text'}
+        className='form__field bg-transparent h-14'
+        {...register('observation')}
+      />
+      <label className='form__label'>Observação</label>
     </div>
   );
 };

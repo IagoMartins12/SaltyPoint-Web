@@ -36,6 +36,12 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
   id,
   userAddressId,
 }) => {
+  console.log('userAddressId', userAddressId);
+  console.log(
+    'userAddressId',
+    address.map(a => a.id),
+  );
+
   const hasUserAddress = userAddressId !== null;
 
   return (
@@ -52,7 +58,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
               value={option.id} // Use uma propriedade identificadora adequada aqui
               key={i}
               className='text-sm my-2'
-              defaultChecked={option.id === userAddressId}
+              selected={option.id === userAddressId}
             >
               {option.address}, {option.number} / {option.district}
             </option>
@@ -67,7 +73,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
                 value={option.id} // Use uma propriedade identificadora adequada aqui
                 key={i}
                 className='text-sm my-2'
-                defaultChecked={option.id === userAddressId}
               >
                 {option.address}, {option.number} / {option.district}
               </option>

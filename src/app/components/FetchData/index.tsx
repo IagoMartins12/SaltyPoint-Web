@@ -5,6 +5,7 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import {
   getAddress,
+  getCartProduct,
   getCategories,
   getFavorites,
   getMe,
@@ -14,7 +15,8 @@ import { useEffect } from 'react';
 
 export const FetchData = () => {
   const { setCategorys, setProducts } = useGlobalStore();
-  const { setAddress, setUser, setFavorites } = usePrivateStore();
+  const { setAddress, setUser, setFavorites, setCart_product } =
+    usePrivateStore();
   const { isLogged } = useAuth();
 
   useEffect(() => {
@@ -39,9 +41,11 @@ export const FetchData = () => {
           const addressData = await getAddress();
           const userData = await getMe();
           const favoriteData = await getFavorites();
+          const cartProductData = await getCartProduct();
           setAddress(addressData);
           setUser(userData);
           setFavorites(favoriteData);
+          setCart_product(cartProductData);
         } catch (error) {
           console.log(error);
         }

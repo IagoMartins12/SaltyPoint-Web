@@ -1,5 +1,7 @@
 import { IconType } from 'react-icons';
 import {
+  Cart,
+  Cart_product,
   Category,
   Discount_cupom,
   Favorite,
@@ -35,7 +37,13 @@ export interface AddressRadioButton {
 }
 export interface ProductCardType {
   product: Product;
-  fullWidth: boolean;
+  fullWidth?: boolean;
+}
+
+export interface PizzaCardType extends ProductCardType {
+  selectedProduct2: string | null;
+  setSelectedProduct2: React.Dispatch<React.SetStateAction<string | null>>;
+  removeSelected: () => void;
 }
 
 interface BaseInputProps {
@@ -60,6 +68,10 @@ export interface AddressInputProps extends BaseInputProps {
 
 export interface InfoAddressInputProps extends RequiredInputProps {
   errors: FieldErrors<FieldValues>;
+}
+
+export interface TextAreaInputProps {
+  register: UseFormRegister<FieldValues>;
 }
 
 export interface CepInputProps {
@@ -160,6 +172,10 @@ export interface PrivateStore {
   setUser: (user: User) => void;
   favorites: Favorite[] | [];
   setFavorites: (favorite: Favorite[]) => void;
+  cart: Cart | null;
+  setCart: (cart: Cart) => void;
+  cart_product: Cart_product[] | [];
+  setCart_product: (cart_product: Cart_product[]) => void;
 }
 
 export interface GeoLocationStore {
@@ -194,4 +210,5 @@ export interface ProductModalProps {
   disabled: boolean;
   decreaseQuantity: () => void;
   increaseQuantity: () => void;
+  onSubmit: SubmitHandler<FieldValues>;
 }

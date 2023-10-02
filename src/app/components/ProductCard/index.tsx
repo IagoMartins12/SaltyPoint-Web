@@ -20,7 +20,6 @@ export const ProductCard: React.FC<ProductCardType> = ({
         fullWidth ? 'w-[100%]' : 'w-[48%]'
       }`}
       onClick={() => {
-        console.log('clciou');
         productModal.setCurrentProduct(product);
         productModal.onOpen();
       }}
@@ -46,7 +45,14 @@ export const ProductCard: React.FC<ProductCardType> = ({
           )}
         </div>
 
-        <FavoriteButton product={product} filled={handleCheckFavorites()} />
+        <div
+          className='z-10'
+          onClick={ev => {
+            ev.stopPropagation();
+          }}
+        >
+          <FavoriteButton product={product} filled={handleCheckFavorites()} />
+        </div>
       </div>
       <div className='flex flex-col w-7/12 h-full gap-4 py-2 px-5 justify-between'>
         <div className='flex flex-col gap-4'>

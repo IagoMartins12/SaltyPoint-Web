@@ -1,15 +1,19 @@
 import { Api } from '../api/Api';
 import {
   CEPInfoDto,
+  CartProductDto,
   CreateUserDto,
   DeleteFavoritesDto,
   FavoritesDto,
   LoginUserDto,
   RecoverPasswordDto,
+  RemoveCartProductDto,
   UpdatePasswordDto,
   UpdateUserDto,
 } from '../types/Dtos';
 import {
+  Cart,
+  Cart_product,
   Category,
   Discount_cupom,
   Favorite,
@@ -196,5 +200,39 @@ export const deleteMe = async () => {
     return response;
   } catch (error: any) {
     return error.response;
+  }
+};
+
+export const getCartProduct = async (): Promise<Cart_product[]> => {
+  try {
+    const response = await Api.get('/cart/products');
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const addCartProduct = async (
+  cartProductDto: CartProductDto,
+): Promise<Cart_product> => {
+  try {
+    console.log(cartProductDto);
+    const response = await Api.post('/cart/add', cartProductDto);
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const removeCartProduct = async (
+  cartProductDto: RemoveCartProductDto,
+): Promise<RemoveCartProductDto> => {
+  try {
+    const response = await Api.delete('/cart/delete', {
+      data: cartProductDto,
+    });
+    return response.data;
+  } catch (error: any) {
+    return error;
   }
 };

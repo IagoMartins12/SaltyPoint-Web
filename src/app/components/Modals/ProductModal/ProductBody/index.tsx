@@ -1,3 +1,5 @@
+import { TextArea } from '@/app/components/Input';
+import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import { ProductModalProps } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
@@ -9,12 +11,14 @@ export const ProductBody: React.FC<ProductModalProps> = ({
   value,
   decreaseQuantity,
   increaseQuantity,
+  onSubmit,
 }) => {
   const productModal = useProductModal();
+  const { handleSubmit, register } = useFormHook();
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
-      <div className='w-full h-[30%] border-2 relative rounded-lg '>
+      <div className='w-full h-[30%] relative rounded-lg '>
         <Image
           fill
           src={productModal.currentProduct?.product_image ?? ''}
@@ -24,12 +28,17 @@ export const ProductBody: React.FC<ProductModalProps> = ({
         />
       </div>
 
-      <div className='flex flex-col gap-8 items-center justify-center'>
+      <form
+        className='flex flex-col gap-8 items-center justify-center'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <span className='font-light text-2xl text-center'>
           {productModal.currentProduct?.name}
         </span>
 
-        <div></div>
+        <div className='w-full'>
+          <TextArea register={register} />
+        </div>
         <div className='flex gap-8 items-center justify-center'>
           <AiOutlineMinus
             size={25}
@@ -45,17 +54,16 @@ export const ProductBody: React.FC<ProductModalProps> = ({
         </div>
 
         <button
-          type='submit'
-          className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white ${
+          className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg cursor-pointer bg-red-600 text-white ${
             disabled ? '' : 'opacity-60'
           }`}
-          disabled={disabled}
+          disabled={!disabled}
         >
           <span>
             Adicionar R$ <span>{value}</span>
           </span>
         </button>
-      </div>
+      </form>
     </div>
   );
 };

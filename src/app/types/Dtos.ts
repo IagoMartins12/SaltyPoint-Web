@@ -56,3 +56,14 @@ export type FavoritesDto = {
 export type DeleteFavoritesDto = {
   id: string;
 };
+
+export type CartProductDto = {
+  product_id: string;
+  product_id_2?: string;
+  quantity: number;
+  observation?: string;
+};
+
+export type RemoveCartProductDto = {
+  cart_item_id: string;
+};

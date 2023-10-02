@@ -67,8 +67,8 @@ const Modal: React.FC<ModalProps> = ({
               <div className='text-lg font-semibold'>{title}</div>
             </div>
             {/* Corpo */}
-            <div className='relative p-6 flex-auto overflow-auto privacyScroll'>
-              {body}
+            <div className=' overflow-auto privacyScroll'>
+              <div className='relative p-6 flex-auto'> {body}</div>
             </div>
           </div>
         </div>

@@ -137,13 +137,12 @@ body {
   display: block;
   transition: 0.2s;
   font-size: 17px;
-  color: #9b9b9b;
   pointer-events: none;
 }
 
 .form__field:focus {
   padding-bottom: 6px;
-  font-weight: 700;
+  font-weight: 550;
   border-width: 3px;
   border-image: linear-gradient(to right, #dd3e38, rgb(250, 1, 1));
   border-image-slice: 1;
