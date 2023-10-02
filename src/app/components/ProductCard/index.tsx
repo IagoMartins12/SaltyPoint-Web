@@ -2,12 +2,14 @@ import { ProductCardType } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { FavoriteButton } from '../FavoriteButton';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import { useProductModal } from '@/app/hooks/modals/useProduct';
 
 export const ProductCard: React.FC<ProductCardType> = ({
   product,
   fullWidth = false,
 }) => {
   const { favorites } = usePrivateStore();
+  const productModal = useProductModal();
 
   const handleCheckFavorites = () => {
     return favorites.some(p => p.product_id === product.id);
@@ -17,6 +19,11 @@ export const ProductCard: React.FC<ProductCardType> = ({
       className={`flex shadow-md min-h-[18vh] p-2 rounded-2xl cursor-pointer ${
         fullWidth ? 'w-[100%]' : 'w-[48%]'
       }`}
+      onClick={() => {
+        console.log('clciou');
+        productModal.setCurrentProduct(product);
+        productModal.onOpen();
+      }}
     >
       <div className='relative w-5/12 h-full'>
         <div className=' w-full h-full'>

@@ -17,6 +17,7 @@ import {
 } from 'react-hook-form';
 import { GoogleMapsApiResponse, Result } from './GeolocationType';
 import { STEPS } from '../components/Modals/AddAddressModal';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface AuthButton {
   icon?: IconType;
@@ -108,6 +109,21 @@ export interface ModalStore {
   onClose: () => void;
 }
 
+export interface DeleteStore {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  currentItem: string | null;
+  setCurrentItem: (item: string) => void;
+}
+
+export interface ProductStore {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  currentProduct: Product | null;
+  setCurrentProduct: (product: Product) => void;
+}
 export interface AuthStore {
   isLogged: boolean;
   setIsLogged: () => void;
@@ -151,13 +167,6 @@ export interface GeoLocationStore {
   setGeoAddress: (address: GoogleMapsApiResponse) => void;
 }
 
-export interface deleteProps {
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-  currentItem: string | null;
-  setCurrentItem: (item: string) => void;
-}
 export interface ImageComponentType {
   src: string;
   alt: string;
@@ -177,4 +186,12 @@ export interface SelectAddressProps {
 export interface FavoriteButtonProps {
   product: Product;
   filled: boolean;
+}
+
+export interface ProductModalProps {
+  value: string | number;
+  quantity: number;
+  disabled: boolean;
+  decreaseQuantity: () => void;
+  increaseQuantity: () => void;
 }

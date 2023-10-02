@@ -1,8 +1,8 @@
-import { deleteProps } from '@/app/types/ComponentTypes';
+import { DeleteStore } from '@/app/types/ComponentTypes';
 import { create } from 'zustand';
 
 const createDeleteModalStore = () =>
-  create<deleteProps>(set => ({
+  create<DeleteStore>(set => ({
     currentItem: null,
     isOpen: false,
     onOpen: () => set({ isOpen: true }),
