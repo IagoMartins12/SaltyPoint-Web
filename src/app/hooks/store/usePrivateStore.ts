@@ -6,6 +6,8 @@ const usePrivateStore = create<PrivateStore>(set => ({
   setAddress: address => set({ address: address }),
   user: null,
   setUser: user => set({ user: user }),
+  favorites: [],
+  setFavorites: favorite => set({ favorites: favorite }),
 }));
 
 export default usePrivateStore;

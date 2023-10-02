@@ -3,12 +3,18 @@
 import useAuth from '@/app/hooks/auth/useAuth';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { getAddress, getCategories, getMe, getProducts } from '@/app/services';
+import {
+  getAddress,
+  getCategories,
+  getFavorites,
+  getMe,
+  getProducts,
+} from '@/app/services';
 import { useEffect } from 'react';
 
 export const FetchData = () => {
   const { setCategorys, setProducts } = useGlobalStore();
-  const { setAddress, setUser } = usePrivateStore();
+  const { setAddress, setUser, setFavorites } = usePrivateStore();
   const { isLogged } = useAuth();
 
   useEffect(() => {
@@ -32,8 +38,10 @@ export const FetchData = () => {
         try {
           const addressData = await getAddress();
           const userData = await getMe();
+          const favoriteData = await getFavorites();
           setAddress(addressData);
           setUser(userData);
+          setFavorites(favoriteData);
         } catch (error) {
           console.log(error);
         }

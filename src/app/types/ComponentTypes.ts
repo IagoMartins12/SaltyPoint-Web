@@ -2,6 +2,7 @@ import { IconType } from 'react-icons';
 import {
   Category,
   Discount_cupom,
+  Favorite,
   Product,
   User,
   User_Adress,
@@ -140,6 +141,8 @@ export interface PrivateStore {
   setAddress: (address: User_Adress[]) => void;
   user: User | null;
   setUser: (user: User) => void;
+  favorites: Favorite[] | [];
+  setFavorites: (favorite: Favorite[]) => void;
 }
 
 export interface GeoLocationStore {
@@ -168,4 +171,9 @@ export interface SelectAddressProps {
   address: User_Adress[];
   userAddressId: string | null | undefined;
   id: string;
+}
+
+export interface FavoriteButtonProps {
+  product: Product;
+  filled: boolean;
 }

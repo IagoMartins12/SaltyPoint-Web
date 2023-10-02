@@ -2,6 +2,8 @@ import { Api } from '../api/Api';
 import {
   CEPInfoDto,
   CreateUserDto,
+  DeleteFavoritesDto,
+  FavoritesDto,
   LoginUserDto,
   RecoverPasswordDto,
   UpdatePasswordDto,
@@ -10,6 +12,7 @@ import {
 import {
   Category,
   Discount_cupom,
+  Favorite,
   Product,
   User,
   User_Adress,
@@ -131,6 +134,37 @@ export const getMe = async (): Promise<User> => {
   try {
     const response = await Api.get('/me');
     return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getFavorites = async (): Promise<Favorite[]> => {
+  try {
+    const response = await Api.get('/favorites');
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const addFavorites = async (
+  favoriteDto: FavoritesDto,
+): Promise<Favorite> => {
+  try {
+    const response = await Api.post('/favorites/add', favoriteDto);
+    return response.data as Favorite;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const deleteFavorite = async (deleteFavoriteDto: DeleteFavoritesDto) => {
+  try {
+    const response = await Api.delete('/favorites/delete', {
+      data: deleteFavoriteDto,
+    });
+    return response;
   } catch (error: any) {
     return error;
   }

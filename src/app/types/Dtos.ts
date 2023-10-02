@@ -48,3 +48,11 @@ export type UpdateUserDto = {
 export type UpdatePasswordDto = {
   newPassword: string;
 };
+
+export type FavoritesDto = {
+  product_id: string;
+};
+
+export type DeleteFavoritesDto = {
+  id: string;
+};

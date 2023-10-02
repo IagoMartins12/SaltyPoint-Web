@@ -37,9 +37,9 @@ const Modal: React.FC<ModalProps> = ({
     <div className='fixed inset-0 z-50 flex items-center justify-center'>
       {/* Div de fundo para fechar o modal */}
       <div
-        className='fixed inset-0 bg-black opacity-50 cursor-pointer'
+        className='fixed inset-0 bg-black opacity-50'
         onClick={handleClose}
-      ></div>
+      />
       {/* Modal */}
       <div
         className={`relative ${authModal ? 'w-8/12' : 'w-4/12'} ${
