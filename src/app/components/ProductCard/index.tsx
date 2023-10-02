@@ -3,23 +3,40 @@ import Image from 'next/image';
 import { FavoriteButton } from '../FavoriteButton';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 
-export const ProductCard: React.FC<ProductCardType> = ({ product }) => {
-  const { favorites, setFavorites } = usePrivateStore();
+export const ProductCard: React.FC<ProductCardType> = ({
+  product,
+  fullWidth = false,
+}) => {
+  const { favorites } = usePrivateStore();
 
   const handleCheckFavorites = () => {
     return favorites.some(p => p.product_id === product.id);
   };
   return (
-    <div className='w-[48%] flex shadow-md min-h-[20vh]  p-2 rounded-2xl cursor-pointer'>
+    <div
+      className={`flex shadow-md min-h-[18vh] p-2 rounded-2xl cursor-pointer ${
+        fullWidth ? 'w-[100%]' : 'w-[48%]'
+      }`}
+    >
       <div className='relative w-5/12 h-full'>
-        <div className='relative w-full h-full'>
-          <Image
-            fill
-            src={product.product_image}
-            alt='product-image'
-            className='rounded-xl px-2 py-2 -z-10'
-            sizes='100%'
-          />
+        <div className=' w-full h-full'>
+          {fullWidth ? (
+            <Image
+              fill
+              src={product.product_image}
+              alt='product-image'
+              className='rounded-xl px-2 py-2'
+              sizes='100%'
+            />
+          ) : (
+            <Image
+              fill
+              src={product.product_image}
+              alt='product-image'
+              className='rounded-xl px-2 py-2 -z-10'
+              sizes='100%'
+            />
+          )}
         </div>
 
         <FavoriteButton product={product} filled={handleCheckFavorites()} />

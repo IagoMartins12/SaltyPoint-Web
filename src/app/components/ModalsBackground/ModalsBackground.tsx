@@ -6,6 +6,7 @@ import {
   useAddress,
   useAppDownload,
   useCoupons,
+  useFavoriteModal,
   useForgetPasswordModal,
   useLoginModal,
   usePrivacyTerms,
@@ -29,6 +30,7 @@ const modals = [
   useAddAddress,
   useDeleteAddress,
   useUserInfoModal,
+  useFavoriteModal,
 ];
 
 export const ModalsBackground = () => {
@@ -40,11 +42,5 @@ export const ModalsBackground = () => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [openModals]);
 
-  return (
-    <div
-      style={{
-        display: openModals.some(isOpen => isOpen) ? 'flex' : 'none',
-      }}
-    />
-  );
+  return <></>;
 };

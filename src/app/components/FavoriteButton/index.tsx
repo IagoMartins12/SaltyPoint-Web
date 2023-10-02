@@ -44,7 +44,7 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   return (
     <AiFillHeart
       size={25}
-      className={` absolute right-3 top-3 cursor-pointer z-50 ${
+      className={` absolute right-3 top-3 cursor-pointer z-20 ${
         filled ? 'fill-rose-500' : 'fill-slate-100 '
       }`}
       onClick={handleFavorite}

@@ -34,6 +34,7 @@ export interface AddressRadioButton {
 }
 export interface ProductCardType {
   product: Product;
+  fullWidth: boolean;
 }
 
 interface BaseInputProps {

@@ -18,6 +18,7 @@ import {
   useAddress,
   useAppDownload,
   useCoupons,
+  useFavoriteModal,
   useLoginModal,
   usePrivacyTerms,
   useTalkToUsModal,
@@ -33,7 +34,7 @@ export const useMenuHeader = () => {
   const couponModal = useCoupons();
   const addressModal = useAddress();
   const userInfoModal = useUserInfoModal();
-
+  const favoritesModal = useFavoriteModal();
   const authOptions = useAuth();
 
   const iconsSize = 28;
@@ -102,7 +103,7 @@ export const useMenuHeader = () => {
       label: 'Meus favoritos',
       icon: <MdOutlineFavoriteBorder size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(favoritesModal);
       },
     },
     {

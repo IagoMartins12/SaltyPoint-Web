@@ -61,14 +61,26 @@ export const ForgetPasswordModal = () => {
     loginModal.onOpen();
   };
 
+  let imageContent = (
+    <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
+      <Image
+        fill
+        className='sm:object-cover  !static '
+        src={`/forget.svg`}
+        alt={'forget.svg'}
+        sizes='100%'
+      />
+    </div>
+  );
+
   let bodyContent = (
-    <div className='h-3/5'>
-      <div className='flex flex-col w-10/12 mx-auto p-4 h-[60%] sm:h-auto'>
+    <div className='h-4/5 w-full'>
+      <div className='flex flex-col w-11/12 mx-auto  h-full sm:h-auto'>
         <div className='flex flex-col py-4 gap-y-3'>
-          <h1 className='font-semibold text-3xl text-center'>
+          <h1 className='font-semibold text-xl text-center'>
             Esqueceu sua senha?
           </h1>
-          <p className='font-medium text-xl'>
+          <p className='font-medium text-lg'>
             Não se preocupe, iremos enviar um email para você redefinir sua
             senha!
           </p>
@@ -86,13 +98,13 @@ export const ForgetPasswordModal = () => {
 
           <div className='flex flex-col w-full gap-y-4'>
             <button
-              className=' bg-red-700 py-2  rounded-md text-white text-lg font-semibold'
+              className=' bg-red-700 py-2  rounded-md text-white text-medium font-semibold'
               onClick={handleSubmit(onSubmit)}
             >
               Enviar email
             </button>
             <button
-              className={`py-2 rounded-md  text-lg font-semibold border-2 ${
+              className={`py-2 rounded-md  text-medium font-semibold border-2 ${
                 theme === 'light' ? 'border-black' : 'border-white'
               }`}
               onClick={handleOpenLoginModal}
@@ -105,32 +117,22 @@ export const ForgetPasswordModal = () => {
     </div>
   );
 
-  let imageContent = (
-    <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
-      <Image
-        fill
-        className='sm:object-cover -z-10 !static '
-        src={`/forget.svg`}
-        alt={'forget.svg'}
-        sizes='100%'
-      />
-    </div>
-  );
-
   if (step === STEPS.SENDED_EMAIL) {
     bodyContent = (
-      <div className='h-2/5'>
-        <div className='flex flex-col mx-auto p-4  sm:h-auto'>
+      <div className='h-4/5 w-full'>
+        <div className='flex flex-col w-11/12 mx-auto  h-full sm:h-auto'>
           <div className='flex flex-col py-4 gap-y-3'>
-            <h1 className='font-bold text-3xl'>Email enviado! </h1>
-            <p className='font-semibold text-xl'>
+            <h1 className='font-semibold text-xl text-center'>
+              Email enviado!
+            </h1>
+            <p className='font-medium text-lg text-center'>
               Não se esqueça de verificar na sua caixa de span :)
             </p>
           </div>
 
           <div className='flex flex-col w-full gap-y-4'>
             <button
-              className={`py-2 rounded-md  text-lg font-semibold border-2  my-4 ${
+              className={`py-2 rounded-md  text-medium font-semibold border-2  my-4 ${
                 theme === 'light' ? 'border-black' : 'border-white'
               }`}
               onClick={handleOpenLoginModal}
@@ -143,12 +145,13 @@ export const ForgetPasswordModal = () => {
     );
 
     imageContent = (
-      <div className='aspect-video w-full h-3/5   relative overflow-hidden rounded-xl'>
+      <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
         <Image
           fill
-          className='sm:object-cover h-1 w-full group-hover:scale-110 transition'
-          src='/email.svg'
-          alt='forgetPassword'
+          className='sm:object-cover  !static '
+          src={`/email.svg`}
+          alt={'forget.svg'}
+          sizes='100%'
         />
       </div>
     );

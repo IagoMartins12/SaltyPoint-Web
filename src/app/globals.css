@@ -208,6 +208,10 @@ body {
   z-index: 40;
 }
 
+.inherit {
+  position: inherit !important ;
+}
+
 @media (max-width: 620px) {
   .modalPosition,
   .menuModalsPosition {
