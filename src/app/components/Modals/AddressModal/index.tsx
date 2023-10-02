@@ -2,15 +2,15 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import useDelete from '@/app/hooks/modals/useDelete';
-import Modal from '../Modal';
+import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
+import Modal from '../../Modal';
 import { useAddAddress, useAddress } from '@/app/hooks/modals/useModal';
 
 export const AddressModal = () => {
   const { address } = usePrivateStore();
   const addressModal = useAddress();
   const addAddress = useAddAddress();
-  const deleteAddressModal = useDelete();
+  const deleteAddressModal = useDeleteAddress();
 
   const handleOpenDeleteModal = (addressId: string) => {
     deleteAddressModal.setCurrentItem(addressId);

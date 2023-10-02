@@ -11,7 +11,7 @@ import { CepStep } from './CepStep';
 import { AddressPerGeoLocation } from './AddressPerGeoLocation';
 import { Result } from '@/app/types/GeolocationType';
 import { checkIfAddressIsValid } from '@/app/utils';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import { useAddAddress } from '@/app/hooks/modals/useModal';
 
 export enum STEPS {

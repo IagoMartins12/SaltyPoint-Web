@@ -12,7 +12,7 @@ import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import Image from 'next/image';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import { useLoginModal, useRegisterModal } from '@/app/hooks/modals/useModal';
 
 export const RegisterModal = () => {

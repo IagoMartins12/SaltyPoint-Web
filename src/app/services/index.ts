@@ -1,6 +1,5 @@
 import { Api } from '../api/Api';
 import {
-  AddressUserDto,
   CEPInfoDto,
   CreateUserDto,
   LoginUserDto,
@@ -15,10 +14,6 @@ import {
   User,
   User_Adress,
 } from '../types/ModelsType';
-
-const headers = {
-  'Content-Type': 'application/json',
-};
 
 export const createUser = async (createUserDto: CreateUserDto) => {
   try {
@@ -155,6 +150,15 @@ export const updatedMe = async (
 export const updatedPassword = async (updatePasswordDto: UpdatePasswordDto) => {
   try {
     const response = await Api.patch('/resetPassword', updatePasswordDto);
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const deleteMe = async () => {
+  try {
+    const response = await Api.delete('me/delete');
     return response;
   } catch (error: any) {
     return error.response;

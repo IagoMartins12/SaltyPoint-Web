@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import { AddressInput, PhoneInput } from '../../Input';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useEffect } from 'react';
@@ -13,13 +13,14 @@ import { formatPhoneNumberUser } from '@/app/utils';
 import { User } from '@/app/types/ModelsType';
 import {
   useChangePasswordModal,
+  useDeleteUser,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 
 export const UserInfoModal = () => {
-  const UserInfoModal = useUserInfoModal();
+  const userInfoModal = useUserInfoModal();
   const changePasswordModal = useChangePasswordModal();
-
+  const deleteModal = useDeleteUser();
   const { user, address, setUser } = usePrivateStore();
 
   const setUserWithCallback = (callback: (user: User) => User) => {
@@ -98,10 +99,6 @@ export const UserInfoModal = () => {
     }
   };
 
-  const handleOpenPasswordModal = () => {
-    changePasswordModal.onOpen();
-  };
-
   const body = (
     <form
       className='flex flex-col gap-6 w-11/12 mx-auto'
@@ -151,12 +148,20 @@ export const UserInfoModal = () => {
 
         <div
           className='flex items-center justify-center cursor-pointer'
-          onClick={handleOpenPasswordModal}
+          onClick={() => {
+            changePasswordModal.onOpen();
+          }}
         >
           <span className='text-sm font-light text-red-600'>Alterar senha</span>
         </div>
 
-        <div className='flex items-center cursor-pointer justify-center'>
+        <div
+          className='flex items-center cursor-pointer justify-center'
+          onClick={() => {
+            userInfoModal.onClose();
+            deleteModal.onOpen();
+          }}
+        >
           <span className='text-sm font-light text-red-600'>
             Deletar minha conta
           </span>
@@ -175,10 +180,10 @@ export const UserInfoModal = () => {
   return (
     <>
       <Modal
-        onClose={UserInfoModal.onClose}
+        onClose={userInfoModal.onClose}
         body={body}
         title='Minha conta'
-        isOpen={UserInfoModal.isOpen}
+        isOpen={userInfoModal.isOpen}
       />
     </>
   );

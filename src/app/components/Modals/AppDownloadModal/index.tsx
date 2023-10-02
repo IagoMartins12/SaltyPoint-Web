@@ -1,6 +1,6 @@
 import { useAppDownload } from '@/app/hooks/modals/useModal';
 import { AppleButton, GoogleButton } from '../../Buttons';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 
 export const AppDownloadModal = () => {
   const appModal = useAppDownload();

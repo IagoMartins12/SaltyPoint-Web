@@ -4,7 +4,7 @@ import { SearchCategory } from '../../SearchCategory';
 import { useState } from 'react';
 import { SearchProduct } from '../../SearchProduct';
 import { Product } from '@/app/types/ModelsType';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
 
 export const SearchModal = () => {

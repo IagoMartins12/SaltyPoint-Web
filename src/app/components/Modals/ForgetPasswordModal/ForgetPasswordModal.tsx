@@ -13,7 +13,7 @@ import {
   useForgetPasswordModal,
   useLoginModal,
 } from '@/app/hooks/modals/useModal';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 
 enum STEPS {
   RECEIVE_EMAIL = 0,

@@ -1,6 +1,6 @@
 'use client';
 
-import useDelete from '@/app/hooks/modals/useDelete';
+import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 import {
   useAddAddress,
   useAddress,
@@ -27,7 +27,7 @@ const modals = [
   useCoupons,
   useAddress,
   useAddAddress,
-  useDelete,
+  useDeleteAddress,
   useUserInfoModal,
 ];
 

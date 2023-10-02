@@ -1,6 +1,6 @@
 import { useChangePasswordModal } from '@/app/hooks/modals/useModal';
 import { AuthLoginButton } from '../../Buttons';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import { PasswordInput } from '../../Input';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';

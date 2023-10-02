@@ -6,6 +6,7 @@ import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
 import { ChangePasswordModal } from '../components/Modals/ChangePasswordModal';
 import { CouponsModal } from '../components/Modals/CouponsModal';
 import { DeleteItemModal } from '../components/Modals/DeleteItemModal';
+import { DeleteUserModal } from '../components/Modals/DeleteUserModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
 import { LoginModal } from '../components/Modals/LoginModal/LoginModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
@@ -30,6 +31,7 @@ const ModalsProvider = () => {
       <DeleteItemModal />
       <UserInfoModal />
       <ChangePasswordModal />
+      <DeleteUserModal />
     </>
   );
 };

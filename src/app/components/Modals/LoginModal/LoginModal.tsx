@@ -11,7 +11,7 @@ import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
 import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
-import Modal from '../Modal';
+import Modal from '../../Modal';
 import Image from 'next/image';
 import {
   useForgetPasswordModal,

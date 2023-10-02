@@ -1,40 +1,41 @@
-import { useAddress } from '@/app/hooks/modals/useModal';
-import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { deleteAddress } from '@/app/services';
-import toast from 'react-hot-toast';
+import { useDeleteUser, useUserInfoModal } from '@/app/hooks/modals/useModal';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { DeleteModal } from '../../ModalDelete';
-import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
+import { deleteMe } from '@/app/services';
+import toast from 'react-hot-toast';
+import useAuth, { removeToken } from '@/app/hooks/auth/useAuth';
 
-export const DeleteItemModal: React.FC = () => {
-  const deleteModal = useDeleteAddress();
-  const addressModal = useAddress();
-  const { address, setAddress, user } = usePrivateStore();
+export const DeleteUserModal: React.FC = () => {
+  const deleteModal = useDeleteUser();
+  const userModal = useUserInfoModal();
+  const auth = useAuth();
 
   const handleDeleteAddress = async () => {
-    if (deleteModal.currentItem) {
-      if (user?.user_Adress_id === deleteModal.currentItem) {
-        return toast.error(
-          'Não é possível excluir o endereço que está vinculado a sua conta!',
-        );
-      }
-      const response = await deleteAddress(deleteModal.currentItem);
+    const response = await deleteMe();
 
-      if (response.status === 200) {
-        const updatedAddressList = address.filter(
-          address => address.id !== deleteModal.currentItem,
-        );
-        setAddress(updatedAddressList);
-        handleOpenAddressModal();
-        return toast.success('Endereço excluido');
-      } else {
-        return toast.error('Erro ao deletar endereço');
-      }
+    if (response.status === 200) {
+      toast.success('Conta deletada');
+      close();
+      window.location.reload();
+      removeToken();
+      auth.setLogout();
+    } else {
+      toast.error('Erro ao deletar conta');
     }
   };
 
+  const close = () => {
+    setTimeout(() => {
+      deleteModal.onClose();
+    }, 300);
+  };
+
   const handleOpenAddressModal = () => {
-    addressModal.onOpen();
+    setTimeout(() => {
+      deleteModal.onClose();
+    }, 300);
+
+    userModal.onOpen();
     deleteModal.onClose();
   };
 
@@ -45,7 +46,7 @@ export const DeleteItemModal: React.FC = () => {
           <RiDeleteBin5Fill size={45} />
         </div>
         <div className='flex flex-col items-center justify-center gap-3'>
-          <h3 className='text-2xl font-bold'>Deletar endereço?</h3>
+          <h3 className='text-2xl font-bold'>Deletar Conta?</h3>
           <span className='text-lg font-medium'>
             Essa ação não pode ser desfeita, tem certeza?
           </span>
@@ -66,7 +67,7 @@ export const DeleteItemModal: React.FC = () => {
             }}
           >
             <span className='font-semibold text-white text-lg'>
-              Deletar endereço
+              Deletar Conta
             </span>
           </button>
         </div>
