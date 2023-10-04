@@ -2,6 +2,7 @@ import { MenuHeader } from '../MenuHeader';
 import Image from 'next/image';
 import { SearchIcon } from '../Icons';
 import { Cart } from '../Cart';
+import { CartIcon } from '../CartIcon';
 
 export const Header = () => {
   return (
@@ -16,14 +17,7 @@ export const Header = () => {
 
       <div className='flex gap-6 items-center'>
         <SearchIcon />
-        <div className='cursor-pointer flex gap-4 relative'>
-          <div className='z-10'>
-            <Cart />
-          </div>
-          {/* <span className='h-6 w-6 bottom-0 right-0 top-2 z-50 text-center  bg-red-700 absolute rounded-full'>
-            1
-          </span> */}
-        </div>
+        <CartIcon />
       </div>
     </div>
   );

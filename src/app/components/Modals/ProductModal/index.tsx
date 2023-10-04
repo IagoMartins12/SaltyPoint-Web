@@ -56,7 +56,19 @@ export const ProductModal = () => {
     }
   };
 
-  let body = (
+  const productIsPizza = productModal.currentProduct?.name.includes('Pizza');
+
+  const body = productIsPizza ? (
+    <PizzaBody
+      decreaseQuantity={decreaseQuantity}
+      increaseQuantity={increaseQuantity}
+      disabled={disabled}
+      quantity={quantity}
+      value={value}
+      setValue={setValue}
+      onSubmit={onSubmit}
+    />
+  ) : (
     <ProductBody
       decreaseQuantity={decreaseQuantity}
       increaseQuantity={increaseQuantity}
@@ -67,18 +79,6 @@ export const ProductModal = () => {
     />
   );
 
-  if (productModal.currentProduct?.name.includes('Pizza')) {
-    body = (
-      <PizzaBody
-        decreaseQuantity={decreaseQuantity}
-        increaseQuantity={increaseQuantity}
-        disabled={disabled}
-        quantity={quantity}
-        value={value}
-        onSubmit={onSubmit}
-      />
-    );
-  }
   useEffect(() => {
     if (quantity !== 0) {
       setDisabled(true);

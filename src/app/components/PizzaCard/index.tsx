@@ -5,12 +5,15 @@ import { PizzaCardType } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
+import { handleSetSelected } from '@/app/utils';
 
-export const PizzaCart: React.FC<PizzaCardType> = ({
+export const PizzaCard: React.FC<PizzaCardType> = ({
   product,
   selectedProduct2,
   setSelectedProduct2,
   removeSelected,
+  value,
+  setValue,
 }) => {
   const productModal = useProductModal();
 
@@ -29,9 +32,18 @@ export const PizzaCart: React.FC<PizzaCardType> = ({
         value={product.id}
         checked={selectedProduct2 === product.id}
         onClick={() => {
+          const diferenceValue =
+            product.value - (productModal.currentProduct?.value ?? 0);
+
+          if (diferenceValue > 0) {
+            // const newValue = +value + diferenceValue;
+            // setValue(newValue);
+          }
+
           if (selectedProduct2 === product.id) {
             setSelectedProduct2(null);
           } else {
+            handleSetSelected('cornicione');
             setSelectedProduct2(product.id);
           }
         }}

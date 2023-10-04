@@ -99,6 +99,8 @@ export type Order_Product = {
   id: string;
   product_id: string;
   product_id_2?: string | null;
+  product_id_3?: string | null;
+  size: number | null;
   order_id: string;
   quantity: number;
   observation?: string | null;
@@ -178,9 +180,11 @@ export type Cart_product = {
   id: string;
   product_id: string;
   product_id_2?: string | null;
+  product_id_3?: string | null;
   cart_id: string;
   observation?: string | null;
   quantity: number;
+  size: number | null;
 
   cart: Cart;
   product: Product;

@@ -96,3 +96,12 @@ export const handleInputChange = (
 
   return inputValue;
 };
+
+export const handleSetSelected = (category_name: string) => {
+  const targetDiv = document.getElementById(`${category_name}`);
+  if (targetDiv) {
+    setTimeout(() => {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+};

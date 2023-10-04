@@ -24,14 +24,14 @@ export const ProductCard: React.FC<ProductCardType> = ({
         productModal.onOpen();
       }}
     >
-      <div className='relative w-5/12 h-full -z-10'>
-        <div className=' w-full h-full'>
+      <div className=' w-5/12 h-full -z-10 '>
+        <div className=' w-full h-full relative'>
           {fullWidth ? (
             <Image
               fill
               src={product.product_image}
               alt='product-image'
-              className='rounded-xl px-2 py-2'
+              className='rounded-xl px-2 py-2 '
               sizes='100%'
             />
           ) : (
@@ -39,14 +39,14 @@ export const ProductCard: React.FC<ProductCardType> = ({
               fill
               src={product.product_image}
               alt='product-image'
-              className='rounded-xl px-2 py-2 -z-10'
+              className='rounded-xl px-2 py-2 '
               sizes='100%'
             />
           )}
         </div>
 
         <div
-          className='z-10'
+          className='z-30'
           onClick={ev => {
             ev.stopPropagation();
           }}

@@ -35,16 +35,6 @@ export interface AddressRadioButton {
   name: string;
   onChange: (index: number, name: string) => void;
 }
-export interface ProductCardType {
-  product: Product;
-  fullWidth?: boolean;
-}
-
-export interface PizzaCardType extends ProductCardType {
-  selectedProduct2: string | null;
-  setSelectedProduct2: React.Dispatch<React.SetStateAction<string | null>>;
-  removeSelected: () => void;
-}
 
 interface BaseInputProps {
   id: string;
@@ -204,6 +194,19 @@ export interface FavoriteButtonProps {
   filled: boolean;
 }
 
+export interface ProductCardType {
+  product: Product;
+  fullWidth?: boolean;
+}
+
+export interface PizzaCardType extends ProductCardType {
+  value: string | number;
+  selectedProduct2: string | null;
+  setSelectedProduct2: React.Dispatch<React.SetStateAction<string | null>>;
+  removeSelected: () => void;
+  setValue: Dispatch<SetStateAction<string | number>>;
+}
+
 export interface ProductModalProps {
   value: string | number;
   quantity: number;
@@ -211,4 +214,8 @@ export interface ProductModalProps {
   decreaseQuantity: () => void;
   increaseQuantity: () => void;
   onSubmit: SubmitHandler<FieldValues>;
+}
+
+export interface PizzaModalProps extends ProductModalProps {
+  setValue: Dispatch<SetStateAction<string | number>>;
 }
