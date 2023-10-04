@@ -207,12 +207,22 @@ export interface PizzaCardType extends ProductCardType {
   setValue: Dispatch<SetStateAction<string | number>>;
 }
 
+export interface NewPizzaProps {
+  product: Product;
+}
+
+export interface PizzaProductModalType {
+  product: Product;
+  selectedProduct2: string | null;
+  setSelectedProduct2: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export interface CornicioneProductModalType {
+  product: Product;
+  selectedProduct3: string | null;
+  setSelectedProduct3: React.Dispatch<React.SetStateAction<string | null>>;
+}
 export interface ProductModalProps {
-  value: string | number;
-  quantity: number;
-  disabled: boolean;
-  decreaseQuantity: () => void;
-  increaseQuantity: () => void;
   onSubmit: SubmitHandler<FieldValues>;
 }
 

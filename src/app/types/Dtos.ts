@@ -60,6 +60,8 @@ export type DeleteFavoritesDto = {
 export type CartProductDto = {
   product_id: string;
   product_id_2?: string;
+  product_id_3?: string;
+  size: number;
   quantity: number;
   observation?: string;
 };

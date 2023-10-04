@@ -1,41 +1,40 @@
 import React from 'react';
 
 // Importe as dependências necessárias, incluindo ProductCardType e useProductModal
-import { PizzaCardType } from '@/app/types/ComponentTypes';
+import { CornicioneProductModalType } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
+import { useCustomProductModal } from '../Modals/ProductModal/useProductModal';
 
-export const CornicioneCart: React.FC<PizzaCardType> = ({
+export const CornicioneCart: React.FC<CornicioneProductModalType> = ({
   product,
-  selectedProduct2,
-  setSelectedProduct2,
-  removeSelected,
-  setValue,
+  selectedProduct3,
+  setSelectedProduct3,
 }) => {
   return (
     <label className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%]`}>
       <input
         type='radio'
-        name='selectedProduct2'
+        name='selectedProduct3'
         value={product.id}
-        checked={selectedProduct2 === product.id}
+        defaultChecked={selectedProduct3 === product.id}
         onClick={() => {
-          if (selectedProduct2 === product.id) {
-            setSelectedProduct2(null);
+          if (selectedProduct3 === product.id) {
+            setSelectedProduct3(null);
           } else {
-            setSelectedProduct2(product.id);
+            setSelectedProduct3(product.id);
           }
         }}
         style={{ display: 'none' }} // Esconde o input para personalizar a aparência
       />
       <div
         className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%] ${
-          selectedProduct2 === product.id ? '' : ''
+          selectedProduct3 === product.id ? '' : ''
         }`}
       >
         {/* Conteúdo do componente PizzaCart */}
         <div className='relative w-3/12 h-full'>
-          <div className=' w-full h-full'>
+          <div className=' w-full h-full relative'>
             <Image
               fill
               src={product.product_image}
@@ -56,10 +55,10 @@ export const CornicioneCart: React.FC<PizzaCardType> = ({
           </div>
         </div>
         <div className='flex items-center justify-center'>
-          {selectedProduct2 === product.id ? (
+          {selectedProduct3 === product.id ? (
             <AiOutlineClose size={25} fill='red' />
           ) : (
-            <AiOutlinePlus size={25} fill='red' onClick={removeSelected} />
+            <AiOutlinePlus size={25} fill='red' />
           )}
         </div>
       </div>

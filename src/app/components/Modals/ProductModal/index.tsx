@@ -1,45 +1,18 @@
 import Modal from '../../Modal';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
-import { useEffect, useState } from 'react';
 import { ProductBody } from './ProductBody';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { CartProductDto } from '@/app/types/Dtos';
 import { addCartProduct } from '@/app/services';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
-import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { PizzaBody } from './PizzaBody';
+import { useCustomProductModal } from './useProductModal';
 
 export const ProductModal = () => {
-  const [quantity, setQuantity] = useState(0);
-  const [disabled, setDisabled] = useState(true);
-  const [value, setValue] = useState<number | string>(0);
   const productModal = useProductModal();
-
   const { cart_product, setCart_product } = usePrivateStore();
-  const { reset } = useFormHook();
-
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    if (quantity === 0) return;
-    setQuantity(quantity - 1);
-  };
-
-  const handleClose = () => {
-    setQuantity(0);
-    productModal.onClose();
-    reset();
-  };
-
-  const checkValue = () => {
-    if (!productModal.currentProduct) return;
-
-    const value = productModal.currentProduct.value * quantity;
-    setValue(value.toFixed(2));
-  };
+  const { handleClose, quantity } = useCustomProductModal();
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const response = await addCartProduct({
@@ -59,37 +32,10 @@ export const ProductModal = () => {
   const productIsPizza = productModal.currentProduct?.name.includes('Pizza');
 
   const body = productIsPizza ? (
-    <PizzaBody
-      decreaseQuantity={decreaseQuantity}
-      increaseQuantity={increaseQuantity}
-      disabled={disabled}
-      quantity={quantity}
-      value={value}
-      setValue={setValue}
-      onSubmit={onSubmit}
-    />
+    <PizzaBody onSubmit={onSubmit} />
   ) : (
-    <ProductBody
-      decreaseQuantity={decreaseQuantity}
-      increaseQuantity={increaseQuantity}
-      disabled={disabled}
-      quantity={quantity}
-      value={value}
-      onSubmit={onSubmit}
-    />
+    <ProductBody onSubmit={onSubmit} />
   );
-
-  useEffect(() => {
-    if (quantity !== 0) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  }, [quantity]);
-
-  useEffect(() => {
-    checkValue();
-  }, [value, quantity]);
 
   return (
     <>

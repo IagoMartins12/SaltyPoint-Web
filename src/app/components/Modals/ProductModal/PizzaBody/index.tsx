@@ -1,53 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextArea } from '@/app/components/Input';
 import { PizzaCard } from '@/app/components/PizzaCard';
 import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
-import { PizzaModalProps, ProductModalProps } from '@/app/types/ComponentTypes';
+import { ProductModalProps } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { handleSetSelected } from '@/app/utils';
 import { CornicioneCart } from '@/app/components/CornicioneCart';
+import { useCustomProductModal } from '../useProductModal';
+import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { CartProductDto } from '@/app/types/Dtos';
 
-export const PizzaBody: React.FC<PizzaModalProps> = ({
-  disabled,
-  quantity,
-  value,
-  decreaseQuantity,
-  increaseQuantity,
-  onSubmit,
-  setValue,
-}) => {
-  const [selectedFlavor, setSelectedFlavor] = useState('');
-  const [selectedProduct2, setSelectedProduct2] = useState<null | string>(null);
-  const [selectedProduct3, setSelectedProduct3] = useState<null | string>(null);
-
+export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   const productModal = useProductModal();
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
 
-  const sizes = [
-    {
-      name: 'Pizza',
-    },
-    {
-      name: 'Brotinho',
-    },
-  ];
-
-  const flavors = [
-    {
-      name: '1 Sabor',
-    },
-    {
-      name: '2 Sabores',
-    },
-  ];
-
-  const removeSelected = () => {
-    setSelectedProduct2(null);
+  const newSubmit: SubmitHandler<FieldValues> = async data => {
+    const object = {
+      product_id: productModal.currentProduct?.id,
+      product_id_2: selectedProduct2,
+      product_id_3: selectedProduct3,
+      observation: data.observation,
+      quantity: quantity,
+    } as CartProductDto;
   };
+
+  const {
+    decreaseQuantity,
+    increaseQuantity,
+    quantity,
+    disabled,
+    value,
+    flavors,
+    sizes,
+    selectedFlavor,
+    setSelectedFlavor,
+    selectedProduct2,
+    setSelectedProduct2,
+    selectedProduct3,
+    setSelectedProduct3,
+  } = useCustomProductModal();
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>
@@ -63,7 +58,7 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
 
       <form
         className='flex flex-col gap-8 items-center justify-center'
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(newSubmit)}
       >
         <span className='font-light text-2xl text-center'>
           {productModal.currentProduct?.name}
@@ -78,16 +73,16 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
           </div>
 
           <div className='flex flex-col gap-2'>
-            {sizes.map(size => (
+            {sizes.map((size, i) => (
               <div
                 className='flex border-b-2 justify-between p-2 min-h-[7vh]'
-                key={size.name}
+                key={i}
               >
-                <span className='text-medium font-medium '>{size.name} </span>
+                <span className='text-medium font-medium '>{size} </span>
                 <input
                   type='radio'
                   name='pizzaSize'
-                  id={size.name}
+                  id={size}
                   onClick={() => {
                     handleSetSelected('flavor');
                   }}
@@ -106,19 +101,18 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
           </div>
 
           <div className='flex flex-col gap-2'>
-            {flavors.map(flavor => (
+            {flavors.map((flavor, i) => (
               <div
                 className='flex border-b-2 justify-between p-2 min-h-[7vh]'
-                key={flavor.name}
+                key={i}
               >
-                <span className='text-medium font-medium '>{flavor.name} </span>
+                <span className='text-medium font-medium '>{flavor} </span>
                 <input
                   type='radio'
                   name='pizzaFlavor'
-                  id={flavor.name}
+                  id={flavor}
                   onChange={() => {
-                    setSelectedProduct2(null);
-                    setSelectedFlavor(flavor.name);
+                    setSelectedFlavor(flavor);
                   }}
                   onClick={() => {
                     handleSetSelected('pizzas');
@@ -160,9 +154,6 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
                             product={product}
                             selectedProduct2={selectedProduct2}
                             setSelectedProduct2={setSelectedProduct2}
-                            removeSelected={removeSelected}
-                            value={value}
-                            setValue={setValue}
                           />
                         </div>
                       )),
@@ -194,11 +185,8 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
                       >
                         <CornicioneCart
                           product={product}
-                          selectedProduct2={selectedProduct3}
-                          setSelectedProduct2={setSelectedProduct3}
-                          removeSelected={removeSelected}
-                          value={value}
-                          setValue={setValue}
+                          selectedProduct3={selectedProduct3}
+                          setSelectedProduct3={setSelectedProduct3}
                         />
                       </div>
                     )),
@@ -210,6 +198,7 @@ export const PizzaBody: React.FC<PizzaModalProps> = ({
         <div className='w-full'>
           <TextArea register={register} />
         </div>
+
         <div className='flex gap-8 items-center justify-center'>
           <AiOutlineMinus
             size={25}
