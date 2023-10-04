@@ -50,8 +50,7 @@ const Modal: React.FC<ModalProps> = ({
         <div
           className={`translate duration-300 h-full ${
             showModal ? 'translate-y-0' : 'translate-y-full'
-          } ${showModal ? 'opacity-100' : 'opacity-0'}
-          }`}
+          } ${showModal ? 'opacity-100' : 'opacity-0'}`}
         >
           <div
             className={`translate h-full border-0 rounded-lg shadow-lg relative flex flex-col w-full modalsBackground outline-none self-center focus:outline-none`}
@@ -67,8 +66,8 @@ const Modal: React.FC<ModalProps> = ({
               <div className='text-lg font-semibold'>{title}</div>
             </div>
             {/* Corpo */}
-            <div className=' overflow-auto privacyScroll'>
-              <div className='relative p-6 flex-auto'> {body}</div>
+            <div className=' overflow-auto privacyScroll h-full'>
+              <div className='relative p-6 flex-auto h-full'> {body}</div>
             </div>
           </div>
         </div>

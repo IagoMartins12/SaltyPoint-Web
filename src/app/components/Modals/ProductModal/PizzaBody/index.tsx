@@ -56,7 +56,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({
   };
 
   return (
-    <div className='overflow-auto h-full w-full flex flex-col gap-6'>
+    <div className=' h-full w-full flex flex-col gap-6'>
       <div className='w-full h-[25%] relative rounded-lg '>
         <Image
           fill

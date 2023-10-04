@@ -157,6 +157,7 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
         placeholder={placeholder}
         {...register(id, { required })}
         value={value}
+        minLength={15}
         maxLength={15} // Define o máximo de caracteres permitidos
         readOnly={disabled}
         onChange={ev => {

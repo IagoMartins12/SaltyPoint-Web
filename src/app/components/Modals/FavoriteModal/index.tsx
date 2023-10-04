@@ -11,15 +11,19 @@ export const FavoriteModal = () => {
   const { products } = useGlobalStore();
   const body = (
     <div className='flex flex-col gap-6 w-11/12 mx-auto'>
-      {favorites.map(favorite => (
-        <div className='flex gap-x-2 gap-y-6 flex-wrap ' key={favorite.id}>
-          {products
-            .filter(p => p.id === favorite.product_id)
-            .map(product => (
-              <ProductCard product={product} key={product.id} fullWidth />
-            ))}
-        </div>
-      ))}
+      {favorites.length > 0 ? (
+        favorites.map(favorite => (
+          <div className='flex gap-x-2 gap-y-6 flex-wrap ' key={favorite.id}>
+            {products
+              .filter(p => p.id === favorite.product_id)
+              .map(product => (
+                <ProductCard product={product} key={product.id} fullWidth />
+              ))}
+          </div>
+        ))
+      ) : (
+        <span> Sem favoritados</span>
+      )}
     </div>
   );
   return (

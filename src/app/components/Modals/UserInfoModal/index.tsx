@@ -49,23 +49,22 @@ export const UserInfoModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     if (!user) return;
+    if (data.phone.length !== 15 && data.phone)
+      return toast.error('Insira um numero valido');
 
     const object = {
       name: data.name,
-      phone: data.phone,
-      user_Adress_id: data.address,
+      phone: data.phone !== '' ? data.phone : null,
+      user_Adress_id: data.address !== '' ? data.address : null,
     } as UpdateUserDto;
-    console.log('user', user);
-    console.log('object', object);
 
     try {
-      const response = await updatedMe(object);
+      await updatedMe(object);
 
-      // Update the user object with the new phone and address
       setUserWithCallback(oldUser => ({
         ...oldUser,
-        phone: response.phone,
-        user_Adress_id: data.address,
+        phone: data.phone !== '' ? data.phone : null,
+        user_Adress_id: data.address !== '' ? data.address : null,
         name: data.name,
       }));
 

@@ -19,13 +19,15 @@ export const ProductBody: React.FC<ProductModalProps> = ({
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
       <div className='w-full h-[30%] relative rounded-lg '>
-        <Image
-          fill
-          src={productModal.currentProduct?.product_image ?? ''}
-          alt='Product image'
-          className='rounded-lg'
-          sizes='100%'
-        />
+        <div className=' w-full h-full'>
+          <Image
+            fill
+            src={productModal.currentProduct?.product_image ?? ''}
+            alt='Product image'
+            className='rounded-lg'
+            sizes='100%'
+          />
+        </div>
       </div>
 
       <form

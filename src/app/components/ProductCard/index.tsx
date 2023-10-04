@@ -24,7 +24,7 @@ export const ProductCard: React.FC<ProductCardType> = ({
         productModal.onOpen();
       }}
     >
-      <div className='relative w-5/12 h-full'>
+      <div className='relative w-5/12 h-full -z-10'>
         <div className=' w-full h-full'>
           {fullWidth ? (
             <Image

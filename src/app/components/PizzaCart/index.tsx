@@ -51,7 +51,7 @@ export const PizzaCart: React.FC<PizzaCardType> = ({
               alt='product-image'
               className='rounded-xl px-2 py-2'
               sizes='100%'
-            />{' '}
+            />
           </div>
         </div>
         <div className='flex flex-col w-9/12 h-full gap-4 py-2 px-5 justify-between'>

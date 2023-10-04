@@ -36,12 +36,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
   id,
   userAddressId,
 }) => {
-  console.log('userAddressId', userAddressId);
-  console.log(
-    'userAddressId',
-    address.map(a => a.id),
-  );
-
   const hasUserAddress = userAddressId !== null;
 
   return (
@@ -50,7 +44,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
       <select
         id={id}
         className='block w-full p-2 text-sm border-b-2 rounded-lg bg-transparent'
-        {...register(id, { required: true })}
+        {...register(id)}
       >
         {hasUserAddress ? (
           address.map((option, i) => (
