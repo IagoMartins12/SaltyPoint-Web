@@ -2,6 +2,7 @@
 
 import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { Product } from '@/app/types/ModelsType';
 import { useEffect, useState } from 'react';
 
@@ -13,6 +14,9 @@ export const useCustomProductModal = () => {
   const [quantity, setQuantity] = useState(0);
   const [disabled, setDisabled] = useState(true);
   const [value, setValue] = useState<number | string>(0);
+  const [otherProductsValue, setOtherProductsValue] = useState<number | string>(
+    0,
+  );
   const [selectedFlavor, setSelectedFlavor] = useState('');
   const [selectedProduct2, setSelectedProduct2] = useState<null | string>(null);
   const [selectedProduct3, setSelectedProduct3] = useState<null | string>(null);
@@ -28,11 +32,12 @@ export const useCustomProductModal = () => {
   };
 
   const productModal = useProductModal();
+  const { products } = useGlobalStore();
+
   const { reset } = useFormHook();
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
-    console.log(quantity);
   };
 
   const decreaseQuantity = () => {
@@ -49,8 +54,11 @@ export const useCustomProductModal = () => {
   const checkValue = () => {
     if (!productModal.currentProduct) return;
 
-    const value = productModal.currentProduct.value * quantity;
-    setValue(value.toFixed(2));
+    if (otherProductsValue !== 0) {
+      return setValue((+otherProductsValue * quantity).toFixed(2));
+    }
+    const newValue = productModal.currentProduct.value * quantity;
+    setValue(newValue.toFixed(2));
   };
 
   const checkDiference = (product: Product) => {
@@ -76,6 +84,21 @@ export const useCustomProductModal = () => {
   useEffect(() => {
     checkValue();
   }, [value, quantity]);
+
+  useEffect(() => {
+    if (selectedProduct2 && productModal.currentProduct) {
+      const product = products.find(p => p.id === selectedProduct2);
+      if (product) {
+        const maxValue = Math.max(
+          productModal.currentProduct?.value,
+          product.value,
+        );
+        setOtherProductsValue(maxValue);
+        console.log('max value', maxValue);
+        console.log('other', otherProductsValue);
+      }
+    }
+  }, [selectedProduct2]);
 
   return {
     quantity,
