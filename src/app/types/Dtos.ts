@@ -64,6 +64,7 @@ export type CartProductDto = {
   size: number;
   quantity: number;
   observation?: string;
+  value: string;
 };
 
 export type RemoveCartProductDto = {

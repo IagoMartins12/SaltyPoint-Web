@@ -6,10 +6,6 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { Product } from '@/app/types/ModelsType';
 import { useEffect, useState } from 'react';
 
-type ProductType = {
-  product_id: string | null;
-};
-
 export const useCustomProductModal = () => {
   const [quantity, setQuantity] = useState(0);
   const [disabled, setDisabled] = useState(true);
@@ -17,6 +13,7 @@ export const useCustomProductModal = () => {
   const [otherProductsValue, setOtherProductsValue] = useState<number | string>(
     0,
   );
+  const [selectedSize, setSelectedSize] = useState(0);
   const [selectedFlavor, setSelectedFlavor] = useState('');
   const [selectedProduct2, setSelectedProduct2] = useState<null | string>(null);
   const [selectedProduct3, setSelectedProduct3] = useState<null | string>(null);
@@ -24,6 +21,7 @@ export const useCustomProductModal = () => {
   const sizes = ['Pizza', 'Brotinho'];
 
   const flavors = ['1 Sabor', '2 Sabores'];
+  const brotinhoPrice = 10 * quantity;
 
   const removeSelected = (
     setSelectedAction: React.Dispatch<React.SetStateAction<string | null>>,
@@ -54,11 +52,71 @@ export const useCustomProductModal = () => {
   const checkValue = () => {
     if (!productModal.currentProduct) return;
 
-    if (otherProductsValue !== 0) {
+    //Se uma borda for selecionado
+    if (selectedProduct3 && productModal.currentProduct) {
+      const product = products.find(p => p.id === selectedProduct3);
+
+      if (!product) return;
+      if (quantity === 0) return setValue((0).toFixed(2));
+
+      //Se um segundo sabor for selecionado
+      if (otherProductsValue !== 0) {
+        if (selectedSize === 1) {
+          console.log('caiu aqui');
+          const newValue =
+            +otherProductsValue * quantity + product.value * quantity;
+          return setValue((newValue - brotinhoPrice).toFixed(2));
+        }
+        return setValue(
+          (+otherProductsValue * quantity + product.value * quantity).toFixed(
+            2,
+          ),
+        );
+      } else {
+        if (selectedSize === 1) {
+          return setValue(
+            (
+              productModal.currentProduct.value * quantity +
+              product.value * quantity -
+              brotinhoPrice
+            ).toFixed(2),
+          );
+        }
+
+        return setValue(
+          (
+            productModal.currentProduct.value * quantity +
+            product.value * quantity
+          ).toFixed(2),
+        );
+      }
+    }
+
+    //Se um segundo sabor for selecionado
+    if (
+      otherProductsValue !== 0 &&
+      +otherProductsValue > productModal.currentProduct.value
+    ) {
+      if (selectedSize === 1) {
+        return setValue(
+          (+otherProductsValue * quantity - brotinhoPrice).toFixed(2),
+        );
+      }
+
       return setValue((+otherProductsValue * quantity).toFixed(2));
     }
-    const newValue = productModal.currentProduct.value * quantity;
-    setValue(newValue.toFixed(2));
+
+    //Se nenhum outro produto foi selecionado
+    if (!selectedProduct3 && !selectedProduct2 && productModal.currentProduct) {
+      if (selectedSize === 1) {
+        const newValue =
+          productModal.currentProduct.value * quantity - brotinhoPrice;
+        return setValue(newValue.toFixed(2));
+      }
+
+      const newValue = productModal.currentProduct.value * quantity;
+      return setValue(newValue.toFixed(2));
+    }
   };
 
   const checkDiference = (product: Product) => {
@@ -70,7 +128,6 @@ export const useCustomProductModal = () => {
 
   const handleSetProduct2 = (product_id: string) => {
     setSelectedProduct2(product_id);
-    console.log('selected product', selectedProduct2);
   };
 
   useEffect(() => {
@@ -83,7 +140,7 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
-  }, [value, quantity]);
+  }, [value, quantity, increaseQuantity, decreaseQuantity]);
 
   useEffect(() => {
     if (selectedProduct2 && productModal.currentProduct) {
@@ -94,8 +151,6 @@ export const useCustomProductModal = () => {
           product.value,
         );
         setOtherProductsValue(maxValue);
-        console.log('max value', maxValue);
-        console.log('other', otherProductsValue);
       }
     }
   }, [selectedProduct2]);
@@ -109,6 +164,8 @@ export const useCustomProductModal = () => {
     flavors,
     selectedProduct2,
     selectedProduct3,
+    selectedSize,
+    setSelectedSize,
     setSelectedFlavor,
     setSelectedProduct2,
     setSelectedProduct3,

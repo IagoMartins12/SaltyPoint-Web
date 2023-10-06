@@ -15,6 +15,7 @@ import {
   useTalkToUsModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
+import { useProductModal } from '@/app/hooks/modals/useProduct';
 import { useEffect } from 'react';
 
 const modals = [
@@ -31,6 +32,7 @@ const modals = [
   useDeleteAddress,
   useUserInfoModal,
   useFavoriteModal,
+  useProductModal,
 ];
 
 export const ModalsBackground = () => {

@@ -25,7 +25,11 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       product_id_3: selectedProduct3,
       observation: data.observation,
       quantity: quantity,
+      value: value,
+      size: selectedSize,
     } as CartProductDto;
+
+    console.log('newSubmit', object);
   };
 
   const {
@@ -42,6 +46,8 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
     setSelectedProduct2,
     selectedProduct3,
     setSelectedProduct3,
+    selectedSize,
+    setSelectedSize,
   } = useCustomProductModal();
 
   return (
@@ -51,7 +57,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
           fill
           src={productModal.currentProduct?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky'
+          className='rounded-lg !sticky object-contain'
           sizes='100%'
         />
       </div>
@@ -65,7 +71,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
         </span>
 
         <div id='size' className='flex flex-col w-full'>
-          <div className='flex border-b-2 justify-between'>
+          <div className='flex border-b-2 justify-between pb-2'>
             <span className='text-lg '>Selecione o tamanho </span>
             <span className='bg-black py-2 px-2 text-white text-xs rounded-xl'>
               Obrigatorio
@@ -75,17 +81,22 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
           <div className='flex flex-col gap-2'>
             {sizes.map((size, i) => (
               <div
-                className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                className='flex border-b-2 justify-between p-4 min-h-[7vh]'
                 key={i}
               >
-                <span className='text-medium font-medium '>{size} </span>
+                <label className='text-medium font-medium' htmlFor='pizzaSize'>
+                  {size}{' '}
+                </label>
                 <input
                   type='radio'
                   name='pizzaSize'
                   id={size}
                   onClick={() => {
                     handleSetSelected('flavor');
+                    setSelectedSize(i);
                   }}
+                  defaultChecked={size === 'Pizza'}
+                  className='accent-red-600 w-5 h-5'
                 />
               </div>
             ))}
@@ -103,7 +114,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
           <div className='flex flex-col gap-2'>
             {flavors.map((flavor, i) => (
               <div
-                className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                className='flex border-b-2 justify-between p-4 min-h-[7vh]'
                 key={i}
               >
                 <span className='text-medium font-medium '>{flavor} </span>
@@ -112,11 +123,16 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
                   name='pizzaFlavor'
                   id={flavor}
                   onChange={() => {
+                    if (flavor === '1 Sabor') {
+                      setSelectedProduct2(null);
+                    }
                     setSelectedFlavor(flavor);
                   }}
                   onClick={() => {
                     handleSetSelected('pizzas');
                   }}
+                  defaultChecked={flavor === '1 Sabor'}
+                  className='accent-red-600 w-5 h-5'
                 />
               </div>
             ))}
@@ -148,7 +164,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
                       .map(product => (
                         <div
                           className='flex border-b-2 justify-between p-2 min-h-[7vh]'
-                          key={product.id} // Adicione uma chave única para evitar avisos
+                          key={product.id}
                         >
                           <PizzaCard
                             product={product}
@@ -214,7 +230,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
         </div>
 
         <button
-          className={`flex gap-3 items-center justify-center w-full py-2 mb-4 rounded-lg cursor-pointer bg-red-600 text-white ${
+          className={`flex gap-3 items-center justify-center w-full py-2 mb-5 rounded-lg cursor-pointer bg-red-600 text-white ${
             disabled ? '' : 'opacity-60'
           }`}
           disabled={!disabled}

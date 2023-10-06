@@ -7,7 +7,7 @@ export const ProductMenu = () => {
   const { categorys, products } = useGlobalStore();
 
   return (
-    <div className='w-10/12 mx-auto pt-4 flex z-10 flex-col gap-8'>
+    <div className='w-11/12 mx-auto pt-4 flex z-10 flex-col gap-8'>
       {categorys
         .filter(c => c.category_name !== 'Bordas')
         .map(category => (
