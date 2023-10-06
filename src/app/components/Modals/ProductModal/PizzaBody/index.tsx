@@ -18,20 +18,6 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
 
-  const newSubmit: SubmitHandler<FieldValues> = async data => {
-    const object = {
-      product_id: productModal.currentProduct?.id,
-      product_id_2: selectedProduct2,
-      product_id_3: selectedProduct3,
-      observation: data.observation,
-      quantity: quantity,
-      value: value,
-      size: selectedSize,
-    } as CartProductDto;
-
-    console.log('newSubmit', object);
-  };
-
   const {
     decreaseQuantity,
     increaseQuantity,
@@ -49,6 +35,31 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
     selectedSize,
     setSelectedSize,
   } = useCustomProductModal();
+
+  const newSubmit: SubmitHandler<FieldValues> = async data => {
+    const object = {
+      product_id: productModal.currentProduct?.id,
+      product_id_2: selectedProduct2,
+      product_id_3: selectedProduct3,
+      observation: data.observation,
+      quantity: quantity,
+      value: value,
+      size: selectedSize,
+    } as CartProductDto;
+  };
+
+  const brotinhoNames = products
+    .filter(
+      p =>
+        p.name !== productModal.currentProduct?.name &&
+        p.category_id === productModal.currentProduct?.category_id,
+    )
+    .map(p => ({
+      ...p,
+      name: p.name.replace('Pizza', 'Brotinho'),
+    }));
+
+  console.log(brotinhoNames);
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>
@@ -150,30 +161,43 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
               </div>
 
               <div className='flex flex-col gap-2'>
-                {categorys
-                  .filter(
-                    c => c.id === productModal.currentProduct?.category_id,
-                  )
-                  .map(category =>
-                    products
+                {selectedSize === 0
+                  ? categorys
                       .filter(
-                        p =>
-                          p.id !== productModal.currentProduct?.id &&
-                          p.category_id === category.id,
+                        c => c.id === productModal.currentProduct?.category_id,
                       )
-                      .map(product => (
-                        <div
-                          className='flex border-b-2 justify-between p-2 min-h-[7vh]'
-                          key={product.id}
-                        >
-                          <PizzaCard
-                            product={product}
-                            selectedProduct2={selectedProduct2}
-                            setSelectedProduct2={setSelectedProduct2}
-                          />
-                        </div>
-                      )),
-                  )}
+                      .map(category =>
+                        products
+                          .filter(
+                            p =>
+                              p.id !== productModal.currentProduct?.id &&
+                              p.category_id === category.id,
+                          )
+                          .map(product => (
+                            <div
+                              className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                              key={product.id}
+                            >
+                              <PizzaCard
+                                product={product}
+                                selectedProduct2={selectedProduct2}
+                                setSelectedProduct2={setSelectedProduct2}
+                              />
+                            </div>
+                          )),
+                      )
+                  : brotinhoNames.map(product => (
+                      <div
+                        className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                        key={product.id}
+                      >
+                        <PizzaCard
+                          product={product}
+                          selectedProduct2={selectedProduct2}
+                          setSelectedProduct2={setSelectedProduct2}
+                        />
+                      </div>
+                    ))}
               </div>
             </div>
           )}

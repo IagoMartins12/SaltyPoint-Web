@@ -30,6 +30,46 @@ export const StyledInput: React.FC<StyledInputProps> = ({
   );
 };
 
+export const StyledInputPassword: React.FC<StyledInputProps> = ({
+  id,
+  label,
+  register,
+  placeholder,
+  required,
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <div className='form__group field'>
+      <input
+        type={isVisible ? 'text' : 'password'}
+        className='form__field bg-transparent'
+        placeholder={placeholder}
+        {...register(id, { required })}
+      />
+      <label className='form__label'>{label}</label>
+
+      {isVisible ? (
+        <AiOutlineEyeInvisible
+          size={25}
+          className='absolute right-1 top-8 cursor-pointer'
+          onClick={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
+      ) : (
+        <AiOutlineEye
+          size={25}
+          className='absolute right-1 top-8 cursor-pointer'
+          onClick={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
 export const AddressInput: React.FC<AddressInputProps> = ({
   id,
   label,

@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import { BiLogInCircle } from 'react-icons/bi';
-import { StyledInput } from '../../Input';
+import { StyledInput, StyledInputPassword } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
@@ -88,7 +88,7 @@ export const LoginModal = () => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-y-3 mx-auto w-11/12 '>
+        <div className='flex flex-col gap-y-5 mx-auto w-11/12 '>
           <StyledInput
             id='email'
             required
@@ -96,8 +96,7 @@ export const LoginModal = () => {
             label='Email'
             register={register}
           />
-          <StyledInput
-            type='password'
+          <StyledInputPassword
             id='password'
             required
             placeholder='Senha'

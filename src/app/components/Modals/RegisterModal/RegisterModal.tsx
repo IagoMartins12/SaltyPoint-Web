@@ -9,7 +9,7 @@ import { AiFillApple } from 'react-icons/ai';
 import { BiLogInCircle } from 'react-icons/bi';
 import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
-import { StyledInput } from '../../Input';
+import { StyledInput, StyledInputPassword } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import Image from 'next/image';
 import Modal from '../../Modal';
@@ -78,7 +78,7 @@ export const RegisterModal = () => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-y-3 mx-auto w-11/12 '>
+        <div className='flex flex-col gap-y-5 mx-auto w-11/12 '>
           <StyledInput
             id='name'
             required
@@ -96,12 +96,11 @@ export const RegisterModal = () => {
             type='email'
           />
 
-          <StyledInput
-            type='password'
+          <StyledInputPassword
             id='password'
             required
-            placeholder='Senha:'
-            label='Senha:'
+            placeholder='Senha'
+            label='Senha'
             register={register}
           />
 
