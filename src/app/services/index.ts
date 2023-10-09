@@ -18,6 +18,7 @@ import {
   Discount_cupom,
   Favorite,
   Product,
+  Type_Pagament,
   User,
   User_Adress,
 } from '../types/ModelsType';
@@ -68,6 +69,15 @@ export const getCategories = async (): Promise<Category[]> => {
   try {
     const response = await Api.get('/category');
     return response.data as Category[];
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getTypePagaments = async (): Promise<Type_Pagament[]> => {
+  try {
+    const response = await Api.get('/typePagament');
+    return response.data as Type_Pagament[];
   } catch (error: any) {
     return error;
   }

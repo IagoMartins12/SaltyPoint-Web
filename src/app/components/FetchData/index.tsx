@@ -7,6 +7,7 @@ import {
   getAddress,
   getCartProduct,
   getCategories,
+  getCoupons,
   getFavorites,
   getMe,
   getProducts,
@@ -15,7 +16,7 @@ import { useEffect } from 'react';
 
 export const FetchData = () => {
   const { setCategorys, setProducts } = useGlobalStore();
-  const { setAddress, setUser, setFavorites, setCart_product } =
+  const { setAddress, setUser, setFavorites, setCart_product, setCoupons } =
     usePrivateStore();
   const { isLogged } = useAuth();
 
@@ -42,6 +43,9 @@ export const FetchData = () => {
           const userData = await getMe();
           const favoriteData = await getFavorites();
           const cartProductData = await getCartProduct();
+          const couponsData = await getCoupons();
+
+          setCoupons(couponsData);
           setAddress(addressData);
           setUser(userData);
           setFavorites(favoriteData);

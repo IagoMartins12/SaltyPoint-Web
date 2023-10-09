@@ -1,31 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Discount_cupom } from '@/app/types/ModelsType';
-import { getCoupons } from '@/app/services';
 import { CouponCard } from '../../CouponCard';
-import useAuth from '@/app/hooks/auth/useAuth';
 import Modal from '../../Modal';
 import { useCoupons } from '@/app/hooks/modals/useModal';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 
 export const CouponsModal = () => {
-  const [coupons, setCoupons] = useState<Discount_cupom[] | []>([]);
   const couponModal = useCoupons();
-  const { isLogged } = useAuth();
 
-  useEffect(() => {
-    if (isLogged) {
-      const fetchData = async () => {
-        try {
-          const couponsData = await getCoupons();
-
-          setCoupons(couponsData);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      fetchData();
-    }
-  }, [isLogged]);
+  const { coupons } = usePrivateStore();
 
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6'>

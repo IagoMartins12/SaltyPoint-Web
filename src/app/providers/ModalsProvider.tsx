@@ -11,6 +11,7 @@ import { DeleteUserModal } from '../components/Modals/DeleteUserModal';
 import { FavoriteModal } from '../components/Modals/FavoriteModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
 import { LoginModal } from '../components/Modals/LoginModal/LoginModal';
+import OrderModal from '../components/Modals/OrderModal';
 import { ProductModal } from '../components/Modals/ProductModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
 import { SearchModal } from '../components/Modals/SearchModal';
@@ -38,6 +39,7 @@ const ModalsProvider = () => {
       <FavoriteModal />
       <ProductModal />
       <DeleteItemCartModal />
+      <OrderModal />
     </>
   );
 };

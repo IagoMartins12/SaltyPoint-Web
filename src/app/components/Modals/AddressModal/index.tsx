@@ -48,6 +48,12 @@ export const AddressModal = () => {
                   <span className='text-sm font-light'>
                     {address.city} / {address.uf}
                   </span>
+
+                  {address.reference && (
+                    <span className='text-sm font-light'>
+                      {address.reference}
+                    </span>
+                  )}
                 </div>
 
                 <div className='w-2/12 flex items-end gap-2 justify-center'>

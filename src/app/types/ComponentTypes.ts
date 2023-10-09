@@ -166,6 +166,8 @@ export interface PrivateStore {
   setCart: (cart: Cart) => void;
   cart_product: Cart_product[] | [];
   setCart_product: (cart_product: Cart_product[]) => void;
+  coupons: Discount_cupom[] | [];
+  setCoupons: (discount_cupom: Discount_cupom[]) => void;
 }
 
 export interface GeoLocationStore {

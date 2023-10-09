@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CartProductCard } from '../CartProductCard/index2';
 import { handleSetSelected } from '@/app/utils';
+import { useOrderModal } from '@/app/hooks/modals/useModal';
 
 export const Cart = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const { cart_product } = usePrivateStore();
-
+  const orderModal = useOrderModal();
   const toggleMenu = () => {
     setMenuOpen(prevState => !prevState);
   };
@@ -19,6 +20,11 @@ export const Cart = () => {
     (total, item) => total + Number(item.value),
     0,
   );
+
+  const handleOpenOrderModal = () => {
+    setMenuOpen(false);
+    orderModal.onOpen();
+  };
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
@@ -65,6 +71,7 @@ export const Cart = () => {
                   cart_product.length === 0 ? 'bg-slate-300' : 'bg-red-400'
                 }`}
                 disabled={cart_product.length === 0 ? true : false}
+                onClick={handleOpenOrderModal}
               >
                 <span className='text-lg font-medium'> Iniciar Compra</span>
               </button>

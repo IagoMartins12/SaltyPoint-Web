@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({
       {/* Modal */}
       <div
         className={`relative ${authModal ? 'w-8/12' : 'w-4/12'} ${
-          authModal ? 'lg:h-[65%]' : 'lg:h-[80%]'
+          authModal ? 'lg:h-[65%]' : 'lg:h-[85%]'
         } my-6 mx-auto`}
       >
         {/* Conteúdo do Modal */}
