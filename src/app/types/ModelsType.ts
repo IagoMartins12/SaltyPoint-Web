@@ -100,7 +100,8 @@ export type Order_Product = {
   product_id: string;
   product_id_2?: string | null;
   product_id_3?: string | null;
-  size: number | null;
+  size: number;
+  value: string;
   order_id: string;
   quantity: number;
   observation?: string | null;

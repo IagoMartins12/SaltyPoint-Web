@@ -62,7 +62,6 @@ export const useCustomProductModal = () => {
       //Se um segundo sabor for selecionado
       if (otherProductsValue !== 0) {
         if (selectedSize === 1) {
-          console.log('caiu aqui');
           const newValue =
             +otherProductsValue * quantity + product.value * quantity;
           return setValue((newValue - brotinhoPrice).toFixed(2));

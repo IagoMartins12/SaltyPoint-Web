@@ -12,11 +12,15 @@ import { CornicioneCart } from '@/app/components/CornicioneCart';
 import { useCustomProductModal } from '../useProductModal';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { CartProductDto } from '@/app/types/Dtos';
+import { addCartProduct } from '@/app/services';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import toast from 'react-hot-toast';
 
 export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   const productModal = useProductModal();
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
+  const { cart_product, setCart_product } = usePrivateStore();
 
   const {
     decreaseQuantity,
@@ -37,7 +41,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   } = useCustomProductModal();
 
   const newSubmit: SubmitHandler<FieldValues> = async data => {
-    const object = {
+    const response = await addCartProduct({
       product_id: productModal.currentProduct?.id,
       product_id_2: selectedProduct2,
       product_id_3: selectedProduct3,
@@ -45,7 +49,13 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       quantity: quantity,
       value: value,
       size: selectedSize,
-    } as CartProductDto;
+    } as CartProductDto);
+
+    if (response) {
+      const updatedCartProduct = [...cart_product, response];
+      setCart_product(updatedCartProduct);
+      toast.success('Produto adicionado');
+    }
   };
 
   const brotinhoNames = products
@@ -58,8 +68,6 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       ...p,
       name: p.name.replace('Pizza', 'Brotinho'),
     }));
-
-  console.log(brotinhoNames);
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>

@@ -216,7 +216,6 @@ export const addCartProduct = async (
   cartProductDto: CartProductDto,
 ): Promise<Cart_product> => {
   try {
-    console.log(cartProductDto);
     const response = await Api.post('/cart/add', cartProductDto);
     return response.data;
   } catch (error: any) {

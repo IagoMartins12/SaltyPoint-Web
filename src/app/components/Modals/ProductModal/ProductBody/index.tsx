@@ -24,6 +24,7 @@ export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       product_id: productModal.currentProduct?.id,
       observation: data.observation,
       quantity: quantity,
+      value: value,
     } as CartProductDto);
 
     if (response) {

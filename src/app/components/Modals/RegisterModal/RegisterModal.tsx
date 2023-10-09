@@ -137,24 +137,6 @@ export const RegisterModal = () => {
                 onClick={() => console.log('clicou')}
               />
             </div>
-            {/* <AuthLoginButton
-                text='Continuar com Google'
-                icon={FcGoogle}
-                bgColor='bg-[#4285F4]'
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButton
-                text='Continuar com Facebook'
-                icon={BsFacebook}
-                bgColor='bg-blue-800 '
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButton
-                text='Continuar com Apple'
-                icon={AiFillApple}
-                bgColor='bg-black '
-                onClick={() => console.log('clicou')}
-              /> */}
           </div>
         </div>
       </div>
