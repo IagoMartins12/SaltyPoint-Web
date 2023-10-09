@@ -29,7 +29,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className='hidden lg:flex w-5/12 relative'>
+      <div className='hidden lg:flex w-5/12 -z-10 relative'>
         <ImageComponent src='hero.svg' alt='hero' />
       </div>
     </div>

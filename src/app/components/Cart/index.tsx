@@ -52,7 +52,7 @@ export const Cart = () => {
             </div>
 
             <div className='flex justify-between'>
-              <span className='text-2xl font-light'> Subtotal: </span>
+              <span className='text-2xl font-light underline'> Subtotal: </span>
               <span className='text-lg font-medium'>
                 R${cartProductTotal.toFixed(2)}
               </span>
