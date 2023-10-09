@@ -11,3 +11,4 @@ const createDeleteModalStore = () =>
   }));
 
 export const useDeleteAddress = createDeleteModalStore();
+export const useDeleteCartItem = createDeleteModalStore();

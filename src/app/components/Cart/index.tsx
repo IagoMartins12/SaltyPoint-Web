@@ -3,7 +3,8 @@
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { CartProductCard } from '../CartProductCard';
+import { CartProductCard } from '../CartProductCard/index2';
+import { handleSetSelected } from '@/app/utils';
 
 export const Cart = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ export const Cart = () => {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
-  }, [menuOpen]);
+  }, [menuOpen, setMenuOpen]);
   return (
     <>
       <div className=''>
@@ -32,9 +33,9 @@ export const Cart = () => {
           <AiOutlineShoppingCart size={25} />
         </button>
       </div>
-      <div className={`relative z-50 w-6/12`}>
+      <div className={`relative z-50 w-6/12 cursor-auto`}>
         <div
-          className={`cursor-auto ${
+          className={` ${
             menuOpen ? 'fixed' : ''
           } inset-0 bg-gray-800 opacity-25`}
           onClick={toggleMenu}
@@ -52,19 +53,29 @@ export const Cart = () => {
             </div>
 
             <div className='flex justify-between'>
-              <span className='text-2xl font-light underline'> Subtotal: </span>
-              <span className='text-lg font-medium'>
+              <span className='text-xl font-light underline'> Subtotal: </span>
+              <span className='text-base font-medium'>
                 R${cartProductTotal.toFixed(2)}
               </span>
             </div>
 
             <div className='flex flex-col gap-6'>
-              <button className='w-full px-3 py-3 rounded-3xl bg-red-400'>
+              <button
+                className={`w-full px-3 py-3 rounded-3xl ${
+                  cart_product.length === 0 ? 'bg-slate-300' : 'bg-red-400'
+                }`}
+                disabled={cart_product.length === 0 ? true : false}
+              >
                 <span className='text-lg font-medium'> Iniciar Compra</span>
               </button>
 
-              <span className='text-center font-light text-lg underline'>
-                {' '}
+              <span
+                className='text-center font-light text-base underline cursor-pointer'
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleSetSelected('Pizzas Salgadas');
+                }}
+              >
                 Ver mais produtos{' '}
               </span>
             </div>

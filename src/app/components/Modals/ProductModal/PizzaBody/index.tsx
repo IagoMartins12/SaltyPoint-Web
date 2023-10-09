@@ -55,6 +55,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       const updatedCartProduct = [...cart_product, response];
       setCart_product(updatedCartProduct);
       toast.success('Produto adicionado');
+      productModal.onClose();
     }
   };
 

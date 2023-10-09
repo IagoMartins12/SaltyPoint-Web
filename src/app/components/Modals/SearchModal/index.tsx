@@ -1,7 +1,7 @@
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { SearchCategory } from '../../SearchCategory';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchProduct } from '../../SearchProduct';
 import { Product } from '@/app/types/ModelsType';
 import Modal from '../../Modal';
@@ -38,6 +38,9 @@ export const SearchModal = () => {
     return setProductState(newProducts);
   };
 
+  useEffect(() => {
+    setProductState(products);
+  }, [products]);
   const body = (
     <div className='flex flex-col gap-5'>
       <div className='relative flex w-11/12 mx-auto'>
@@ -56,7 +59,9 @@ export const SearchModal = () => {
 
       <div className='flex flex-wrap gap-4 w-10/12 mx-auto'>
         {categorys
-          .filter(c => c.category_name !== 'Bordas')
+          .filter(
+            c => c.category_name !== 'Bordas' && c.category_name !== 'Brindes',
+          )
           .map((category, i) => (
             <SearchCategory
               category={category}

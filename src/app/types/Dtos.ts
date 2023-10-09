@@ -68,5 +68,5 @@ export type CartProductDto = {
 };
 
 export type RemoveCartProductDto = {
-  cart_item_id: string;
+  cart_product_id: string;
 };

@@ -31,21 +31,20 @@ export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       const updatedCartProduct = [...cart_product, response];
       setCart_product(updatedCartProduct);
       toast.success('Produto adicionado');
+      productModal.onClose();
     }
   };
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
-      <div className='w-full h-[30%] relative rounded-lg '>
-        <div className=' w-full h-full'>
-          <Image
-            fill
-            src={productModal.currentProduct?.product_image ?? ''}
-            alt='Product image'
-            className='rounded-lg'
-            sizes='100%'
-          />
-        </div>
+      <div className='w-full h-[25%] relative rounded-lg '>
+        <Image
+          fill
+          src={productModal.currentProduct?.product_image ?? ''}
+          alt='Product image'
+          className='rounded-lg !sticky object-contain'
+          sizes='100%'
+        />
       </div>
 
       <form
@@ -66,6 +65,18 @@ export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
             className='cursor-pointer'
           />
           <span className='font-medium text-xl'> {quantity}</span>
+          {/* <input
+            className='w-12 text-center h-10'
+            type='number'
+            value={quantity}
+            onChange={ev => {
+              const newValue = parseInt(ev.target.value, 10);
+              if (!isNaN(newValue) && newValue >= 0) {
+                setQuantity(newValue);
+                console.log(newValue);
+              }
+            }}
+          /> */}
           <AiOutlinePlus
             size={25}
             onClick={increaseQuantity}

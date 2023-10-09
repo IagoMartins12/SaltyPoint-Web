@@ -60,7 +60,10 @@ export const useCustomProductModal = () => {
       if (quantity === 0) return setValue((0).toFixed(2));
 
       //Se um segundo sabor for selecionado
-      if (otherProductsValue !== 0) {
+      if (
+        otherProductsValue !== 0 &&
+        +otherProductsValue > +productModal.currentProduct.value
+      ) {
         if (selectedSize === 1) {
           const newValue =
             +otherProductsValue * quantity + product.value * quantity;
@@ -102,6 +105,7 @@ export const useCustomProductModal = () => {
         );
       }
 
+      console.log('caiu aqui');
       return setValue((+otherProductsValue * quantity).toFixed(2));
     }
 
@@ -113,6 +117,7 @@ export const useCustomProductModal = () => {
         return setValue(newValue.toFixed(2));
       }
 
+      console.log('caiu aqui 2');
       const newValue = productModal.currentProduct.value * quantity;
       return setValue(newValue.toFixed(2));
     }

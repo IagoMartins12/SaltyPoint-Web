@@ -224,13 +224,13 @@ export const addCartProduct = async (
 };
 
 export const removeCartProduct = async (
-  cartProductDto: RemoveCartProductDto,
-): Promise<RemoveCartProductDto> => {
+  removeProductCartDto: RemoveCartProductDto,
+) => {
   try {
     const response = await Api.delete('/cart/delete', {
-      data: cartProductDto,
+      data: removeProductCartDto,
     });
-    return response.data;
+    return response;
   } catch (error: any) {
     return error;
   }

@@ -3,23 +3,20 @@
 import { useState } from 'react';
 import CategoryBox from '../CategoryBox';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { handleSetSelected } from '@/app/utils';
 
 export const CategoryMenu = () => {
   const [selected, setSelected] = useState<string | null>(null);
 
   const { categorys } = useGlobalStore();
 
-  const handleSetSelected = (category_name: string) => {
+  const handleSelect = (category_name: string) => {
     if (category_name === selected) {
       return setSelected(null);
     }
 
     setSelected(category_name);
-
-    const targetDiv = document.getElementById(`${category_name}`);
-    if (targetDiv) {
-      targetDiv.scrollIntoView({ behavior: 'smooth' });
-    }
+    handleSetSelected(category_name);
   };
 
   return (
@@ -30,7 +27,7 @@ export const CategoryMenu = () => {
           <CategoryBox
             key={item.category_name}
             label={item.category_name}
-            onClick={handleSetSelected}
+            onClick={handleSelect}
             selected={selected}
           />
         ))}
