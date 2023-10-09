@@ -47,8 +47,8 @@ export const Cart = () => {
         >
           <div className='flex flex-col gap-6  h-full px-2 py-3'>
             <div className='flex flex-col gap-6 px-2 py-3'>
-              {cart_product.map(cartProduct => (
-                <CartProductCard cart_product={cartProduct} />
+              {cart_product.map((cartProduct, i) => (
+                <CartProductCard cart_product={cartProduct} key={i} />
               ))}
             </div>
 

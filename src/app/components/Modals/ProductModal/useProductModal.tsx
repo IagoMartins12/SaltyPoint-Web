@@ -51,13 +51,13 @@ export const useCustomProductModal = () => {
 
   const checkValue = () => {
     if (!productModal.currentProduct) return;
+    if (quantity === 0) return setValue((0).toFixed(2));
 
     //Se uma borda for selecionado
     if (selectedProduct3 && productModal.currentProduct) {
       const product = products.find(p => p.id === selectedProduct3);
 
       if (!product) return;
-      if (quantity === 0) return setValue((0).toFixed(2));
 
       //Se um segundo sabor for selecionado
       if (
@@ -105,7 +105,6 @@ export const useCustomProductModal = () => {
         );
       }
 
-      console.log('caiu aqui');
       return setValue((+otherProductsValue * quantity).toFixed(2));
     }
 
@@ -117,10 +116,12 @@ export const useCustomProductModal = () => {
         return setValue(newValue.toFixed(2));
       }
 
-      console.log('caiu aqui 2');
       const newValue = productModal.currentProduct.value * quantity;
       return setValue(newValue.toFixed(2));
     }
+
+    const newValue = productModal.currentProduct.value * quantity;
+    return setValue(newValue.toFixed(2));
   };
 
   const checkDiference = (product: Product) => {

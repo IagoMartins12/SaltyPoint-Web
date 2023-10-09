@@ -1,6 +1,6 @@
 'use client';
-import useLoginModal from '@/app/hooks/modals/useLoginModal';
-import useRegisterModal from '@/app/hooks/modals/useRegisterModal';
+
+import { useLoginModal, useRegisterModal } from '@/app/hooks/modals/useModal';
 import { AiOutlineUser } from 'react-icons/ai';
 
 export const LoginButton = () => {
