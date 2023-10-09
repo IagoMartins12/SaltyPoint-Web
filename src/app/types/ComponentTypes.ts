@@ -229,3 +229,7 @@ export interface ProductModalProps {
 export interface PizzaModalProps extends ProductModalProps {
   setValue: Dispatch<SetStateAction<string | number>>;
 }
+
+export interface CartProductCardType {
+  cart_product: Cart_product;
+}

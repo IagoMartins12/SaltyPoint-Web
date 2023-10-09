@@ -186,6 +186,7 @@ export type Cart_product = {
   observation?: string | null;
   quantity: number;
   size: number | null;
+  value: string;
 
   cart: Cart;
   product: Product;
