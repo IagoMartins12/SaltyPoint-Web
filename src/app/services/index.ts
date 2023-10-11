@@ -1,4 +1,5 @@
 import { Api } from '../api/Api';
+import { OrderType } from '../types/ComponentTypes';
 import {
   CEPInfoDto,
   CartProductDto,
@@ -94,10 +95,10 @@ export const getCoupons = async (): Promise<Discount_cupom[]> => {
   }
 };
 
-export const getOrders = async (): Promise<Order[]> => {
+export const getOrders = async (): Promise<OrderType[]> => {
   try {
     const response = await Api.get('/order');
-    return response.data as Order[];
+    return response.data as OrderType[];
   } catch (error: any) {
     return error;
   }

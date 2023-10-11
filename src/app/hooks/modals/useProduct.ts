@@ -1,7 +1,7 @@
 import { ProductStore } from '@/app/types/ComponentTypes';
 import { create } from 'zustand';
 
-const createDeleteModalStore = () =>
+const createProductModal = () =>
   create<ProductStore>(set => ({
     currentProduct: null,
     isOpen: false,
@@ -10,4 +10,5 @@ const createDeleteModalStore = () =>
     setCurrentProduct: item => set({ currentProduct: item }),
   }));
 
-export const useProductModal = createDeleteModalStore();
+export const useProductModal = createProductModal();
+export const useCurrentOrderModal = createProductModal();

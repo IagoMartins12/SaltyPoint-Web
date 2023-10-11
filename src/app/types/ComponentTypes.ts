@@ -7,6 +7,7 @@ import {
   Favorite,
   Order,
   Product,
+  Type_Pagament,
   User,
   User_Adress,
 } from './ModelsType';
@@ -124,8 +125,8 @@ export interface ProductStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  currentProduct: Product | null;
-  setCurrentProduct: (product: Product) => void;
+  currentProduct: Product | null | OrderType;
+  setCurrentProduct: (product: Product | OrderType) => void;
 }
 export interface AuthStore {
   isLogged: boolean;
@@ -154,6 +155,8 @@ export interface Store {
   setCategorys: (category: Category[]) => void;
   products: Product[] | [];
   setProducts: (products: Product[]) => void;
+  typePagament: Type_Pagament[] | [];
+  setTypePagament: (typePagament: Type_Pagament[]) => void;
 }
 
 export interface PrivateStore {
@@ -169,8 +172,8 @@ export interface PrivateStore {
   setCart_product: (cart_product: Cart_product[]) => void;
   coupons: Discount_cupom[] | [];
   setCoupons: (discount_cupom: Discount_cupom[]) => void;
-  orders: Order[] | [];
-  setOrders: (orders: Order[]) => void;
+  orders: OrderType[] | [];
+  setOrders: (orders: OrderType[]) => void;
 }
 
 export interface GeoLocationStore {
@@ -237,4 +240,21 @@ export interface PizzaModalProps extends ProductModalProps {
 
 export interface CartProductCardType {
   cart_product: Cart_product;
+}
+
+export interface OrderProductCardType extends CartProductCardType {
+  quantity: number;
+}
+
+export interface OrderType extends Order {
+  orderItems: Cart_product[];
+}
+
+export type OrderComponentType = {
+  order: OrderType;
+};
+
+export interface LabelInfo {
+  label: string;
+  content: string;
 }

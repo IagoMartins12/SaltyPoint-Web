@@ -13,6 +13,8 @@ import toast from 'react-hot-toast';
 import { BiStoreAlt } from 'react-icons/bi';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
 
+export const districtRate = ['Sulina', 'Décima', 'area', 'Bandeirantes'];
+
 export const useCustomOrderModal = () => {
   const [selected, setSelected] = useState<number | null>(null);
   const [showCoupon, setShowCoupon] = useState<boolean>(false);
@@ -37,7 +39,6 @@ export const useCustomOrderModal = () => {
     setCoupons,
   } = usePrivateStore();
 
-  const districtRate = ['Sulina', 'Décima', 'area', 'Bandeirantes'];
   const orderModal = useOrderModal();
   const addressModal = useAddress();
   const userInfo = useUserInfoModal();
@@ -82,7 +83,8 @@ export const useCustomOrderModal = () => {
     } as CreateOrderDto);
 
     if (response) {
-      const updatedOrders = [...orders, response];
+      const newOrder = { ...response, orderItems: cart_product };
+      const updatedOrders = [...orders, newOrder];
 
       if (couponApplied) {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);

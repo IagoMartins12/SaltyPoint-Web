@@ -1,4 +1,3 @@
-import { useDeleteCartItem } from '@/app/hooks/modals/useDelete';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { CartProductCardType } from '@/app/types/ComponentTypes';
 
@@ -6,8 +5,6 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
   cart_product,
 }) => {
   const { products } = useGlobalStore();
-
-  //   const deleteItemModal = useDeleteCartItem();
 
   const getProductName2 = (productId: string, size: number | null) => {
     let name: string;
@@ -23,12 +20,6 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
       return product?.name;
     }
   };
-
-  //   const handleOpenDeleteModal = (cart_id: string) => {
-  //     deleteItemModal.setCurrentItem(cart_id);
-
-  //     deleteItemModal.onOpen();
-  //   };
 
   return (
     <div className='w-full flex gap-6 border-b-2 p-4'>
@@ -73,17 +64,6 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
           ) : null}
         </div>
       </div>
-
-      {/* <div className=''>
-        <AiOutlineDelete
-          size={25}
-          fill='red'
-          className='cursor-pointer'
-          onClick={() => {
-            handleOpenDeleteModal(cart_product.id);
-          }}
-        />
-      </div> */}
     </div>
   );
 };

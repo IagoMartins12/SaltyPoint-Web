@@ -6,6 +6,8 @@ const useGlobalStore = create<Store>(set => ({
   setCategorys: categorys => set({ categorys: categorys }),
   products: [],
   setProducts: products => set({ products: products }),
+  typePagament: [],
+  setTypePagament: typePagament => set({ typePagament: typePagament }),
 }));
 
 export default useGlobalStore;

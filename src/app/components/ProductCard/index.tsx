@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { FavoriteButton } from '../FavoriteButton';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
-import { useMenuHeader } from '../MenuHeader/useMenuHeader';
 
 export const ProductCard: React.FC<ProductCardType> = ({
   product,
@@ -11,7 +10,6 @@ export const ProductCard: React.FC<ProductCardType> = ({
 }) => {
   const { favorites } = usePrivateStore();
   const productModal = useProductModal();
-  const { menuOpen } = useMenuHeader();
 
   const handleCheckFavorites = () => {
     return favorites.some(p => p.product_id === product.id);
@@ -33,6 +31,7 @@ export const ProductCard: React.FC<ProductCardType> = ({
           src={product.product_image}
           alt='product-image'
           className='rounded-xl px-2 py-2 object-contain '
+          sizes='100%'
         />
 
         <div
