@@ -70,3 +70,13 @@ export type CartProductDto = {
 export type RemoveCartProductDto = {
   cart_product_id: string;
 };
+
+export type CreateOrderDto = {
+  total_amount: number;
+  type_delivery: number;
+  type_pagament_id: string;
+  discount_coupon_id?: string;
+  reward_id?: string;
+  address_id?: string | null;
+  state_id?: string;
+};

@@ -20,6 +20,7 @@ import {
   useCoupons,
   useFavoriteModal,
   useLoginModal,
+  useMyOrderModal,
   usePrivacyTerms,
   useTalkToUsModal,
   useUserInfoModal,
@@ -36,6 +37,7 @@ export const useMenuHeader = () => {
   const userInfoModal = useUserInfoModal();
   const favoritesModal = useFavoriteModal();
   const authOptions = useAuth();
+  const myOrderModal = useMyOrderModal();
 
   const iconsSize = 28;
 
@@ -117,7 +119,7 @@ export const useMenuHeader = () => {
       label: 'Meus pedidos',
       icon: <BsBag size={iconsSize} />,
       onclick: () => {
-        menuAction(loginModal);
+        menuAction(myOrderModal);
       },
     },
     {

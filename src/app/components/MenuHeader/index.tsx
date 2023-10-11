@@ -3,10 +3,15 @@
 import { AiOutlineMenu } from 'react-icons/ai';
 import ThemeSwitch from '../ThemeSwitcher/ThemeSwitch';
 import { useMenuHeader } from './useMenuHeader';
+import { useEffect } from 'react';
 
 export const MenuHeader = () => {
   const { menuOptions, toggleMenu, userMenuOptions, menuOpen, authOptions } =
     useMenuHeader();
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
+  }, [menuOpen]);
 
   return (
     <>
@@ -20,9 +25,9 @@ export const MenuHeader = () => {
       </div>
       <div className={`relative  w-6/12`}>
         <div
-          className={`navbar-backdrop z-40 ${
+          className={`${
             menuOpen ? 'fixed' : ''
-          } inset-0 bg-gray-800 opacity-25`}
+          } z-40 inset-0 bg-black opacity-50`}
           onClick={toggleMenu}
         />
         <nav

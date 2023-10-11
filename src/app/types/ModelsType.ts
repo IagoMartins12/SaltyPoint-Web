@@ -151,7 +151,7 @@ export type Discount_cupom = {
   discount: number;
   expiration_date: Date;
   active: number;
-
+  type_coupon: number; // 0 = public, 1 =  private
   discount_cupom_orders: Discount_cupom_orders[];
   order: Order[];
 };

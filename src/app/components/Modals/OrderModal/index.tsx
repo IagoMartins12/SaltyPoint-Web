@@ -165,7 +165,7 @@ const OrderModal = () => {
 
           <div className='flex flex-col'>
             <div className='flex justify-between px-2 items-center w-full'>
-              <span className='text-lg font-light w-4/12'>
+              <span className='text-base font-light w-4/12'>
                 Cupom de desconto:{' '}
               </span>
               <div className=' w-8/12 flex justify-end'>

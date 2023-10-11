@@ -2,6 +2,7 @@ import { Api } from '../api/Api';
 import {
   CEPInfoDto,
   CartProductDto,
+  CreateOrderDto,
   CreateUserDto,
   DeleteFavoritesDto,
   FavoritesDto,
@@ -17,6 +18,7 @@ import {
   Category,
   Discount_cupom,
   Favorite,
+  Order,
   Product,
   Type_Pagament,
   User,
@@ -87,6 +89,15 @@ export const getCoupons = async (): Promise<Discount_cupom[]> => {
   try {
     const response = await Api.get('/coupon');
     return response.data as Discount_cupom[];
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getOrders = async (): Promise<Order[]> => {
+  try {
+    const response = await Api.get('/order');
+    return response.data as Order[];
   } catch (error: any) {
     return error;
   }
@@ -241,6 +252,17 @@ export const removeCartProduct = async (
       data: removeProductCartDto,
     });
     return response;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const createOrder = async (
+  createOrderDto: CreateOrderDto,
+): Promise<Order> => {
+  try {
+    const response = await Api.post('/order/create', createOrderDto);
+    return response.data as Order;
   } catch (error: any) {
     return error;
   }

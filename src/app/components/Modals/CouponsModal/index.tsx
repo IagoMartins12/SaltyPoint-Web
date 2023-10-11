@@ -8,12 +8,14 @@ export const CouponsModal = () => {
 
   const { coupons } = usePrivateStore();
 
+  const filteredCoupons = coupons.filter(coupon => coupon.type_coupon === 0);
+
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6'>
       <div className=''>
         <div className='flex flex-col gap-6'>
           {coupons &&
-            coupons.map(coupon => (
+            filteredCoupons.map(coupon => (
               <CouponCard coupon={coupon} key={coupon.id} />
             ))}
         </div>

@@ -98,15 +98,13 @@ export const ForgetPasswordModal = () => {
 
           <div className='flex flex-col w-full gap-y-4'>
             <button
-              className=' bg-red-700 py-2  rounded-md text-white text-medium font-semibold'
+              className=' bg-red-400 py-2  rounded-md text-white text-medium font-semibold'
               onClick={handleSubmit(onSubmit)}
             >
               Enviar email
             </button>
             <button
-              className={`py-2 rounded-md  text-medium font-semibold border-2 ${
-                theme === 'light' ? 'border-black' : 'border-white'
-              }`}
+              className={`py-2 rounded-md  text-medium font-semibold shadow-md `}
               onClick={handleOpenLoginModal}
             >
               Voltar

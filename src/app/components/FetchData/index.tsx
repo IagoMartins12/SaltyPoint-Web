@@ -10,14 +10,21 @@ import {
   getCoupons,
   getFavorites,
   getMe,
+  getOrders,
   getProducts,
 } from '@/app/services';
 import { useEffect } from 'react';
 
 export const FetchData = () => {
   const { setCategorys, setProducts } = useGlobalStore();
-  const { setAddress, setUser, setFavorites, setCart_product, setCoupons } =
-    usePrivateStore();
+  const {
+    setAddress,
+    setUser,
+    setFavorites,
+    setCart_product,
+    setCoupons,
+    setOrders,
+  } = usePrivateStore();
   const { isLogged } = useAuth();
 
   useEffect(() => {
@@ -44,12 +51,14 @@ export const FetchData = () => {
           const favoriteData = await getFavorites();
           const cartProductData = await getCartProduct();
           const couponsData = await getCoupons();
+          const orderData = await getOrders();
 
           setCoupons(couponsData);
           setAddress(addressData);
           setUser(userData);
           setFavorites(favoriteData);
           setCart_product(cartProductData);
+          setOrders(orderData);
         } catch (error) {
           console.log(error);
         }

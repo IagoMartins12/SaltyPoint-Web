@@ -5,6 +5,7 @@ import {
   Category,
   Discount_cupom,
   Favorite,
+  Order,
   Product,
   User,
   User_Adress,
@@ -168,6 +169,8 @@ export interface PrivateStore {
   setCart_product: (cart_product: Cart_product[]) => void;
   coupons: Discount_cupom[] | [];
   setCoupons: (discount_cupom: Discount_cupom[]) => void;
+  orders: Order[] | [];
+  setOrders: (orders: Order[]) => void;
 }
 
 export interface GeoLocationStore {

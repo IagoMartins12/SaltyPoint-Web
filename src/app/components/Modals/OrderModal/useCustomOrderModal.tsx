@@ -4,7 +4,8 @@ import {
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { getTypePagaments } from '@/app/services';
+import { createOrder, getTypePagaments } from '@/app/services';
+import { CreateOrderDto } from '@/app/types/Dtos';
 import { Discount_cupom, Type_Pagament } from '@/app/types/ModelsType';
 import { handleSetSelected } from '@/app/utils';
 import { useEffect, useState } from 'react';
@@ -25,7 +26,16 @@ export const useCustomOrderModal = () => {
     null | string
   >(null);
 
-  const { cart_product, coupons, user, address } = usePrivateStore();
+  const {
+    cart_product,
+    coupons,
+    user,
+    address,
+    orders,
+    setOrders,
+    setCart_product,
+    setCoupons,
+  } = usePrivateStore();
 
   const districtRate = ['Sulina', 'Décima', 'area', 'Bandeirantes'];
   const orderModal = useOrderModal();
@@ -55,21 +65,36 @@ export const useCustomOrderModal = () => {
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!user?.phone) {
       toast.error('Por favor, insira um telefone antes de finalizar o pedido');
       orderModal.onClose();
       userInfo.onOpen();
       return;
     }
-    const object = {
+
+    const response = await createOrder({
       total_amount: getTotal(),
       type_pagament_id: selectedTypePagament,
-      user_adress_id: selected === 0 ? user?.user_Adress_id : null,
+      user_adress_id: selected === 0 ? user.user_Adress_id : null,
+      type_delivery: selected === 0 ? 0 : 1,
       discount_coupon_id: couponApplied ? couponApplied.id : null,
-    };
+    } as CreateOrderDto);
 
-    console.log('object', object);
+    if (response) {
+      const updatedOrders = [...orders, response];
+
+      if (couponApplied) {
+        const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
+        setCoupons(filteredCoupons);
+      }
+      setCart_product([]);
+      orderModal.onClose();
+      setOrders(updatedOrders);
+      toast.success('Pedido feito!');
+    } else {
+      toast.error('Erro ao fazer pedido');
+    }
   };
 
   const deliveryOptions = [

@@ -23,3 +23,4 @@ export const useChangePasswordModal = createModalStore();
 export const useDeleteUser = createModalStore();
 export const useFavoriteModal = createModalStore();
 export const useOrderModal = createModalStore();
+export const useMyOrderModal = createModalStore();
