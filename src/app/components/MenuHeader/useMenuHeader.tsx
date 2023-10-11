@@ -20,6 +20,7 @@ import {
   useCoupons,
   useFavoriteModal,
   useLoginModal,
+  useMenuHeaderState,
   useMyOrderModal,
   usePrivacyTerms,
   useTalkToUsModal,
@@ -27,7 +28,6 @@ import {
 } from '@/app/hooks/modals/useModal';
 
 export const useMenuHeader = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const loginModal = useLoginModal();
   const talkToUsModal = useTalkToUsModal();
   const termPrivacyModal = usePrivacyTerms();
@@ -38,20 +38,20 @@ export const useMenuHeader = () => {
   const favoritesModal = useFavoriteModal();
   const authOptions = useAuth();
   const myOrderModal = useMyOrderModal();
-
+  const leftMenu = useMenuHeaderState();
   const iconsSize = 28;
 
   const toggleMenu = () => {
-    setMenuOpen(prevState => !prevState);
+    leftMenu.isOpen ? leftMenu.onClose() : leftMenu.onOpen();
   };
 
   const menuAction = (store: ModalStore) => {
     store.onOpen();
-    setMenuOpen(false);
+    leftMenu.onClose();
   };
 
   const logoout = () => {
-    setMenuOpen(false);
+    leftMenu.onClose();
 
     setTimeout(() => {
       removeToken();
@@ -147,7 +147,7 @@ export const useMenuHeader = () => {
     userMenuOptions,
     menuOptions,
     toggleMenu,
-    menuOpen,
+    leftMenu,
     authOptions,
   };
 };

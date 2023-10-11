@@ -7,6 +7,7 @@ import {
   Favorite,
   Order,
   Product,
+  State,
   Type_Pagament,
   User,
   User_Adress,
@@ -157,6 +158,8 @@ export interface Store {
   setProducts: (products: Product[]) => void;
   typePagament: Type_Pagament[] | [];
   setTypePagament: (typePagament: Type_Pagament[]) => void;
+  states: State[];
+  setStates: (states: State[]) => void;
 }
 
 export interface PrivateStore {

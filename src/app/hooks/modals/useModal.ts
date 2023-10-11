@@ -24,3 +24,5 @@ export const useDeleteUser = createModalStore();
 export const useFavoriteModal = createModalStore();
 export const useOrderModal = createModalStore();
 export const useMyOrderModal = createModalStore();
+export const useMenuHeaderState = createModalStore();
+export const useCartMenuState = createModalStore();

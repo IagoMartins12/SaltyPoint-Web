@@ -12,12 +12,14 @@ import {
   getMe,
   getOrders,
   getProducts,
+  getStates,
   getTypePagaments,
 } from '@/app/services';
 import { useEffect } from 'react';
 
 export const FetchData = () => {
-  const { setCategorys, setProducts, setTypePagament } = useGlobalStore();
+  const { setCategorys, setProducts, setTypePagament, setStates } =
+    useGlobalStore();
   const {
     setAddress,
     setUser,
@@ -34,9 +36,11 @@ export const FetchData = () => {
         const categoryData = await getCategories();
         const productData = await getProducts();
         const typePagamentData = await getTypePagaments();
+        const statesDate = await getStates();
         setCategorys(categoryData);
         setProducts(productData);
         setTypePagament(typePagamentData);
+        setStates(statesDate);
       } catch (error) {
         console.log(error);
       }

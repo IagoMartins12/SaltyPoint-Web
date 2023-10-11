@@ -2,18 +2,6 @@
 
 import { CategoryBoxProps } from '@/app/types/ComponentTypes';
 
-// type CategoryName = 'Pizza' | 'Esfiha' | 'Promoções' | 'Bebidas' | 'Combos';
-// const SetIcon = (categoryName: CategoryName) => {
-//   let icon;
-//   switch (categoryName) {
-//     case 'Pizza':
-//       icon: <CiPizza />;
-//       break;
-//     case 'Esfiha':
-//       icon: <CiPizza />;
-//   }
-// };
-
 const CategoryBox: React.FC<CategoryBoxProps> = ({
   label,
   selected,
@@ -32,13 +20,14 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
         hover:text-neutral-400
         transition
         cursor-pointer
+        whitespace-nowrap
         ${selected === label ? 'border-b-red-500' : 'border-transparent'}
         `}
       onClick={() => {
         onClick(label);
       }}
     >
-      <div className='font-semibold text-base'>{label}</div>
+      <div className='font-semibold text-sm md:text-base'>{label}</div>
     </div>
   );
 };

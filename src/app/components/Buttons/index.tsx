@@ -4,7 +4,7 @@ import { FaGooglePlay } from 'react-icons/fa';
 
 export const AppleButton = () => {
   return (
-    <button className='px-4 py-2 flex gap-2 items-center rounded-xl bg-black text-white '>
+    <button className='px-4 py-2 flex gap-2 items-center w-full sm:w-auto justify-center rounded-xl bg-black text-white '>
       <div className='w-10'>
         <AiFillApple size={35} fill='white' color='white' />
       </div>
@@ -18,7 +18,7 @@ export const AppleButton = () => {
 
 export const GoogleButton = () => {
   return (
-    <button className='px-4 py-2 flex gap-2 items-center rounded-xl bg-white text-black border-2 border-black '>
+    <button className='px-4 py-2 flex gap-2 items-center justify-center w-full sm:w-auto rounded-xl  bg-white text-black border-2 border-black '>
       <div className='w-10'>
         <FaGooglePlay size={35} />
       </div>

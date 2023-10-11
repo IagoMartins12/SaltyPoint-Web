@@ -27,7 +27,7 @@ export const OrderItemCard: React.FC<OrderProductCardType> = ({
       return quantity - 1;
     }
 
-    return quantity;
+    return null;
   };
 
   return (
@@ -43,9 +43,11 @@ export const OrderItemCard: React.FC<OrderProductCardType> = ({
         </div>
 
         <div>
-          <span className='font-semibold text-xs'>
-            mais {getQuantity()} itens
-          </span>
+          {quantity > 1 && (
+            <span className='font-semibold text-xs'>
+              mais {getQuantity()} itens
+            </span>
+          )}
         </div>
       </div>
     </div>

@@ -80,6 +80,8 @@ export const useCustomOrderModal = () => {
       user_adress_id: selected === 0 ? user.user_Adress_id : null,
       type_delivery: selected === 0 ? 0 : 1,
       discount_coupon_id: couponApplied ? couponApplied.id : null,
+      state_id: '6526e4b833e69bf2bb97bc9e', //Em análise,
+      discount_value: couponApplied ? getDiscount(couponApplied) : 0,
     } as CreateOrderDto);
 
     if (response) {

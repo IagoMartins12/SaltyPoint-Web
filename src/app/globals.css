@@ -180,7 +180,7 @@ body {
 }
 
 .cart-open {
-  transform: translateX(-75%);
+  transform: translateX(-80%);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
@@ -222,6 +222,49 @@ body {
   position: inherit !important ;
 }
 
+@media (max-width: 1500px) {
+  .cart-open {
+    transform: translateX(-76%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 1370px) {
+  .menu-open {
+    transform: translateX(-40%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-73%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 1168px) {
+  .menu-open {
+    transform: translateX(-45%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-65%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 1016px) {
+  .menu-open {
+    transform: translateX(-25%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-73%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
 @media (max-width: 620px) {
   .modalPosition,
   .menuModalsPosition {
@@ -235,5 +278,51 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     border-radius: 0;
+  }
+
+  .menu-open {
+    transform: translateX(-30%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-75%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu-open {
+    transform: translateX(-15%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-88%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 530px) {
+  .menu-open {
+    transform: translateX(-20%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-83%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+}
+
+@media (max-width: 430px) {
+  .menu-open {
+    transform: translateX(-30%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .cart-open {
+    transform: translateX(-80%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   }
 }

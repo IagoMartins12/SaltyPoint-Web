@@ -78,5 +78,6 @@ export type CreateOrderDto = {
   discount_coupon_id?: string;
   reward_id?: string;
   address_id?: string | null;
-  state_id?: string;
+  state_id: string;
+  discount_value?: number | null;
 };

@@ -20,7 +20,7 @@ export const CategoryMenu = () => {
   };
 
   return (
-    <div className='w-11/12 mx-auto my-4 pt-4 flex flex-row items-center  overflow-x-auto'>
+    <div className='w-11/12 mx-auto my-4 py-2 flex flex-row items-center  overflow-x-auto'>
       {categorys
         .filter(c => c.category_name !== 'Bordas')
         .map(item => (

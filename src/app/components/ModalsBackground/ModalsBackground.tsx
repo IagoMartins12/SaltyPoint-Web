@@ -1,14 +1,19 @@
 'use client';
 
-import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
+import {
+  useDeleteAddress,
+  useDeleteCartItem,
+} from '@/app/hooks/modals/useDelete';
 import {
   useAddAddress,
   useAddress,
   useAppDownload,
   useCoupons,
+  useDeleteUser,
   useFavoriteModal,
   useForgetPasswordModal,
   useLoginModal,
+  useMyOrderModal,
   useOrderModal,
   usePrivacyTerms,
   useRegisterModal,
@@ -35,7 +40,10 @@ const modals = [
   useUserInfoModal,
   useFavoriteModal,
   useProductModal,
+  useMyOrderModal,
 ];
+
+const deleteModals = [useDeleteAddress, useDeleteCartItem, useDeleteUser];
 
 export const ModalsBackground = () => {
   const openModals = modals.map(modal => modal().isOpen);
@@ -45,6 +53,12 @@ export const ModalsBackground = () => {
 
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [openModals]);
+
+  useEffect(() => {
+    const isOpen = deleteModals.some(isOpen => isOpen);
+
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [deleteModals]);
 
   return <></>;
 };

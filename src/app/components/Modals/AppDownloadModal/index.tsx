@@ -20,7 +20,7 @@ export const AppDownloadModal = () => {
         </span>
       </div>
 
-      <div className=' flex gap-6 items-center justify-center my-12'>
+      <div className=' flex flex-col sm:flex-row gap-6 items-center justify-center my-12'>
         <AppleButton />
         <GoogleButton />
       </div>

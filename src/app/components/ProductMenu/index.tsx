@@ -16,7 +16,7 @@ export const ProductMenu = () => {
             key={category.id}
             id={category.category_name}
           >
-            <span className='font-medium text-3xl px-3'>
+            <span className='font-medium text-2xl md:text-3xl px-3'>
               {category.category_name}
             </span>
             <div className='flex gap-x-2 gap-y-6 flex-wrap '>

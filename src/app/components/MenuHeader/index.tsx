@@ -3,15 +3,10 @@
 import { AiOutlineMenu } from 'react-icons/ai';
 import ThemeSwitch from '../ThemeSwitcher/ThemeSwitch';
 import { useMenuHeader } from './useMenuHeader';
-import { useEffect } from 'react';
 
 export const MenuHeader = () => {
-  const { menuOptions, toggleMenu, userMenuOptions, menuOpen, authOptions } =
+  const { menuOptions, toggleMenu, userMenuOptions, leftMenu, authOptions } =
     useMenuHeader();
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
-  }, [menuOpen]);
 
   return (
     <>
@@ -26,14 +21,14 @@ export const MenuHeader = () => {
       <div className={`relative  w-6/12`}>
         <div
           className={`${
-            menuOpen ? 'fixed' : ''
+            leftMenu.isOpen ? 'fixed' : ''
           } z-40 inset-0 bg-black opacity-50`}
           onClick={toggleMenu}
         />
         <nav
           className={`fixed top-0 z-50 ${
-            menuOpen ? 'menu-open' : 'menu-closed'
-          } bottom-0 flex flex-col w-[70%] lg:w-[20%] py-6 px-6 modalsBackground overflow-y-auto`}
+            leftMenu.isOpen ? 'menu-open' : 'menu-closed'
+          } bottom-0 flex flex-col w-[80%] sm:w-[65%] md:w-[50%] lg:w-[25%] py-6 px-6 modalsBackground overflow-y-auto`}
         >
           <div className='flex flex-col gap-6 px-4 py-3'>
             {authOptions.isLogged
@@ -46,7 +41,9 @@ export const MenuHeader = () => {
                     }}
                   >
                     {option.icon && option.icon}
-                    <span className='text-lg '>{option.label}</span>
+                    <span className='text-base font-medium sm:text-lg'>
+                      {option.label}
+                    </span>
                   </div>
                 ))
               : menuOptions.map((option, index) => (
@@ -58,7 +55,9 @@ export const MenuHeader = () => {
                     }}
                   >
                     {option.icon && option.icon}
-                    <span className='text-lg'>{option.label}</span>
+                    <span className='text-base font-medium sm:text-lg'>
+                      {option.label}
+                    </span>
                   </div>
                 ))}
           </div>

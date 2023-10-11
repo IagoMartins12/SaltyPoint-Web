@@ -43,7 +43,7 @@ export const SearchModal = () => {
   }, [products]);
   const body = (
     <div className='flex flex-col gap-5'>
-      <div className='relative flex w-11/12 mx-auto'>
+      <div className='relative flex w-full mx-auto'>
         <input
           type='text'
           className='w-full px-2 py-2 rounded-md border-b-2 bg-transparent'
@@ -87,6 +87,7 @@ export const SearchModal = () => {
         onClose={searchModal.onClose}
         body={body}
         isOpen={searchModal.isOpen}
+        title='Pesquisar'
       />
     </>
   );

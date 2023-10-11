@@ -8,7 +8,7 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
   const { coupons, address } = usePrivateStore();
-  const { typePagament } = useGlobalStore();
+  const { typePagament, states } = useGlobalStore();
 
   const getSubtotal = () => {
     if (!order.user_adress_id) return order.total_amount;
@@ -72,10 +72,17 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
     );
   };
 
+  const getState = () => {
+    return (
+      states.find(s => s.id === order.state_id)?.state_name ??
+      'Status desconhecido'
+    );
+  };
+
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2' id='total'>
-        <div className='flex justify-between px-2 '>
+        <div className='flex justify-between  '>
           <span className='text-base font-light'>Subtotal: </span>
           <span className='text-base font-light text-gray-400'>
             R$ {getSubtotal().toFixed(2)}
@@ -83,7 +90,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
         </div>
 
         {order.discount_coupon_id && (
-          <div className='flex justify-between px-2 '>
+          <div className='flex justify-between  '>
             <span className='text-base font-light'>Cupom: </span>
             <span className='text-base font-light text-green-500'>
               - R$ {getDiscount().toFixed(2)}
@@ -92,7 +99,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
         )}
 
         {order.user_adress_id && (
-          <div className='flex justify-between px-2 '>
+          <div className='flex justify-between  '>
             <span className='text-base font-light'>Taxa: </span>
             <span className='text-base font-light text-gray-400'>
               R$ {getTaxa(getAddressInfo()?.district) ? '6.00' : '3.00'}
@@ -100,7 +107,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
           </div>
         )}
 
-        <div className='flex justify-between px-2 '>
+        <div className='flex justify-between  '>
           <span className='text-2xl font-light'>Total: </span>
           <span className='text-2xl font-light '>
             R$ {getTotal().toFixed(2)}
@@ -115,8 +122,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
           <OrderInfo label='' content='Retirada no balcão' />
         )}
         {getAddressInfo()?.reference && (
-          <span className='text-base font-normal'>
-            {' '}
+          <span className='text-base font-normal pb-2 border-b-2'>
             Ponto de referencia: {getAddressInfo()?.reference}{' '}
           </span>
         )}
@@ -129,7 +135,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
 
       <OrderInfo label='Forma de pagamento' content={getTypePagament()} />
 
-      <OrderInfo label='Status do pedido' content={getTypePagament()} />
+      <OrderInfo label='Status do pedido' content={getState()} />
     </div>
   );
 };

@@ -35,19 +35,24 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
   return (
     <div className='w-full flex gap-6 shadow-md p-4'>
       <div className='flex flex-col gap-4 w-full justify-center'>
-        <div className='flex items-center justify-between'>
-          <span className='font-medium text-lg'>
+        <div className='flex flex-col sm:flex-row items-center justify-between'>
+          <span className='font-medium text-base sm:text-lg'>
             {cart_product.quantity}x{' '}
             {getProductName2(cart_product.product_id, cart_product.size)}
           </span>
-          <span className='font-light text-base'> R$ {cart_product.value}</span>
+          <span className='font-light text-sm sm:text-base'>
+            R$ {cart_product.value}
+          </span>
         </div>
         <div className='flex flex-col'>
           {cart_product.product_id_2 ? (
             <>
               {[cart_product.product_id, cart_product.product_id_2].map(
                 (productId, index) => (
-                  <li key={index} className='font-light text-base px-2'>
+                  <li
+                    key={index}
+                    className='font-light text-sm sm:text-base px-2'
+                  >
                     {cart_product.quantity}x 1/2{' '}
                     {getProductName2(productId, cart_product.size)}
                   </li>
@@ -55,14 +60,14 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
               )}
             </>
           ) : (
-            <li className='font-light text-base px-2 '>
+            <li className='font-light  text-sm sm:text-base px-2 '>
               {cart_product.quantity}x{' '}
               {getProductName2(cart_product.product_id, cart_product.size)}
             </li>
           )}
 
           {cart_product.product_id_3 ? (
-            <li className='font-light text-base px-2'>
+            <li className='font-light  text-sm sm:text-base px-2'>
               {cart_product.quantity}x{' '}
               {getProductName2(cart_product.product_id_3, cart_product.size)}
             </li>
