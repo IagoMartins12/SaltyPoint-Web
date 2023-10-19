@@ -82,6 +82,7 @@ export const useCustomOrderModal = () => {
       discount_coupon_id: couponApplied ? couponApplied.id : null,
       state_id: '6526e4b833e69bf2bb97bc9e', //Em análise,
       discount_value: couponApplied ? getDiscount(couponApplied) : 0,
+      contact_phone: user.phone,
     } as CreateOrderDto);
 
     if (response) {
@@ -91,6 +92,7 @@ export const useCustomOrderModal = () => {
       if (couponApplied) {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
         setCoupons(filteredCoupons);
+        setCouponApplied(null);
       }
       setCart_product([]);
       orderModal.onClose();
@@ -142,6 +144,7 @@ export const useCustomOrderModal = () => {
   };
 
   const toggleCouponInput = () => {
+    setInputValue('');
     setShowCoupon(!showCoupon);
   };
 

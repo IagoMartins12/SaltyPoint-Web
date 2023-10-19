@@ -47,6 +47,7 @@ export type User_Adress = {
   district: String;
   reference?: string | null;
   type_adress: number;
+  isActive: number;
 
   user: User;
   order: Order[];
@@ -62,13 +63,14 @@ export type Order = {
   delivery_man_id?: string | null;
   user_adress_id?: string | null;
   discount_coupon_id?: string | null;
-
+  discount_value?: number | null;
   user: User;
   state: State;
   delivery_man?: Delivery_Man | null;
   type_pagament: Type_Pagament;
   user_adress?: User_Adress | null;
   discount_coupon?: Discount_cupom | null;
+  contact_phone: string;
 
   order_products: Order_Product[];
   discount_cupom_orders: Discount_cupom_orders[];
@@ -201,3 +203,29 @@ export type Favorite = {
   user: User;
   post: Product;
 };
+
+export type Reward = {
+  id: string;
+  quantity_points: number;
+  image: string;
+  product_id?: string;
+  discount?: number;
+  type_reward: number; //0 - Disconto / 2 - Produt
+};
+
+export type Reward_Orders = {
+  id: string;
+  reward_id: string;
+  order_id: string;
+  created_at: Date;
+  isUser: number; // 0 = não usado,  1 = usado,
+  reward_code: string;
+};
+
+// id          String   @id @default(auto()) @map("_id") @db.ObjectId
+// reward_id   String   @db.ObjectId
+// order_id    String   @db.ObjectId
+// user_id     String   @db.ObjectId
+// created_at  DateTime @default(now())
+// isUsed      Int      @default(0) //0 = não usado, 1 = usado
+// reward_code String

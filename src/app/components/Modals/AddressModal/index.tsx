@@ -5,6 +5,7 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 import Modal from '../../Modal';
 import { useAddAddress, useAddress } from '@/app/hooks/modals/useModal';
+import toast from 'react-hot-toast';
 
 export const AddressModal = () => {
   const { address } = usePrivateStore();
@@ -19,56 +20,69 @@ export const AddressModal = () => {
     deleteAddressModal.onOpen();
   };
 
+  const isValid = () => {
+    const addressLenght = address.filter(
+      address => address.isActive === 0,
+    ).length;
+
+    if (addressLenght <= 4) return true;
+
+    return false;
+  };
   const body = (
-    <div className='w-full overflow-auto privacyScroll'>
-      <div className='flex flex-col w-11/12 mx-auto gap-12 '>
-        <div className='flex flex-col gap-4'>
-          {address.length > 0 ? (
-            address.map((address, i) => (
-              <div
-                className='flex items-center px-2 py-3 border-b-2 gap-3'
-                key={i}
-              >
-                <div className='w-2/12 flex items-center justify-center'>
-                  {address.type_adress === 0 ? (
-                    <BsFillHouseDoorFill size={30} />
-                  ) : (
-                    <FaSuitcase size={30} />
-                  )}
-                </div>
+    <div className='w-full overflow-auto privacyScroll h-full'>
+      <div className='flex flex-col w-11/12 mx-auto h-full gap-12 '>
+        <div className='flex flex-col gap-4 justify-end'>
+          {address.length > 0 &&
+            address
+              .filter(address => address.isActive === 0)
+              .map((address, i) => (
+                <div
+                  className='flex items-center px-2 py-3 border-b-2 gap-3'
+                  key={i}
+                >
+                  <div className='w-2/12 flex items-center justify-center'>
+                    {address.type_adress === 0 ? (
+                      <BsFillHouseDoorFill size={30} />
+                    ) : (
+                      <FaSuitcase size={30} />
+                    )}
+                  </div>
 
-                <div className='w-8/12 flex flex-col'>
-                  <span className='font-medium text-lg'>
-                    {address.type_adress === 0 ? 'Casa' : 'Trabalho'}
-                  </span>
-                  <span className='text-sm font-light'>
-                    {address.address}, {address.number}
-                  </span>
-                  <span className='text-sm font-light'>{address.district}</span>
-                  <span className='text-sm font-light'>
-                    {address.city} / {address.uf}
-                  </span>
-
-                  {address.reference && (
-                    <span className='text-sm font-light'>
-                      {address.reference}
+                  <div className='w-8/12 flex flex-col'>
+                    <span className='font-medium text-lg'>
+                      {address.type_adress === 0 ? 'Casa' : 'Trabalho'}
                     </span>
-                  )}
-                </div>
+                    <span className='text-sm font-light'>
+                      {address.address}, {address.number}
+                    </span>
+                    <span className='text-sm font-light'>
+                      {address.district}
+                    </span>
+                    <span className='text-sm font-light'>
+                      {address.city} / {address.uf}
+                    </span>
 
-                <div className='w-2/12 flex items-end gap-2 justify-center'>
-                  <AiOutlineDelete
-                    size={25}
-                    className='cursor-pointer'
-                    onClick={() => {
-                      handleOpenDeleteModal(address.id);
-                    }}
-                  />
+                    {address.reference && (
+                      <span className='text-sm font-light'>
+                        {address.reference}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className='w-2/12 flex items-end gap-2 justify-center'>
+                    <AiOutlineDelete
+                      size={25}
+                      className='cursor-pointer'
+                      onClick={() => {
+                        handleOpenDeleteModal(address.id);
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className='h-60 flex items-center justify-center'>
+              ))}
+          {address.length === 0 && (
+            <div className='h-full flex items-center justify-center'>
               <span className='font-semibold text-xl text-center'>
                 Sem endereço cadastrado!
               </span>
@@ -78,7 +92,9 @@ export const AddressModal = () => {
           <div
             className='flex items-center justify-center gap-3 my-3 cursor-pointer'
             onClick={() => {
-              addAddress.onOpen();
+              isValid()
+                ? addAddress.onOpen()
+                : toast.error('Quantidade maxima de endereços atingida!');
             }}
           >
             <AiOutlinePlus size={25} color='red' fill='red' />

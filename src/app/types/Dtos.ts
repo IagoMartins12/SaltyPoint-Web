@@ -80,4 +80,5 @@ export type CreateOrderDto = {
   address_id?: string | null;
   state_id: string;
   discount_value?: number | null;
+  contact_phone: string;
 };

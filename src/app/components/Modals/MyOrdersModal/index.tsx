@@ -12,9 +12,15 @@ export const MyOrdersModal = () => {
     <div className='flex flex-col w-11/12 mx-auto gap-6 pb-6'>
       <div className=''>
         <div className='flex flex-col gap-6'>
-          {orders.map(order => (
-            <OrderComponent key={order.id} order={order} />
-          ))}
+          {orders.length > 0 ? (
+            orders.map(order => <OrderComponent key={order.id} order={order} />)
+          ) : (
+            <div className='h-full flex items-center justify-center'>
+              <span className='font-semibold text-xl text-center'>
+                Você ainda não fez nenhum pedido
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

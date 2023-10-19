@@ -22,7 +22,11 @@ export const FavoriteModal = () => {
           </div>
         ))
       ) : (
-        <span> Sem favoritados</span>
+        <div className='h-full flex items-center justify-center'>
+          <span className='font-semibold text-xl text-center'>
+            Você ainda não favoritou nenhum produto
+          </span>
+        </div>
       )}
     </div>
   );

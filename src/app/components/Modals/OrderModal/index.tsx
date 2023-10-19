@@ -12,7 +12,6 @@ import { useCustomOrderModal } from './useCustomOrderModal';
 import { MdPix } from 'react-icons/md';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
-import toast from 'react-hot-toast';
 
 const OrderModal = () => {
   const {
@@ -89,6 +88,24 @@ const OrderModal = () => {
                         </span>
                         <span className='text-sm font-light'>
                           {getAddressInfo()?.city} / {getAddressInfo()?.uf}
+                        </span>
+
+                        <span className='text-sm font-light'>
+                          {getAddressInfo()?.reference}
+                        </span>
+                      </div>
+                    )}
+
+                    {options.name === 'Retirar na loja' && getAddressInfo() && (
+                      <div className='flex flex-col'>
+                        <span className='text-sm font-light'>
+                          Estrada de ligação, 22
+                        </span>
+                        <span className='text-sm font-light'>
+                          Residencial Sol Nascente
+                        </span>
+                        <span className='text-sm font-light'>
+                          São paulo / SP
                         </span>
 
                         <span className='text-sm font-light'>

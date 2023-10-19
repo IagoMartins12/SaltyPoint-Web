@@ -98,6 +98,7 @@ export const AddAddressModal = () => {
       setAddress([...address, response.data]);
       setStep(0);
       addAddress.onClose();
+      reset();
       return toast.success('Endereço criado!');
     } else {
       return toast.error('Erro ao cadastrar endereço');

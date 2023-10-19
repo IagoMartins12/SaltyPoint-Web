@@ -4,7 +4,6 @@ import React from 'react';
 import { CornicioneProductModalType } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
-import { useCustomProductModal } from '../Modals/ProductModal/useProductModal';
 
 export const CornicioneCart: React.FC<CornicioneProductModalType> = ({
   product,

@@ -15,6 +15,7 @@ import { CartProductDto } from '@/app/types/Dtos';
 import { addCartProduct } from '@/app/services';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
+import { Product } from '@/app/types/ModelsType';
 
 export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   const productModal = useProductModal();
@@ -62,8 +63,8 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
   const brotinhoNames = products
     .filter(
       p =>
-        p.name !== productModal.currentProduct?.name &&
-        p.category_id === productModal.currentProduct?.category_id,
+        p.name !== (productModal.currentProduct as Product)?.name &&
+        p.category_id === (productModal.currentProduct as Product)?.category_id,
     )
     .map(p => ({
       ...p,
@@ -75,7 +76,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       <div className='w-full h-[25%] relative rounded-lg '>
         <Image
           fill
-          src={productModal.currentProduct?.product_image ?? ''}
+          src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
           className='rounded-lg !sticky object-contain'
           sizes='100%'
@@ -87,7 +88,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
         onSubmit={handleSubmit(newSubmit)}
       >
         <span className='font-light text-2xl text-center'>
-          {productModal.currentProduct?.name}
+          {(productModal.currentProduct as Product)?.name}
         </span>
 
         <div id='size' className='flex flex-col w-full'>
@@ -173,13 +174,16 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
                 {selectedSize === 0
                   ? categorys
                       .filter(
-                        c => c.id === productModal.currentProduct?.category_id,
+                        c =>
+                          c.id ===
+                          (productModal.currentProduct as Product)?.category_id,
                       )
                       .map(category =>
                         products
                           .filter(
                             p =>
-                              p.id !== productModal.currentProduct?.id &&
+                              p.id !==
+                                (productModal.currentProduct as Product)?.id &&
                               p.category_id === category.id,
                           )
                           .map(product => (

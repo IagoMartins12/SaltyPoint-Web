@@ -144,7 +144,7 @@ export const getAddressPerCep = async (cep: string): Promise<CEPInfoDto> => {
 
 export const deleteAddress = async (addressId: string) => {
   try {
-    const response = await Api.delete(`/address/${addressId}`);
+    const response = await Api.put(`/address/${addressId}`);
     return response;
   } catch (error: any) {
     return error;
