@@ -12,6 +12,7 @@ import { useCustomOrderModal } from './useCustomOrderModal';
 import { MdPix } from 'react-icons/md';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
+import { APP_SETTINGS } from '@/app/config';
 
 const OrderModal = () => {
   const {
@@ -255,7 +256,10 @@ const OrderModal = () => {
               <div className='flex justify-between px-2 '>
                 <span className='text-base font-light'>Taxa: </span>
                 <span className='text-base font-light text-gray-400'>
-                  R$ {getTaxa(getAddressInfo()?.district) ? '6.00' : '3.00'}
+                  R${' '}
+                  {getTaxa(getAddressInfo()?.district)
+                    ? APP_SETTINGS.taxaForaSolNascente.toFixed(2)
+                    : APP_SETTINGS.taxaSolNascente.toFixed(2)}
                 </span>
               </div>
             )}

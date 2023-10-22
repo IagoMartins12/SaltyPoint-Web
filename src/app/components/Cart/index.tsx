@@ -56,7 +56,6 @@ export const Cart = () => {
 
             <div className='flex justify-between'>
               <span className='text-lg sm:text-xl font-light underline'>
-                {' '}
                 Subtotal:{' '}
               </span>
               <span className='text-base font-medium'>

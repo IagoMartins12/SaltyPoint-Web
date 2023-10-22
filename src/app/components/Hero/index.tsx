@@ -1,3 +1,4 @@
+import { AiOutlineSearch } from 'react-icons/ai';
 import { AppleButton, GoogleButton } from '../Buttons';
 import { ImageComponent } from '../ImageComponent';
 
@@ -30,6 +31,33 @@ export const Hero = () => {
       </div>
       <div className='hidden lg:flex w-4/12 -z-10 relative'>
         <ImageComponent src='hero.svg' alt='hero' />
+      </div>
+    </div>
+  );
+};
+
+export const Hero2 = () => {
+  return (
+    <div className='flex flex-col w-11/12 mx-auto my-6 gap-6' id='hero'>
+      <div className='flex flex-col gap-3 w-10/12'>
+        <span className='font-semibold text-3xl '>
+          Peça as pizzas mais deliciosas da região
+        </span>
+        <span className='font-semibold text-3xl text-red-500'>
+          Em 40 Minutos
+        </span>
+      </div>
+
+      <div className='relative flex w-full mx-auto -z-10'>
+        <input
+          type='text'
+          className='w-full px-12 py-[0.65rem]  rounded-2xl border-2 bg-gray-200'
+          placeholder='Pesquise seus sabores preferidos'
+        />
+        <AiOutlineSearch
+          size={30}
+          className='left-2 top-2 absolute cursor-pointer'
+        />
       </div>
     </div>
   );

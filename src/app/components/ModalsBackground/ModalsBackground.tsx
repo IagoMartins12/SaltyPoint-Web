@@ -54,11 +54,5 @@ export const ModalsBackground = () => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [openModals]);
 
-  useEffect(() => {
-    const isOpen = deleteModals.some(isOpen => isOpen);
-
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-  }, [deleteModals]);
-
   return <></>;
 };

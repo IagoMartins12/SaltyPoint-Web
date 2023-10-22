@@ -1,3 +1,4 @@
+import { APP_SETTINGS } from '@/app/config';
 import {
   useAddress,
   useOrderModal,
@@ -12,8 +13,6 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiStoreAlt } from 'react-icons/bi';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
-
-export const districtRate = ['Sulina', 'Décima', 'area', 'Bandeirantes'];
 
 export const useCustomOrderModal = () => {
   const [selected, setSelected] = useState<number | null>(null);
@@ -157,7 +156,7 @@ export const useCustomOrderModal = () => {
     if (!district) return;
     const lowercaseAddress = district.toLowerCase();
 
-    const rate = districtRate.some(district =>
+    const rate = APP_SETTINGS.districtRate.some(district =>
       lowercaseAddress.includes(district.toLowerCase()),
     );
 
