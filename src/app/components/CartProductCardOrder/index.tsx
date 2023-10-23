@@ -22,14 +22,17 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
   };
 
   return (
-    <div className='w-full flex gap-6 border-b-2 p-4'>
+    <div className='w-full flex gap-6 border-b-2 py-4 px-2'>
       <div className='flex flex-col gap-4 w-full justify-center'>
         <div className='flex items-center justify-between'>
           <span className='font-medium text-lg'>
             {cart_product.quantity}x{' '}
             {getProductName2(cart_product.product_id, cart_product.size)}
           </span>
-          <span className='font-light text-base'> R$ {cart_product.value}</span>
+          <span className='font-light text-base whitespace-nowrap'>
+            {' '}
+            R$ {cart_product.value}
+          </span>
         </div>
         <div className='flex flex-col'>
           {cart_product.product_id_2 ? (

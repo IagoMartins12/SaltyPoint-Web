@@ -16,6 +16,7 @@ export const ProductCard: React.FC<ProductCardType> = ({
   const [imageZIndex, setImageZIndex] = useState(0);
 
   const { favorites } = usePrivateStore();
+
   const productModal = useProductModal();
   const leftMenu = useMenuHeaderState();
   const rightCart = useCartMenuState();

@@ -21,6 +21,7 @@ import {
   Favorite,
   Order,
   Product,
+  Reward,
   State,
   Type_Pagament,
   User,
@@ -272,9 +273,17 @@ export const createOrder = async (
   createOrderDto: CreateOrderDto,
 ): Promise<Order> => {
   try {
-    console.log('create order', createOrderDto);
     const response = await Api.post('/order/create', createOrderDto);
     return response.data as Order;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getRewards = async (): Promise<Reward[]> => {
+  try {
+    const response = await Api.get('/reward');
+    return response.data;
   } catch (error: any) {
     return error;
   }

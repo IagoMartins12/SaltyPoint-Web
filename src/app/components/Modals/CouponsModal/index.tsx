@@ -10,14 +10,23 @@ export const CouponsModal = () => {
 
   const filteredCoupons = coupons.filter(coupon => coupon.type_coupon === 0);
 
+  console.log('cupons', filteredCoupons);
+
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6'>
       <div className=''>
         <div className='flex flex-col gap-6'>
-          {coupons &&
+          {filteredCoupons.length !== 0 ? (
             filteredCoupons.map(coupon => (
               <CouponCard coupon={coupon} key={coupon.id} />
-            ))}
+            ))
+          ) : (
+            <div className='h-40 flex items-center justify-center'>
+              <span className='font-semibold text-xl text-center'>
+                Nenhum cupom disponivel no momento
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

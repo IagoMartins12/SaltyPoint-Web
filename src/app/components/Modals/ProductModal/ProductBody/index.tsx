@@ -10,15 +10,18 @@ import { CartProductDto } from '@/app/types/Dtos';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
 import { Product } from '@/app/types/ModelsType';
-import { useLoginModal } from '@/app/hooks/modals/useModal';
+import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
 
 export const ProductBody = () => {
-  const productModal = useProductModal();
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product } = usePrivateStore();
-  const loginModal = useLoginModal();
+
   const { isLogged } = useAuth();
+
+  const loginModal = useLoginModal();
+  const searchModal = useSearchModal();
+  const productModal = useProductModal();
 
   const { decreaseQuantity, increaseQuantity, quantity, disabled, value } =
     useCustomProductModal();
@@ -26,6 +29,9 @@ export const ProductBody = () => {
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     if (!isLogged) {
       productModal.onClose();
+
+      if (searchModal.isOpen) searchModal.onClose();
+
       loginModal.onOpen();
       return toast.error('Faça o login para adicionar produtos');
     }

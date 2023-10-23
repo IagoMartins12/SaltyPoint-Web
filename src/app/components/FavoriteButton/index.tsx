@@ -1,3 +1,5 @@
+import useAuth from '@/app/hooks/auth/useAuth';
+import { useLoginModal } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { addFavorites, deleteFavorite } from '@/app/services';
 import { FavoriteButtonProps } from '@/app/types/ComponentTypes';
@@ -10,6 +12,8 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   filled,
 }) => {
   const { favorites, setFavorites } = usePrivateStore();
+  const { isLogged } = useAuth();
+  const loginModal = useLoginModal();
 
   const handleFavorite = async () => {
     const isFavorite = filled;
@@ -47,7 +51,14 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       className={` z-30 absolute right-3 top-3 cursor-pointer  ${
         filled ? 'fill-rose-500' : 'fill-slate-100 '
       }`}
-      onClick={handleFavorite}
+      onClick={() => {
+        if (!isLogged) {
+          toast.error('Faça o login para adicionar o produto');
+          loginModal.onOpen();
+          return;
+        }
+        handleFavorite();
+      }}
     />
   );
 };

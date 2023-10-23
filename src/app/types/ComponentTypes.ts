@@ -7,6 +7,7 @@ import {
   Favorite,
   Order,
   Product,
+  Reward,
   State,
   Type_Pagament,
   User,
@@ -257,4 +258,8 @@ export type OrderComponentType = {
 export interface LabelInfo {
   label: string;
   content: string;
+}
+
+export interface RewardComponentProps {
+  reward: Reward;
 }

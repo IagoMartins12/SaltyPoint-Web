@@ -3,9 +3,9 @@ import useAuth, {
   removeToken,
 } from '@/app/hooks/auth/useAuth';
 import { ModalStore } from '@/app/types/ComponentTypes';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
-import { BiMessageAlt } from 'react-icons/bi';
+import { BiCrown, BiMessageAlt } from 'react-icons/bi';
 import { BsBag } from 'react-icons/bs';
 import { HiOutlineDeviceMobile } from 'react-icons/hi';
 import { RiCoupon2Line } from 'react-icons/ri';
@@ -23,10 +23,10 @@ import {
   useMenuHeaderState,
   useMyOrderModal,
   usePrivacyTerms,
+  useRewardModal,
   useTalkToUsModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
-import { useRouter } from 'next/navigation';
 
 export const useMenuHeader = () => {
   const loginModal = useLoginModal();
@@ -40,9 +40,9 @@ export const useMenuHeader = () => {
   const authOptions = useAuth();
   const myOrderModal = useMyOrderModal();
   const leftMenu = useMenuHeaderState();
+  const rewardModal = useRewardModal();
   const iconsSize = 28;
 
-  const router = useRouter();
   const toggleMenu = () => {
     leftMenu.isOpen ? leftMenu.onClose() : leftMenu.onOpen();
   };
@@ -59,7 +59,7 @@ export const useMenuHeader = () => {
       removeToken();
     }, 1000);
 
-    router.refresh();
+    window.location.reload();
   };
 
   const commomOptions = [
@@ -126,6 +126,14 @@ export const useMenuHeader = () => {
         menuAction(myOrderModal);
       },
     },
+    {
+      label: 'Minhas recompensas',
+      icon: <BiCrown size={iconsSize} />,
+      onclick: () => {
+        menuAction(rewardModal);
+      },
+    },
+
     {
       label: 'Meus cupons',
       icon: <RiCoupon2Line size={iconsSize} />,

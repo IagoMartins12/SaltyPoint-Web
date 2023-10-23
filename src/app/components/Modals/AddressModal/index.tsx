@@ -82,7 +82,7 @@ export const AddressModal = () => {
                 </div>
               ))}
           {address.length === 0 && (
-            <div className='h-full flex items-center justify-center'>
+            <div className='h-40 flex items-center justify-center'>
               <span className='font-semibold text-xl text-center'>
                 Sem endereço cadastrado!
               </span>

@@ -16,6 +16,7 @@ import { MyOrdersModal } from '../components/Modals/MyOrdersModal';
 import OrderModal from '../components/Modals/OrderModal';
 import { ProductModal } from '../components/Modals/ProductModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
+import { RewardModal } from '../components/Modals/RewardModal';
 import { SearchModal } from '../components/Modals/SearchModal';
 import { TalkToUsModal } from '../components/Modals/TalkToUsModal';
 import { TermPrivacyModal } from '../components/Modals/TermPrivacyModal';
@@ -44,6 +45,7 @@ const ModalsProvider = () => {
       <OrderModal />
       <MyOrdersModal />
       <CurrentOrderModal />
+      <RewardModal />
     </>
   );
 };

@@ -210,7 +210,8 @@ export type Reward = {
   image: string;
   product_id?: string;
   discount?: number;
-  type_reward: number; //0 - Disconto / 2 - Produt
+  type_reward: number; //0 - Disconto / 1 - Produt
+  name: string;
 };
 
 export type Reward_Orders = {
@@ -221,11 +222,3 @@ export type Reward_Orders = {
   isUser: number; // 0 = não usado,  1 = usado,
   reward_code: string;
 };
-
-// id          String   @id @default(auto()) @map("_id") @db.ObjectId
-// reward_id   String   @db.ObjectId
-// order_id    String   @db.ObjectId
-// user_id     String   @db.ObjectId
-// created_at  DateTime @default(now())
-// isUsed      Int      @default(0) //0 = não usado, 1 = usado
-// reward_code String

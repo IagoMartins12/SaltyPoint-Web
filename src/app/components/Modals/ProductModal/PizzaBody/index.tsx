@@ -15,16 +15,18 @@ import { addCartProduct } from '@/app/services';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
 import { Product } from '@/app/types/ModelsType';
-import { useLoginModal } from '@/app/hooks/modals/useModal';
+import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
 
 export const PizzaBody = () => {
-  const productModal = useProductModal();
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product } = usePrivateStore();
-  const loginModal = useLoginModal();
   const { isLogged } = useAuth();
+
+  const loginModal = useLoginModal();
+  const productModal = useProductModal();
+  const searchModal = useSearchModal();
 
   const {
     decreaseQuantity,
@@ -47,6 +49,9 @@ export const PizzaBody = () => {
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     if (!isLogged) {
       productModal.onClose();
+
+      if (searchModal.isOpen) searchModal.onClose();
+
       loginModal.onOpen();
       return toast.error('Faça o login para adicionar produtos');
     }
