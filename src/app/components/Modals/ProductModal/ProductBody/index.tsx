@@ -1,7 +1,6 @@
 import { TextArea } from '@/app/components/Input';
 import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
-import { ProductModalProps } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { useCustomProductModal } from '../useProductModal';
@@ -10,16 +9,27 @@ import { addCartProduct } from '@/app/services';
 import { CartProductDto } from '@/app/types/Dtos';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
+import { Product } from '@/app/types/ModelsType';
+import { useLoginModal } from '@/app/hooks/modals/useModal';
+import useAuth from '@/app/hooks/auth/useAuth';
 
-export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
+export const ProductBody = () => {
   const productModal = useProductModal();
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product } = usePrivateStore();
+  const loginModal = useLoginModal();
+  const { isLogged } = useAuth();
 
   const { decreaseQuantity, increaseQuantity, quantity, disabled, value } =
     useCustomProductModal();
 
-  const onSubmit2: SubmitHandler<FieldValues> = async data => {
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    if (!isLogged) {
+      productModal.onClose();
+      loginModal.onOpen();
+      return toast.error('Faça o login para adicionar produtos');
+    }
+
     const response = await addCartProduct({
       product_id: productModal.currentProduct?.id,
       observation: data.observation,
@@ -40,7 +50,7 @@ export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
       <div className='w-full h-[25%] relative rounded-lg '>
         <Image
           fill
-          src={productModal.currentProduct?.product_image ?? ''}
+          src={(productModal.currentProduct as Product).product_image ?? ''}
           alt='Product image'
           className='rounded-lg !sticky object-contain'
           sizes='100%'
@@ -49,10 +59,10 @@ export const ProductBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
 
       <form
         className='flex flex-col gap-8 items-center justify-center'
-        onSubmit={handleSubmit(onSubmit2)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <span className='font-light text-2xl text-center'>
-          {productModal.currentProduct?.name}
+          {(productModal.currentProduct as Product)?.name}
         </span>
 
         <div className='w-full'>

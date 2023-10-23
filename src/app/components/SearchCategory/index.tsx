@@ -10,11 +10,17 @@ export const SearchCategory: React.FC<SearchCategoryBox> = ({
       onClick={() => {
         onClick(category.id);
       }}
-      className={`px-2 py-2 border-2 cursor-pointer ${
-        selected === category.id ? 'bg-red-700' : 'bg-transparent'
+      className={`px-4 py-2 border-2 cursor-pointer rounded-3xl border-red-500 ${
+        selected === category.id ? 'bg-red-500' : 'bg-transparent'
       }`}
     >
-      <span> {category.category_name}</span>
+      <span
+        className={`font-medium text-sm md:text-base ${
+          selected === category.id ? 'text-white' : 'text-red-500'
+        }`}
+      >
+        {category.category_name}
+      </span>
     </div>
   );
 };

@@ -26,6 +26,7 @@ import {
   useTalkToUsModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
+import { useRouter } from 'next/navigation';
 
 export const useMenuHeader = () => {
   const loginModal = useLoginModal();
@@ -41,6 +42,7 @@ export const useMenuHeader = () => {
   const leftMenu = useMenuHeaderState();
   const iconsSize = 28;
 
+  const router = useRouter();
   const toggleMenu = () => {
     leftMenu.isOpen ? leftMenu.onClose() : leftMenu.onOpen();
   };
@@ -56,6 +58,8 @@ export const useMenuHeader = () => {
     setTimeout(() => {
       removeToken();
     }, 1000);
+
+    router.refresh();
   };
 
   const commomOptions = [

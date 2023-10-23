@@ -42,8 +42,8 @@ export const SearchModal = () => {
     setProductState(products);
   }, [products]);
   const body = (
-    <div className='flex flex-col gap-5'>
-      <div className='relative flex w-full mx-auto'>
+    <div className='flex flex-col gap-5 w-11/12 mx-auto'>
+      <div className='relative flex w-full'>
         <input
           type='text'
           className='w-full px-2 py-2 rounded-md border-b-2 bg-transparent'
@@ -57,7 +57,7 @@ export const SearchModal = () => {
         />
       </div>
 
-      <div className='flex flex-wrap gap-4 w-10/12 mx-auto'>
+      <div className='flex flex-wrap gap-4  w-full'>
         {categorys
           .filter(
             c => c.category_name !== 'Bordas' && c.category_name !== 'Brindes',
@@ -73,7 +73,7 @@ export const SearchModal = () => {
       </div>
 
       <div className='privacyScroll overflow-auto'>
-        <div className='flex flex-col  gap-4 w-10/12 mx-auto '>
+        <div className='flex flex-col  gap-4  w-full'>
           {productState.map(p => (
             <SearchProduct product={p} key={p.id} />
           ))}

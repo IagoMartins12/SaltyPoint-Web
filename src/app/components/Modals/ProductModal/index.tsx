@@ -8,13 +8,22 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
 import { PizzaBody } from './PizzaBody';
 import { useCustomProductModal } from './useProductModal';
+import { Product } from '@/app/types/ModelsType';
+import { useLoginModal } from '@/app/hooks/modals/useModal';
+import useAuth from '@/app/hooks/auth/useAuth';
 
 export const ProductModal = () => {
   const productModal = useProductModal();
   const { cart_product, setCart_product } = usePrivateStore();
   const { handleClose, quantity } = useCustomProductModal();
 
+  const loginModal = useLoginModal();
+  const { isLogged } = useAuth();
   const onSubmit: SubmitHandler<FieldValues> = async data => {
+    if (!isLogged) {
+      loginModal.onOpen();
+      return toast.error('Faça o login para adicionar produtos');
+    }
     const response = await addCartProduct({
       product_id: productModal.currentProduct?.id,
       observation: data.observation,
@@ -29,13 +38,11 @@ export const ProductModal = () => {
     }
   };
 
-  const productIsPizza = productModal.currentProduct?.name.includes('Pizza');
+  const productIsPizza = (
+    productModal.currentProduct as Product
+  )?.name.includes('Pizza');
 
-  const body = productIsPizza ? (
-    <PizzaBody onSubmit={onSubmit} />
-  ) : (
-    <ProductBody onSubmit={onSubmit} />
-  );
+  const body = productIsPizza ? <PizzaBody /> : <ProductBody />;
 
   return (
     <>

@@ -4,7 +4,6 @@ import { PizzaCard } from '@/app/components/PizzaCard';
 import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
-import { ProductModalProps } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { handleSetSelected } from '@/app/utils';
@@ -16,12 +15,16 @@ import { addCartProduct } from '@/app/services';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import toast from 'react-hot-toast';
 import { Product } from '@/app/types/ModelsType';
+import { useLoginModal } from '@/app/hooks/modals/useModal';
+import useAuth from '@/app/hooks/auth/useAuth';
 
-export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
+export const PizzaBody = () => {
   const productModal = useProductModal();
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product } = usePrivateStore();
+  const loginModal = useLoginModal();
+  const { isLogged } = useAuth();
 
   const {
     decreaseQuantity,
@@ -41,7 +44,13 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
     setSelectedSize,
   } = useCustomProductModal();
 
-  const newSubmit: SubmitHandler<FieldValues> = async data => {
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
+    if (!isLogged) {
+      productModal.onClose();
+      loginModal.onOpen();
+      return toast.error('Faça o login para adicionar produtos');
+    }
+
     const response = await addCartProduct({
       product_id: productModal.currentProduct?.id,
       product_id_2: selectedProduct2,
@@ -85,7 +94,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
 
       <form
         className='flex flex-col gap-8 items-center justify-center'
-        onSubmit={handleSubmit(newSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <span className='font-light text-2xl text-center'>
           {(productModal.currentProduct as Product)?.name}
@@ -188,7 +197,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
                           )
                           .map(product => (
                             <div
-                              className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                              className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
                               key={product.id}
                             >
                               <PizzaCard
@@ -201,7 +210,7 @@ export const PizzaBody: React.FC<ProductModalProps> = ({ onSubmit }) => {
                       )
                   : brotinhoNames.map(product => (
                       <div
-                        className='flex border-b-2 justify-between p-2 min-h-[7vh]'
+                        className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
                         key={product.id}
                       >
                         <PizzaCard

@@ -28,7 +28,7 @@ export const ComeBack = () => {
 
   return (
     <div
-      className={`w-16 h-16 rounded-full cursor-pointer ${
+      className={`w-8 sm:w-12 h-8 sm:h-12 rounded-full cursor-pointer ${
         showArrow ? 'fixed' : 'hidden'
       } bottom-8 right-8`}
     >

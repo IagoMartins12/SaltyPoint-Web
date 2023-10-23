@@ -47,7 +47,7 @@ export const DeleteUserModal: React.FC = () => {
         </div>
         <div className='flex flex-col items-center justify-center gap-3'>
           <h3 className='text-2xl font-bold'>Deletar Conta?</h3>
-          <span className='text-lg font-medium'>
+          <span className='text-base sm:text-lg font-medium'>
             Essa ação não pode ser desfeita, tem certeza?
           </span>
         </div>
@@ -58,7 +58,9 @@ export const DeleteUserModal: React.FC = () => {
               handleOpenAddressModal();
             }}
           >
-            <span className='font-semibold text-black text-lg'>Cancelar</span>
+            <span className='font-semibold text-black text-sm sm:text-lg'>
+              Cancelar
+            </span>
           </button>
           <button
             className='w-full py-3 bg-red-500 rounded-2xl'
@@ -66,7 +68,7 @@ export const DeleteUserModal: React.FC = () => {
               handleDeleteAddress();
             }}
           >
-            <span className='font-semibold text-white text-lg'>
+            <span className='font-semibold text-white text-sm sm:text-lg'>
               Deletar Conta
             </span>
           </button>

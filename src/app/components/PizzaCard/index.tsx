@@ -7,6 +7,7 @@ import { useProductModal } from '@/app/hooks/modals/useProduct';
 import { handleSetSelected } from '@/app/utils';
 import { useCustomProductModal } from '../Modals/ProductModal/useProductModal';
 import { PizzaProductModalType } from '@/app/types/ComponentTypes';
+import { Product } from '@/app/types/ModelsType';
 
 export const PizzaCard: React.FC<PizzaProductModalType> = ({
   product,
@@ -17,7 +18,7 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
   const { removeSelected, checkDiference } = useCustomProductModal();
 
   return (
-    <label className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%]`}>
+    <label className={`flex min-h-[12vh] rounded-2xl cursor-pointer w-[100%]`}>
       <input
         type='radio'
         name='selectedProduct2'
@@ -34,7 +35,7 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
         style={{ display: 'none' }}
       />
       <div
-        className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%] ${
+        className={`flex min-h-[10%] rounded-2xl cursor-pointer w-[100%] ${
           selectedProduct2 === product.id ? '' : ''
         }`}
       >
@@ -53,10 +54,17 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
 
         <div className='flex flex-col w-9/12 h-full gap-4 py-2 px-5 justify-between'>
           <div className='flex flex-col gap-4'>
-            <span className='font-semibold text-lg'> {product.name} </span>
-            <span className='font-light text-sm'> {product.description} </span>
+            <span className='font-semibold text-base sm:text-lg'>
+              {' '}
+              {product.name}{' '}
+            </span>
+            <span className='font-light text-sm whitespace-pre-line'>
+              {' '}
+              {product.description}{' '}
+            </span>
             {productModal.currentProduct &&
-            productModal.currentProduct?.value >= product.value ? null : (
+            (productModal.currentProduct as Product)?.value >=
+              product.value ? null : (
               <span className='text-sm font-semibold text-red-500'>
                 + {checkDiference(product)}
               </span>

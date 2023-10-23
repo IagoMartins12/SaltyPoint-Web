@@ -1,10 +1,10 @@
 import { OrderComponentType } from '@/app/types/ComponentTypes';
 
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { districtRate } from '../Modals/OrderModal/useCustomOrderModal';
 import { OrderInfo } from '../Span';
 import { formatOrderDate } from '@/app/utils';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { APP_SETTINGS } from '@/app/config';
 
 export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
   const { address } = usePrivateStore();
@@ -28,7 +28,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
     if (!district) return;
     const lowercaseAddress = district.toLowerCase();
 
-    const rate = districtRate.some(district =>
+    const rate = APP_SETTINGS.districtRate.some(district =>
       lowercaseAddress.includes(district.toLowerCase()),
     );
 

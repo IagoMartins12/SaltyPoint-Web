@@ -53,7 +53,7 @@ export const DeleteModal: React.FC<ModalProps> = ({
             {/* Cabeçalho */}
             <div className='flex items-center p-6 justify-center'>
               <button
-                className='p-1 border-0 hover:opacity-70 transition absolute left-9'
+                className='p-1 border-0 hover:opacity-70 transition absolute left-5'
                 onClick={handleClose}
               >
                 <IoMdClose size={25} />

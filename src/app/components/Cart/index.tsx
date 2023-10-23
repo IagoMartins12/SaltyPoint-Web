@@ -2,7 +2,7 @@
 
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { CartProductCard } from '../CartProductCard/index2';
+import { CartProductCard } from '../CartProductCard';
 import { handleSetSelected } from '@/app/utils';
 import { useCartMenuState, useOrderModal } from '@/app/hooks/modals/useModal';
 

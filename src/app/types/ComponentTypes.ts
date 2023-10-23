@@ -233,11 +233,8 @@ export interface CornicioneProductModalType {
   selectedProduct3: string | null;
   setSelectedProduct3: React.Dispatch<React.SetStateAction<string | null>>;
 }
-export interface ProductModalProps {
-  onSubmit: SubmitHandler<FieldValues>;
-}
 
-export interface PizzaModalProps extends ProductModalProps {
+export interface PizzaModalProps {
   setValue: Dispatch<SetStateAction<string | number>>;
 }
 
