@@ -82,3 +82,8 @@ export type CreateOrderDto = {
   discount_value?: number | null;
   contact_phone: string;
 };
+
+export type CreateRewardDto = {
+  orderId?: string;
+  rewardId: string;
+};

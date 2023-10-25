@@ -3,12 +3,10 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import Image from 'next/image';
-import { IoCloseOutline } from 'react-icons/io5';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import { StyledInput } from '../../Input';
 import { recoverPassword } from '@/app/services';
-import { ImageComponent } from '../../ImageComponent';
 import {
   useForgetPasswordModal,
   useLoginModal,
@@ -21,7 +19,6 @@ enum STEPS {
 }
 export const ForgetPasswordModal = () => {
   const [step, setStep] = useState(STEPS.RECEIVE_EMAIL);
-
   const forgetPasswordModal = useForgetPasswordModal();
   const loginModal = useLoginModal();
   const { theme } = useTheme();

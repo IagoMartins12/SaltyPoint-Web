@@ -81,18 +81,7 @@ export const ProductBody = () => {
             className='cursor-pointer'
           />
           <span className='font-medium text-xl'> {quantity}</span>
-          {/* <input
-            className='w-12 text-center h-10'
-            type='number'
-            value={quantity}
-            onChange={ev => {
-              const newValue = parseInt(ev.target.value, 10);
-              if (!isNaN(newValue) && newValue >= 0) {
-                setQuantity(newValue);
-                console.log(newValue);
-              }
-            }}
-          /> */}
+
           <AiOutlinePlus
             size={25}
             onClick={increaseQuantity}

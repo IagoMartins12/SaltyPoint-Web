@@ -10,8 +10,6 @@ export const CouponsModal = () => {
 
   const filteredCoupons = coupons.filter(coupon => coupon.type_coupon === 0);
 
-  console.log('cupons', filteredCoupons);
-
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6'>
       <div className=''>

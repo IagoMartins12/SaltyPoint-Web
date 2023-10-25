@@ -14,6 +14,7 @@ import {
   getProducts,
   getStates,
   getTypePagaments,
+  getUserReward,
 } from '@/app/services';
 import { useEffect } from 'react';
 
@@ -27,6 +28,7 @@ export const FetchData = () => {
     setCart_product,
     setCoupons,
     setOrders,
+    setUserReward,
   } = usePrivateStore();
   const { isLogged } = useAuth();
 
@@ -59,6 +61,7 @@ export const FetchData = () => {
           const cartProductData = await getCartProduct();
           const couponsData = await getCoupons();
           const orderData = await getOrders();
+          const rewardData = await getUserReward();
 
           setCoupons(couponsData);
           setAddress(addressData);
@@ -66,6 +69,7 @@ export const FetchData = () => {
           setFavorites(favoriteData);
           setCart_product(cartProductData);
           setOrders(orderData);
+          setUserReward(rewardData);
         } catch (error) {
           console.log(error);
         }

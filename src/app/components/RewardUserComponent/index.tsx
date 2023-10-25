@@ -1,7 +1,7 @@
-import { RewardComponentProps } from '@/app/types/ComponentTypes';
+import { RewardUserComponentProps } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
 
-export const RewardComponent: React.FC<RewardComponentProps> = ({
+export const RewardUserComponent: React.FC<RewardUserComponentProps> = ({
   reward,
   onClick,
 }) => {
@@ -18,7 +18,7 @@ export const RewardComponent: React.FC<RewardComponentProps> = ({
         <div className='h-5/6 relative p-3 rounded-lg '>
           <Image
             fill
-            src={reward.image}
+            src={reward.rewardImage}
             sizes='100%'
             alt='rewardImage'
             className='object-fit p-3 rounded-lg'
@@ -27,7 +27,7 @@ export const RewardComponent: React.FC<RewardComponentProps> = ({
 
         <div className='h-1/6 flex items-center justify-center'>
           <span className='font-semibold text-sm  text-center'>
-            {reward.name}
+            {reward.rewardName}
           </span>
         </div>
 
@@ -36,7 +36,7 @@ export const RewardComponent: React.FC<RewardComponentProps> = ({
 
       <div className='h-1/5 w-full items-center justify-center flex'>
         <span className='font-semibold text-sm text-red-500 text-center'>
-          {reward.quantity_points} Pontos
+          {reward.reward_code}
         </span>
       </div>
     </div>

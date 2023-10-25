@@ -4,6 +4,7 @@ import {
   CEPInfoDto,
   CartProductDto,
   CreateOrderDto,
+  CreateRewardDto,
   CreateUserDto,
   DeleteFavoritesDto,
   FavoritesDto,
@@ -22,10 +23,12 @@ import {
   Order,
   Product,
   Reward,
+  Reward_Orders,
   State,
   Type_Pagament,
   User,
   User_Adress,
+  User_Rewards,
 } from '../types/ModelsType';
 
 export const createUser = async (createUserDto: CreateUserDto) => {
@@ -284,6 +287,26 @@ export const getRewards = async (): Promise<Reward[]> => {
   try {
     const response = await Api.get('/reward');
     return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const getUserReward = async (): Promise<User_Rewards[]> => {
+  try {
+    const response = await Api.get('/reward/user');
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const postReward = async (
+  rewardDto: CreateRewardDto,
+): Promise<Reward_Orders> => {
+  try {
+    const response = await Api.post('/reward', rewardDto);
+    return response.data as Reward_Orders;
   } catch (error: any) {
     return error;
   }

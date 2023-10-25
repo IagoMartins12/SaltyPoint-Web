@@ -10,6 +10,7 @@ export type User = {
   createdAt: Date;
   role: number;
   user_Adress_id?: string | null;
+  points: number;
 
   orders: Order[];
   account: Account[];
@@ -220,5 +221,13 @@ export type Reward_Orders = {
   order_id: string;
   created_at: Date;
   isUser: number; // 0 = não usado,  1 = usado,
+  reward_code: string;
+};
+
+export type User_Rewards = {
+  id: string;
+  rewardId: string;
+  rewardImage: string;
+  rewardName: string;
   reward_code: string;
 };

@@ -8,10 +8,12 @@ import {
   Order,
   Product,
   Reward,
+  Reward_Orders,
   State,
   Type_Pagament,
   User,
   User_Adress,
+  User_Rewards,
 } from './ModelsType';
 import {
   FieldErrors,
@@ -178,6 +180,8 @@ export interface PrivateStore {
   setCoupons: (discount_cupom: Discount_cupom[]) => void;
   orders: OrderType[] | [];
   setOrders: (orders: OrderType[]) => void;
+  userReward: User_Rewards[] | [];
+  setUserReward: (reward_order: User_Rewards[]) => void;
 }
 
 export interface GeoLocationStore {
@@ -262,4 +266,10 @@ export interface LabelInfo {
 
 export interface RewardComponentProps {
   reward: Reward;
+  onClick?: (reward: Reward) => void;
+}
+
+export interface RewardUserComponentProps {
+  reward: User_Rewards;
+  onClick?: (reward: User_Rewards) => void;
 }

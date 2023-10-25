@@ -16,6 +16,8 @@ const usePrivateStore = create<PrivateStore>(set => ({
   setCoupons: discount_cupom => set({ coupons: discount_cupom }),
   orders: [],
   setOrders: orders => set({ orders: orders }),
+  userReward: [],
+  setUserReward: userReward => set({ userReward: userReward }),
 }));
 
 export default usePrivateStore;
