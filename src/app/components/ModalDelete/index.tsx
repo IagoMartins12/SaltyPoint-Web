@@ -1,16 +1,12 @@
+import { ModalProps } from '@/app/types/ComponentTypes';
 import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
-
-interface ModalProps {
-  isOpen?: any;
-  onClose: any;
-  body?: React.ReactElement;
-}
 
 export const DeleteModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   body,
+  title,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -53,11 +49,12 @@ export const DeleteModal: React.FC<ModalProps> = ({
             {/* Cabeçalho */}
             <div className='flex items-center p-6 justify-center'>
               <button
-                className='p-1 border-0 hover:opacity-70 transition absolute left-5'
+                className='p-1 border-0 hover:opacity-70 transition absolute left-6 flex'
                 onClick={handleClose}
               >
                 <IoMdClose size={25} />
               </button>
+              <div className='text-lg font-semibold'>{title}</div>
             </div>
             {/* Corpo */}
             <div className=' px-6 py-3 flex-auto overflow-auto items-center justify-center flex'>

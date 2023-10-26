@@ -1,5 +1,6 @@
 'use client';
 
+import { ModalWarning } from '../components/ModalWarning';
 import { AddAddressModal } from '../components/Modals/AddAddressModal';
 import { AddressModal } from '../components/Modals/AddressModal';
 import { AppDownloadModal } from '../components/Modals/AppDownloadModal';
@@ -21,6 +22,7 @@ import { SearchModal } from '../components/Modals/SearchModal';
 import { TalkToUsModal } from '../components/Modals/TalkToUsModal';
 import { TermPrivacyModal } from '../components/Modals/TermPrivacyModal';
 import { UserInfoModal } from '../components/Modals/UserInfoModal';
+import { WarningRewardModal } from '../components/Modals/WarningRewardModal';
 
 const ModalsProvider = () => {
   return (
@@ -46,6 +48,7 @@ const ModalsProvider = () => {
       <MyOrdersModal />
       <CurrentOrderModal />
       <RewardModal />
+      <WarningRewardModal />
     </>
   );
 };

@@ -5,7 +5,6 @@ export const RewardUserComponent: React.FC<RewardUserComponentProps> = ({
   reward,
   onClick,
 }) => {
-  console.log('userReward', reward);
   return (
     <div
       className='flex flex-col w-5/12 h-[55%] cardBG rounded-2xl cursor-pointer'

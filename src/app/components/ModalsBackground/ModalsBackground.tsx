@@ -1,15 +1,11 @@
 'use client';
 
-import {
-  useDeleteAddress,
-  useDeleteCartItem,
-} from '@/app/hooks/modals/useDelete';
+import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 import {
   useAddAddress,
   useAddress,
   useAppDownload,
   useCoupons,
-  useDeleteUser,
   useFavoriteModal,
   useForgetPasswordModal,
   useLoginModal,
@@ -42,8 +38,6 @@ const modals = [
   useProductModal,
   useMyOrderModal,
 ];
-
-const deleteModals = [useDeleteAddress, useDeleteCartItem, useDeleteUser];
 
 export const ModalsBackground = () => {
   const openModals = modals.map(modal => modal().isOpen);

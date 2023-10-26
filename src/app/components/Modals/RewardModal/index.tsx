@@ -1,7 +1,7 @@
 import { useRewardModal } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 import { useEffect, useState } from 'react';
-import { Reward } from '@/app/types/ModelsType';
+import { Reward, User, User_Rewards } from '@/app/types/ModelsType';
 import { getRewards, postReward } from '@/app/services';
 import toast from 'react-hot-toast';
 import { RewardComponent } from '../../RewardComponent';
@@ -9,6 +9,7 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { CreateRewardDto } from '@/app/types/Dtos';
 import { RewardUserComponent } from '../../RewardUserComponent';
 import { EmptyResult } from '../../EmptyResult';
+import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
 
 enum STEPS {
   INVENTORY = 0,
@@ -22,6 +23,8 @@ export const RewardModal = () => {
     [number, number] | null
   >(null);
   const [rewards, setRewards] = useState<[] | Reward[]>([]);
+
+  const warningModal = useWarningRewardModal();
   const { user, setUser, userReward, setUserReward } = usePrivateStore();
 
   const rewardoOptions = [
@@ -76,30 +79,38 @@ export const RewardModal = () => {
 
   const catchReward = async (reward: Reward) => {
     if (user?.points) {
-      const updatedPoints = user?.points - reward.quantity_points;
+      warningModal.setCurrentItem(reward);
+      warningModal.onOpen();
+      // const updatedPoints = user?.points - reward.quantity_points;
 
-      if (user.points < reward.quantity_points) {
-        return toast.error('Pontos insuficientes');
-      }
+      // if (user.points < reward.quantity_points) {
+      //   return toast.error('Pontos insuficientes');
+      // }
 
-      const updatedUser = { ...user, points: updatedPoints }; //
-      console.log(updatedUser);
-      setUser(updatedUser);
+      // const updatedUser = { ...user, points: updatedPoints }; //
+      // console.log(updatedUser);
+      // setUser(updatedUser);
 
-      const object = {
-        rewardId: reward.id,
-      } as CreateRewardDto;
-      const response = await postReward(object);
+      // const object = {
+      //   rewardId: reward.id,
+      // } as CreateRewardDto;
+      // const response = await postReward(object);
 
-      if (response) {
-        const updatedRewards = [...userReward, response];
-        setUserReward(updatedRewards);
-        toast.success('Recompensa resgatada');
-      }
+      // if (response) {
+      //   const updatedRewards = [...userReward, response];
+      //   setUserReward(updatedRewards);
+      //   toast.success('Recompensa resgatada');
+      // }
 
-      console.log('response: ', response);
+      // console.log('response: ', response);
     }
   };
+
+  const handleCopyLink = (reward: User_Rewards) => {
+    navigator.clipboard.writeText(reward.reward_code);
+    toast.success('Copiado!');
+  };
+
   useEffect(() => {
     fetchReward();
   }, []);
@@ -125,7 +136,11 @@ export const RewardModal = () => {
       <div className='flex flex-wrap gap-8 justify-center h-4/6'>
         {userReward && userReward.length > 0 ? (
           userReward.map((reward, i) => (
-            <RewardUserComponent reward={reward} key={i} />
+            <RewardUserComponent
+              reward={reward}
+              key={i}
+              onClick={handleCopyLink}
+            />
           ))
         ) : (
           <EmptyResult text='Nenhuma recompensa resgatada' />

@@ -125,6 +125,14 @@ export interface DeleteStore {
   setCurrentItem: (item: string) => void;
 }
 
+export interface WarningStore {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  currentItem: Reward | null;
+  setCurrentItem: (item: Reward | null) => void;
+}
+
 export interface ProductStore {
   isOpen: boolean;
   onOpen: () => void;
@@ -272,4 +280,12 @@ export interface RewardComponentProps {
 export interface RewardUserComponentProps {
   reward: User_Rewards;
   onClick?: (reward: User_Rewards) => void;
+}
+
+export interface ModalProps {
+  isOpen?: any;
+  onClose: any;
+  title?: string;
+  body?: React.ReactElement;
+  authModal?: boolean;
 }

@@ -2,12 +2,11 @@ import { ModalProps } from '@/app/types/ComponentTypes';
 import { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
-const Modal: React.FC<ModalProps> = ({
+export const ModalWarning: React.FC<ModalProps> = ({
   isOpen,
   onClose,
-  title,
   body,
-  authModal,
+  title,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -30,24 +29,19 @@ const Modal: React.FC<ModalProps> = ({
     <div className='fixed inset-0 z-50 flex items-center justify-center'>
       {/* Div de fundo para fechar o modal */}
       <div
-        className='fixed inset-0 bg-black opacity-50'
+        className='fixed inset-0 bg-black opacity-50 cursor-pointer'
         onClick={handleClose}
-      />
+      ></div>
       {/* Modal */}
       <div
-        className={`relative ${
-          authModal
-            ? 'w-full sm:w-8/12'
-            : 'w-full sm:w-9/12 lg:w-7/12 xl:w-4/12'
-        } ${
-          authModal ? 'h-full lg:h-[65%]' : 'h-[100%] sm:h-[85%]'
-        } my-6 mx-auto`}
+        className={`relative w-11/12 sm:w-9/12 lg:w-7/12 xl:w-4/12 lg:h-[45%] my-6 mx-auto`}
       >
         {/* Conteúdo do Modal */}
         <div
           className={`translate duration-300 h-full ${
             showModal ? 'translate-y-0' : 'translate-y-full'
-          } ${showModal ? 'opacity-100' : 'opacity-0'}`}
+          } ${showModal ? 'opacity-100' : 'opacity-0'}
+          }`}
         >
           <div
             className={`translate h-full border-0 rounded-lg shadow-lg relative flex flex-col w-full modalsBackground outline-none self-center focus:outline-none`}
@@ -63,8 +57,8 @@ const Modal: React.FC<ModalProps> = ({
               <div className='text-lg font-semibold'>{title}</div>
             </div>
             {/* Corpo */}
-            <div className=' overflow-auto privacyScroll h-full'>
-              <div className='relative p-6 flex-auto h-full'> {body}</div>
+            <div className=' px-6 py-3 flex-auto overflow-auto items-center justify-center flex'>
+              {body}
             </div>
           </div>
         </div>
@@ -72,5 +66,3 @@ const Modal: React.FC<ModalProps> = ({
     </div>
   );
 };
-
-export default Modal;

@@ -1,0 +1,95 @@
+import toast from 'react-hot-toast';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { ModalWarning } from '../../ModalWarning';
+import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import { Reward } from '@/app/types/ModelsType';
+import { CreateRewardDto } from '@/app/types/Dtos';
+import { postReward } from '@/app/services';
+
+export const WarningRewardModal: React.FC = () => {
+  const warningModal = useWarningRewardModal();
+  const { user, setUser, setUserReward, userReward } = usePrivateStore();
+  const handleCloseModal = () => {
+    warningModal.onClose();
+  };
+
+  const catchReward = async (reward: Reward) => {
+    if (user?.points) {
+      if (user.points < reward.quantity_points) {
+        return toast.error('Pontos insuficientes');
+      }
+
+      const object = {
+        rewardId: reward.id,
+      } as CreateRewardDto;
+      const response = await postReward(object);
+
+      if (response) {
+        const updatedRewards = [...userReward, response];
+        setUserReward(updatedRewards);
+        const updatedPoints = user?.points - reward.quantity_points;
+        const updatedUser = { ...user, points: updatedPoints }; //
+        setUser(updatedUser);
+        toast.success('Recompensa resgatada');
+      }
+
+      handleCloseModal();
+    }
+  };
+
+  const body = (
+    <>
+      <div className='w-full items-center flex justify-center flex-col gap-10'>
+        <div className='w-24 h-24 rounded-full bg-red-200 items-center justify-center flex'>
+          <RiDeleteBin5Fill size={45} />
+        </div>
+        <div className='flex flex-col items-center justify-center gap-3'>
+          <h3 className='text-2xl  font-bold'>
+            Resgatar {warningModal.currentItem?.name}
+          </h3>
+
+          {warningModal.currentItem ? (
+            <span className=' text-base sm:text-lg font-medium'>
+              Você está resgatando uma recompensa de{' '}
+              {warningModal.currentItem.quantity_points} pontos
+            </span>
+          ) : null}
+        </div>
+        <div className='flex gap-4 w-full '>
+          <button
+            className='w-full py-3 bg-slate-200 rounded-2xl '
+            onClick={() => {
+              handleCloseModal();
+            }}
+          >
+            <span className='font-semibold text-black text-sm sm:text-lg'>
+              Cancelar
+            </span>
+          </button>
+          <button
+            className='w-full py-3 bg-red-500 rounded-2xl'
+            onClick={() => {
+              if (warningModal.currentItem) {
+                catchReward(warningModal.currentItem);
+              }
+            }}
+          >
+            <span className='font-semibold text-white text-sm sm:text-lg'>
+              Resgatar recompensa
+            </span>
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <ModalWarning
+      onClose={warningModal.onClose}
+      body={body}
+      isOpen={warningModal.isOpen}
+      title='Resgatar recompensa'
+    />
+  );
+};
