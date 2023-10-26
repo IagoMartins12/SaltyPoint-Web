@@ -5,9 +5,10 @@ export const RewardUserComponent: React.FC<RewardUserComponentProps> = ({
   reward,
   onClick,
 }) => {
+  console.log('userReward', reward);
   return (
     <div
-      className='flex flex-col w-5/12 h-[25vh] cardBG rounded-2xl cursor-pointer'
+      className='flex flex-col w-5/12 h-[55%] cardBG rounded-2xl cursor-pointer'
       onClick={() => {
         if (onClick) {
           onClick(reward);
@@ -31,7 +32,7 @@ export const RewardUserComponent: React.FC<RewardUserComponentProps> = ({
           </span>
         </div>
 
-        <hr className='w-11/12 mx-auto' />
+        <hr className='w-11/12 mx-auto py-4' />
       </div>
 
       <div className='h-1/5 w-full items-center justify-center flex'>

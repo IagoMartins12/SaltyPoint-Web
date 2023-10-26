@@ -303,10 +303,10 @@ export const getUserReward = async (): Promise<User_Rewards[]> => {
 
 export const postReward = async (
   rewardDto: CreateRewardDto,
-): Promise<Reward_Orders> => {
+): Promise<User_Rewards> => {
   try {
     const response = await Api.post('/reward', rewardDto);
-    return response.data as Reward_Orders;
+    return response.data as User_Rewards;
   } catch (error: any) {
     return error;
   }

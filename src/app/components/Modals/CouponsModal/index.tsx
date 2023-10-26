@@ -1,4 +1,5 @@
 import { CouponCard } from '../../CouponCard';
+import { EmptyResult } from '../../EmptyResult';
 import Modal from '../../Modal';
 import { useCoupons } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
@@ -19,11 +20,7 @@ export const CouponsModal = () => {
               <CouponCard coupon={coupon} key={coupon.id} />
             ))
           ) : (
-            <div className='h-40 flex items-center justify-center'>
-              <span className='font-semibold text-xl text-center'>
-                Nenhum cupom disponivel no momento
-              </span>
-            </div>
+            <EmptyResult text='Nenhum cupom disponivel no momento' />
           )}
         </div>
       </div>

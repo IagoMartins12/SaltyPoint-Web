@@ -6,6 +6,7 @@ import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 import Modal from '../../Modal';
 import { useAddAddress, useAddress } from '@/app/hooks/modals/useModal';
 import toast from 'react-hot-toast';
+import { EmptyResult } from '../../EmptyResult';
 
 export const AddressModal = () => {
   const { address } = usePrivateStore();
@@ -82,11 +83,7 @@ export const AddressModal = () => {
                 </div>
               ))}
           {address.length === 0 && (
-            <div className='h-40 flex items-center justify-center'>
-              <span className='font-semibold text-xl text-center'>
-                Sem endereço cadastrado!
-              </span>
-            </div>
+            <EmptyResult text='Sem endereço cadastrado' />
           )}
 
           <div

@@ -230,4 +230,8 @@ export type User_Rewards = {
   rewardImage: string;
   rewardName: string;
   reward_code: string;
+  rewardPoints: number;
+  rewardType: number;
+  rewardDiscount: number;
+  rewardProductId: string;
 };

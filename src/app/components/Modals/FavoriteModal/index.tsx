@@ -4,6 +4,7 @@ import Modal from '../../Modal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ProductCard } from '../../ProductCard';
+import { EmptyResult } from '../../EmptyResult';
 
 export const FavoriteModal = () => {
   const favoriteModal = useFavoriteModal();
@@ -22,11 +23,7 @@ export const FavoriteModal = () => {
           </div>
         ))
       ) : (
-        <div className='h-full flex items-center justify-center'>
-          <span className='font-semibold text-xl text-center'>
-            Você ainda não favoritou nenhum produto
-          </span>
-        </div>
+        <EmptyResult text='Você ainda não favoritou nenhum produto' />
       )}
     </div>
   );
