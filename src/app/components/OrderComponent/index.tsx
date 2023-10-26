@@ -22,7 +22,10 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
   };
 
   return (
-    <div className='w-full shadow-md cursor-pointer' onClick={handleOnClick}>
+    <div
+      className='w-full cardBG rounded-2xl cursor-pointer'
+      onClick={handleOnClick}
+    >
       <div className='flex flex-col gap-6 p-1 h-full'>
         <div className='w-11/12 mx-auto h-[50%] flex gap-3 items-center justify-between border-b-2 py-4 '>
           <div className='flex gap-3'>

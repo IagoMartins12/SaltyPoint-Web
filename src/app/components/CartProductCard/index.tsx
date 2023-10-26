@@ -33,7 +33,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
   };
 
   return (
-    <div className='w-full flex gap-6 shadow-md justify-center p-4 relative min-h-[7rem]'>
+    <div className='w-full flex gap-6 cardBG rounded-2xl justify-center p-4 relative min-h-[7rem]'>
       <div className='flex flex-col gap-4 w-full justify-center'>
         <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between '>
           <span className='font-medium text-sm sm:text-lg pr-6 sm:pr-0'>

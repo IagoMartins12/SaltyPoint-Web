@@ -6,7 +6,7 @@ import { ProductMenu } from './components/ProductMenu';
 
 export default function Home() {
   return (
-    <div>
+    <div className='bodyBackground'>
       <Header />
       <Hero2 />
       <CategoryMenu />
