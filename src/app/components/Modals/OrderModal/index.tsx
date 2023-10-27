@@ -41,6 +41,7 @@ const OrderModal = () => {
     handleOpenAddressModal,
     rewardApplied,
     setRewardApplied,
+    toogleRewardInput,
   } = useCustomOrderModal();
 
   const body = (
@@ -238,7 +239,7 @@ const OrderModal = () => {
                     </button>
                     <AiOutlineClose
                       size={20}
-                      onClick={() => setRewardApplied(null)}
+                      onClick={toogleRewardInput}
                       className='cursor-pointer'
                     />
                   </div>

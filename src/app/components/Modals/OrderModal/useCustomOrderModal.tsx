@@ -84,6 +84,16 @@ export const useCustomOrderModal = () => {
       return;
     }
 
+    if (rewardApplied && rewardApplied.rewardType === 1) {
+      const newItem = products.find(
+        product => product.id === rewardApplied.rewardProductId,
+      );
+
+      if (newItem) {
+        addItemToCart(newItem, true);
+      }
+    }
+
     const response = await createOrder({
       total_amount: getTotal(),
       type_pagament_id: selectedTypePagament,
@@ -182,6 +192,19 @@ export const useCustomOrderModal = () => {
     setShowCoupon(!showCoupon);
   };
 
+  const toogleRewardInput = () => {
+    setInputValue('');
+    if (rewardApplied && rewardApplied.rewardType === 1) {
+      console.log('removeee', rewardApplied);
+      console.log('carrinho', cart_product);
+      const filteredCart = cart_product.filter(
+        cart => cart.observation !== 'Recompensa',
+      );
+      setCart_product(filteredCart);
+    }
+    setRewardApplied(null);
+  };
+
   const getAddressInfo = () => {
     const userAddress = address.find(a => a.id === user?.user_Adress_id);
     return userAddress;
@@ -217,7 +240,7 @@ export const useCustomOrderModal = () => {
     return totalValue;
   };
 
-  const addItemToCart = async (product: Product) => {
+  const addItemToCart = async (product: Product, isOrdered = false) => {
     const checkSize = product.name.includes('Brotinho');
     const newCart = {
       product_id: product.id,
@@ -226,20 +249,16 @@ export const useCustomOrderModal = () => {
       value: '0',
       size: checkSize ? 1 : 0,
     } as Cart_product;
-    // const response = await addCartProduct({
-    //   product_id: product.id,
-    //   observation: 'Recompensa',
-    //   quantity: 1,
-    //   value: '0',
-    // } as CartProductDto);
 
-    //     product_id: string;
-    // product_id_2?: string;
-    // product_id_3?: string;
-    // size: number;
-    // quantity: number;
-    // observation?: string;
-    // value: string;
+    if (isOrdered) {
+      const response = await addCartProduct({
+        product_id: product.id,
+        observation: 'Recompensa',
+        quantity: 1,
+        value: '0',
+      } as CartProductDto);
+      return response;
+    }
 
     const updatedCartProduct = [...cart_product, newCart];
     setCart_product(updatedCartProduct);
@@ -277,6 +296,7 @@ export const useCustomOrderModal = () => {
       }
     }
   }, [rewardApplied]);
+
   return {
     getTaxa,
     getTotal,
@@ -304,5 +324,6 @@ export const useCustomOrderModal = () => {
     handleOpenAddressModal,
     rewardApplied,
     setRewardApplied,
+    toogleRewardInput,
   };
 };

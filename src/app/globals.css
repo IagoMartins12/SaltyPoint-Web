@@ -5,7 +5,7 @@
 .cardBG,
 .modalBG {
   background: #fff;
-  box-shadow: 0 16px 20px 8px rgba(1, 1, 5, 0.1);
+  /* box-shadow: 0 16px 20px 8px rgba(1, 1, 5, 0.1); */
 }
 
 [data-theme='dark'] .cardBG,

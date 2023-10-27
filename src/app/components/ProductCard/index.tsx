@@ -1,6 +1,5 @@
 import { ProductCardType } from '@/app/types/ComponentTypes';
 import Image from 'next/image';
-import { FavoriteButton } from '../FavoriteButton';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 
@@ -18,8 +17,8 @@ export const ProductCard: React.FC<ProductCardType> = ({
 
   return (
     <div
-      className={`flex  cardBG  min-h-[15vh] p-2 rounded-2xl cursor-pointer  ${
-        fullWidth ? 'w-[100%]' : 'w-full md:w-[48%] lg:w-[30%]'
+      className={`flex  cardBG  min-h-[15vh] p-2 shadow-md rounded-2xl cursor-pointer  ${
+        fullWidth ? 'w-[100%]' : 'w-full md:w-[48%] lg:w-[33%]'
       }`}
       onClick={() => {
         productModal.setCurrentProduct(product);
