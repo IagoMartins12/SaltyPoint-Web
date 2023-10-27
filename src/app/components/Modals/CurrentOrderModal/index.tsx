@@ -25,7 +25,10 @@ export const CurrentOrderModal = () => {
     const updatedCartProduct = [...cart_product]; // Novo array temporário
     setLoading(true);
 
-    for (const product of currentOrder[0].orderItems) {
+    const filteredOrderItems = currentOrder[0].orderItems.filter(
+      item => item.value !== '0',
+    );
+    for (const product of filteredOrderItems) {
       try {
         const response = await addCartProduct(product as CartProductDto);
 

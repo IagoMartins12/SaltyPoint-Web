@@ -39,6 +39,8 @@ const OrderModal = () => {
     handleGetMoreProduct,
     user,
     handleOpenAddressModal,
+    rewardApplied,
+    setRewardApplied,
   } = useCustomOrderModal();
 
   const body = (
@@ -51,6 +53,7 @@ const OrderModal = () => {
         }}
       >
         <div className='flex flex-col w-full gap-4'>
+          {/* Items do pedido */}
           <div className='flex flex-col gap-2'>
             {cart_product.map((cartProduct, i) => (
               <CartProductCardOrder cart_product={cartProduct} key={i} />
@@ -67,6 +70,7 @@ const OrderModal = () => {
             </span>
           </div>
 
+          {/* Opções de entrega */}
           <div className='flex flex-col  border-b-2'>
             {deliveryOptions.map((options, i) => (
               <div className='flex justify-between p-4  items-center' key={i}>
@@ -138,8 +142,8 @@ const OrderModal = () => {
             ))}
           </div>
 
+          {/* Opções de pagamento */}
           <div className='flex flex-col gap-2 border-b-2'>
-            {/* <span className='text-lg font-light px-4'> Pagamento</span> */}
             {typePagament.map((options, i) => (
               <div
                 className='flex justify-between p-4  items-center'
@@ -181,10 +185,11 @@ const OrderModal = () => {
             ))}
           </div>
 
+          {/* Cupom e recompensa */}
           <div className='flex flex-col'>
             <div className='flex justify-between px-2 items-center w-full'>
               <span className='text-base font-light w-4/12'>
-                Cupom de desconto:{' '}
+                Cupom/Recompensa:
               </span>
               <div className=' w-8/12 flex justify-end'>
                 {showCoupon ? (
@@ -223,6 +228,20 @@ const OrderModal = () => {
                       className='cursor-pointer'
                     />
                   </div>
+                ) : rewardApplied ? (
+                  <div className='flex items-center gap-3'>
+                    <button
+                      className='px-3 py-2 text-center rounded-xl'
+                      onClick={toggleCouponInput}
+                    >
+                      <span>{rewardApplied.reward_code} </span>
+                    </button>
+                    <AiOutlineClose
+                      size={20}
+                      onClick={() => setRewardApplied(null)}
+                      className='cursor-pointer'
+                    />
+                  </div>
                 ) : (
                   <button
                     className='px-3 py-2 text-center bg-red-300 rounded-xl'
@@ -235,6 +254,7 @@ const OrderModal = () => {
             </div>
           </div>
 
+          {/* Informações gerais */}
           <div className='flex flex-col gap-2' id='total'>
             <div className='flex justify-between px-2 '>
               <span className='text-base font-light'>Subtotal: </span>
@@ -247,7 +267,16 @@ const OrderModal = () => {
               <div className='flex justify-between px-2 '>
                 <span className='text-base font-light'>Cupom: </span>
                 <span className='text-base font-light text-green-500'>
-                  - R$ {getDiscount(couponApplied).toFixed(2)}
+                  - R$ {getDiscount(couponApplied.discount).toFixed(2)}
+                </span>
+              </div>
+            )}
+
+            {rewardApplied && rewardApplied.rewardType === 0 && (
+              <div className='flex justify-between px-2 '>
+                <span className='text-base font-light'>Cupom: </span>
+                <span className='text-base font-light text-green-500'>
+                  - R$ {getDiscount(rewardApplied.rewardDiscount).toFixed(2)}
                 </span>
               </div>
             )}

@@ -11,8 +11,6 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
   const { typePagament, states } = useGlobalStore();
 
   const getSubtotal = () => {
-    if (!order.user_adress_id) return order.total_amount;
-
     const subtotal = order.orderItems.reduce((total, item) => {
       return total + parseFloat(item.value);
     }, 0);
@@ -70,6 +68,15 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
         {order.discount_coupon_id && (
           <div className='flex justify-between  '>
             <span className='text-base font-light'>Cupom: </span>
+            <span className='text-base font-light text-green-500'>
+              - R$ {order.discount_value?.toFixed(2)}
+            </span>
+          </div>
+        )}
+
+        {order.reward_id && order.discount_value !== 0 && (
+          <div className='flex justify-between  '>
+            <span className='text-base font-light'>Recompensa: </span>
             <span className='text-base font-light text-green-500'>
               - R$ {order.discount_value?.toFixed(2)}
             </span>

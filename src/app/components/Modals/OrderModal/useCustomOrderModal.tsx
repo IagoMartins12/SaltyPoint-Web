@@ -4,10 +4,17 @@ import {
   useOrderModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { createOrder, getTypePagaments } from '@/app/services';
-import { CreateOrderDto } from '@/app/types/Dtos';
-import { Discount_cupom, Type_Pagament } from '@/app/types/ModelsType';
+import { addCartProduct, createOrder, getTypePagaments } from '@/app/services';
+import { CartProductDto, CreateOrderDto } from '@/app/types/Dtos';
+import {
+  Cart_product,
+  Discount_cupom,
+  Product,
+  Type_Pagament,
+  User_Rewards,
+} from '@/app/types/ModelsType';
 import { handleSetSelected } from '@/app/utils';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -21,7 +28,7 @@ export const useCustomOrderModal = () => {
   const [couponApplied, setCouponApplied] = useState<Discount_cupom | null>(
     null,
   );
-
+  const [rewardApplied, setRewardApplied] = useState<User_Rewards | null>(null);
   const [typePagament, setTypePagament] = useState<Type_Pagament[] | []>([]);
   const [selectedTypePagament, setSelectedTypePagament] = useState<
     null | string
@@ -33,10 +40,14 @@ export const useCustomOrderModal = () => {
     user,
     address,
     orders,
+    userReward,
     setOrders,
     setCart_product,
     setCoupons,
+    setUserReward,
   } = usePrivateStore();
+
+  const { products } = useGlobalStore();
 
   const orderModal = useOrderModal();
   const addressModal = useAddress();
@@ -80,8 +91,13 @@ export const useCustomOrderModal = () => {
       type_delivery: selected === 0 ? 0 : 1,
       discount_coupon_id: couponApplied ? couponApplied.id : null,
       state_id: '6526e4b833e69bf2bb97bc9e', //Em análise,
-      discount_value: couponApplied ? getDiscount(couponApplied) : 0,
+      discount_value: couponApplied
+        ? getDiscount(couponApplied.discount)
+        : rewardApplied && rewardApplied.rewardType === 0
+        ? getDiscount(rewardApplied.rewardDiscount)
+        : 0,
       contact_phone: user.phone,
+      reward_id: rewardApplied ? rewardApplied.id : null,
     } as CreateOrderDto);
 
     if (response) {
@@ -92,6 +108,14 @@ export const useCustomOrderModal = () => {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
         setCoupons(filteredCoupons);
         setCouponApplied(null);
+      }
+
+      if (rewardApplied) {
+        const filteredRewards = userReward.filter(
+          c => c.id !== rewardApplied.id,
+        );
+        setUserReward(filteredRewards);
+        setRewardApplied(null);
       }
       setCart_product([]);
       orderModal.onClose();
@@ -117,23 +141,34 @@ export const useCustomOrderModal = () => {
     return coupons.find(c => c.cupom_name === inputValue);
   };
 
-  const getDiscount = (coupon: Discount_cupom) => {
-    const discount = (coupon.discount / 100) * cartProductTotal;
-    return discount;
+  const checkReward = () => {
+    return userReward.find(c => c.reward_code === inputValue);
   };
 
+  const getDiscount = (discount: number) => {
+    const orderDiscount = (discount / 100) * cartProductTotal;
+    return orderDiscount;
+  };
   const handleApplyCoupon = () => {
-    const check = checkCoupon();
+    const checkIfCouponExists = checkCoupon();
+    const checkIfRewardExists = checkReward();
 
-    if (!check) {
-      toast.error('Cupom inválido');
-      return;
+    if (!checkIfCouponExists && !checkIfRewardExists) {
+      return toast.error('Código inválido');
     }
 
-    setCouponApplied(check);
-    setShowCoupon(false);
-    setInputValue('');
-    toast.success('Cupom aplicado');
+    if (checkIfCouponExists) {
+      setCouponApplied(checkIfCouponExists);
+      setShowCoupon(false);
+      setInputValue('');
+      toast.success('Cupom aplicado');
+    } else if (checkIfRewardExists) {
+      // Lógica para aplicar a recompensa, se necessário
+      setRewardApplied(checkIfRewardExists);
+      setShowCoupon(false);
+      setInputValue('');
+      toast.success('Recompensa aplicada');
+    }
   };
 
   const handleCouponInputChange = (
@@ -167,7 +202,11 @@ export const useCustomOrderModal = () => {
     let totalValue = cartProductTotal;
 
     if (couponApplied) {
-      totalValue -= getDiscount(couponApplied);
+      totalValue -= getDiscount(couponApplied.discount);
+    }
+
+    if (rewardApplied && rewardApplied.rewardType === 0) {
+      totalValue -= getDiscount(rewardApplied.rewardDiscount);
     }
 
     if (selected === 0) {
@@ -176,6 +215,34 @@ export const useCustomOrderModal = () => {
     }
 
     return totalValue;
+  };
+
+  const addItemToCart = async (product: Product) => {
+    const checkSize = product.name.includes('Brotinho');
+    const newCart = {
+      product_id: product.id,
+      quantity: 1,
+      observation: 'Recompensa',
+      value: '0',
+      size: checkSize ? 1 : 0,
+    } as Cart_product;
+    // const response = await addCartProduct({
+    //   product_id: product.id,
+    //   observation: 'Recompensa',
+    //   quantity: 1,
+    //   value: '0',
+    // } as CartProductDto);
+
+    //     product_id: string;
+    // product_id_2?: string;
+    // product_id_3?: string;
+    // size: number;
+    // quantity: number;
+    // observation?: string;
+    // value: string;
+
+    const updatedCartProduct = [...cart_product, newCart];
+    setCart_product(updatedCartProduct);
   };
 
   useEffect(() => {
@@ -192,6 +259,24 @@ export const useCustomOrderModal = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (rewardApplied) {
+      if (rewardApplied.rewardType === 0) {
+        const orderDiscount = getDiscount(rewardApplied.rewardDiscount);
+        console.log('orderDiscount', orderDiscount);
+      }
+
+      if (rewardApplied.rewardType === 1) {
+        const newItem = products.find(
+          product => product.id === rewardApplied.rewardProductId,
+        );
+
+        if (newItem) {
+          addItemToCart(newItem);
+        }
+      }
+    }
+  }, [rewardApplied]);
   return {
     getTaxa,
     getTotal,
@@ -217,5 +302,7 @@ export const useCustomOrderModal = () => {
     handleGetMoreProduct,
     user,
     handleOpenAddressModal,
+    rewardApplied,
+    setRewardApplied,
   };
 };
