@@ -33,8 +33,33 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   useEffect(() => {
     if (!result) return;
 
+    console.log('resultado', result);
+
+    if (result.types.some(type => addressTypes.includes('premise'))) {
+      setValue('cep', result.address_components[6].long_name);
+    }
+
+    if (result.types.some(type => type === 'route')) {
+      setValue('address', result.address_components[1].long_name);
+      setValue('cep', result.address_components[6].long_name);
+      setValue('district', result.address_components[2].long_name);
+      return;
+    }
+
+    if (result.types.some(type => type === 'premise')) {
+      setValue('address', result.address_components[1].long_name);
+      setValue('cep', result.address_components[6].long_name);
+      // setValue('district', result.address_components[2].long_name);
+      setValue('district', result.address_components[2].long_name);
+      setValue('number', result.address_components[0].long_name);
+
+      return;
+    }
+
     if (result.types.some(type => addressTypes.includes(type))) {
       setValue('address', result.address_components[1].long_name);
+      setValue('cep', result.address_components[0].long_name);
+      // setValue('district', result.address_components[2].long_name);
     }
 
     if (result.types.some(type => onlyDistrict.includes(type))) {

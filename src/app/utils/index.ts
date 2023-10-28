@@ -42,6 +42,7 @@ export const checkIfAddressIsValid = (address: string) => {
     'Décima',
     'area',
     'Bandeirantes',
+    'Morada',
   ];
 
   const lowercaseAddress = address.toLowerCase();

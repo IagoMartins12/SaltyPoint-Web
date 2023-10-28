@@ -39,7 +39,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
 
   const handleResultClick = (result: Result, isValidAddress: boolean) => {
     if (!isValidAddress) {
-      return toast.error('Esse endereço não está na nossa área de entrega');
+      return toast.error('Esse bairro não está na nossa área de entrega.');
     }
     setResult(result);
     setStep(3);
@@ -86,7 +86,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
           <div className='flex flex-col items-center justify-center gap-8 h-3/6'>
             <div className='flex flex-col gap-3 items-center justify-center'>
               <BsWifiOff size={55} />
-              <span className='text-2xl font-medium text-red-700'>
+              <span className='text-2xl font-medium'>
                 Erro ao buscar localização
               </span>
             </div>
@@ -95,7 +95,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
               onClick={() => {
                 setStep(3);
               }}
-              className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
+              className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-500 text-white `}
             >
               <span className='font-medium text-lg'>Inserir endereço </span>
             </button>

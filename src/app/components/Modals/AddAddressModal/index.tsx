@@ -80,7 +80,7 @@ export const AddAddressModal = () => {
     const checkAddress = checkIfAddressIsValid(data.district);
 
     if (!checkAddress)
-      return toast.error('Esse endereço não está na nossa área de entrega');
+      return toast.error('Esse bairro não está na nossa área de entrega.');
 
     const object = {
       address: data.address,
