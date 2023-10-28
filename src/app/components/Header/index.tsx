@@ -20,7 +20,7 @@ export const Header = () => {
         />
       </div>
 
-      <div className='flex  sm:gap-6 items-center'>
+      <div className='flex sm:gap-6 items-center'>
         <SearchIcon />
         <CartIcon />
       </div>

@@ -290,3 +290,8 @@ export interface ModalProps {
   body?: React.ReactElement;
   authModal?: boolean;
 }
+
+export interface AnimationCommponentProps {
+  setHasPlayed: React.Dispatch<React.SetStateAction<boolean>>;
+  // onCloseFuncion: () => void;
+}
