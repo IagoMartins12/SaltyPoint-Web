@@ -56,7 +56,7 @@ export const RegisterModal = () => {
 
   const body = (
     <div className='flex flex-col-reverse sm:flex-row-reverse justify-around'>
-      <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-4'>
+      <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-2'>
         <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
           <div>
             <span className='font-bold text-2xl'>Salty </span>

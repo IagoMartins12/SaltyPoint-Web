@@ -66,7 +66,7 @@ export const LoginModal = () => {
 
   const body = (
     <div className='flex flex-col-reverse sm:flex-row justify-around'>
-      <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-4'>
+      <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-2'>
         <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
           <div>
             <span className='font-bold text-2xl'>Salty </span>
@@ -88,7 +88,10 @@ export const LoginModal = () => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-y-5 mx-auto w-11/12 '>
+        <form
+          className='flex flex-col gap-y-5 mx-auto w-11/12 '
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <StyledInput
             id='email'
             required
@@ -116,7 +119,8 @@ export const LoginModal = () => {
               text='Entrar'
               icon={BiLogInCircle}
               bgColor='bg-red-400'
-              onClick={handleSubmit(onSubmit)}
+              onClick={() => console.log('clicou')}
+              submit
             />
             <div className='flex items-center justify-center  '>
               <hr className='w-3/12 mr-2' />
@@ -144,7 +148,7 @@ export const LoginModal = () => {
               />
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className='w-full sm:w-5/12 lg:w-4/12 relative'>
         <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>

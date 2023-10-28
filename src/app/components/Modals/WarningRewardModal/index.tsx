@@ -1,11 +1,11 @@
 import toast from 'react-hot-toast';
-import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { ModalWarning } from '../../ModalWarning';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { Reward } from '@/app/types/ModelsType';
 import { CreateRewardDto } from '@/app/types/Dtos';
 import { postReward } from '@/app/services';
+import { AiOutlineWarning } from 'react-icons/ai';
 
 export const WarningRewardModal: React.FC = () => {
   const warningModal = useWarningRewardModal();
@@ -41,8 +41,8 @@ export const WarningRewardModal: React.FC = () => {
   const body = (
     <>
       <div className='w-full items-center flex justify-center flex-col gap-10'>
-        <div className='w-24 h-24 rounded-full bg-red-200 items-center justify-center flex'>
-          <RiDeleteBin5Fill size={45} />
+        <div className='w-24 h-24 rounded-full bg-yellow-300 items-center justify-center flex'>
+          <AiOutlineWarning size={45} fill='black' />
         </div>
         <div className='flex flex-col items-center justify-center gap-3'>
           <h3 className='text-2xl  font-bold'>

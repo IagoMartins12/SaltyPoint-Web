@@ -241,7 +241,9 @@ export const useCustomOrderModal = () => {
   };
 
   const addItemToCart = async (product: Product, isOrdered = false) => {
-    const checkSize = product.name.includes('Brotinho');
+    const checkSize = rewardApplied?.rewardName
+      .toUpperCase()
+      .includes('BROTINHO');
     const newCart = {
       product_id: product.id,
       quantity: 1,

@@ -32,6 +32,7 @@ export interface AuthButton {
   text: string;
   bgColor: string;
   onClick: () => void;
+  submit?: boolean;
 }
 
 export interface AddressRadioButton {

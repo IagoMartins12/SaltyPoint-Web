@@ -21,7 +21,7 @@ export const CategoryMenu = () => {
 
   return (
     <div
-      className='w-11/12 mx-auto my-4 py-2 flex flex-row items-center  overflow-x-auto gap-3'
+      className='w-11/12 mx-auto my-4 py-2 flex flex-row items-center  hiddenScroll overflow-x-auto gap-3'
       id='categoryMenu'
     >
       {categorys

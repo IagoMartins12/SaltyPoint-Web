@@ -65,7 +65,7 @@ export const ChangePasswordModal = () => {
         onClose={changePasswordModal.onClose}
         body={body}
         isOpen={changePasswordModal.isOpen}
-        title='Alterar minha senha!'
+        title='Alterar minha senha'
       />
     </>
   );

@@ -15,7 +15,9 @@ export const SearchProduct: React.FC<SearchProductBox> = ({ product }) => {
     >
       <div className='w-7/12 flex py-2 h-full flex-col gap-3'>
         <span className='text-base sm:text-lg font-medium'>{product.name}</span>
-        <span className='text-sm font-light'>{product.description}</span>
+        <span className='text-sm font-light overflow-hidden'>
+          {product.description}
+        </span>
       </div>
       <div className='w-5/12 h-full'>
         <Image

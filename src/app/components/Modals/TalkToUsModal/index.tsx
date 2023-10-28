@@ -90,9 +90,12 @@ export const TalkToUsModal = () => {
       <span className='text-xl font-medium'>Ou entre em contato:</span>
 
       <div className='flex w-full '>
-        <div className='flex flex-col  justify-center items-start gap-2'>
+        <div className='flex flex-col  justify-center items-start gap-6'>
           {talkOptions.map((option, i) => (
-            <div className='flex gap-5 items-start justify-center ' key={i + 1}>
+            <div
+              className='flex flex-col sm:flex-row gap-5 items-start justify-center '
+              key={i + 1}
+            >
               <div className='flex gap-4 items-center'>
                 {option.icon}
                 <span className='font-light text-lg text-end'>

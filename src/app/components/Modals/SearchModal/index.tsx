@@ -72,7 +72,7 @@ export const SearchModal = () => {
           ))}
       </div>
 
-      <div className='privacyScroll overflow-auto'>
+      <div className=''>
         <div className='flex flex-col  gap-4  w-full'>
           {productState.map(p => (
             <SearchProduct product={p} key={p.id} />

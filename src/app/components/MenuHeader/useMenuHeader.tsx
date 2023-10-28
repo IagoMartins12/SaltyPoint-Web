@@ -57,9 +57,8 @@ export const useMenuHeader = () => {
 
     setTimeout(() => {
       removeToken();
-    }, 1000);
-
-    window.location.reload();
+      window.location.reload();
+    }, 500);
   };
 
   const commomOptions = [

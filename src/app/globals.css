@@ -4,8 +4,8 @@
 
 .cardBG,
 .modalBG {
-  background: #fff;
-  /* box-shadow: 0 16px 20px 8px rgba(1, 1, 5, 0.1); */
+  background: #f9f9f9;
+  box-shadow: 0 16px 20px 8px rgba(1, 1, 5, 0.1);
 }
 
 [data-theme='dark'] .cardBG,
@@ -38,7 +38,7 @@ input[type='number'] {
 
 /* Estilos para o preenchimento automático quando o tema é escuro */
 [data-theme='dark'] input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px black inset !important;
+  -webkit-box-shadow: 0 0 0 30px #0b0a0a inset !important;
 }
 
 [data-theme='dark'] input {
@@ -51,25 +51,6 @@ option {
 
 [data-theme='dark'] option {
   background-color: #000000;
-}
-
-.dark {
-  --bg-color-dark: #1c1c1c;
-  --text-color-dark: #fafafa;
-  --border-color-dark: #0f0f0f;
-  --reactIcons-color-dark: rgba(0, 0, 0, 0.99);
-}
-
-.light {
-  --bg-color-white: #fafafa;
-  --text-color-white: #1c1c1c;
-  --border-color-white: #1d1d1d;
-  --reactIcons-color-white: hsla(0, 0%, 100%, 0.99);
-}
-
-body {
-  color: var(--text-color-white);
-  background-color: var(--bg-color-white);
 }
 
 .modalsBackground {
@@ -106,6 +87,10 @@ body {
 /* Defina a largura da barra de rolagem */
 .privacyScroll::-webkit-scrollbar {
   width: 5px;
+}
+
+.hiddenScroll::-webkit-scrollbar {
+  width: 1px;
 }
 
 /* Estilize a faixa da barra de rolagem */
