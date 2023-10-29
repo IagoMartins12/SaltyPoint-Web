@@ -8,10 +8,10 @@ import { addCartProduct } from '@/app/services';
 import { CartProductDto } from '@/app/types/Dtos';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-import Loader from '../../Loader';
+import { AnimationCart } from '../../AnimationCart';
 
 export const CurrentOrderModal = () => {
-  const [loading, setLoading] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const myOrdersModal = useCurrentOrderModal();
 
   const { orders, cart_product, setCart_product } = usePrivateStore();
@@ -23,7 +23,7 @@ export const CurrentOrderModal = () => {
   const handleRepeatOrder = async () => {
     let success = true; // Variável de controle para verificar se tudo ocorreu bem
     const updatedCartProduct = [...cart_product]; // Novo array temporário
-    setLoading(true);
+    setHasPlayed(true);
 
     const filteredOrderItems = currentOrder[0].orderItems.filter(
       item => item.value !== '0',
@@ -43,10 +43,7 @@ export const CurrentOrderModal = () => {
     if (success) {
       setCart_product(updatedCartProduct); // Atualiza o estado com o novo array temporário
       toast.success('Produtos adicionados com sucesso');
-      myOrdersModal.onClose();
     }
-
-    setLoading(false);
   };
 
   let body = (
@@ -67,24 +64,35 @@ export const CurrentOrderModal = () => {
         </div>
       </div>
 
-      <button
-        className='w-full py-3 px-2 rounded-2xl bg-red-400 flex items-center justify-center gap-6'
-        onClick={handleRepeatOrder}
-      >
-        <AiOutlineShoppingCart size={25} />
-        Repetir pedido{' '}
-      </button>
+      {hasPlayed ? (
+        <div
+          className={` items-center justify-center w-full h-10 mb-5 rounded-lg `}
+        >
+          <span>
+            <AnimationCart setHasPlayed={setHasPlayed} />
+          </span>
+        </div>
+      ) : (
+        <button
+          className='w-full py-3 px-2 rounded-2xl bg-red-400 flex items-center justify-center gap-6'
+          onClick={handleRepeatOrder}
+        >
+          <AiOutlineShoppingCart size={25} />
+          Repetir pedido
+        </button>
+      )}
     </div>
   );
 
-  if (loading) {
-    body = <Loader />;
-  }
+  const handleClose = () => {
+    setHasPlayed(false);
+    myOrdersModal.onClose();
+  };
 
   return (
     <>
       <Modal
-        onClose={myOrdersModal.onClose}
+        onClose={handleClose}
         body={body}
         isOpen={myOrdersModal.isOpen}
         title='Meu pedido'

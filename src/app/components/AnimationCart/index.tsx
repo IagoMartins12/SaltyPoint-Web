@@ -6,13 +6,15 @@ import toast from 'react-hot-toast';
 
 export const AnimationCart: React.FC<AnimationCommponentProps> = ({
   setHasPlayed,
+  repeat = false,
 }) => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
 
   const onCloseFunction = () => {
     toast.success('Produto adicionado');
-
-    setHasPlayed(false);
+    if (repeat) {
+      setHasPlayed(false);
+    }
   };
   const { View, play, destroy } = useLottie({
     animationData: cartAnimation,

@@ -293,6 +293,7 @@ export interface ModalProps {
 
 export interface AnimationCommponentProps {
   setHasPlayed: React.Dispatch<React.SetStateAction<boolean>>;
+  repeat?: boolean;
 }
 
 export interface OrderAnimationCommponentProps
