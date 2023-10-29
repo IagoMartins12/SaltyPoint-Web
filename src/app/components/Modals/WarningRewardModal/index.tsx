@@ -6,11 +6,16 @@ import { Reward } from '@/app/types/ModelsType';
 import { CreateRewardDto } from '@/app/types/Dtos';
 import { postReward } from '@/app/services';
 import { AiOutlineWarning } from 'react-icons/ai';
+import { useState } from 'react';
+import { AnimationReward } from '../../AnimationReward';
 
 export const WarningRewardModal: React.FC = () => {
+  const [hasPlayed, setHasPlayed] = useState(false);
+
   const warningModal = useWarningRewardModal();
   const { user, setUser, setUserReward, userReward } = usePrivateStore();
   const handleCloseModal = () => {
+    setHasPlayed(false);
     warningModal.onClose();
   };
 
@@ -26,19 +31,17 @@ export const WarningRewardModal: React.FC = () => {
       const response = await postReward(object);
 
       if (response) {
+        setHasPlayed(true);
         const updatedRewards = [...userReward, response];
         setUserReward(updatedRewards);
         const updatedPoints = user?.points - reward.quantity_points;
         const updatedUser = { ...user, points: updatedPoints }; //
         setUser(updatedUser);
-        toast.success('Recompensa resgatada');
       }
-
-      handleCloseModal();
     }
   };
 
-  const body = (
+  let body = (
     <>
       <div className='w-full items-center flex justify-center flex-col gap-10'>
         <div className='w-24 h-24 rounded-full bg-yellow-300 items-center justify-center flex'>
@@ -84,9 +87,17 @@ export const WarningRewardModal: React.FC = () => {
     </>
   );
 
+  if (hasPlayed) {
+    body = (
+      <div className='w-full h-full items-center flex justify-center flex-col gap-10'>
+        <AnimationReward setHasPlayed={setHasPlayed} />
+      </div>
+    );
+  }
+
   return (
     <ModalWarning
-      onClose={warningModal.onClose}
+      onClose={handleCloseModal}
       body={body}
       isOpen={warningModal.isOpen}
       title='Resgatar recompensa'

@@ -35,10 +35,14 @@ export const FetchData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoryData = await getCategories();
-        const productData = await getProducts();
-        const typePagamentData = await getTypePagaments();
-        const statesDate = await getStates();
+        const [categoryData, productData, typePagamentData, statesDate] =
+          await Promise.all([
+            getCategories(),
+            getProducts(),
+            getTypePagaments(),
+            getStates(),
+          ]);
+
         setCategorys(categoryData);
         setProducts(productData);
         setTypePagament(typePagamentData);
@@ -55,13 +59,23 @@ export const FetchData = () => {
     if (isLogged) {
       const fetchData = async () => {
         try {
-          const addressData = await getAddress();
-          const userData = await getMe();
-          const favoriteData = await getFavorites();
-          const cartProductData = await getCartProduct();
-          const couponsData = await getCoupons();
-          const orderData = await getOrders();
-          const rewardData = await getUserReward();
+          const [
+            addressData,
+            userData,
+            favoriteData,
+            cartProductData,
+            couponsData,
+            orderData,
+            rewardData,
+          ] = await Promise.all([
+            getAddress(),
+            getMe(),
+            getFavorites(),
+            getCartProduct(),
+            getCoupons(),
+            getOrders(),
+            getUserReward(),
+          ]);
 
           setCoupons(couponsData);
           setAddress(addressData);

@@ -5,7 +5,7 @@ import { CartIcon } from '../CartIcon';
 
 export const Header = () => {
   return (
-    <div className=' w-full px-2 sm:px-14 sticky items-center h-[10vh] flex justify-between'>
+    <div className=' w-full px-2 sm:px-14 sticky items-center h-[10vh] flex justify-between menuBackground top-0'>
       <div className='flex gap-4 items-center'>
         <MenuHeader />
       </div>

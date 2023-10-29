@@ -17,7 +17,7 @@ export const ProductCard: React.FC<ProductCardType> = ({
 
   return (
     <div
-      className={`flex  cardBG  min-h-[15vh] p-2 shadow-md rounded-2xl cursor-pointer  ${
+      className={`flex  cardBG  h-[23vh] p-2 shadow-md rounded-2xl cursor-pointer  ${
         fullWidth ? 'w-[100%]' : 'w-full md:w-[48%] lg:w-[33%]'
       }`}
       onClick={() => {
@@ -36,10 +36,10 @@ export const ProductCard: React.FC<ProductCardType> = ({
           height={100}
         />
       </div>
-      <div className='flex flex-col w-7/12 h-full gap-4 py-2 px-5 justify-between'>
+      <div className='flex flex-col w-7/12 h-full gap-4 py-2 px-5 justify-between overflow-hidden'>
         <div className='flex flex-col gap-4'>
           <span className='font-semibold text-lg'> {product.name} </span>
-          <span className='font-light text-sm'> {product.description} </span>
+          <span className='font-light text-sm '> {product.description} </span>
         </div>
         <span className='font-bold text-lg'>R$ {product.value.toFixed(2)}</span>
       </div>

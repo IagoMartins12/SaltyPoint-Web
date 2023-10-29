@@ -11,7 +11,7 @@ export const CouponCard: React.FC<CouponCardType> = ({ coupon }) => {
 
   return (
     <div
-      className='min-h-[15vh] flex border-dashed border-2 w-full cursor-pointer'
+      className='h-[18vh] sm:h-[15vh] flex border-dashed border-2 w-full cursor-pointer'
       onClick={handleCopyLink}
     >
       <div className='w-4/12 relative flex items-center justify-center'>

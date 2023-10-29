@@ -102,7 +102,7 @@ export const ProductBody = () => {
             className={` items-center justify-center w-full h-10 mb-5 rounded-lg `}
           >
             <span>
-              <AnimationCart setHasPlayed={setHasPlayed} />
+              <AnimationCart setHasPlayed={setHasPlayed} repeat />
             </span>
           </div>
         ) : (
