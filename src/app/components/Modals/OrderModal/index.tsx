@@ -13,6 +13,7 @@ import { MdPix } from 'react-icons/md';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
 import { APP_SETTINGS } from '@/app/config';
+import { AnimationOrder } from '../../AnimationOrder';
 
 const OrderModal = () => {
   const {
@@ -40,11 +41,12 @@ const OrderModal = () => {
     user,
     handleOpenAddressModal,
     rewardApplied,
-    setRewardApplied,
     toogleRewardInput,
+    hasPlayed,
+    setHasPlayed,
   } = useCustomOrderModal();
 
-  const body = (
+  let body = (
     <div className='overflow-auto privacyScroll pb-8'>
       <form
         className='flex flex-col gap-6 mx-auto w-11/12'
@@ -310,10 +312,19 @@ const OrderModal = () => {
     </div>
   );
 
+  if (hasPlayed) {
+    body = <AnimationOrder setHasPlayed={setHasPlayed} />;
+  }
+
+  const onClose = () => {
+    setHasPlayed(false);
+    orderModal.onClose();
+  };
+
   return (
     <>
       <Modal
-        onClose={orderModal.onClose}
+        onClose={onClose}
         body={body}
         title='Meu pedido'
         isOpen={orderModal.isOpen}

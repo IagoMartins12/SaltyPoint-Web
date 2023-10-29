@@ -70,9 +70,9 @@ export const PizzaBody = () => {
     } as CartProductDto);
 
     if (response) {
+      setHasPlayed(true);
       const updatedCartProduct = [...cart_product, response];
       setCart_product(updatedCartProduct);
-      setHasPlayed(true);
     }
   };
 

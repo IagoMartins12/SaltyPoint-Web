@@ -33,6 +33,7 @@ export const useCustomOrderModal = () => {
   const [selectedTypePagament, setSelectedTypePagament] = useState<
     null | string
   >(null);
+  const [hasPlayed, setHasPlayed] = useState(false);
 
   const {
     cart_product,
@@ -113,6 +114,7 @@ export const useCustomOrderModal = () => {
     if (response) {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
+      setHasPlayed(true);
 
       if (couponApplied) {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
@@ -128,9 +130,8 @@ export const useCustomOrderModal = () => {
         setRewardApplied(null);
       }
       setCart_product([]);
-      orderModal.onClose();
       setOrders(updatedOrders);
-      toast.success('Pedido feito!');
+      return;
     } else {
       toast.error('Erro ao fazer pedido');
     }
@@ -195,8 +196,6 @@ export const useCustomOrderModal = () => {
   const toogleRewardInput = () => {
     setInputValue('');
     if (rewardApplied && rewardApplied.rewardType === 1) {
-      console.log('removeee', rewardApplied);
-      console.log('carrinho', cart_product);
       const filteredCart = cart_product.filter(
         cart => cart.observation !== 'Recompensa',
       );
@@ -317,7 +316,6 @@ export const useCustomOrderModal = () => {
     getDiscount,
     setCouponApplied,
     typePagament,
-    selectedTypePagament,
     setSelectedTypePagament,
     onSubmit,
     orderModal,
@@ -325,7 +323,8 @@ export const useCustomOrderModal = () => {
     user,
     handleOpenAddressModal,
     rewardApplied,
-    setRewardApplied,
     toogleRewardInput,
+    hasPlayed,
+    setHasPlayed,
   };
 };

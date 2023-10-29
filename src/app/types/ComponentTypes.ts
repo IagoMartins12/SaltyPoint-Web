@@ -293,5 +293,7 @@ export interface ModalProps {
 
 export interface AnimationCommponentProps {
   setHasPlayed: React.Dispatch<React.SetStateAction<boolean>>;
-  // onCloseFuncion: () => void;
 }
+
+export interface OrderAnimationCommponentProps
+  extends AnimationCommponentProps {}
