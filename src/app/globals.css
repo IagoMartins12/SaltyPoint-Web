@@ -4,8 +4,8 @@
 
 .cardBG,
 .modalBG {
-  background: #f9f9f9;
-  box-shadow: 0 16px 20px 8px rgba(1, 1, 5, 0.1);
+  background: #fffdfd;
+  /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
 [data-theme='dark'] .cardBG,

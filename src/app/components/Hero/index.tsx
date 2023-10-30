@@ -1,6 +1,9 @@
+'use client';
+
 import { AiOutlineSearch } from 'react-icons/ai';
 import { AppleButton, GoogleButton } from '../Buttons';
 import { ImageComponent } from '../ImageComponent';
+import { useSearchModal } from '@/app/hooks/modals/useModal';
 
 export const Hero = () => {
   return (
@@ -37,6 +40,7 @@ export const Hero = () => {
 };
 
 export const Hero2 = () => {
+  const searchModal = useSearchModal();
   return (
     <div className='flex flex-col w-11/12 mx-auto my-6 gap-6' id='hero'>
       <div className='flex flex-col gap-3 w-10/12'>
@@ -48,16 +52,23 @@ export const Hero2 = () => {
         </span>
       </div>
 
-      <div className='relative flex w-full mx-auto -z-10'>
-        <input
-          type='text'
-          className='w-full px-12 py-[0.65rem]  rounded-2xl border-2 bg-gray-200'
-          placeholder='Pesquise seus sabores preferidos'
-        />
-        <AiOutlineSearch
-          size={30}
-          className='left-2 top-2 absolute cursor-pointer'
-        />
+      <div
+        className=' flex w-full mx-auto  '
+        onClick={() => {
+          searchModal.onOpen();
+        }}
+      >
+        <div className='relative -z-10 w-full'>
+          <input
+            type='text'
+            className='w-full px-12 py-[0.65rem]  rounded-2xl border-2 bg-gray-200 '
+            placeholder='Pesquise seus sabores preferidos'
+          />
+          <AiOutlineSearch
+            size={30}
+            className='left-2 top-2 absolute cursor-pointer'
+          />
+        </div>
       </div>
     </div>
   );

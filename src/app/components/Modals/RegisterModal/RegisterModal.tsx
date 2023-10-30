@@ -7,7 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';
 import { AiFillApple } from 'react-icons/ai';
 import { BiLogInCircle } from 'react-icons/bi';
-import { createUser } from '@/app/services';
+import { createUser, googleLogin } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput, StyledInputPassword } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
@@ -52,6 +52,12 @@ export const RegisterModal = () => {
     } else {
       toast.error('Erro ao realizar cadastro!');
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    console.log('clicou');
+    const response = await googleLogin();
+    console.log('resposta', response);
   };
 
   const body = (
@@ -122,7 +128,7 @@ export const RegisterModal = () => {
                 text='Continuar com Google'
                 icon={FcGoogle}
                 bgColor='bg-[#4285F4] '
-                onClick={() => console.log('clicou')}
+                onClick={handleGoogleLogin}
               />
               <AuthLoginButtonRounded
                 text='Continuar com Facebook'

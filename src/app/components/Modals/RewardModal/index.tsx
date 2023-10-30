@@ -78,14 +78,13 @@ export const RewardModal = () => {
   const rewardModal = useRewardModal();
 
   const catchReward = async (reward: Reward) => {
-    if (user?.points) {
+    if (user) {
+      if (user.points < reward.quantity_points) {
+        return toast.error('Pontos insuficientes');
+      }
       warningModal.setCurrentItem(reward);
       warningModal.onOpen();
       // const updatedPoints = user?.points - reward.quantity_points;
-
-      // if (user.points < reward.quantity_points) {
-      //   return toast.error('Pontos insuficientes');
-      // }
 
       // const updatedUser = { ...user, points: updatedPoints }; //
       // console.log(updatedUser);

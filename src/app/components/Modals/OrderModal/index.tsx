@@ -137,9 +137,6 @@ const OrderModal = () => {
                     }
                   }}
                   required
-                  defaultChecked={
-                    selected === i && (i !== 0 || !user?.user_Adress_id)
-                  }
                 />
               </div>
             ))}

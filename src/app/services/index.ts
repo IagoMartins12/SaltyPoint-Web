@@ -311,3 +311,12 @@ export const postReward = async (
     return error;
   }
 };
+
+export const googleLogin = async () => {
+  try {
+    const response = await Api.get('/social');
+    return response;
+  } catch (error: any) {
+    return error;
+  }
+};
