@@ -33,7 +33,6 @@ export const CurrentOrderModal = () => {
         const response = await addCartProduct(product as CartProductDto);
 
         updatedCartProduct.push(response); // Adiciona o produto ao novo array temporário
-        console.log('response', response);
       } catch (error) {
         toast.error('Erro ao adicionar produto');
         success = false; // Define a variável de sucesso como false em caso de erro
@@ -42,7 +41,6 @@ export const CurrentOrderModal = () => {
 
     if (success) {
       setCart_product(updatedCartProduct); // Atualiza o estado com o novo array temporário
-      toast.success('Produtos adicionados com sucesso');
     }
   };
 
@@ -69,7 +67,10 @@ export const CurrentOrderModal = () => {
           className={` items-center justify-center w-full h-10 mb-5 rounded-lg `}
         >
           <span>
-            <AnimationCart setHasPlayed={setHasPlayed} />
+            <AnimationCart
+              setHasPlayed={setHasPlayed}
+              text='Produtos adicionados'
+            />
           </span>
         </div>
       ) : (

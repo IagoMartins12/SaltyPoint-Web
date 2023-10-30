@@ -7,11 +7,16 @@ import toast from 'react-hot-toast';
 export const AnimationCart: React.FC<AnimationCommponentProps> = ({
   setHasPlayed,
   repeat = false,
+  text,
 }) => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
 
   const onCloseFunction = () => {
-    toast.success('Produto adicionado');
+    if (text) {
+      toast.success(text);
+    } else {
+      toast.success('Produto adicionado');
+    }
     if (repeat) {
       setHasPlayed(false);
     }

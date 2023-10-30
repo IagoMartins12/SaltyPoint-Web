@@ -26,7 +26,6 @@ export default function RootLayout({
           <ModalsProvider />
           <ToasterProvider />
           <ModalsBackground />
-          <FetchData />
           {children}
         </ThemeProv>
       </body>
