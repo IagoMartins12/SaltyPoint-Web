@@ -8,6 +8,14 @@
   /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
+/* body {
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] body {
+  background-color: #000000;
+} */
+
 [data-theme='dark'] .cardBG,
 .modalBG {
   background: #141414;

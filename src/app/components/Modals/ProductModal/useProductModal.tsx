@@ -7,7 +7,7 @@ import { Product } from '@/app/types/ModelsType';
 import { useEffect, useState } from 'react';
 
 export const useCustomProductModal = () => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [disabled, setDisabled] = useState(true);
   const [value, setValue] = useState<number | string>(0);
   const [otherProductsValue, setOtherProductsValue] = useState<number | string>(

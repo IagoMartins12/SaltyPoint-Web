@@ -16,7 +16,7 @@ export const AnimationReward: React.FC<AnimationCommponentProps> = ({
       setHasPlayed(false);
     }
   };
-  const { View, play, destroy } = useLottie({
+  const { View, play } = useLottie({
     animationData: crown,
     loop: false,
     autoplay: false,

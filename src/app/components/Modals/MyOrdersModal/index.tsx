@@ -2,6 +2,7 @@ import Modal from '../../Modal';
 import { useMyOrderModal } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { OrderComponent } from '../../OrderComponent';
+import { EmptyResult } from '../../EmptyResult';
 
 export const MyOrdersModal = () => {
   const myOrdersModal = useMyOrderModal();
@@ -15,11 +16,7 @@ export const MyOrdersModal = () => {
           {orders.length > 0 ? (
             orders.map(order => <OrderComponent key={order.id} order={order} />)
           ) : (
-            <div className='h-full flex items-center justify-center'>
-              <span className='font-semibold text-xl text-center'>
-                Você ainda não fez nenhum pedido
-              </span>
-            </div>
+            <EmptyResult text='Você ainda não fez nenhum pedido' />
           )}
         </div>
       </div>

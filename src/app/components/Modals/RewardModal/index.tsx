@@ -29,14 +29,9 @@ export const RewardModal = () => {
 
   const rewardoOptions = [
     {
-      mainText: 'Até 50',
+      mainText: 'Até 100',
       subText: 'Pontos',
-      pointsRange: [0, 50] as [number, number],
-    },
-    {
-      mainText: '51 a 100',
-      subText: 'Pontos',
-      pointsRange: [51, 100] as [number, number],
+      pointsRange: [0, 100] as [number, number],
     },
     {
       mainText: '101 a 150',
@@ -52,6 +47,11 @@ export const RewardModal = () => {
       mainText: '201 a 250',
       subText: 'Pontos',
       pointsRange: [201, 250] as [number, number],
+    },
+    {
+      mainText: '251 a 300',
+      subText: 'Pontos',
+      pointsRange: [251, 300] as [number, number],
     },
   ];
   const filterRewardsByPointsRange = () => {
@@ -84,24 +84,6 @@ export const RewardModal = () => {
       }
       warningModal.setCurrentItem(reward);
       warningModal.onOpen();
-      // const updatedPoints = user?.points - reward.quantity_points;
-
-      // const updatedUser = { ...user, points: updatedPoints }; //
-      // console.log(updatedUser);
-      // setUser(updatedUser);
-
-      // const object = {
-      //   rewardId: reward.id,
-      // } as CreateRewardDto;
-      // const response = await postReward(object);
-
-      // if (response) {
-      //   const updatedRewards = [...userReward, response];
-      //   setUserReward(updatedRewards);
-      //   toast.success('Recompensa resgatada');
-      // }
-
-      // console.log('response: ', response);
     }
   };
 
@@ -109,10 +91,6 @@ export const RewardModal = () => {
     navigator.clipboard.writeText(reward.reward_code);
     toast.success('Copiado!');
   };
-
-  useEffect(() => {
-    fetchReward();
-  }, []);
 
   let body = (
     <div className='flex flex-col gap-6 h-full'>
@@ -204,6 +182,10 @@ export const RewardModal = () => {
       </div>
     );
   }
+
+  useEffect(() => {
+    fetchReward();
+  }, []);
   return (
     <>
       <Modal

@@ -66,14 +66,3 @@ export const AuthLoginButtonRounded: React.FC<AuthButton> = ({
     </button>
   );
 };
-
-export const OrderButton = () => {
-  return (
-    <button
-      type='button'
-      className='border-2 px-5 py-5 border-white text-white rounded-full bg-red-800'
-    >
-      <span> Comprar online</span>
-    </button>
-  );
-};

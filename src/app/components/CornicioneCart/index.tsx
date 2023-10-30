@@ -11,12 +11,12 @@ export const CornicioneCart: React.FC<CornicioneProductModalType> = ({
   setSelectedProduct3,
 }) => {
   return (
-    <label className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%]`}>
+    <label className={`flex h-[10vh] rounded-2xl cursor-pointer w-full`}>
       <input
         type='radio'
         name='selectedProduct3'
         value={product.id}
-        defaultChecked={selectedProduct3 === product.id}
+        className='hidden'
         onClick={() => {
           if (selectedProduct3 === product.id) {
             setSelectedProduct3(null);
@@ -24,7 +24,7 @@ export const CornicioneCart: React.FC<CornicioneProductModalType> = ({
             setSelectedProduct3(product.id);
           }
         }}
-        style={{ display: 'none' }} // Esconde o input para personalizar a aparência
+        defaultChecked={product.name === 'Sem borda'}
       />
       <div
         className={`flex min-h-[10vh] rounded-2xl cursor-pointer w-[100%] ${
@@ -38,7 +38,7 @@ export const CornicioneCart: React.FC<CornicioneProductModalType> = ({
               fill
               src={product.product_image}
               alt='product-image'
-              className='rounded-xl px-2 py-2'
+              className='rounded-xl object-cover'
               sizes='100%'
             />
           </div>

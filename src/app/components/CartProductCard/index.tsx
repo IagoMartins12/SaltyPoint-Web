@@ -83,7 +83,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
 
       <div className='pt-1'>
         <AiOutlineDelete
-          size={25}
+          size={22}
           fill='red'
           className='cursor-pointer'
           onClick={() => {

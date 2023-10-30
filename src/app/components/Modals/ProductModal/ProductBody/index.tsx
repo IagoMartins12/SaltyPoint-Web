@@ -14,12 +14,13 @@ import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
 import { useState } from 'react';
 import { AnimationCart } from '@/app/components/AnimationCart';
+import { FavoriteButton } from '@/app/components/FavoriteButton';
 
 export const ProductBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
 
   const { handleSubmit, register } = useFormHook();
-  const { cart_product, setCart_product } = usePrivateStore();
+  const { cart_product, setCart_product, favorites } = usePrivateStore();
 
   const { isLogged } = useAuth();
 
@@ -54,15 +55,25 @@ export const ProductBody = () => {
     }
   };
 
+  const handleCheckFavorites = () => {
+    return favorites.some(
+      p => p.product_id === productModal.currentProduct?.id,
+    );
+  };
+
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
       <div className='w-full h-[25%] relative rounded-lg '>
         <Image
           fill
-          src={(productModal.currentProduct as Product).product_image ?? ''}
+          src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky'
+          className='rounded-lg !sticky object-fill opacity-90'
           sizes='100%'
+        />
+        <FavoriteButton
+          product={productModal.currentProduct as Product}
+          filled={handleCheckFavorites()}
         />
       </div>
 

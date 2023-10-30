@@ -5,7 +5,12 @@ import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import Image from 'next/image';
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import {
+  AiFillCheckCircle,
+  AiOutlineCheck,
+  AiOutlineMinus,
+  AiOutlinePlus,
+} from 'react-icons/ai';
 import { handleSetSelected } from '@/app/utils';
 import { CornicioneCart } from '@/app/components/CornicioneCart';
 import { useCustomProductModal } from '../useProductModal';
@@ -18,6 +23,8 @@ import { Product } from '@/app/types/ModelsType';
 import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
 import { AnimationCart } from '@/app/components/AnimationCart';
+import { FavoriteButton } from '@/app/components/FavoriteButton';
+import { FaCheckCircle } from 'react-icons/fa';
 
 export const PizzaBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
@@ -26,6 +33,7 @@ export const PizzaBody = () => {
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product } = usePrivateStore();
   const { isLogged } = useAuth();
+  const { favorites } = usePrivateStore();
 
   const loginModal = useLoginModal();
   const productModal = useProductModal();
@@ -87,6 +95,12 @@ export const PizzaBody = () => {
       name: p.name.replace('Pizza', 'Brotinho'),
     }));
 
+  const handleCheckFavorites = () => {
+    return favorites.some(
+      p => p.product_id === productModal.currentProduct?.id,
+    );
+  };
+
   const getCategory = categorys.find(
     c => c.id === (productModal.currentProduct as Product).category_id,
   )?.category_name;
@@ -98,8 +112,12 @@ export const PizzaBody = () => {
           fill
           src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky object-contain'
+          className='rounded-lg !sticky object-fill opacity-90'
           sizes='100%'
+        />
+        <FavoriteButton
+          product={productModal.currentProduct as Product}
+          filled={handleCheckFavorites()}
         />
       </div>
 
@@ -119,9 +137,14 @@ export const PizzaBody = () => {
         <div id='size' className='flex flex-col w-full'>
           <div className='flex border-b-2 justify-between pb-2'>
             <span className='text-lg '>Selecione o tamanho </span>
-            <span className='bg-black py-2 px-2 text-white text-xs rounded-xl'>
-              Obrigatorio
-            </span>
+            {/* 
+            {selectedSize !== 0 && selectedSize !== 1 ? (
+              <span className='bg-black py-2 px-2 text-white text-xs rounded-xl'>
+                Obrigatorio
+              </span>
+            ) : (
+              <AiFillCheckCircle fill='green' size={25} className='mr-3' />
+            )} */}
           </div>
 
           <div className='flex flex-col gap-2'>
@@ -142,7 +165,7 @@ export const PizzaBody = () => {
                     setSelectedSize(i);
                   }}
                   defaultChecked={size === 'Pizza'}
-                  className='accent-red-600 w-5 h-5'
+                  className='accent-red-500 w-5 h-5'
                 />
               </div>
             ))}
@@ -152,9 +175,7 @@ export const PizzaBody = () => {
         <div id='flavor' className='flex flex-col w-full'>
           <div className='flex border-b-2 justify-between pb-2'>
             <span className='text-lg '>Quantos sabores ?</span>
-            <span className='bg-black py-2 px-2 text-white text-xs rounded-xl'>
-              Obrigatorio
-            </span>
+            {/* <AiFillCheckCircle fill='green' size={25} className='mr-3' /> */}
           </div>
 
           <div className='flex flex-col gap-2'>
@@ -178,7 +199,7 @@ export const PizzaBody = () => {
                     handleSetSelected('pizzas');
                   }}
                   defaultChecked={flavor === '1 Sabor'}
-                  className='accent-red-600 w-5 h-5'
+                  className='accent-red-500 w-5 h-5'
                 />
               </div>
             ))}

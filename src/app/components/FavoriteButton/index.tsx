@@ -46,19 +46,21 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   };
 
   return (
-    <AiFillHeart
-      size={25}
-      className={` z-30 absolute right-3 top-3 cursor-pointer  ${
-        filled ? 'fill-rose-500' : 'fill-slate-100 '
-      }`}
-      onClick={() => {
-        if (!isLogged) {
-          toast.error('Faça o login para adicionar o produto');
-          loginModal.onOpen();
-          return;
-        }
-        handleFavorite();
-      }}
-    />
+    <div className='w-10 h-10 rounded-full bg-[#dfdfdf] absolute right-2 top-2 flex items-center justify-center'>
+      <AiFillHeart
+        size={25}
+        className={` z-30  cursor-pointer  ${
+          filled ? 'fill-rose-500' : 'fill-slate-100 '
+        }`}
+        onClick={() => {
+          if (!isLogged) {
+            toast.error('Faça o login para adicionar o produto');
+            loginModal.onOpen();
+            return;
+          }
+          handleFavorite();
+        }}
+      />
+    </div>
   );
 };
