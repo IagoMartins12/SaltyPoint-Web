@@ -66,13 +66,13 @@ export const useCustomOrderModal = () => {
   const handleOpenAddressModal = () => {
     if (address.length === 0) {
       toast.error('É necessario possuir ao minimo um endereço cadastrado');
-      orderModal.onClose();
+      // orderModal.onClose();
       return addressModal.onOpen();
     }
 
     if (address.length !== 0 && !user?.user_Adress_id) {
       toast.error('É necessario vincular um endereço a sua conta ');
-      orderModal.onClose();
+      // orderModal.onClose();
       return userInfo.onOpen();
     }
   };

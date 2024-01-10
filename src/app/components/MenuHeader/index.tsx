@@ -30,7 +30,7 @@ export const MenuHeader = () => {
             leftMenu.isOpen ? 'menu-open' : 'menu-closed'
           } bottom-0 flex flex-col w-[80%] sm:w-[65%] md:w-[50%] lg:w-[25%] py-6 px-6 modalsBackground overflow-y-auto`}
         >
-          <div className='flex flex-col gap-6 px-4 py-3'>
+          <div className='flex flex-col gap-6 px-4 sm:px-8 py-3'>
             {authOptions.isLogged
               ? userMenuOptions.map((option, index) => (
                   <div

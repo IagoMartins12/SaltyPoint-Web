@@ -1,15 +1,15 @@
 import { useRewardModal } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 import { useEffect, useState } from 'react';
-import { Reward, User, User_Rewards } from '@/app/types/ModelsType';
-import { getRewards, postReward } from '@/app/services';
+import { Reward, User_Rewards } from '@/app/types/ModelsType';
+import { getRewards } from '@/app/services';
 import toast from 'react-hot-toast';
 import { RewardComponent } from '../../RewardComponent';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { CreateRewardDto } from '@/app/types/Dtos';
 import { RewardUserComponent } from '../../RewardUserComponent';
 import { EmptyResult } from '../../EmptyResult';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
+import { ProgressBar } from '../../ProgressBar';
 
 enum STEPS {
   INVENTORY = 0,
@@ -17,6 +17,7 @@ enum STEPS {
 }
 
 export const RewardModal = () => {
+  const [animatedPoints, setAnimatedPoints] = useState<number>(0);
   const [step, setStep] = useState(STEPS.INVENTORY);
   const [isActive, setIsActive] = useState<number | null>(null);
   const [selectedPointsRange, setSelectedPointsRange] = useState<
@@ -25,7 +26,7 @@ export const RewardModal = () => {
   const [rewards, setRewards] = useState<[] | Reward[]>([]);
 
   const warningModal = useWarningRewardModal();
-  const { user, setUser, userReward, setUserReward } = usePrivateStore();
+  const { user, userReward } = usePrivateStore();
 
   const rewardoOptions = [
     {
@@ -56,7 +57,6 @@ export const RewardModal = () => {
   ];
   const filterRewardsByPointsRange = () => {
     if (selectedPointsRange) {
-      console.log('clicou');
       const [minPoints, maxPoints] = selectedPointsRange;
       return rewards.filter(
         reward =>
@@ -94,9 +94,9 @@ export const RewardModal = () => {
 
   let body = (
     <div className='flex flex-col gap-6 h-full'>
-      <div className='flex items-center justify-between w-full sm:w-10/12 mx-auto '>
+      <div className='flex items-center justify-between w-full sm:w-11/12 mx-auto '>
         <span className='text-3xl font-semibold'>
-          {user?.points}{' '}
+          {animatedPoints}
           <span className='font-medium text-base sm:text-xl'> Pontos</span>{' '}
         </span>
 
@@ -110,7 +110,7 @@ export const RewardModal = () => {
         </button>
       </div>
 
-      <div className='flex flex-wrap gap-8 justify-center h-4/6'>
+      <div className='flex flex-wrap gap-8 justify-evenly h-4/6'>
         {userReward && userReward.length > 0 ? (
           userReward.map((reward, i) => (
             <RewardUserComponent
@@ -129,7 +129,7 @@ export const RewardModal = () => {
   if (step === STEPS.STORE) {
     body = (
       <div className='flex flex-col gap-6 h-full'>
-        <div className='flex items-center justify-between w-full sm:w-10/12  mx-auto '>
+        <div className='flex items-center justify-between w-full sm:w-11/12  mx-auto '>
           <span className='text-3xl font-semibold'>
             {user?.points}{' '}
             <span className='font-medium text-base sm:text-xl'> Pontos</span>{' '}
@@ -144,7 +144,7 @@ export const RewardModal = () => {
             Minhas recompensas
           </button>
         </div>
-        <div className='flex gap-4 items-center justify-start sm:justify-center hiddenScroll overflow-auto '>
+        <div className='flex gap-3 sm:gap-10 items-center justify-start sm:justify-center hiddenScroll overflow-auto '>
           {rewardoOptions.map((op, i) => (
             <div
               className={`flex flex-col items-center border-2 border-red-500 py-2 px-2  rounded-lg cursor-pointer ${
@@ -174,7 +174,7 @@ export const RewardModal = () => {
           ))}
         </div>
 
-        <div className='flex flex-wrap gap-8 justify-center h-4/6'>
+        <div className='flex flex-wrap gap-8 justify-between h-4/6'>
           {filterRewardsByPointsRange().map((reward, i) => (
             <RewardComponent reward={reward} key={i} onClick={catchReward} />
           ))}
@@ -182,6 +182,32 @@ export const RewardModal = () => {
       </div>
     );
   }
+
+  useEffect(() => {
+    const targetPoints = user?.points || 0; // User's current points
+    const animationDuration = 1000; // Animation duration in milliseconds
+
+    const startAnimation = () => {
+      let startTimestamp: number;
+      const animate = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+
+        const progress = timestamp - startTimestamp;
+        const percentage = Math.min(progress / animationDuration, 1);
+
+        const currentPoints = Math.floor(percentage * targetPoints);
+        setAnimatedPoints(currentPoints);
+
+        if (percentage < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
+
+    startAnimation();
+  }, [user?.points, rewardModal.isOpen]);
 
   useEffect(() => {
     fetchReward();

@@ -24,6 +24,7 @@ export const StyledInput: React.FC<StyledInputProps> = ({
         className='form__field bg-transparent'
         placeholder={placeholder}
         {...register(id, { required })}
+        autoComplete='off'
       />
       <label className='form__label'>{label}</label>
     </div>
@@ -46,6 +47,7 @@ export const StyledInputPassword: React.FC<StyledInputProps> = ({
         className='form__field bg-transparent'
         placeholder={placeholder}
         {...register(id, { required })}
+        autoComplete='off'
       />
       <label className='form__label'>{label}</label>
 
@@ -99,6 +101,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
           {...register(id, { required })}
           value={value}
           readOnly={disabled}
+          autoComplete='off'
         />
       ) : (
         <input
@@ -110,6 +113,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
           placeholder={placeholder}
           {...register(id)}
           readOnly={disabled}
+          autoComplete='off'
         />
       )}
     </div>
@@ -135,6 +139,7 @@ export const InfoAddressInput: React.FC<InfoAddressInputProps> = ({
         className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
         placeholder={placeholder}
         {...register(id, { required })}
+        autoComplete='off'
       />
     </div>
   );

@@ -43,14 +43,14 @@ export const Hero2 = () => {
   const searchModal = useSearchModal();
   return (
     <div className='flex flex-col w-11/12 mx-auto my-6 gap-6' id='hero'>
-      <div className='flex flex-col gap-3 w-10/12'>
+      {/* <div className='flex flex-col gap-3 w-10/12'>
         <span className='font-semibold text-3xl '>
           Peça as pizzas mais deliciosas da região
         </span>
         <span className='font-semibold text-3xl text-red-500'>
           Em 40 Minutos
         </span>
-      </div>
+      </div> */}
 
       <div
         className=' flex w-full mx-auto  '

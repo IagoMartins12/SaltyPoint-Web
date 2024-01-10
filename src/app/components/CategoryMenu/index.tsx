@@ -6,31 +6,35 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { handleSetSelected } from '@/app/utils';
 
 export const CategoryMenu = () => {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const { categorys } = useGlobalStore();
 
-  const handleSelect = (category_name: string) => {
-    if (category_name === selected) {
-      return setSelected(null);
+  const handleCategorySelection = (categoryName: string) => {
+    if (categoryName === selectedCategory) {
+      return setSelectedCategory(null);
     }
 
-    setSelected(category_name);
-    handleSetSelected(category_name);
+    setSelectedCategory(categoryName);
+    handleSetSelected(categoryName);
   };
 
+  const categoriesToExclude = ['Bordas', 'Brindes', 'Promoções'];
+
+  const visibleCategories = categorys.filter(
+    category => !categoriesToExclude.includes(category.category_name),
+  );
+
   return (
-    <div className='w-11/12 mx-auto my-4 py-2 flex flex-row items-center  hiddenScroll overflow-x-auto gap-3'>
-      {categorys
-        .filter(c => c.category_name !== 'Bordas')
-        .map(item => (
-          <CategoryBox
-            key={item.category_name}
-            label={item.category_name}
-            onClick={handleSelect}
-            selected={selected}
-          />
-        ))}
+    <div className='w-11/12 mx-auto my-0 sm:my-2 py-2 flex flex-row items-center hiddenScroll overflow-x-auto gap-3'>
+      {visibleCategories.map(category => (
+        <CategoryBox
+          key={category.category_name}
+          label={category.category_name}
+          onClick={handleCategorySelection}
+          selected={selectedCategory}
+        />
+      ))}
     </div>
   );
 };

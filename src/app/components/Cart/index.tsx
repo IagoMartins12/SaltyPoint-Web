@@ -5,11 +5,13 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CartProductCard } from '../CartProductCard';
 import { handleSetSelected } from '@/app/utils';
 import { useCartMenuState, useOrderModal } from '@/app/hooks/modals/useModal';
+import { useEffect } from 'react';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 export const Cart = () => {
   const rightCart = useCartMenuState();
-
-  const { cart_product } = usePrivateStore();
+  const { products, categorys } = useGlobalStore();
+  const { cart_product, setCart_product } = usePrivateStore();
   const orderModal = useOrderModal();
   const toggleMenu = () => {
     rightCart.isOpen ? rightCart.onClose() : rightCart.onOpen();
@@ -25,6 +27,87 @@ export const Cart = () => {
     orderModal.onOpen();
   };
 
+  // const cartGuardianPizza = () => {
+  //   const dollyPromo = products.find(
+  //     p => p.name.toLowerCase() === 'dolly promoção',
+  //   );
+  //   const pizzas = products.filter(p => {
+  //     const category = categorys.find(c => c.id === p.category_id);
+  //     return category?.category_name.toLowerCase().includes('pizzas');
+  //   });
+
+  //   if (dollyPromo && pizzas.length >= 3) {
+  //     const pizzaIds = pizzas.map(pizza => pizza.id);
+  //     const pizzaCountInCart = cart_product.filter(cartProduct =>
+  //       pizzaIds.includes(cartProduct.product_id),
+  //     ).length;
+
+  //     if (pizzaCountInCart >= 3) {
+  //       const hasDollyPromo = cart_product.some(
+  //         cartProduct => cartProduct.product_id === dollyPromo.id,
+  //       );
+
+  //       if (!hasDollyPromo) {
+  //         const newCart = {
+  //           product_id: dollyPromo.id,
+  //           quantity: 1,
+  //           observation: 'Recompensa',
+  //           value: '0',
+  //           size: 0,
+  //         };
+
+  //         const updatedCartProduct = [...cart_product, newCart];
+  //         setCart_product(updatedCartProduct);
+  //       }
+  //     } else {
+  //       const updatedCartProduct = cart_product.filter(
+  //         cartProduct => cartProduct.product_id !== dollyPromo.id,
+  //       );
+  //       setCart_product(updatedCartProduct);
+  //     }
+  //   }
+  // };
+
+  //Promoção 1
+  const cartGuardian = () => {
+    const promo1 = products.find(p => p.name.toLowerCase() === 'combo 1');
+    const dollyPromo = products.find(
+      p => p.name.toLowerCase() === 'dolly promoção',
+    );
+
+    if (promo1 && dollyPromo) {
+      const hasPromo1 = cart_product.some(
+        cartProduct => cartProduct.product_id === promo1.id,
+      );
+      const hasDollyPromo = cart_product.some(
+        cartProduct => cartProduct.product_id === dollyPromo.id,
+      );
+
+      if (hasPromo1 && !hasDollyPromo) {
+        const newCart = {
+          product_id: dollyPromo.id,
+          quantity: 1,
+          observation: null,
+          value: '0',
+          size: 0,
+        };
+
+        const updatedCartProduct = [...cart_product, newCart];
+        //@ts-ignore
+        setCart_product(updatedCartProduct);
+      } else if (!hasPromo1 && hasDollyPromo) {
+        const updatedCartProduct = cart_product.filter(
+          cartProduct => cartProduct.product_id !== dollyPromo.id,
+        );
+        setCart_product(updatedCartProduct);
+      }
+    }
+  };
+
+  useEffect(() => {
+    cartGuardian();
+    // cartGuardianPizza();
+  }, [cart_product]);
   return (
     <>
       <div className=''>

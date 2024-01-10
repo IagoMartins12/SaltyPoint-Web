@@ -4,21 +4,21 @@
 
 .cardBG,
 .modalBG {
-  background: #fffdfd;
+  background: #f7f6f6;
   /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
-/* body {
+body {
   background-color: #ffffff;
 }
 
 [data-theme='dark'] body {
   background-color: #000000;
-} */
+}
 
 [data-theme='dark'] .cardBG,
 .modalBG {
-  background: #141414;
+  background: #060606;
   box-shadow: 0 16px 48px 8px rgba(1, 1, 5, 0.1);
 }
 
@@ -74,7 +74,7 @@ option {
 }
 
 [data-theme='dark'] .menuBackground {
-  background-color: #141111;
+  background-color: #040404;
 }
 
 .modalPosition {

@@ -5,13 +5,15 @@ import { FetchData } from './components/FetchData';
 import { Header } from './components/Header';
 import { Hero2 } from './components/Hero';
 import { ProductMenu } from './components/ProductMenu';
+import { RewardOnHome } from './components/RewardOnHome';
 
 export default function Home() {
   return (
     <ClientOnly>
       <main>
         <Header />
-        <Hero2 />
+        <RewardOnHome />
+        {/* <Hero2 /> */}
         <CategoryMenu />
         <ProductMenu />
         <ComeBack />
