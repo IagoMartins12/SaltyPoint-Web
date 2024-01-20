@@ -12,8 +12,8 @@ export const RewardOnHome = () => {
   const rewardModal = useRewardModal();
 
   useEffect(() => {
-    const targetPoints = user?.points || 0; // User's current points
-    const animationDuration = 1000; // Animation duration in milliseconds
+    const targetPoints = user?.points || 0;
+    const animationDuration = 1000;
 
     const startAnimation = () => {
       let startTimestamp: number;
@@ -39,7 +39,7 @@ export const RewardOnHome = () => {
 
   if (user) {
     return (
-      <div className='flex flex-col w-11/12 mx-auto mt-4 sm:mt-0'>
+      <div className='flex flex-col w-11/12 mx-auto mt-4 sm:py-12'>
         <div className='flex items-center justify-between w-full'>
           <span className='text-3xl font-semibold'>
             {animatedPoints}

@@ -36,7 +36,7 @@ export const ProgressBar = ({ points }: { points: number }) => {
   }
 
   const percentage = (points - currentStep * step) / step;
-  const barWidth = (currentStep + percentage) * (90 / numBalls);
+  const barWidth = (currentStep + percentage) * (91 / numBalls);
 
   return (
     <div className='flex flex-col items-center justify-center w-full relative overflow-hidden pt-4 -z-10'>
