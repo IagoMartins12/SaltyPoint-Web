@@ -14,6 +14,10 @@ import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
 import { APP_SETTINGS } from '@/app/config';
 import { AnimationOrder } from '../../Animations/AnimationOrder';
+import { useGeneralDataInfo } from '@/app/hooks/generalData';
+import toast from 'react-hot-toast';
+import { useGeneralDataModal } from '@/app/hooks/modals/useModal';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 const OrderModal = () => {
   const {
@@ -45,6 +49,8 @@ const OrderModal = () => {
     hasPlayed,
     setHasPlayed,
   } = useCustomOrderModal();
+  const { systemOpening } = useGeneralDataInfo();
+  const { generalData } = useGlobalStore();
 
   let body = (
     <div className='overflow-auto privacyScroll pb-8'>
@@ -52,6 +58,13 @@ const OrderModal = () => {
         className='flex flex-col gap-6 mx-auto w-11/12'
         onSubmit={ev => {
           ev.preventDefault();
+          if (generalData?.isOpening === false) {
+            return toast.error('Sistema indisponivel no momento');
+          }
+          if (!systemOpening) {
+            return toast.error('Não estamos em horario de atendimento');
+          }
+
           onSubmit();
         }}
       >
@@ -104,7 +117,7 @@ const OrderModal = () => {
                       </div>
                     )}
 
-                    {options.name === 'Retirar na loja' && getAddressInfo() && (
+                    {options.name === 'Retirar na loja' && (
                       <div className='flex flex-col'>
                         <span className='text-sm font-light'>
                           Estrada de ligação, 22

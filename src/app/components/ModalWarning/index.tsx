@@ -34,7 +34,7 @@ export const ModalWarning: React.FC<ModalProps> = ({
       ></div>
       {/* Modal */}
       <div
-        className={`relative w-11/12 sm:w-9/12 lg:w-7/12 xl:w-4/12 h-[60%] sm:h-[55%] my-6 mx-auto`}
+        className={`relative w-11/12 sm:w-9/12 lg:w-7/12 xl:w-4/12 h-[62%] sm:h-[55%] my-6 mx-auto`}
       >
         {/* Conteúdo do Modal */}
         <div

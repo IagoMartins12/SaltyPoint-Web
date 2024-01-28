@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
-import empty from '../../../animations/empty.json';
+import closed from '../../../animations/closed.json';
 
-interface Props {
-  text: string;
-}
-export const AnimationEmpty: React.FC<Props> = ({ text }) => {
+export const AnimationClosed = () => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
 
   const { View, play } = useLottie({
-    animationData: empty,
+    animationData: closed,
     loop: true,
     autoplay: true,
-    className: 'h-full w-full',
   });
 
   useEffect(() => {
@@ -23,10 +19,8 @@ export const AnimationEmpty: React.FC<Props> = ({ text }) => {
   }, [hasPlayed2, play]);
 
   return (
-    <div className=' flex items-center justify-center p-4 sm:p-8 flex-col gap-8 h-full'>
+    <div className=' h-full w-full flex items-center justify-center'>
       {View}
-
-      <p className='text-lg font-semibold text-center'>{text}</p>
     </div>
   );
 };

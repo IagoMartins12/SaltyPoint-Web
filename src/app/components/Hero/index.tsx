@@ -3,9 +3,14 @@
 import { AiOutlineSearch } from 'react-icons/ai';
 import { AppleButton, GoogleButton } from '../Buttons';
 import { ImageComponent } from '../ImageComponent';
-import { useSearchModal } from '@/app/hooks/modals/useModal';
+import {
+  useGeneralDataModal,
+  useSearchModal,
+} from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
+import { useGeneralDataInfo } from '@/app/hooks/generalData';
+import { useEffect } from 'react';
 
 export const Hero = () => {
   return (
@@ -78,6 +83,14 @@ export const Hero2 = () => {
 
 export const Hero3 = () => {
   const { user } = usePrivateStore();
+  const { systemOpening } = useGeneralDataInfo();
+  const generalDataModal = useGeneralDataModal();
+
+  useEffect(() => {
+    if (systemOpening === false) {
+      generalDataModal.onOpen();
+    }
+  }, [systemOpening]);
 
   if (!user) {
     return (
@@ -92,8 +105,9 @@ export const Hero3 = () => {
       <></>
     );
   }
+
   return (
-    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-2 gap-2' id='hero'>
+    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-8 gap-2' id='hero'>
       <p className='text-3xl font-normal'>
         Olá, <span className='font-semibold'>{user.name}</span>
       </p>

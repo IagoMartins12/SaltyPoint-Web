@@ -1,5 +1,3 @@
-'use client';
-
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import { toast } from 'react-hot-toast';
@@ -20,7 +18,6 @@ export const RegisterModal = () => {
   const registerModal = useRegisterModal();
 
   const openLoginModal = () => {
-    console.log('clicou');
     registerModal.onClose();
     loginModal.onOpen();
   };
@@ -55,7 +52,6 @@ export const RegisterModal = () => {
   };
 
   const handleGoogleLogin = async () => {
-    console.log('clicou');
     const response = await googleLogin();
     console.log('resposta', response);
   };

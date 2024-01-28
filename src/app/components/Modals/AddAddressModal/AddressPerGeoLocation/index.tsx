@@ -73,12 +73,12 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
       onSubmit={handleSubmit(saveAddress)}
     >
       <div className='flex flex-col gap-3'>
-        <CepInput
+        {/* <CepInput
           errors={errors}
           handleOnChange={handleOnChange}
           register={register}
           required={false}
-        />
+        /> */}
         <InfoAddressInput
           errors={errors}
           id='address'

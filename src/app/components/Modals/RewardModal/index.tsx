@@ -110,11 +110,11 @@ export const RewardModal = () => {
         </button>
       </div>
 
-      <div className='w-11/12 mx-auto'>
+      <div className='w-11/12 mx-auto h-1/5'>
         <ProgressBar points={user?.points ?? 0} />
       </div>
 
-      <div className='flex flex-wrap gap-8 justify-evenly'>
+      <div className='flex flex-wrap gap-8 justify-evenly h-4/5'>
         {userReward && userReward.length > 0 ? (
           userReward.map((reward, i) => (
             <RewardUserComponent
@@ -124,7 +124,7 @@ export const RewardModal = () => {
             />
           ))
         ) : (
-          <div className='w-full h-3/5'>
+          <div className='w-full h-4/5'>
             <AnimationEmpty text='Nenhuma recompensa resgatada' />
           </div>
         )}

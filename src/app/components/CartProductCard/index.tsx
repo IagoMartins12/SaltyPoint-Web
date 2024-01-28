@@ -32,7 +32,6 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
     deleteItemModal.onOpen();
   };
 
-  console.log('name', getProductName2(cart_product.id, null));
   return (
     <div className='w-full flex gap-6 cardBG rounded-2xl justify-center p-4 relative min-h-[7rem]'>
       <div className='flex flex-col gap-4 w-full justify-center'>

@@ -70,10 +70,6 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
     }
   }, [location, apiKey]);
 
-  console.log('GeoAddress', GeoAddress);
-
-  console.log('location', location);
-
   return (
     <>
       <div className='flex flex-col gap-2 h-full'>

@@ -27,3 +27,4 @@ export const useMyOrderModal = createModalStore();
 export const useMenuHeaderState = createModalStore();
 export const useCartMenuState = createModalStore();
 export const useRewardModal = createModalStore();
+export const useGeneralDataModal = createModalStore();

@@ -5,7 +5,6 @@ import {
   AiOutlinePhone,
   AiOutlineWhatsApp,
 } from 'react-icons/ai';
-import { IoCloseOutline } from 'react-icons/io5';
 import Modal from '../../Modal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
