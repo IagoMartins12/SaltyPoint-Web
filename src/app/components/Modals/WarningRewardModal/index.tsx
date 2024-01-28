@@ -10,11 +10,11 @@ import { RxDoubleArrowRight } from 'react-icons/rx';
 import { PiCrownLight } from 'react-icons/pi';
 
 import { useState } from 'react';
-import { AnimationReward } from '../../AnimationReward';
+import { AnimationReward } from '../../Animations/AnimationReward';
 import { BiDownArrowAlt } from 'react-icons/bi';
 
 export const WarningRewardModal: React.FC = () => {
-  const [hasPlayed, setHasPlayed] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(true);
 
   const warningModal = useWarningRewardModal();
   const { user, setUser, setUserReward, userReward } = usePrivateStore();

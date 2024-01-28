@@ -236,3 +236,14 @@ export type User_Rewards = {
   rewardDiscount: number;
   rewardProductId: string;
 };
+
+export type General_data = {
+  id: string;
+  openingHours: string;
+  closingHours: string;
+  cellphone: string;
+  cellphone2: string;
+  telephone: string;
+  telephone2?: string;
+  isOpening: Boolean;
+};

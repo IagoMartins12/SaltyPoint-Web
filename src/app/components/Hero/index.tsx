@@ -4,6 +4,8 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { AppleButton, GoogleButton } from '../Buttons';
 import { ImageComponent } from '../ImageComponent';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 
 export const Hero = () => {
   return (
@@ -70,6 +72,35 @@ export const Hero2 = () => {
           />
         </div>
       </div>
+    </div>
+  );
+};
+
+export const Hero3 = () => {
+  const { user } = usePrivateStore();
+
+  if (!user) {
+    return (
+      // <div
+      //   className='flex flex-col w-11/12 mx-auto my-4 sm:my-2 gap-2'
+      //   id='hero'
+      // >
+      //   <p className='text-3xl font-normal'>
+      //     Faça o login para ver os seus pontos
+      //   </p>
+      // </div>
+      <></>
+    );
+  }
+  return (
+    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-2 gap-2' id='hero'>
+      <p className='text-3xl font-normal'>
+        Olá, <span className='font-semibold'>{user.name}</span>
+      </p>
+
+      <p className='text-xl font-normal'>
+        Você possui: <span className='text-3xl '> 250 Pontos</span>
+      </p>
     </div>
   );
 };

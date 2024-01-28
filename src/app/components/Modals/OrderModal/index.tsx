@@ -13,7 +13,7 @@ import { MdPix } from 'react-icons/md';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
 import { APP_SETTINGS } from '@/app/config';
-import { AnimationOrder } from '../../AnimationOrder';
+import { AnimationOrder } from '../../Animations/AnimationOrder';
 
 const OrderModal = () => {
   const {
@@ -188,9 +188,7 @@ const OrderModal = () => {
           {/* Cupom e recompensa */}
           <div className='flex flex-col'>
             <div className='flex justify-between px-2 items-center w-full'>
-              <span className='text-base font-light w-4/12'>
-                Cupom/Recompensa:
-              </span>
+              <span className='text-base font-light w-4/12'>Código:</span>
               <div className=' w-8/12 flex justify-end'>
                 {showCoupon ? (
                   <div className='flex gap-3 w-full justify-end'>

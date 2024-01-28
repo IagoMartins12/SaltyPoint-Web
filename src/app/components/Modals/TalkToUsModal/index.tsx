@@ -7,10 +7,11 @@ import {
 } from 'react-icons/ai';
 import { IoCloseOutline } from 'react-icons/io5';
 import Modal from '../../Modal';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 export const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
-
+  const { generalData } = useGlobalStore();
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       name: '',
@@ -24,12 +25,17 @@ export const TalkToUsModal = () => {
   const talkOptions = [
     {
       label: 'WhatsApp:',
-      text: '+55 (11) 98859-8530',
+      text: `+55 ${generalData?.cellphone}`,
       icon: <AiOutlineWhatsApp size={30} />,
     },
     {
       label: 'Telefone:',
-      text: '+55 (11) 3943-3038',
+      text: `${generalData?.telephone}`,
+      icon: <AiOutlinePhone size={30} />,
+    },
+    {
+      label: 'Telefone 2:',
+      text: `${generalData?.telephone2}`,
       icon: <AiOutlinePhone size={30} />,
     },
     {
@@ -90,19 +96,19 @@ export const TalkToUsModal = () => {
       <span className='text-xl font-medium'>Ou entre em contato:</span>
 
       <div className='flex w-full '>
-        <div className='flex flex-col  justify-center items-start gap-6'>
+        <div className='flex flex-col  justify-center items-start gap-6 w-full'>
           {talkOptions.map((option, i) => (
             <div
-              className='flex flex-col sm:flex-row gap-5 items-start justify-center '
+              className='flex flex-row gap-2 sm:gap-5 items-center w-full '
               key={i + 1}
             >
               <div className='flex gap-4 items-center'>
                 {option.icon}
-                <span className='font-light text-lg text-end'>
+                <span className='font-light text-lg sm:text-lg text-end'>
                   {option.label}
                 </span>
               </div>
-              <span className='font-light text-lg underline cursor-pointer'>
+              <span className='font-light text-base sm:text-lg underline cursor-pointer'>
                 {option.text}
               </span>
             </div>

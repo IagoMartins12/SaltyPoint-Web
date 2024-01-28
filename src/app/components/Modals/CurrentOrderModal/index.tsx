@@ -8,7 +8,7 @@ import { addCartProduct } from '@/app/services';
 import { CartProductDto } from '@/app/types/Dtos';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
-import { AnimationCart } from '../../AnimationCart';
+import { AnimationCart } from '../../Animations/AnimationCart';
 
 export const CurrentOrderModal = () => {
   const [hasPlayed, setHasPlayed] = useState(false);

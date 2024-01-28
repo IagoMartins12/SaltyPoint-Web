@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
-import cartAnimation from '../../animations/cartAnimation.json';
+import cartAnimation from '../../../animations/cartAnimation.json';
 import { AnimationCommponentProps } from '@/app/types/ComponentTypes';
 import toast from 'react-hot-toast';
 

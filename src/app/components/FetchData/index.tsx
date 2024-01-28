@@ -9,6 +9,7 @@ import {
   getCategories,
   getCoupons,
   getFavorites,
+  getGeneralData,
   getMe,
   getOrders,
   getProducts,
@@ -19,8 +20,13 @@ import {
 import { useEffect } from 'react';
 
 export const FetchData = () => {
-  const { setCategorys, setProducts, setTypePagament, setStates } =
-    useGlobalStore();
+  const {
+    setCategorys,
+    setProducts,
+    setTypePagament,
+    setStates,
+    setGeneralData,
+  } = useGlobalStore();
   const {
     setAddress,
     setUser,
@@ -35,18 +41,25 @@ export const FetchData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [categoryData, productData, typePagamentData, statesDate] =
-          await Promise.all([
-            getCategories(),
-            getProducts(),
-            getTypePagaments(),
-            getStates(),
-          ]);
+        const [
+          categoryData,
+          productData,
+          typePagamentData,
+          statesDate,
+          generalData,
+        ] = await Promise.all([
+          getCategories(),
+          getProducts(),
+          getTypePagaments(),
+          getStates(),
+          getGeneralData(),
+        ]);
 
         setCategorys(categoryData);
         setProducts(productData);
         setTypePagament(typePagamentData);
         setStates(statesDate);
+        setGeneralData(generalData);
       } catch (error) {
         console.log(error);
       }

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
-import crown from '../../animations/crown.json';
+import crown from '../../../animations/crown.json';
+import crownDark from '../../../animations/crownDark.json';
 import { AnimationCommponentProps } from '@/app/types/ComponentTypes';
 import toast from 'react-hot-toast';
+import { useTheme } from 'next-themes';
 
 export const AnimationReward: React.FC<AnimationCommponentProps> = ({
   setHasPlayed,
@@ -10,6 +12,7 @@ export const AnimationReward: React.FC<AnimationCommponentProps> = ({
 }) => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
 
+  const { theme } = useTheme();
   const onCloseFunction = () => {
     toast.success('Recompensa resgatada');
     if (repeat) {
@@ -17,7 +20,7 @@ export const AnimationReward: React.FC<AnimationCommponentProps> = ({
     }
   };
   const { View, play } = useLottie({
-    animationData: crown,
+    animationData: theme === 'light' ? crown : crownDark,
     loop: false,
     autoplay: false,
     className: 'h-full w-full',

@@ -2,7 +2,7 @@ import { FaCrown } from 'react-icons/fa';
 
 export const ProgressBar = ({ points }: { points: number }) => {
   const maxWidth = 620;
-  const maxPoints = window.innerWidth < maxWidth ? 250 : 500;
+  const maxPoints = window.innerWidth < maxWidth ? 250 : 250;
   const step = 50;
   const numBalls = Math.ceil(maxPoints / step);
 
@@ -39,7 +39,7 @@ export const ProgressBar = ({ points }: { points: number }) => {
   const barWidth = (currentStep + percentage) * (91 / numBalls);
 
   return (
-    <div className='flex flex-col items-center justify-center w-full relative overflow-hidden pt-4 -z-10'>
+    <div className='flex flex-col items-center justify-center w-full sticky overflow-hidden  '>
       <div className='absolute -z-20 w-full h-2 bg-transparent'>
         <div
           className='absolute h-full bg-red-500'

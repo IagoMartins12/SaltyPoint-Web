@@ -39,14 +39,11 @@ export const RewardOnHome = () => {
 
   if (user) {
     return (
-      <div className='flex flex-col w-11/12 mx-auto mt-4 sm:py-12'>
+      <div className='flex flex-col w-11/12 mx-auto  sm:py-4'>
         <div className='flex items-center justify-between w-full'>
           <span className='text-3xl font-semibold'>
             {animatedPoints}
-            <span className='font-medium text-base sm:text-xl'>
-              {' '}
-              Pontos
-            </span>{' '}
+            <span className='font-medium text-base sm:text-xl'> Pontos</span>
           </span>
 
           <button

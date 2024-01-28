@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { getAddressPerCep, sendAddressUser } from '@/app/services';
+import { getAddressPerCep, sendAddressUser, updatedMe } from '@/app/services';
 import toast from 'react-hot-toast';
-import { CEPInfoDto } from '@/app/types/Dtos';
+import { CEPInfoDto, UpdateUserDto } from '@/app/types/Dtos';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { User_Adress } from '@/app/types/ModelsType';
+import { User, User_Adress } from '@/app/types/ModelsType';
 import { GetGeoLocation } from './Geolocation';
 import { AddressInfoStep } from './AddressInfoStep';
 import { CepStep } from './CepStep';
@@ -28,7 +28,7 @@ export const AddAddressModal = () => {
   const [result, setResult] = useState<Result | null>(null);
 
   const addAddress = useAddAddress();
-  const { address, setAddress } = usePrivateStore();
+  const { address, setAddress, user, setUser } = usePrivateStore();
 
   const {
     register,
@@ -47,6 +47,14 @@ export const AddAddressModal = () => {
       uf: '',
     },
   });
+
+  const setUserWithCallback = (callback: (user: User) => User) => {
+    if (!user) return;
+
+    const updatedUser = callback(user);
+
+    setUser(updatedUser);
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const validateCpf = data.cep.replace('-', '');
@@ -99,6 +107,18 @@ export const AddAddressModal = () => {
       setStep(0);
       addAddress.onClose();
       reset();
+
+      const object = {
+        user_Adress_id: response.data.id,
+      } as UpdateUserDto;
+
+      await updatedMe(object);
+
+      setUserWithCallback(oldUser => ({
+        ...oldUser,
+        user_Adress_id: response.data.id,
+      }));
+
       return toast.success('Endereço criado!');
     } else {
       return toast.error('Erro ao cadastrar endereço');
@@ -108,7 +128,7 @@ export const AddAddressModal = () => {
   const saveGeoAddress: SubmitHandler<FieldValues> = async data => {
     const object = {
       address: data.address,
-      cep: data.cep,
+      cep: data.cep !== '' ? data.cep : '00000-000',
       number: data.number,
       reference: data.complement,
       district: data.district,
@@ -121,9 +141,20 @@ export const AddAddressModal = () => {
     if (response.status === 201) {
       setAddress([...address, response.data]);
       setStep(0);
+      addAddress.onClose();
       reset();
 
-      addAddress.onClose();
+      const object = {
+        user_Adress_id: response.data.id,
+      } as UpdateUserDto;
+
+      await updatedMe(object);
+
+      setUserWithCallback(oldUser => ({
+        ...oldUser,
+        user_Adress_id: response.data.id,
+      }));
+
       return toast.success('Endereço criado!');
     } else {
       return toast.error('Erro ao cadastrar endereço');

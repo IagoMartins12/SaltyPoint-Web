@@ -3,17 +3,16 @@ import ClientOnly from './components/ClientOnly';
 import { ComeBack } from './components/ComeTop';
 import { FetchData } from './components/FetchData';
 import { Header } from './components/Header';
-import { Hero2 } from './components/Hero';
+import { Hero3 } from './components/Hero';
 import { ProductMenu } from './components/ProductMenu';
-import { RewardOnHome } from './components/RewardOnHome';
 
 export default function Home() {
   return (
     <ClientOnly>
       <main>
         <Header />
-        <RewardOnHome />
-        {/* <Hero2 /> */}
+        {/* <RewardOnHome /> */}
+        <Hero3 />
         <CategoryMenu />
         <ProductMenu />
         <ComeBack />

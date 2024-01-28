@@ -5,6 +5,7 @@ import {
   Category,
   Discount_cupom,
   Favorite,
+  General_data,
   Order,
   Product,
   Reward,
@@ -75,6 +76,7 @@ export interface CepInputProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<FieldValues>;
   handleOnChange: (value: string) => void;
+  required?: boolean;
 }
 
 export interface AddAddressInfoStepProps {
@@ -172,6 +174,8 @@ export interface Store {
   setTypePagament: (typePagament: Type_Pagament[]) => void;
   states: State[];
   setStates: (states: State[]) => void;
+  generalData: null | General_data;
+  setGeneralData: (generalData: General_data) => void;
 }
 
 export interface PrivateStore {

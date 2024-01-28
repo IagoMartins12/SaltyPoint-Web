@@ -2,7 +2,7 @@ import Modal from '../../Modal';
 import { useMyOrderModal } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { OrderComponent } from '../../OrderComponent';
-import { EmptyResult } from '../../EmptyResult';
+import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
 export const MyOrdersModal = () => {
   const myOrdersModal = useMyOrderModal();
@@ -16,7 +16,7 @@ export const MyOrdersModal = () => {
           {orders.length > 0 ? (
             orders.map(order => <OrderComponent key={order.id} order={order} />)
           ) : (
-            <EmptyResult text='Você ainda não fez nenhum pedido' />
+            <AnimationEmpty text='Você ainda não fez nenhum pedido' />
           )}
         </div>
       </div>

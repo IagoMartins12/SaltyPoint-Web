@@ -320,3 +320,12 @@ export const googleLogin = async () => {
     return error;
   }
 };
+
+export const getGeneralData = async () => {
+  try {
+    const response = await Api.get('/general-data');
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};

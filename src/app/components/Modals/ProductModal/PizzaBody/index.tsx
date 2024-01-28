@@ -22,9 +22,8 @@ import toast from 'react-hot-toast';
 import { Product } from '@/app/types/ModelsType';
 import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
-import { AnimationCart } from '@/app/components/AnimationCart';
 import { FavoriteButton } from '@/app/components/FavoriteButton';
-import { FaCheckCircle } from 'react-icons/fa';
+import { AnimationCart } from '@/app/components/Animations/AnimationCart';
 
 export const PizzaBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);

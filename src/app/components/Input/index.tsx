@@ -149,6 +149,7 @@ export const CepInput: React.FC<CepInputProps> = ({
   errors,
   register,
   handleOnChange,
+  required = true,
 }) => {
   return (
     <div className='flex flex-col gap-1'>
@@ -159,7 +160,7 @@ export const CepInput: React.FC<CepInputProps> = ({
         className={`px-2 py-2 border-b-2 ${errors.cep ? 'border-red-500' : ''}`}
         placeholder='Exemplo: 05280-000'
         {...register('cep', {
-          required: true,
+          required: required,
         })}
         onChange={ev => {
           const formattedCep = formatCep(ev.target.value);

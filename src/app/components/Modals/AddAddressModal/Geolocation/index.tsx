@@ -70,6 +70,10 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
     }
   }, [location, apiKey]);
 
+  console.log('GeoAddress', GeoAddress);
+
+  console.log('location', location);
+
   return (
     <>
       <div className='flex flex-col gap-2 h-full'>
@@ -139,7 +143,18 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
                     </span>
                   </button>
                 </>
-              ) : null}
+              ) : (
+                <button
+                  onClick={() => {
+                    setStep(3);
+                  }}
+                  className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
+                >
+                  <span className='font-medium text-lg'>
+                    Não achei meu endereço
+                  </span>
+                </button>
+              )}
             </div>
           </div>
         )}

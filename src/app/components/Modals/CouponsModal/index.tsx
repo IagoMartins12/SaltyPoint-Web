@@ -1,5 +1,5 @@
+import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 import { CouponCard } from '../../CouponCard';
-import { EmptyResult } from '../../EmptyResult';
 import Modal from '../../Modal';
 import { useCoupons } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
@@ -20,7 +20,7 @@ export const CouponsModal = () => {
               <CouponCard coupon={coupon} key={coupon.id} />
             ))
           ) : (
-            <EmptyResult text='Nenhum cupom disponivel no momento' />
+            <AnimationEmpty text='Nenhum cupom disponivel no momento' />
           )}
         </div>
       </div>

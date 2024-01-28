@@ -6,7 +6,7 @@ import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 import Modal from '../../Modal';
 import { useAddAddress, useAddress } from '@/app/hooks/modals/useModal';
 import toast from 'react-hot-toast';
-import { EmptyResult } from '../../EmptyResult';
+import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
 export const AddressModal = () => {
   const { address } = usePrivateStore();
@@ -33,8 +33,8 @@ export const AddressModal = () => {
   const body = (
     <div className='w-full overflow-auto privacyScroll h-full'>
       <div className='flex flex-col w-11/12 mx-auto h-full gap-12 '>
-        <div className='flex flex-col gap-4 justify-end'>
-          {address.length > 0 &&
+        <div className='flex flex-col gap-4 justify-end w-full '>
+          {address.length > 0 ? (
             address
               .filter(address => address.isActive === 0)
               .map((address, i) => (
@@ -81,9 +81,11 @@ export const AddressModal = () => {
                     />
                   </div>
                 </div>
-              ))}
-          {address.length === 0 && (
-            <EmptyResult text='Sem endereço cadastrado' />
+              ))
+          ) : (
+            <div className='w-full h-full'>
+              <AnimationEmpty text='Sem endereço cadastrado' />
+            </div>
           )}
 
           <div

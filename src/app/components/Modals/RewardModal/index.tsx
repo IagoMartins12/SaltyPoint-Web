@@ -7,9 +7,9 @@ import toast from 'react-hot-toast';
 import { RewardComponent } from '../../RewardComponent';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { RewardUserComponent } from '../../RewardUserComponent';
-import { EmptyResult } from '../../EmptyResult';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
 import { ProgressBar } from '../../ProgressBar';
+import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
 enum STEPS {
   INVENTORY = 0,
@@ -106,11 +106,15 @@ export const RewardModal = () => {
             setStep(1);
           }}
         >
-          Ver recompensas
+          Resgatar recompensas
         </button>
       </div>
 
-      <div className='flex flex-wrap gap-8 justify-evenly h-4/6'>
+      <div className='w-11/12 mx-auto'>
+        <ProgressBar points={user?.points ?? 0} />
+      </div>
+
+      <div className='flex flex-wrap gap-8 justify-evenly'>
         {userReward && userReward.length > 0 ? (
           userReward.map((reward, i) => (
             <RewardUserComponent
@@ -120,7 +124,9 @@ export const RewardModal = () => {
             />
           ))
         ) : (
-          <EmptyResult text='Nenhuma recompensa resgatada' />
+          <div className='w-full h-3/5'>
+            <AnimationEmpty text='Nenhuma recompensa resgatada' />
+          </div>
         )}
       </div>
     </div>
@@ -129,10 +135,13 @@ export const RewardModal = () => {
   if (step === STEPS.STORE) {
     body = (
       <div className='flex flex-col gap-6 h-full'>
-        <div className='flex items-center justify-between w-full sm:w-11/12  mx-auto '>
+        <div className='flex items-center justify-between w-full sm:w-11/12 mx-auto '>
           <span className='text-3xl font-semibold'>
-            {user?.points}{' '}
-            <span className='font-medium text-base sm:text-xl'> Pontos</span>{' '}
+            {user?.points}
+            <span className='font-medium text-base sm:text-xl'>
+              {' '}
+              Pontos
+            </span>{' '}
           </span>
 
           <button
@@ -144,7 +153,8 @@ export const RewardModal = () => {
             Minhas recompensas
           </button>
         </div>
-        <div className='flex gap-3 sm:gap-10 items-center justify-start sm:justify-center hiddenScroll overflow-auto '>
+
+        <div className='flex gap-3 items-center justify-start sm:justify-around hiddenScroll overflow-auto '>
           {rewardoOptions.map((op, i) => (
             <div
               className={`flex flex-col items-center border-2 border-red-500 py-2 px-2  rounded-lg cursor-pointer ${
@@ -174,7 +184,7 @@ export const RewardModal = () => {
           ))}
         </div>
 
-        <div className='flex flex-wrap gap-8 justify-between h-4/6'>
+        <div className='flex flex-wrap gap-8 justify-evenly h-4/6'>
           {filterRewardsByPointsRange().map((reward, i) => (
             <RewardComponent reward={reward} key={i} onClick={catchReward} />
           ))}
@@ -217,7 +227,11 @@ export const RewardModal = () => {
       <Modal
         onClose={rewardModal.onClose}
         body={body}
-        title='Minhas recompensaas'
+        title={
+          step === STEPS.INVENTORY
+            ? 'Minhas recompensas'
+            : 'Resgatar recompensas'
+        }
         isOpen={rewardModal.isOpen}
       />
     </>

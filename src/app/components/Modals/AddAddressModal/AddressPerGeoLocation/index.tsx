@@ -77,6 +77,7 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
           errors={errors}
           handleOnChange={handleOnChange}
           register={register}
+          required={false}
         />
         <InfoAddressInput
           errors={errors}

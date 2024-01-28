@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
-import orderAnimation from '../../animations/orderAnimation.json';
+import orderAnimation from '../../../animations/orderAnimation.json';
 import { AnimationCommponentProps } from '@/app/types/ComponentTypes';
 import toast from 'react-hot-toast';
-import onSucess from '../../animations/onSucess.json';
+import onSucess from '../../../animations/onSucess.json';
 
 export const AnimationOrder: React.FC<AnimationCommponentProps> = ({
   setHasPlayed,
