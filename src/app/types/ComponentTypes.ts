@@ -9,7 +9,6 @@ import {
   Order,
   Product,
   Reward,
-  Reward_Orders,
   State,
   Type_Pagament,
   User,

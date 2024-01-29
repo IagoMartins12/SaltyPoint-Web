@@ -1,9 +1,10 @@
 'use client';
 
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineQuestionCircle, AiOutlineSearch } from 'react-icons/ai';
 import { AppleButton, GoogleButton } from '../Buttons';
 import { ImageComponent } from '../ImageComponent';
 import {
+  useFidelityModal,
   useGeneralDataModal,
   useSearchModal,
 } from '@/app/hooks/modals/useModal';
@@ -85,6 +86,7 @@ export const Hero3 = () => {
   const { user } = usePrivateStore();
   const { systemOpening } = useGeneralDataInfo();
   const generalDataModal = useGeneralDataModal();
+  const fidelityModal = useFidelityModal();
 
   useEffect(() => {
     if (systemOpening === false) {
@@ -112,9 +114,20 @@ export const Hero3 = () => {
         Olá, <span className='font-semibold'>{user.name}</span>
       </p>
 
-      <p className='text-xl font-normal'>
-        Você possui: <span className='text-3xl '> 250 Pontos</span>
-      </p>
+      <div className='flex gap-5 items-center'>
+        <p className='text-xl font-normal'>
+          Você possui: <span className='text-3xl '> 250 Pontos</span>
+        </p>
+
+        <div
+          className='cursor-pointer'
+          onClick={() => {
+            fidelityModal.onOpen();
+          }}
+        >
+          <AiOutlineQuestionCircle size={25} />
+        </div>
+      </div>
     </div>
   );
 };

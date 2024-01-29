@@ -15,7 +15,6 @@ import {
   UpdateUserDto,
 } from '../types/Dtos';
 import {
-  Cart,
   Cart_product,
   Category,
   Discount_cupom,
@@ -23,7 +22,6 @@ import {
   Order,
   Product,
   Reward,
-  Reward_Orders,
   State,
   Type_Pagament,
   User,

@@ -10,11 +10,13 @@ import { DeleteItemCartModal } from '../components/Modals/DeleteItemCartModal';
 import { DeleteItemModal } from '../components/Modals/DeleteItemModal';
 import { DeleteUserModal } from '../components/Modals/DeleteUserModal';
 import { FavoriteModal } from '../components/Modals/FavoriteModal';
+import { FidelityModal } from '../components/Modals/FidelityModal';
 import { ForgetPasswordModal } from '../components/Modals/ForgetPasswordModal/ForgetPasswordModal';
 import { LoginModal } from '../components/Modals/LoginModal/LoginModal';
 import { MyOrdersModal } from '../components/Modals/MyOrdersModal';
 import { NotOpenModal } from '../components/Modals/NotOpenModal';
 import OrderModal from '../components/Modals/OrderModal';
+import { PixModal } from '../components/Modals/PixModal';
 import { ProductModal } from '../components/Modals/ProductModal';
 import { RegisterModal } from '../components/Modals/RegisterModal/RegisterModal';
 import { RewardModal } from '../components/Modals/RewardModal';
@@ -50,6 +52,8 @@ const ModalsProvider = () => {
       <RewardModal />
       <WarningRewardModal />
       <NotOpenModal />
+      <PixModal />
+      <FidelityModal />
     </>
   );
 };

@@ -15,7 +15,7 @@ export const NotOpenModal = () => {
       <div className='h-3/6 sm:h-2/6 flex flex-col items-center justify-center gap-2'>
         <h1 className='text-3xl font-semibold'>Oops!</h1>
 
-        <p className='font-light text-base text-center'>
+        <p className='font-light text-lg text-center'>
           Nesse momento, não estamos atendendo.
         </p>
 
@@ -44,7 +44,6 @@ export const NotOpenModal = () => {
       <ModalWarning
         onClose={generalDataModal.onClose}
         body={body}
-        title='Dados gerais'
         isOpen={generalDataModal.isOpen}
       />
     </>

@@ -246,4 +246,6 @@ export type General_data = {
   telephone: string;
   telephone2?: string;
   isOpening: Boolean;
+  pixKey: string;
+  pixName: string;
 };

@@ -4,7 +4,12 @@ import useAuth, {
 } from '@/app/hooks/auth/useAuth';
 import { ModalStore } from '@/app/types/ComponentTypes';
 import { useEffect } from 'react';
-import { AiOutlineHome, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
+import {
+  AiOutlineHome,
+  AiOutlineLogout,
+  AiOutlineQuestionCircle,
+  AiOutlineUser,
+} from 'react-icons/ai';
 import { BiCrown, BiMessageAlt } from 'react-icons/bi';
 import { BsBag } from 'react-icons/bs';
 import { HiOutlineDeviceMobile } from 'react-icons/hi';
@@ -19,6 +24,7 @@ import {
   useAppDownload,
   useCoupons,
   useFavoriteModal,
+  useFidelityModal,
   useLoginModal,
   useMenuHeaderState,
   useMyOrderModal,
@@ -41,6 +47,7 @@ export const useMenuHeader = () => {
   const myOrderModal = useMyOrderModal();
   const leftMenu = useMenuHeaderState();
   const rewardModal = useRewardModal();
+  const fidelityModal = useFidelityModal();
   const iconsSize = 28;
 
   const toggleMenu = () => {
@@ -62,6 +69,13 @@ export const useMenuHeader = () => {
   };
 
   const commomOptions = [
+    {
+      label: 'Plano de fidelidade',
+      icon: <AiOutlineQuestionCircle size={iconsSize} />,
+      onclick: () => {
+        menuAction(fidelityModal);
+      },
+    },
     {
       label: 'Fale conosco',
       icon: <BiMessageAlt size={iconsSize} />,

@@ -16,7 +16,7 @@ import { APP_SETTINGS } from '@/app/config';
 import { AnimationOrder } from '../../Animations/AnimationOrder';
 import { useGeneralDataInfo } from '@/app/hooks/generalData';
 import toast from 'react-hot-toast';
-import { useGeneralDataModal } from '@/app/hooks/modals/useModal';
+import { useGeneralDataModal, usePixModal } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 const OrderModal = () => {
@@ -51,6 +51,7 @@ const OrderModal = () => {
   } = useCustomOrderModal();
   const { systemOpening } = useGeneralDataInfo();
   const { generalData } = useGlobalStore();
+  const pixModal = usePixModal();
 
   let body = (
     <div className='overflow-auto privacyScroll pb-8'>
@@ -189,6 +190,9 @@ const OrderModal = () => {
                   name='pagamentOption'
                   className='accent-red-600 w-4 h-4'
                   onClick={() => {
+                    if (options.type_pagament_name.includes('Pix')) {
+                      pixModal.onOpen();
+                    }
                     setSelectedTypePagament(options.id);
                     handleSetSelected('total');
                   }}

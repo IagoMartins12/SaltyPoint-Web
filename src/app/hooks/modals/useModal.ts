@@ -28,3 +28,5 @@ export const useMenuHeaderState = createModalStore();
 export const useCartMenuState = createModalStore();
 export const useRewardModal = createModalStore();
 export const useGeneralDataModal = createModalStore();
+export const usePixModal = createModalStore();
+export const useFidelityModal = createModalStore();

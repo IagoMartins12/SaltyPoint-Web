@@ -8,12 +8,22 @@
   /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
+.buttonBG {
+  background: #000000;
+  /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
+}
+
 body {
   background-color: #ffffff;
 }
 
 [data-theme='dark'] body {
   background-color: #000000;
+}
+
+[data-theme='dark'] .buttonBG {
+  background: #acacac;
+  box-shadow: 0 16px 48px 8px rgba(1, 1, 5, 0.1);
 }
 
 [data-theme='dark'] .cardBG,
