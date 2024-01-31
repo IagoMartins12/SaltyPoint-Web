@@ -14,7 +14,7 @@ import { AnimationReward } from '../../Animations/AnimationReward';
 import { BiDownArrowAlt } from 'react-icons/bi';
 
 export const WarningRewardModal: React.FC = () => {
-  const [hasPlayed, setHasPlayed] = useState(true);
+  const [hasPlayed, setHasPlayed] = useState(false);
 
   const warningModal = useWarningRewardModal();
   const { user, setUser, setUserReward, userReward } = usePrivateStore();

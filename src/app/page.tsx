@@ -9,7 +9,7 @@ import { ProductMenu } from './components/ProductMenu';
 export default function Home() {
   return (
     <ClientOnly>
-      <main>
+      <main id='hero'>
         <Header />
         {/* <RewardOnHome /> */}
         <Hero3 />

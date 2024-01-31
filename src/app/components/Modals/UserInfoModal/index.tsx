@@ -23,6 +23,7 @@ export const UserInfoModal = () => {
   const deleteModal = useDeleteUser();
   const { user, address, setUser } = usePrivateStore();
 
+  const filtedAddress = address.filter(address => address.isActive !== 1);
   //"651b0262e471b239c7e9c1ed"
 
   const setUserWithCallback = (callback: (user: User) => User) => {
@@ -91,7 +92,7 @@ export const UserInfoModal = () => {
     } as UpdateUserDto;
 
     try {
-      const response = await updatedMe(object);
+      await updatedMe(object);
 
       setUser({ ...user, image: value });
       toast.success('Foto atualizada!');
@@ -138,7 +139,7 @@ export const UserInfoModal = () => {
       <SelectAddress
         id='address'
         register={register}
-        address={address}
+        address={filtedAddress}
         userAddressId={user?.user_Adress_id}
       />
 

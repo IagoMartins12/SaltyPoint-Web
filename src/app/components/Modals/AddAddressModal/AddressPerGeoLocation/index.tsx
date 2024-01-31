@@ -26,7 +26,6 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   saveAddress,
   handleSubmit,
   setIsSelected,
-  handleOnChange,
   result,
   setValue,
 }) => {

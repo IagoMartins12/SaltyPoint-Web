@@ -106,12 +106,12 @@ export const PizzaBody = () => {
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>
-      <div className='w-full h-[25%] relative rounded-lg '>
+      <div className='w-full h-[45%] relative rounded-lg '>
         <Image
           fill
           src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky object-fill opacity-90'
+          className='rounded-lg !sticky object-fit '
           sizes='100%'
         />
         <FavoriteButton

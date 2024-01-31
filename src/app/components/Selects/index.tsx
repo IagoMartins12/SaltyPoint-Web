@@ -1,3 +1,5 @@
+'use client';
+
 import {
   SelectAddressProps,
   SelectDistrictProps,
@@ -37,6 +39,8 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
   userAddressId,
 }) => {
   const hasUserAddress = userAddressId !== null;
+  console.log('userAddressId', userAddressId);
+  console.log('address', address);
 
   return (
     <div className='flex flex-col gap-1 focus:outline-none'>

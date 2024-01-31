@@ -10,6 +10,7 @@ export const ProductMenu = () => {
   const visibleCategories = categorys.filter(
     category => !categoriesToExclude.includes(category.category_name),
   );
+
   return (
     <div className='w-11/12 mx-auto sm:pt-4 flex z-10 flex-col gap-8'>
       {visibleCategories.map(category => (

@@ -96,27 +96,27 @@ export const Hero3 = () => {
 
   if (!user) {
     return (
+      <div></div>
       // <div
       //   className='flex flex-col w-11/12 mx-auto my-4 sm:my-2 gap-2'
-      //   id='hero'
+      //
       // >
       //   <p className='text-3xl font-normal'>
       //     Faça o login para ver os seus pontos
       //   </p>
       // </div>
-      <></>
     );
   }
 
   return (
-    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-8 gap-2' id='hero'>
+    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-8 gap-2'>
       <p className='text-3xl font-normal'>
         Olá, <span className='font-semibold'>{user.name}</span>
       </p>
 
       <div className='flex gap-5 items-center'>
         <p className='text-xl font-normal'>
-          Você possui: <span className='text-3xl '> 250 Pontos</span>
+          Você possui: <span className='text-3xl '> {user.points} Pontos</span>
         </p>
 
         <div

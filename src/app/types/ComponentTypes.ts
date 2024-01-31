@@ -87,7 +87,6 @@ export interface AddAddressInfoStepProps {
 }
 
 export interface AddAddressGeoStepProps extends AddAddressInfoStepProps {
-  handleOnChange: (value: string) => void;
   result?: Result | null;
   setValue: UseFormSetValue<FieldValues>;
 }

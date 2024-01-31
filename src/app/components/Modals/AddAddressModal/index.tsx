@@ -60,6 +60,7 @@ export const AddAddressModal = () => {
     const validateCpf = data.cep.replace('-', '');
 
     const response = await getAddressPerCep(validateCpf);
+    console.log('response1', response);
 
     if (response?.erro) {
       return toast.error('CEP não encontrado');
@@ -92,7 +93,7 @@ export const AddAddressModal = () => {
 
     const object = {
       address: data.address,
-      cep: data.cep,
+      cep: data.cep !== '' ? data.cep : null,
       number: data.number,
       reference: data.complement,
       district: data.district,
@@ -102,6 +103,8 @@ export const AddAddressModal = () => {
     } as User_Adress;
 
     const response = await sendAddressUser(object);
+    console.log('response 2', response);
+
     if (response.status === 201) {
       setAddress([...address, response.data]);
       setStep(0);
@@ -128,7 +131,7 @@ export const AddAddressModal = () => {
   const saveGeoAddress: SubmitHandler<FieldValues> = async data => {
     const object = {
       address: data.address,
-      cep: data.cep !== '' ? data.cep : '00000-000',
+      cep: data.cep,
       number: data.number,
       reference: data.complement,
       district: data.district,
@@ -138,6 +141,7 @@ export const AddAddressModal = () => {
     } as User_Adress;
 
     const response = await sendAddressUser(object);
+    console.log('response 3', response);
     if (response.status === 201) {
       setAddress([...address, response.data]);
       setStep(0);
@@ -207,7 +211,6 @@ export const AddAddressModal = () => {
             register={register}
             saveAddress={saveGeoAddress}
             setIsSelected={setIsSelected}
-            handleOnChange={handleOnChange}
             result={result}
             setValue={setValue}
           />

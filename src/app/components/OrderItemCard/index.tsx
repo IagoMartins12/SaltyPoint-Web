@@ -31,7 +31,7 @@ export const OrderItemCard: React.FC<OrderProductCardType> = ({
   };
 
   return (
-    <div className='w-full flex gap-6'>
+    <div className='w-8/12 flex gap-6'>
       <div className='flex flex-col gap-1 w-full justify-center'>
         <div className='flex items-center gap-2'>
           <div className=' bg-slate-300 w-[20px] h-[22px] rounded-md flex items-center justify-center'>

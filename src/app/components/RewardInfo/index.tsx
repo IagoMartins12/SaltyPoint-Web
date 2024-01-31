@@ -26,12 +26,12 @@ export const RewardInfo: FC<RewardInfoProps> = ({ reward }) => {
   };
   return (
     <div className='flex py-4 '>
-      <div className='w-3/12 h-full flex justify-center items-center'>
+      <div className='w-4/12 sm:w-3/12 h-full flex justify-center items-center'>
         <div className='flex justify-center items-center h-14 w-14 rounded-full bg-gray-200'>
           {checkIcon()}
         </div>
       </div>
-      <div className='w-9/12  items-center justify-start'>
+      <div className='w-8/12 sm:w-9/12  items-center justify-start'>
         <p className={`text-lg font-bold `}>{reward.name}</p>
         <p className={`text-base font-light `}>
           Resgate com {reward.quantity_points} pontos

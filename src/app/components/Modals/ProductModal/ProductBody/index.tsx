@@ -63,12 +63,12 @@ export const ProductBody = () => {
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
-      <div className='w-full h-[25%] relative rounded-lg '>
+      <div className='w-full  h-[35%]  sm:h-[45%] relative  aspect-ratio rounded-lg '>
         <Image
           fill
           src={(productModal.currentProduct as Product)?.product_image ?? ''}
-          alt='Product image'
-          className='rounded-lg !sticky object-fill opacity-90'
+          alt={(productModal.currentProduct as Product).name}
+          className='rounded-lg  opacity-90'
           sizes='100%'
         />
         <FavoriteButton

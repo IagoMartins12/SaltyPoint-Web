@@ -4,6 +4,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { OrderItemCard } from '../OrderItemCard';
 import { useCurrentOrderModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { formatOrderDate } from '@/app/utils';
 
 export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
   const currentOrderModal = useCurrentOrderModal();
@@ -49,7 +50,7 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
           </div>
         </div>
 
-        <div className='w-11/12 mx-auto h-[50%] flex flex-col gap-3 items-center justify-center'>
+        <div className='w-11/12 mx-auto h-[50%] flex  gap-3 items-center justify-between '>
           {order.orderItems.slice(0, 1).map(item => (
             <OrderItemCard
               cart_product={item}
@@ -57,6 +58,10 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
               key={item.id}
             />
           ))}
+
+          <span className='text-sm font-semibold text-center'>
+            {formatOrderDate(order.order_date)}
+          </span>
         </div>
       </div>
     </div>

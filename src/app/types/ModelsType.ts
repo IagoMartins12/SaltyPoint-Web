@@ -48,7 +48,7 @@ export type User_Adress = {
   district: String;
   reference?: string | null;
   type_adress: number;
-  isActive: number;
+  isActive?: number;
 
   user: User;
   order: Order[];

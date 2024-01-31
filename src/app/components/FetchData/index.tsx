@@ -105,5 +105,6 @@ export const FetchData = () => {
       fetchData();
     }
   }, [isLogged]);
+
   return <></>;
 };

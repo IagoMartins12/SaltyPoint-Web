@@ -15,18 +15,19 @@ export const SearchProduct: React.FC<SearchProductBox> = ({ product }) => {
     >
       <div className='w-7/12 flex py-2 h-full flex-col gap-3'>
         <span className='text-base sm:text-lg font-medium'>{product.name}</span>
-        <span className='text-sm font-light overflow-hidden'>
+        <span className='text-sm font-light overflow-hidden '>
           {product.description}
         </span>
       </div>
-      <div className='w-5/12 h-full'>
+      <div
+        className={` w-6/12 sm:w-5/12 h-full relative aspect-ratio rounded-xl`}
+      >
         <Image
           src={product.product_image}
           alt='product-image'
-          className='rounded-xl px-2 py-2 object-cover !w-full !h-full aspect-square '
+          className='rounded-xl px-2 py-2 object-fill '
           sizes='100%'
-          width={100}
-          height={100}
+          fill
         />
       </div>
     </div>

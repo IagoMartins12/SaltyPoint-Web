@@ -6,6 +6,7 @@ import { SearchProduct } from '../../SearchProduct';
 import { Product } from '@/app/types/ModelsType';
 import Modal from '../../Modal';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
+import { categoriesToExclude } from '../../CategoryMenu';
 
 export const SearchModal = () => {
   const [productState, setProductState] = useState<[] | Product[]>([]);
@@ -38,6 +39,10 @@ export const SearchModal = () => {
     return setProductState(newProducts);
   };
 
+  const visibleCategories = categorys.filter(
+    category => !categoriesToExclude.includes(category.category_name),
+  );
+
   useEffect(() => {
     setProductState(products);
   }, [products]);
@@ -58,18 +63,14 @@ export const SearchModal = () => {
       </div>
 
       <div className='flex flex-wrap gap-4  w-full'>
-        {categorys
-          .filter(
-            c => c.category_name !== 'Bordas' && c.category_name !== 'Brindes',
-          )
-          .map((category, i) => (
-            <SearchCategory
-              category={category}
-              onClick={handleSetSelected}
-              selected={selected}
-              key={category.id}
-            />
-          ))}
+        {visibleCategories.map((category, i) => (
+          <SearchCategory
+            category={category}
+            onClick={handleSetSelected}
+            selected={selected}
+            key={category.id}
+          />
+        ))}
       </div>
 
       <div className=''>

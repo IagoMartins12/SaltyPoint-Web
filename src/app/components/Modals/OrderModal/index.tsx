@@ -16,7 +16,7 @@ import { APP_SETTINGS } from '@/app/config';
 import { AnimationOrder } from '../../Animations/AnimationOrder';
 import { useGeneralDataInfo } from '@/app/hooks/generalData';
 import toast from 'react-hot-toast';
-import { useGeneralDataModal, usePixModal } from '@/app/hooks/modals/useModal';
+import { usePixModal } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 const OrderModal = () => {
