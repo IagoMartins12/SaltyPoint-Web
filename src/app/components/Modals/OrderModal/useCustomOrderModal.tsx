@@ -6,7 +6,12 @@ import {
 } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { addCartProduct, createOrder, getTypePagaments } from '@/app/services';
+import {
+  addCartProduct,
+  createOrder,
+  getCartProduct,
+  getTypePagaments,
+} from '@/app/services';
 import { CartProductDto, CreateOrderDto } from '@/app/types/Dtos';
 import {
   Cart_product,
@@ -53,6 +58,7 @@ export const useCustomOrderModal = () => {
   const orderModal = useOrderModal();
   const addressModal = useAddress();
   const userInfo = useUserInfoModal();
+
   const cartProductTotal = cart_product.reduce(
     (total, item) => total + Number(item.value),
     0,
@@ -115,7 +121,7 @@ export const useCustomOrderModal = () => {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
       setHasPlayed(true);
-
+      submitOrder();
       if (couponApplied) {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
         setCoupons(filteredCoupons);
@@ -160,6 +166,7 @@ export const useCustomOrderModal = () => {
     const orderDiscount = (discount / 100) * cartProductTotal;
     return orderDiscount;
   };
+
   const handleApplyCoupon = () => {
     const checkIfCouponExists = checkCoupon();
     const checkIfRewardExists = checkReward();
@@ -265,17 +272,26 @@ export const useCustomOrderModal = () => {
     setCart_product(updatedCartProduct);
   };
 
+  const fetchData = async () => {
+    try {
+      const typePagament = await getTypePagaments();
+
+      setTypePagament(typePagament);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchCart = async () => {
+    try {
+      const cart = await getCartProduct();
+
+      setCart_product(cart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const typePagament = await getTypePagaments();
-
-        setTypePagament(typePagament);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -297,6 +313,17 @@ export const useCustomOrderModal = () => {
       }
     }
   }, [rewardApplied]);
+
+  useEffect(() => {
+    fetchCart();
+  }, [orderModal.isOpen]);
+
+  const submitOrder = () => {
+    console.log('fazendo o pedido');
+    // socket.on('newOrder', orderId => {
+    //   console.log(`Novo pedido recebido em tempo real: ${orderId}`);
+    // });
+  };
 
   return {
     getTaxa,

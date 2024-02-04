@@ -1,5 +1,4 @@
 import { useGeneralDataModal } from '@/app/hooks/modals/useModal';
-import Modal from '../../Modal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ModalWarning } from '../../ModalWarning';
 import { AnimationClosed } from '../../Animations/AnimationClosed';

@@ -7,10 +7,12 @@ import {
   useAppDownload,
   useCoupons,
   useFavoriteModal,
+  useFidelityModal,
   useForgetPasswordModal,
   useLoginModal,
   useMyOrderModal,
   useOrderModal,
+  usePixModal,
   usePrivacyTerms,
   useRegisterModal,
   useSearchModal,
@@ -18,6 +20,7 @@ import {
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
+import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
 import { useEffect } from 'react';
 
 const modals = [
@@ -37,6 +40,9 @@ const modals = [
   useFavoriteModal,
   useProductModal,
   useMyOrderModal,
+  usePixModal,
+  useFidelityModal,
+  useWarningRewardModal,
 ];
 
 export const ModalsBackground = () => {

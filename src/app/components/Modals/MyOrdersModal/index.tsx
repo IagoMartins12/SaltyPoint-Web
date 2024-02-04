@@ -11,14 +11,12 @@ export const MyOrdersModal = () => {
 
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6 pb-6'>
-      <div className=''>
-        <div className='flex flex-col gap-6'>
-          {orders.length > 0 ? (
-            orders.map(order => <OrderComponent key={order.id} order={order} />)
-          ) : (
-            <AnimationEmpty text='Você ainda não fez nenhum pedido' />
-          )}
-        </div>
+      <div className='flex flex-col gap-6'>
+        {orders.length > 0 ? (
+          orders.map(order => <OrderComponent key={order.id} order={order} />)
+        ) : (
+          <AnimationEmpty text='Você ainda não fez nenhum pedido' />
+        )}
       </div>
     </div>
   );

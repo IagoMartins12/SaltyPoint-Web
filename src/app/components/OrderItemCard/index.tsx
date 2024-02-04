@@ -35,7 +35,9 @@ export const OrderItemCard: React.FC<OrderProductCardType> = ({
       <div className='flex flex-col gap-1 w-full justify-center'>
         <div className='flex items-center gap-2'>
           <div className=' bg-slate-300 w-[20px] h-[22px] rounded-md flex items-center justify-center'>
-            <span className='text-sm  font-light'>{cart_product.quantity}</span>
+            <span className='text-sm  font-semibold  text-black'>
+              {cart_product.quantity}
+            </span>
           </div>
           <span className='font-light text-base'>
             {getProductName2(cart_product.product_id, cart_product.size)}

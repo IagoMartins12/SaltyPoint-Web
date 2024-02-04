@@ -30,6 +30,7 @@ export const AddressModal = () => {
 
     return false;
   };
+
   const body = (
     <div className='w-full overflow-auto privacyScroll h-full'>
       <div className='flex flex-col w-11/12 mx-auto h-full gap-12 '>

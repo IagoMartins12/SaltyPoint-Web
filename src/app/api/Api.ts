@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getUserLocalStorage } from '../utils/auth';
 
 export const Api = axios.create({
-  baseURL: process.env.BASE_URL || 'http://localhost:3000/',
+  baseURL: process.env.BASE_URL || 'http://localhost:3333/',
 });
 
 Api.interceptors.request.use(

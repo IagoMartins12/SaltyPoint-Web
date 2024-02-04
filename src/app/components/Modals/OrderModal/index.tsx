@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '../../Modal';
 import { CartProductCardOrder } from '../../CartProductCardOrder';
 import {
@@ -16,8 +16,13 @@ import { APP_SETTINGS } from '@/app/config';
 import { AnimationOrder } from '../../Animations/AnimationOrder';
 import { useGeneralDataInfo } from '@/app/hooks/generalData';
 import toast from 'react-hot-toast';
-import { usePixModal } from '@/app/hooks/modals/useModal';
+import {
+  usePixModal,
+  useChangeDeliveryInfoModal,
+} from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { MdOutlineModeEdit } from 'react-icons/md';
+import { BsTelephone } from 'react-icons/bs';
 
 const OrderModal = () => {
   const {
@@ -51,7 +56,12 @@ const OrderModal = () => {
   } = useCustomOrderModal();
   const { systemOpening } = useGeneralDataInfo();
   const { generalData } = useGlobalStore();
+  const userInfo = useChangeDeliveryInfoModal();
   const pixModal = usePixModal();
+
+  const openUserInfo = () => {
+    userInfo.onOpen();
+  };
 
   let body = (
     <div className='overflow-auto privacyScroll pb-8'>
@@ -83,8 +93,38 @@ const OrderModal = () => {
               className='font-medium text-lg text-red-500 hover:text-red-400'
               onClick={handleGetMoreProduct}
             >
-              Adicionar mais itens{' '}
+              Adicionar mais itens
             </span>
+          </div>
+
+          <div className='flex gap-2  border-b-2 '>
+            <div className='flex justify-between p-4  items-center w-full'>
+              <div className='flex gap-4 items-center'>
+                <BsTelephone size={30} />
+                <div className='flex flex-col gap-1'>
+                  <span className='text-medium font-medium'>
+                    Telefone para contato
+                  </span>
+                  {user?.phone ? (
+                    <span className='text-sm font-light'>{user?.phone} </span>
+                  ) : (
+                    <span
+                      className='text-sm font-light underline'
+                      onClick={openUserInfo}
+                    >
+                      Insira um telefone para continuar
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div
+                className='flex items-center justify-center cursor-pointer'
+                onClick={openUserInfo}
+              >
+                <MdOutlineModeEdit size={20} />
+              </div>
+            </div>
           </div>
 
           {/* Opções de entrega */}
@@ -138,20 +178,30 @@ const OrderModal = () => {
                   </label>
                 </div>
 
-                <input
-                  type='radio'
-                  name='deliveryOption'
-                  className='accent-red-600 w-4 h-4'
-                  onClick={() => {
-                    if (i === 0 && !user?.user_Adress_id) {
-                      handleOpenAddressModal();
-                    } else {
-                      setSelected(i);
-                      handleSetSelected('payment');
-                    }
-                  }}
-                  required
-                />
+                <div className='flex gap-4 items-center justify-center'>
+                  {i === 0 ? (
+                    <div
+                      className='flex items-center justify-center'
+                      onClick={openUserInfo}
+                    >
+                      <MdOutlineModeEdit size={15} />
+                    </div>
+                  ) : null}
+                  <input
+                    type='radio'
+                    name='deliveryOption'
+                    className='accent-red-600 w-4 h-4'
+                    onClick={() => {
+                      if (i === 0 && !user?.user_Adress_id) {
+                        handleOpenAddressModal();
+                      } else {
+                        setSelected(i);
+                        handleSetSelected('payment');
+                      }
+                    }}
+                    required
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -165,16 +215,19 @@ const OrderModal = () => {
                 id='payment'
               >
                 <div className='flex gap-4 items-center'>
-                  {options.type_pagament_name.includes('credito') && (
-                    <AiOutlineCreditCard size={30} />
-                  )}
-                  {options.type_pagament_name.includes('debito') && (
-                    <AiFillCreditCard size={30} />
-                  )}
-                  {options.type_pagament_name.includes('Dinheiro') && (
-                    <FaRegMoneyBillAlt size={30} />
-                  )}
-                  {options.type_pagament_name.includes('Pix') && (
+                  {options.type_pagament_name
+                    .toUpperCase()
+                    .includes('CREDITO') && <AiOutlineCreditCard size={30} />}
+
+                  {options.type_pagament_name
+                    .toUpperCase()
+                    .includes('DEBITO') && <AiFillCreditCard size={30} />}
+
+                  {options.type_pagament_name
+                    .toUpperCase()
+                    .includes('DINHEIRO') && <FaRegMoneyBillAlt size={30} />}
+
+                  {options.type_pagament_name.toUpperCase().includes('PIX') && (
                     <MdPix size={30} />
                   )}
                   <label

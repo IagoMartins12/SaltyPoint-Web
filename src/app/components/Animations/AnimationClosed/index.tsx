@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useLottie } from 'lottie-react';
 import closed from '../../../animations/closed.json';

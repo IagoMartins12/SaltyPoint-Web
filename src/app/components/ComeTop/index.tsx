@@ -8,7 +8,7 @@ export const ComeBack = () => {
   const [showArrow, setShowArrow] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > window.innerHeight - 800) {
+    if (window.scrollY > window.innerHeight - 400) {
       setShowArrow(true);
     } else {
       setShowArrow(false);

@@ -14,6 +14,7 @@ import { User } from '@/app/types/ModelsType';
 import {
   useChangePasswordModal,
   useDeleteUser,
+  useOrderModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 
@@ -21,10 +22,11 @@ export const UserInfoModal = () => {
   const userInfoModal = useUserInfoModal();
   const changePasswordModal = useChangePasswordModal();
   const deleteModal = useDeleteUser();
+  const orderModal = useOrderModal();
+
   const { user, address, setUser } = usePrivateStore();
 
   const filtedAddress = address.filter(address => address.isActive !== 1);
-  //"651b0262e471b239c7e9c1ed"
 
   const setUserWithCallback = (callback: (user: User) => User) => {
     if (!user) return;
@@ -105,7 +107,7 @@ export const UserInfoModal = () => {
 
   const body = (
     <form
-      className='flex flex-col gap-6 w-11/12 mx-auto'
+      className='flex flex-col gap-6 w-11/12 mx-auto Z-50'
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className='flex items-center justify-center'>
@@ -162,7 +164,6 @@ export const UserInfoModal = () => {
         <div
           className='flex items-center cursor-pointer justify-center'
           onClick={() => {
-            userInfoModal.onClose();
             deleteModal.onOpen();
           }}
         >

@@ -57,7 +57,7 @@ export const ModalWarning: React.FC<ModalProps> = ({
               <div className='text-lg font-semibold'>{title}</div>
             </div>
             {/* Corpo */}
-            <div className=' px-6 py-3 flex-auto overflow-auto items-center justify-center flex'>
+            <div className=' px-6 py-3 flex-auto overflow-auto privacyScroll  justify-center flex'>
               {body}
             </div>
           </div>

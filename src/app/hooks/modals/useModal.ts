@@ -30,3 +30,4 @@ export const useRewardModal = createModalStore();
 export const useGeneralDataModal = createModalStore();
 export const usePixModal = createModalStore();
 export const useFidelityModal = createModalStore();
+export const useChangeDeliveryInfoModal = createModalStore();

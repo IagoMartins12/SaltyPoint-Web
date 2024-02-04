@@ -1,11 +1,11 @@
 'use client';
 
+import { categoriesToExclude } from '../CategoryMenu';
 import { ProductCard } from '../ProductCard';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 export const ProductMenu = () => {
   const { categorys, products } = useGlobalStore();
-  const categoriesToExclude = ['Bordas', 'Brindes', 'Promoções'];
 
   const visibleCategories = categorys.filter(
     category => !categoriesToExclude.includes(category.category_name),

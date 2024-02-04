@@ -23,7 +23,7 @@ export const FavoriteModal = () => {
           </div>
         ))
       ) : (
-        <div className='w-full h-3/5'>
+        <div className='w-full h-3/5 sm:h-4/5'>
           <AnimationEmpty text='Você ainda não favoritou nenhum produto' />
         </div>
 
