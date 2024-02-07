@@ -15,9 +15,16 @@ import {
   usePixModal,
   usePrivacyTerms,
   useRegisterModal,
+  useRewardModal,
   useSearchModal,
   useTalkToUsModal,
   useUserInfoModal,
+  useCartMenuState,
+  useChangeDeliveryInfoModal,
+  useChangePasswordModal,
+  useDeleteUser,
+  useGeneralDataModal,
+  useMenuHeaderState,
 } from '@/app/hooks/modals/useModal';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
@@ -43,6 +50,13 @@ const modals = [
   usePixModal,
   useFidelityModal,
   useWarningRewardModal,
+  useRewardModal,
+  useCartMenuState,
+  useChangeDeliveryInfoModal,
+  useChangePasswordModal,
+  useDeleteUser,
+  useGeneralDataModal,
+  useMenuHeaderState,
 ];
 
 export const ModalsBackground = () => {

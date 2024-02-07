@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import { handleSetSelected } from '@/app/utils';
-import { useCustomProductModal } from '../Modals/ProductModal/useProductModal';
 import { PizzaProductModalType } from '@/app/types/ComponentTypes';
 import { Product } from '@/app/types/ModelsType';
 
@@ -13,9 +12,10 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
   product,
   selectedProduct2,
   setSelectedProduct2,
+  checkDiference,
+  removeSelected,
 }) => {
   const productModal = useProductModal();
-  const { removeSelected, checkDiference } = useCustomProductModal();
 
   return (
     <label className={`flex min-h-[12vh] rounded-2xl cursor-pointer w-[100%]`}>
@@ -55,12 +55,10 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
         <div className='flex flex-col w-9/12 h-full gap-4 py-2 px-5 justify-between'>
           <div className='flex flex-col gap-4'>
             <span className='font-semibold text-base sm:text-lg'>
-              {' '}
-              {product.name}{' '}
+              {product.name}
             </span>
             <span className='font-light text-sm whitespace-pre-line'>
-              {' '}
-              {product.description}{' '}
+              {product.description}
             </span>
             {productModal.currentProduct &&
             (productModal.currentProduct as Product)?.value >=

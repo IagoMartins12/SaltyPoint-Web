@@ -5,11 +5,6 @@ import { FetchData } from './components/FetchData';
 import { Header } from './components/Header';
 import { Hero3 } from './components/Hero';
 import { ProductMenu } from './components/ProductMenu';
-import dynamic from 'next/dynamic';
-
-// const DynamicHeader = dynamic(() => import('./components/pro'), {
-//   loading: () => <p>Loading...</p>,
-// });
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { AddressInput, InfoAddressInput } from '@/app/components/Input';
+import { AddressInput } from '@/app/components/Input';
 import { AddressRadio } from '@/app/components/RadioButton';
 import { AddAddressInfoStepProps } from '@/app/types/ComponentTypes';
 import { BsHouseFill } from 'react-icons/bs';
@@ -31,14 +31,14 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
           register={register}
           label='Endereço'
         />
-        <InfoAddressInput
+        <AddressInput
           id='number'
           register={register}
           required
           label='Numero'
           errors={errors}
         />
-        <InfoAddressInput
+        <AddressInput
           id='complement'
           register={register}
           label='Complemento'

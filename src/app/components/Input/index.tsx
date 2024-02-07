@@ -83,63 +83,42 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   value,
   required,
 }) => {
+  const [focus, setFocus] = useState(false);
+
+  const handleFocus = () => {
+    setFocus(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+  };
+
   return (
     <div
       className={`flex flex-col gap-1 focus:outline-none  ${
         disabled ? 'pointer-events-none opacity-70' : ''
       }`}
     >
-      <span className='font-light text-base'>{label}</span>
-      {typeof value === 'string' ? (
-        <input
-          type={type}
-          id={id}
-          className={`px-2 py-2 border-b-2 ${
-            errors[id] ? 'border-red-500' : ''
-          }`}
-          placeholder={placeholder}
-          {...register(id, { required })}
-          value={value}
-          readOnly={disabled}
-          autoComplete='off'
-        />
-      ) : (
-        <input
-          type={type}
-          id={id}
-          className={`px-2 py-2 border-b-2 ${
-            errors[id] ? 'border-red-500' : ''
-          }`}
-          placeholder={placeholder}
-          {...register(id)}
-          readOnly={disabled}
-          autoComplete='off'
-        />
-      )}
-    </div>
-  );
-};
-
-export const InfoAddressInput: React.FC<InfoAddressInputProps> = ({
-  id,
-  label,
-  type = 'text',
-  register,
-  placeholder,
-  required,
-  errors,
-}) => {
-  return (
-    <div className='flex flex-col gap-1 focus:outline-none '>
-      <span className='font-light text-base'>{label}</span>
-
+      <span
+        className={`font-light text-base ${
+          focus ? 'text-red-500' : ''
+        } transition-all duration-300`}
+      >
+        {label}
+      </span>
       <input
         type={type}
         id={id}
-        className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
+        className={`px-2 py-2 border-b-2 ${
+          (errors[id] || focus) && 'border-red-500'
+        } transition-all duration-300`}
         placeholder={placeholder}
         {...register(id, { required })}
+        value={value}
+        readOnly={disabled}
         autoComplete='off'
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </div>
   );
@@ -151,13 +130,31 @@ export const CepInput: React.FC<CepInputProps> = ({
   handleOnChange,
   required = true,
 }) => {
+  const [focus, setFocus] = useState(false);
+
+  const handleFocus = () => {
+    setFocus(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+  };
+
   return (
     <div className='flex flex-col gap-1'>
-      <span className='font-light text-sm'>CEP</span>
+      <span
+        className={`font-light text-base ${
+          focus ? 'text-red-500' : ''
+        } transition-all duration-300`}
+      >
+        CEP
+      </span>
       <input
         type='text'
         id='cep'
-        className={`px-2 py-2 border-b-2 ${errors.cep ? 'border-red-500' : ''}`}
+        className={`px-2 py-2 border-b-2 ${
+          errors.cep || focus ? 'border-red-500' : ''
+        } transition-all duration-300`}
         placeholder='Exemplo: 05280-000'
         {...register('cep', {
           required: required,
@@ -166,6 +163,9 @@ export const CepInput: React.FC<CepInputProps> = ({
           const formattedCep = formatCep(ev.target.value);
           handleOnChange(formattedCep);
         }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        autoComplete='off'
       />
       {errors.cep && (
         <span className='text-red-500'>
@@ -189,17 +189,35 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
   value,
   required,
 }) => {
+  const [focus, setFocus] = useState(false);
+
+  const handleFocus = () => {
+    setFocus(true);
+  };
+
+  const handleBlur = () => {
+    setFocus(false);
+  };
+
   return (
     <div
       className={`flex flex-col gap-1 focus:outline-none  ${
         disabled ? 'pointer-events-none opacity-70' : ''
       }`}
     >
-      <span className='font-light text-base'>{label}</span>
+      <span
+        className={`font-light text-base ${
+          focus ? 'text-red-500' : ''
+        } transition-all duration-300`}
+      >
+        {label}
+      </span>
       <input
         type={type}
         id={id}
-        className={`px-2 py-2 border-b-2 ${errors[id] ? 'border-red-500' : ''}`}
+        className={`px-2 py-2 border-b-2 ${
+          errors[id] || focus ? 'border-red-500' : ''
+        } transition-all duration-300`}
         placeholder={placeholder}
         {...register(id, { required })}
         value={value}
@@ -210,6 +228,8 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
           handleInputChange(ev, id);
         }} // Aplica o formato no evento onChange
         autoComplete='off'
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </div>
   );
@@ -263,6 +283,7 @@ export const TextArea: React.FC<TextAreaInputProps> = ({ register }) => {
         type={'text'}
         className='form__field bg-transparent h-14'
         {...register('observation')}
+        autoComplete='off'
       />
       <label className='form__label'>Observação</label>
     </div>

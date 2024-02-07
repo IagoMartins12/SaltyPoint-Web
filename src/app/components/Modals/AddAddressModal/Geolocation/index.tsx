@@ -15,7 +15,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
 }) => {
   const location = useGeoLocation();
   const { setGeoAddress, GeoAddress } = useGeoAddressLocation();
-  const apiKey = 'AIzaSyDu0NBwZWMwvPMDy5gTJZ6EDyptHSv2cdg';
+  const apiKey = 'AIzaSyAHf2daxc7jfa2_Z6ShUv_FRyW3vUR2Ja8';
 
   const requiredTypes = [
     'street_address',
@@ -53,6 +53,8 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
           location.coordinates?.lng,
           apiKey,
         );
+
+        console.log('response', response);
         if (response.ok) {
           const data = await response.json();
 
@@ -69,6 +71,8 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
       fetchData();
     }
   }, [location, apiKey]);
+
+  console.log('GeoAddress', GeoAddress);
 
   return (
     <>

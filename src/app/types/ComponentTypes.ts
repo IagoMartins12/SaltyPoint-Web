@@ -138,8 +138,8 @@ export interface ProductStore {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  currentProduct: Product | null | OrderType;
-  setCurrentProduct: (product: Product | OrderType) => void;
+  currentProduct: Product | null;
+  setCurrentProduct: (product: Product) => void;
 }
 export interface AuthStore {
   isLogged: boolean;
@@ -242,6 +242,10 @@ export interface PizzaProductModalType {
   product: Product;
   selectedProduct2: string | null;
   setSelectedProduct2: React.Dispatch<React.SetStateAction<string | null>>;
+  removeSelected: (
+    setSelectedAction: React.Dispatch<React.SetStateAction<string | null>>,
+  ) => void;
+  checkDiference: (product: Product) => string | undefined;
 }
 
 export interface CornicioneProductModalType {

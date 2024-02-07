@@ -36,9 +36,12 @@ export const SearchModal = () => {
         p.description.toLowerCase().includes(query.toLowerCase()),
     );
 
-    return setProductState(newProducts);
-  };
+    const filteredProduct = newProducts.filter(p =>
+      visibleCategories.some(category => category.id === p.category_id),
+    );
 
+    setProductState(filteredProduct);
+  };
   const visibleCategories = categorys.filter(
     category => !categoriesToExclude.includes(category.category_name),
   );
@@ -54,6 +57,7 @@ export const SearchModal = () => {
           className='w-full px-2 py-2 rounded-md border-b-2 bg-transparent'
           onChange={ev => {
             handleSearchInput(ev.target.value);
+            setSelected(null);
           }}
         />
         <AiOutlineSearch
@@ -73,12 +77,12 @@ export const SearchModal = () => {
         ))}
       </div>
 
-      <div className=''>
-        <div className='flex flex-col  gap-4  w-full'>
-          {productState.map(p => (
-            <SearchProduct product={p} key={p.id} />
-          ))}
-        </div>
+      <div className='flex flex-col  gap-4  w-full'>
+        {productState.length > 0 ? (
+          productState.map(p => <SearchProduct product={p} key={p.id} />)
+        ) : (
+          <span>Sem resultado disponivel</span>
+        )}
       </div>
     </div>
   );

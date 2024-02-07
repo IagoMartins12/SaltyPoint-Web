@@ -26,6 +26,7 @@ export const useCustomProductModal = () => {
   const removeSelected = (
     setSelectedAction: React.Dispatch<React.SetStateAction<string | null>>,
   ) => {
+    setOtherProductsValue(0);
     setSelectedAction(null);
   };
 
@@ -50,8 +51,11 @@ export const useCustomProductModal = () => {
   };
 
   const checkValue = () => {
-    if (!productModal.currentProduct) return;
-    if (quantity === 0) return setValue((0).toFixed(2));
+    if (!productModal.currentProduct || quantity === 0) {
+      return setValue((0).toFixed(2));
+    }
+
+    let newValue = productModal.currentProduct.value * quantity;
 
     //Se uma borda for selecionado
     if (selectedProduct3 && productModal.currentProduct) {
@@ -109,7 +113,11 @@ export const useCustomProductModal = () => {
     }
 
     //Se nenhum outro produto foi selecionado
-    if (!selectedProduct3 && !selectedProduct2 && productModal.currentProduct) {
+    if (
+      selectedProduct3 === null &&
+      selectedProduct2 === null &&
+      productModal.currentProduct
+    ) {
       if (selectedSize === 1) {
         const newValue =
           productModal.currentProduct.value * quantity - brotinhoPrice;
@@ -120,7 +128,6 @@ export const useCustomProductModal = () => {
       return setValue(newValue.toFixed(2));
     }
 
-    const newValue = productModal.currentProduct.value * quantity;
     return setValue(newValue.toFixed(2));
   };
 
@@ -145,7 +152,7 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
-  }, [value, quantity, increaseQuantity, decreaseQuantity]);
+  }, [value, quantity, increaseQuantity, decreaseQuantity, selectedProduct2]);
 
   useEffect(() => {
     if (selectedProduct2 && productModal.currentProduct) {

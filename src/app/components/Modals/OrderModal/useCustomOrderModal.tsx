@@ -315,7 +315,9 @@ export const useCustomOrderModal = () => {
   }, [rewardApplied]);
 
   useEffect(() => {
-    fetchCart();
+    if (user) {
+      fetchCart();
+    }
   }, [orderModal.isOpen]);
 
   const submitOrder = () => {

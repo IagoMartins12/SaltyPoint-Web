@@ -109,10 +109,10 @@ const OrderModal = () => {
                     <span className='text-sm font-light'>{user?.phone} </span>
                   ) : (
                     <span
-                      className='text-sm font-light underline'
+                      className='text-sm font-light underline cursor-pointer'
                       onClick={openUserInfo}
                     >
-                      Insira um telefone para continuar
+                      Cadastre um telefone
                     </span>
                   )}
                 </div>
@@ -191,8 +191,9 @@ const OrderModal = () => {
                     type='radio'
                     name='deliveryOption'
                     className='accent-red-600 w-4 h-4'
-                    onClick={() => {
+                    onClick={ev => {
                       if (i === 0 && !user?.user_Adress_id) {
+                        ev.preventDefault();
                         handleOpenAddressModal();
                       } else {
                         setSelected(i);

@@ -1,8 +1,4 @@
-import {
-  AddressInput,
-  CepInput,
-  InfoAddressInput,
-} from '@/app/components/Input';
+import { AddressInput } from '@/app/components/Input';
 import { AddressRadio } from '@/app/components/RadioButton';
 import { SelectDistrict } from '@/app/components/Selects';
 import { AddAddressGeoStepProps } from '@/app/types/ComponentTypes';
@@ -72,27 +68,21 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
       onSubmit={handleSubmit(saveAddress)}
     >
       <div className='flex flex-col gap-3'>
-        {/* <CepInput
-          errors={errors}
-          handleOnChange={handleOnChange}
-          register={register}
-          required={false}
-        /> */}
-        <InfoAddressInput
+        <AddressInput
           errors={errors}
           id='address'
           register={register}
           label='Endereço'
           required
         />
-        <InfoAddressInput
+        <AddressInput
           id='number'
           register={register}
           required
           label='Numero'
           errors={errors}
         />
-        <InfoAddressInput
+        <AddressInput
           id='complement'
           register={register}
           label='Complemento'
@@ -108,6 +98,7 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
           register={register}
           label='Cidade'
           value='São Paulo'
+          disabled
         />
 
         <AddressInput
@@ -116,6 +107,7 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
           register={register}
           label='Estado'
           value='SP'
+          disabled
         />
 
         <div className='flex items-center justify-center gap-4 my-3 '>

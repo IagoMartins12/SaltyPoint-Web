@@ -5,12 +5,7 @@ import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import Image from 'next/image';
-import {
-  AiFillCheckCircle,
-  AiOutlineCheck,
-  AiOutlineMinus,
-  AiOutlinePlus,
-} from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai';
 import { handleSetSelected } from '@/app/utils';
 import { CornicioneCart } from '@/app/components/CornicioneCart';
 import { useCustomProductModal } from '../useProductModal';
@@ -27,6 +22,7 @@ import { AnimationCart } from '@/app/components/Animations/AnimationCart';
 
 export const PizzaBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [searchText, setSearchText] = useState('');
 
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
@@ -54,6 +50,8 @@ export const PizzaBody = () => {
     setSelectedProduct3,
     selectedSize,
     setSelectedSize,
+    checkDiference,
+    removeSelected,
   } = useCustomProductModal();
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
@@ -83,17 +81,6 @@ export const PizzaBody = () => {
     }
   };
 
-  const brotinhoNames = products
-    .filter(
-      p =>
-        p.name !== (productModal.currentProduct as Product)?.name &&
-        p.category_id === (productModal.currentProduct as Product)?.category_id,
-    )
-    .map(p => ({
-      ...p,
-      name: p.name.replace('Pizza', 'Brotinho'),
-    }));
-
   const handleCheckFavorites = () => {
     return favorites.some(
       p => p.product_id === productModal.currentProduct?.id,
@@ -104,6 +91,52 @@ export const PizzaBody = () => {
     c => c.id === (productModal.currentProduct as Product).category_id,
   )?.category_name;
 
+  const productList = categorys
+    .filter(c => c.id === (productModal.currentProduct as Product)?.category_id)
+    .map(category =>
+      products
+        .filter(
+          p =>
+            p.id !== (productModal.currentProduct as Product)?.id &&
+            p.category_id === category.id,
+        )
+        .filter(
+          p =>
+            p.description.toUpperCase().includes(searchText.toUpperCase()) ||
+            p.name.toUpperCase().includes(searchText.toUpperCase()),
+        )
+        .map(product => (
+          <div
+            className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
+            key={product.id}
+          >
+            <PizzaCard
+              product={product}
+              selectedProduct2={selectedProduct2}
+              setSelectedProduct2={setSelectedProduct2}
+              checkDiference={checkDiference}
+              removeSelected={removeSelected}
+            />
+          </div>
+        )),
+    );
+
+  const brotinhoList = products
+    .filter(
+      p =>
+        p.name !== (productModal.currentProduct as Product)?.name &&
+        p.category_id === (productModal.currentProduct as Product)?.category_id,
+    )
+    .filter(
+      p =>
+        p.description.toUpperCase().includes(searchText.toUpperCase()) ||
+        p.name.toUpperCase().includes(searchText.toUpperCase()),
+    )
+    .map(p => ({
+      ...p,
+      name: p.name.replace('Pizza', 'Brotinho'),
+    }));
+
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>
       <div className='w-full h-[45%] relative rounded-lg '>
@@ -111,7 +144,7 @@ export const PizzaBody = () => {
           fill
           src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky object-fit '
+          className='rounded-lg !sticky object-scale-down '
           sizes='100%'
         />
         <FavoriteButton
@@ -124,20 +157,29 @@ export const PizzaBody = () => {
         className='flex flex-col gap-8 items-center justify-center'
         onSubmit={handleSubmit(onSubmit)}
       >
+        {/* Pizza information */}
         <div className='flex flex-col gap-2'>
-          <span className='font-normal text-2xl text-center'>
-            {(productModal.currentProduct as Product)?.name}
-          </span>
+          {selectedSize === 0 ? (
+            <span className='font-normal text-2xl text-center'>
+              {(productModal.currentProduct as Product)?.name}
+            </span>
+          ) : (
+            <span className='font-normal text-2xl text-center'>
+              {productModal.currentProduct?.name.replace('Pizza', 'Brotinho')}
+            </span>
+          )}
+
           <span className='font-light text-center text-sm'>
-            {(productModal.currentProduct as Product)?.description}
+            {productModal.currentProduct?.description}
           </span>
         </div>
 
+        {/* Pizza size */}
         <div id='size' className='flex flex-col w-full'>
           <div className='flex border-b-2 justify-between pb-2'>
             <span className='text-lg '>Selecione o tamanho </span>
-            {/* 
-            {selectedSize !== 0 && selectedSize !== 1 ? (
+
+            {/* {selectedSize !== 0 && selectedSize !== 1 ? (
               <span className='bg-black py-2 px-2 text-white text-xs rounded-xl'>
                 Obrigatorio
               </span>
@@ -171,6 +213,7 @@ export const PizzaBody = () => {
           </div>
         </div>
 
+        {/* Pizza flavor */}
         <div id='flavor' className='flex flex-col w-full'>
           <div className='flex border-b-2 justify-between pb-2'>
             <span className='text-lg '>Quantos sabores ?</span>
@@ -190,7 +233,7 @@ export const PizzaBody = () => {
                   id={flavor}
                   onChange={() => {
                     if (flavor === '1 Sabor') {
-                      setSelectedProduct2(null);
+                      removeSelected(setSelectedProduct2);
                     }
                     setSelectedFlavor(flavor);
                   }}
@@ -205,6 +248,7 @@ export const PizzaBody = () => {
           </div>
         </div>
 
+        {/* Second pizza flavor */}
         <div id='pizzas' className='flex flex-col w-full'>
           {selectedFlavor === '2 Sabores' && (
             <div id='pizzas' className='flex flex-col w-full'>
@@ -215,47 +259,49 @@ export const PizzaBody = () => {
                 </span>
               </div>
 
+              <div className='relative flex w-full my-6'>
+                <input
+                  type='text'
+                  className='w-full px-2 py-2 rounded-md bg-transparent'
+                  onChange={ev => {
+                    setSearchText(ev.target.value);
+                  }}
+                  placeholder='Pesquisar sabor'
+                />
+                <AiOutlineSearch
+                  size={30}
+                  className='right-2 top-1 absolute cursor-pointer'
+                />
+              </div>
               <div className='flex flex-col gap-2'>
-                {selectedSize === 0
-                  ? categorys
-                      .filter(
-                        c =>
-                          c.id ===
-                          (productModal.currentProduct as Product)?.category_id,
-                      )
-                      .map(category =>
-                        products
-                          .filter(
-                            p =>
-                              p.id !==
-                                (productModal.currentProduct as Product)?.id &&
-                              p.category_id === category.id,
-                          )
-                          .map(product => (
-                            <div
-                              className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
-                              key={product.id}
-                            >
-                              <PizzaCard
-                                product={product}
-                                selectedProduct2={selectedProduct2}
-                                setSelectedProduct2={setSelectedProduct2}
-                              />
-                            </div>
-                          )),
-                      )
-                  : brotinhoNames.map(product => (
-                      <div
-                        className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
-                        key={product.id}
-                      >
-                        <PizzaCard
-                          product={product}
-                          selectedProduct2={selectedProduct2}
-                          setSelectedProduct2={setSelectedProduct2}
-                        />
-                      </div>
-                    ))}
+                {selectedSize === 0 ? (
+                  productList[0].length > 0 ? (
+                    productList
+                  ) : (
+                    <span className='text-xl font-semibold text-center'>
+                      Sem produto disponivel
+                    </span>
+                  )
+                ) : brotinhoList.length > 0 ? (
+                  brotinhoList.map(product => (
+                    <div
+                      className='flex border-b-2 justify-between p-2 min-h-[18vh] sm:min-h-[17vh]'
+                      key={product.id}
+                    >
+                      <PizzaCard
+                        product={product}
+                        selectedProduct2={selectedProduct2}
+                        setSelectedProduct2={setSelectedProduct2}
+                        checkDiference={checkDiference}
+                        removeSelected={removeSelected}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <span className='text-xl font-semibold text-center'>
+                    Sem produto disponivel
+                  </span>
+                )}
               </div>
             </div>
           )}

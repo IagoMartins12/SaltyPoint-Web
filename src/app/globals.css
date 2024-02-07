@@ -28,7 +28,7 @@ body {
 
 [data-theme='dark'] .cardBG,
 .modalBG {
-  background: #060606;
+  background: #141414;
   box-shadow: 0 16px 48px 8px rgba(1, 1, 5, 0.1);
 }
 
