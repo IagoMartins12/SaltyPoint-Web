@@ -28,8 +28,6 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   useEffect(() => {
     if (!result) return;
 
-    console.log('resultado', result);
-
     if (result.types.some(type => addressTypes.includes('premise'))) {
       setValue('cep', result.address_components[6].long_name);
     }

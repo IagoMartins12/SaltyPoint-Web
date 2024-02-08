@@ -14,7 +14,6 @@ export const SelectDistrict: React.FC<SelectDistrictProps> = ({ register }) => {
   };
 
   const handleBlur = () => {
-    console.log('clicou');
     setFocus(false);
   };
 

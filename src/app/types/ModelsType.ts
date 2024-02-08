@@ -73,6 +73,7 @@ export type Order = {
   discount_coupon?: Discount_cupom | null;
   contact_phone: string;
   reward_id?: string;
+  created_at: Date;
 
   order_products: Order_Product[];
   discount_cupom_orders: Discount_cupom_orders[];

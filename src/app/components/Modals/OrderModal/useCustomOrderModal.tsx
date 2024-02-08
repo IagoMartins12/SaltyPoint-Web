@@ -121,7 +121,6 @@ export const useCustomOrderModal = () => {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
       setHasPlayed(true);
-      submitOrder();
       if (couponApplied) {
         const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
         setCoupons(filteredCoupons);
@@ -299,7 +298,6 @@ export const useCustomOrderModal = () => {
     if (rewardApplied) {
       if (rewardApplied.rewardType === 0) {
         const orderDiscount = getDiscount(rewardApplied.rewardDiscount);
-        console.log('orderDiscount', orderDiscount);
       }
 
       if (rewardApplied.rewardType === 1) {
@@ -319,13 +317,6 @@ export const useCustomOrderModal = () => {
       fetchCart();
     }
   }, [orderModal.isOpen]);
-
-  const submitOrder = () => {
-    console.log('fazendo o pedido');
-    // socket.on('newOrder', orderId => {
-    //   console.log(`Novo pedido recebido em tempo real: ${orderId}`);
-    // });
-  };
 
   return {
     getTaxa,

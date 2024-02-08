@@ -60,7 +60,6 @@ export const UserInfoModal = () => {
       phone: data.phone !== '' ? data.phone : null,
       user_Adress_id: data.address !== '' ? data.address : null,
     } as UpdateUserDto;
-
     try {
       await updatedMe(object);
 

@@ -53,7 +53,6 @@ export const RegisterModal = () => {
 
   const handleGoogleLogin = async () => {
     const response = await googleLogin();
-    console.log('resposta', response);
   };
 
   const body = (

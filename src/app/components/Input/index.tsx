@@ -227,9 +227,6 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
         onChange={ev => {
           handleInputChange(ev, id);
         }} // Aplica o formato no evento onChange
-        autoComplete='off'
-        onFocus={handleFocus}
-        onBlur={handleBlur}
       />
     </div>
   );

@@ -22,6 +22,13 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
     );
   };
 
+  const color =
+    getState().toUpperCase() === 'ENTREGUE'
+      ? 'text-green-500'
+      : getState().toUpperCase() === 'CANCELADO'
+      ? 'text-red-500'
+      : 'text-yellow-500';
+
   return (
     <div
       className='w-full cardBG rounded-2xl cursor-pointer'
@@ -41,7 +48,9 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
 
             <div className='flex flex-col gap-1 '>
               <span className='font-medium text-xl'>Pizzaria Salty Point</span>
-              <span className='font-light text-sm'>{getState()}</span>
+              <span className={`font-light text-sm ${color}`}>
+                {getState()}
+              </span>
             </div>
           </div>
 
