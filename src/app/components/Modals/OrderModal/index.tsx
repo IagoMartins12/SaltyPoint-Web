@@ -332,13 +332,15 @@ const OrderModal = () => {
                   </div>
                 ) : (
                   <button
-                    className='px-3 py-2 text-center bg-red-300 rounded-xl'
+                    className='px-3 py-2 text-center bg-red-400 rounded-xl'
                     onClick={ev => {
                       ev.preventDefault();
                       rewardCartModal.onOpen();
                     }}
                   >
-                    <span>Adicionar </span>
+                    <span className='text-medium  font-semibold'>
+                      Adicionar{' '}
+                    </span>
                   </button>
                 )}
               </div>

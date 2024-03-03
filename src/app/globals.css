@@ -4,21 +4,20 @@
 
 .cardBG,
 .modalBG {
-  background: #f7f6f6;
+  background: #f1f2f4;
   /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
 .buttonBG {
   background: #000000;
-  /* box-shadow: 0 16pfx 20px 8px rgb(141 141 141 / 10%); */
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #fafafa;
 }
 
 [data-theme='dark'] body {
-  background-color: #000000;
+  background-color: #18191a;
 }
 
 [data-theme='dark'] .buttonBG {
@@ -28,7 +27,7 @@ body {
 
 [data-theme='dark'] .cardBG,
 .modalBG {
-  background: #141414;
+  background: #242526;
   box-shadow: 0 16px 48px 8px rgba(1, 1, 5, 0.1);
 }
 
@@ -80,11 +79,11 @@ option {
 }
 
 .modalsBackground {
-  background-color: #ffffff;
+  background-color: #fafafa;
 }
 
 [data-theme='dark'] .modalsBackground {
-  background-color: #0b0a0a;
+  background-color: #18191a;
 }
 
 .menuBackground {
@@ -92,7 +91,7 @@ option {
 }
 
 [data-theme='dark'] .menuBackground {
-  background-color: #040404;
+  background-color: #18191a;
 }
 
 .modalPosition {

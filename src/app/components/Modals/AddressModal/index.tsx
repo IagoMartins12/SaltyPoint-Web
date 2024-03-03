@@ -79,6 +79,7 @@ export const AddressModal = () => {
                       onClick={() => {
                         handleOpenDeleteModal(address.id);
                       }}
+                      color='red'
                     />
                   </div>
                 </div>
