@@ -1,4 +1,5 @@
 import { APP_SETTINGS } from '@/app/config';
+import { useRewardCartModal } from '@/app/hooks/modals/useCoupon';
 import {
   useAddress,
   useOrderModal,
@@ -10,6 +11,7 @@ import {
   addCartProduct,
   createOrder,
   getCartProduct,
+  getGeneralData,
   getTypePagaments,
 } from '@/app/services';
 import { CartProductDto, CreateOrderDto } from '@/app/types/Dtos';
@@ -28,18 +30,17 @@ import { MdOutlineDeliveryDining } from 'react-icons/md';
 
 export const useCustomOrderModal = () => {
   const [selected, setSelected] = useState<number | null>(null);
-  const [showCoupon, setShowCoupon] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState('');
-  const [couponApplied, setCouponApplied] = useState<Discount_cupom | null>(
-    null,
-  );
-  const [rewardApplied, setRewardApplied] = useState<User_Rewards | null>(null);
   const [typePagament, setTypePagament] = useState<Type_Pagament[] | []>([]);
   const [selectedTypePagament, setSelectedTypePagament] = useState<
     null | string
   >(null);
   const [hasPlayed, setHasPlayed] = useState(false);
+  const rewardCartModal = useRewardCartModal();
 
+  //@ts-ignore
+  const isCoupon = !rewardCartModal.currentItem?.rewardPoints;
+  //@ts-ignore
+  const isReward = !!rewardCartModal.currentItem?.rewardPoints;
   const {
     cart_product,
     coupons,
@@ -53,7 +54,7 @@ export const useCustomOrderModal = () => {
     setUserReward,
   } = usePrivateStore();
 
-  const { products } = useGlobalStore();
+  const { products, setGeneralData } = useGlobalStore();
 
   const orderModal = useOrderModal();
   const addressModal = useAddress();
@@ -91,9 +92,14 @@ export const useCustomOrderModal = () => {
       return;
     }
 
-    if (rewardApplied && rewardApplied.rewardType === 1) {
+    if (
+      rewardCartModal.currentItem &&
+      (rewardCartModal.currentItem as User_Rewards).rewardType === 1
+    ) {
       const newItem = products.find(
-        product => product.id === rewardApplied.rewardProductId,
+        product =>
+          product.id ===
+          (rewardCartModal.currentItem as User_Rewards).rewardProductId,
       );
 
       if (newItem) {
@@ -106,33 +112,47 @@ export const useCustomOrderModal = () => {
       type_pagament_id: selectedTypePagament,
       user_adress_id: selected === 0 ? user.user_Adress_id : null,
       type_delivery: selected === 0 ? 0 : 1,
-      discount_coupon_id: couponApplied ? couponApplied.id : null,
+      discount_coupon_id:
+        rewardCartModal.currentItem && isCoupon
+          ? rewardCartModal.currentItem.id
+          : null,
       state_id: '6526e4b833e69bf2bb97bc9e', //Em análise,
-      discount_value: couponApplied
-        ? getDiscount(couponApplied.discount)
-        : rewardApplied && rewardApplied.rewardType === 0
-        ? getDiscount(rewardApplied.rewardDiscount)
-        : 0,
+      discount_value:
+        rewardCartModal.currentItem && isCoupon
+          ? getDiscount(
+              (rewardCartModal.currentItem as Discount_cupom).discount,
+            )
+          : isReward &&
+            (rewardCartModal.currentItem as User_Rewards).rewardType === 0
+          ? getDiscount(
+              (rewardCartModal.currentItem as User_Rewards).rewardDiscount,
+            )
+          : 0,
       contact_phone: user.phone,
-      reward_id: rewardApplied ? rewardApplied.id : null,
+      reward_id:
+        rewardCartModal.currentItem && isReward
+          ? rewardCartModal.currentItem.id
+          : null,
     } as CreateOrderDto);
 
     if (response) {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
       setHasPlayed(true);
-      if (couponApplied) {
-        const filteredCoupons = coupons.filter(c => c.id !== couponApplied.id);
+      if (rewardCartModal.currentItem && isCoupon) {
+        const filteredCoupons = coupons.filter(
+          c => c.id !== rewardCartModal.currentItem?.id,
+        );
         setCoupons(filteredCoupons);
-        setCouponApplied(null);
+        rewardCartModal.setCurrentItem(null);
       }
 
-      if (rewardApplied) {
+      if (rewardCartModal.currentItem && isReward) {
         const filteredRewards = userReward.filter(
-          c => c.id !== rewardApplied.id,
+          c => c.id !== rewardCartModal.currentItem?.id,
         );
         setUserReward(filteredRewards);
-        setRewardApplied(null);
+        rewardCartModal.setCurrentItem(null);
       }
       setCart_product([]);
       setOrders(updatedOrders);
@@ -153,61 +173,9 @@ export const useCustomOrderModal = () => {
     },
   ];
 
-  const checkCoupon = () => {
-    return coupons.find(c => c.cupom_name === inputValue);
-  };
-
-  const checkReward = () => {
-    return userReward.find(c => c.reward_code === inputValue);
-  };
-
   const getDiscount = (discount: number) => {
     const orderDiscount = (discount / 100) * cartProductTotal;
     return orderDiscount;
-  };
-
-  const handleApplyCoupon = () => {
-    const checkIfCouponExists = checkCoupon();
-    const checkIfRewardExists = checkReward();
-
-    if (!checkIfCouponExists && !checkIfRewardExists) {
-      return toast.error('Código inválido');
-    }
-
-    if (checkIfCouponExists) {
-      setCouponApplied(checkIfCouponExists);
-      setShowCoupon(false);
-      setInputValue('');
-      toast.success('Cupom aplicado');
-    } else if (checkIfRewardExists) {
-      // Lógica para aplicar a recompensa, se necessário
-      setRewardApplied(checkIfRewardExists);
-      setShowCoupon(false);
-      setInputValue('');
-      toast.success('Recompensa aplicada');
-    }
-  };
-
-  const handleCouponInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setInputValue(event.target.value);
-  };
-
-  const toggleCouponInput = () => {
-    setInputValue('');
-    setShowCoupon(!showCoupon);
-  };
-
-  const toogleRewardInput = () => {
-    setInputValue('');
-    if (rewardApplied && rewardApplied.rewardType === 1) {
-      const filteredCart = cart_product.filter(
-        cart => cart.observation !== 'Recompensa',
-      );
-      setCart_product(filteredCart);
-    }
-    setRewardApplied(null);
   };
 
   const getAddressInfo = () => {
@@ -229,12 +197,20 @@ export const useCustomOrderModal = () => {
   const getTotal = () => {
     let totalValue = cartProductTotal;
 
-    if (couponApplied) {
-      totalValue -= getDiscount(couponApplied.discount);
+    if (rewardCartModal.currentItem && isCoupon) {
+      totalValue -= getDiscount(
+        (rewardCartModal.currentItem as Discount_cupom).discount,
+      );
     }
 
-    if (rewardApplied && rewardApplied.rewardType === 0) {
-      totalValue -= getDiscount(rewardApplied.rewardDiscount);
+    if (
+      rewardCartModal.currentItem &&
+      isReward &&
+      (rewardCartModal.currentItem as User_Rewards).rewardType === 0
+    ) {
+      totalValue -= getDiscount(
+        (rewardCartModal.currentItem as User_Rewards).rewardDiscount,
+      );
     }
 
     if (selected === 0) {
@@ -246,7 +222,7 @@ export const useCustomOrderModal = () => {
   };
 
   const addItemToCart = async (product: Product, isOrdered = false) => {
-    const checkSize = rewardApplied?.rewardName
+    const checkSize = (rewardCartModal.currentItem as User_Rewards)?.rewardName
       .toUpperCase()
       .includes('BROTINHO');
     const newCart = {
@@ -284,8 +260,10 @@ export const useCustomOrderModal = () => {
   const fetchCart = async () => {
     try {
       const cart = await getCartProduct();
+      const generalData = await getGeneralData();
 
       setCart_product(cart);
+      setGeneralData(generalData);
     } catch (error) {
       console.log(error);
     }
@@ -295,22 +273,22 @@ export const useCustomOrderModal = () => {
   }, []);
 
   useEffect(() => {
-    if (rewardApplied) {
-      if (rewardApplied.rewardType === 0) {
-        const orderDiscount = getDiscount(rewardApplied.rewardDiscount);
-      }
+    if (
+      rewardCartModal.currentItem &&
+      isReward &&
+      (rewardCartModal.currentItem as User_Rewards).rewardType === 1
+    ) {
+      const newItem = products.find(
+        product =>
+          product.id ===
+          (rewardCartModal.currentItem as User_Rewards).rewardProductId,
+      );
 
-      if (rewardApplied.rewardType === 1) {
-        const newItem = products.find(
-          product => product.id === rewardApplied.rewardProductId,
-        );
-
-        if (newItem) {
-          addItemToCart(newItem);
-        }
+      if (newItem) {
+        addItemToCart(newItem);
       }
     }
-  }, [rewardApplied]);
+  }, [rewardCartModal.currentItem]);
 
   useEffect(() => {
     if (user) {
@@ -319,32 +297,23 @@ export const useCustomOrderModal = () => {
   }, [orderModal.isOpen]);
 
   return {
-    getTaxa,
-    getTotal,
-    toggleCouponInput,
-    handleApplyCoupon,
-    handleCouponInputChange,
     cart_product,
     deliveryOptions,
+    selected,
+    cartProductTotal,
+    typePagament,
+    orderModal,
+    user,
+    hasPlayed,
     getAddressInfo,
     setSelected,
-    selected,
-    showCoupon,
-    couponApplied,
-    inputValue,
-    cartProductTotal,
+    getTaxa,
+    getTotal,
     getDiscount,
-    setCouponApplied,
-    typePagament,
     setSelectedTypePagament,
-    onSubmit,
-    orderModal,
     handleGetMoreProduct,
-    user,
     handleOpenAddressModal,
-    rewardApplied,
-    toogleRewardInput,
-    hasPlayed,
+    onSubmit,
     setHasPlayed,
   };
 };

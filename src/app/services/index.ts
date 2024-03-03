@@ -289,6 +289,14 @@ export const getRewards = async (): Promise<Reward[]> => {
     return error;
   }
 };
+export const getUserInfos = async () => {
+  try {
+    const response = await Api.get('/me/info');
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
 
 export const getUserReward = async (): Promise<User_Rewards[]> => {
   try {

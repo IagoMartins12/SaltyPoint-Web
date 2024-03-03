@@ -22,40 +22,42 @@ import {
 } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { MdOutlineModeEdit } from 'react-icons/md';
-import { BsTelephone } from 'react-icons/bs';
+import { BsHash, BsTelephone } from 'react-icons/bs';
+import { useRewardCartModal } from '@/app/hooks/modals/useCoupon';
+import { RiCoupon3Line } from 'react-icons/ri';
+import { Discount_cupom, User_Rewards } from '@/app/types/ModelsType';
+import { LuCrown } from 'react-icons/lu';
 
 const OrderModal = () => {
   const {
-    getTaxa,
-    getTotal,
-    handleApplyCoupon,
-    handleCouponInputChange,
-    toggleCouponInput,
     cart_product,
     deliveryOptions,
+    selected,
+    cartProductTotal,
+    typePagament,
+    orderModal,
+    user,
+    hasPlayed,
     getAddressInfo,
     setSelected,
-    selected,
-    couponApplied,
-    showCoupon,
-    inputValue,
-    cartProductTotal,
+    getTaxa,
+    getTotal,
     getDiscount,
-    setCouponApplied,
-    typePagament,
     setSelectedTypePagament,
-    onSubmit,
-    orderModal,
     handleGetMoreProduct,
-    user,
     handleOpenAddressModal,
-    rewardApplied,
-    toogleRewardInput,
-    hasPlayed,
+    onSubmit,
     setHasPlayed,
   } = useCustomOrderModal();
   const { systemOpening } = useGeneralDataInfo();
   const { generalData } = useGlobalStore();
+  const rewardCartModal = useRewardCartModal();
+
+  //@ts-ignore
+  const isCoupon = !rewardCartModal.currentItem?.rewardPoints;
+  //@ts-ignore
+  const isReward = !!rewardCartModal.currentItem?.rewardPoints;
+
   const userInfo = useChangeDeliveryInfoModal();
   const pixModal = usePixModal();
 
@@ -259,62 +261,82 @@ const OrderModal = () => {
           {/* Cupom e recompensa */}
           <div className='flex flex-col'>
             <div className='flex justify-between px-2 items-center w-full'>
-              <span className='text-base font-light w-4/12'>Código:</span>
-              <div className=' w-8/12 flex justify-end'>
-                {showCoupon ? (
-                  <div className='flex gap-3 w-full justify-end'>
-                    <input
-                      type='text'
-                      className='w-5/12  py-1 border-b-2 px-2 text-sm'
-                      value={inputValue}
-                      onChange={handleCouponInputChange}
-                    />
+              <div className='flex gap-4 items-center w-full'>
+                {rewardCartModal.currentItem ? (
+                  isCoupon ? (
+                    <div className='flex items-center justify-center gap-4'>
+                      <RiCoupon3Line size={30} />
 
-                    <div className='flex gap-3 items-center'>
-                      <AiOutlineClose
-                        size={20}
-                        onClick={toggleCouponInput}
-                        className='cursor-pointer'
-                      />
-                      <AiOutlineSearch
-                        size={20}
-                        onClick={handleApplyCoupon}
-                        className='cursor-pointer'
-                      />
+                      <div className='flex flex-col '>
+                        <span className='text-medium font-medium'>
+                          {
+                            (rewardCartModal.currentItem as Discount_cupom)
+                              .cupom_name
+                          }
+                        </span>
+                        <span className='text-sm font-medium '>
+                          {
+                            (rewardCartModal.currentItem as Discount_cupom)
+                              .discount
+                          }{' '}
+                          % de desconto
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ) : couponApplied ? (
-                  <div className='flex items-center gap-3'>
-                    <button
-                      className='px-3 py-2 text-center rounded-xl'
-                      onClick={toggleCouponInput}
+                  ) : (
+                    <div className='flex items-center justify-center gap-4'>
+                      <LuCrown size={30} />
+
+                      <div className='flex flex-col '>
+                        <span className='text-medium font-medium'>
+                          {
+                            (rewardCartModal.currentItem as User_Rewards)
+                              .rewardName
+                          }
+                        </span>
+                        <span className='text-sm font-medium '>
+                          #
+                          {
+                            (rewardCartModal.currentItem as User_Rewards)
+                              .reward_code
+                          }{' '}
+                        </span>
+                      </div>
+                    </div>
+                  )
+                ) : (
+                  <div className='flex items-center justify-center gap-4'>
+                    <BsHash size={30} />
+
+                    <label
+                      className='text-medium font-medium'
+                      htmlFor='deliveryOption'
                     >
-                      <span>{couponApplied.cupom_name} </span>
-                    </button>
-                    <AiOutlineClose
-                      size={20}
-                      onClick={() => setCouponApplied(null)}
-                      className='cursor-pointer'
-                    />
+                      Código
+                    </label>
                   </div>
-                ) : rewardApplied ? (
-                  <div className='flex items-center gap-3'>
-                    <button
-                      className='px-3 py-2 text-center rounded-xl'
-                      onClick={toggleCouponInput}
+                )}
+              </div>
+              <div className=' flex justify-end'>
+                {rewardCartModal.currentItem ? (
+                  <div className='flex gap-3 w-full justify-end'>
+                    <div
+                      className='flex gap-3 items-center'
+                      onClick={ev => {
+                        ev.preventDefault();
+                        rewardCartModal.onOpen();
+                      }}
                     >
-                      <span>{rewardApplied.reward_code} </span>
-                    </button>
-                    <AiOutlineClose
-                      size={20}
-                      onClick={toogleRewardInput}
-                      className='cursor-pointer'
-                    />
+                      <AiOutlineClose size={20} className='cursor-pointer' />
+                    </div>
                   </div>
                 ) : (
                   <button
                     className='px-3 py-2 text-center bg-red-300 rounded-xl'
-                    onClick={toggleCouponInput}
+                    onClick={ev => {
+                      ev.preventDefault();
+                      rewardCartModal.onOpen();
+                    }}
                   >
                     <span>Adicionar </span>
                   </button>
@@ -332,23 +354,32 @@ const OrderModal = () => {
               </span>
             </div>
 
-            {couponApplied && (
+            {rewardCartModal.currentItem && isCoupon && (
               <div className='flex justify-between px-2 '>
                 <span className='text-base font-light'>Cupom: </span>
                 <span className='text-base font-light text-green-500'>
-                  - R$ {getDiscount(couponApplied.discount).toFixed(2)}
+                  - R${' '}
+                  {getDiscount(
+                    (rewardCartModal.currentItem as Discount_cupom).discount,
+                  ).toFixed(2)}
                 </span>
               </div>
             )}
-
-            {rewardApplied && rewardApplied.rewardType === 0 && (
-              <div className='flex justify-between px-2 '>
-                <span className='text-base font-light'>Cupom: </span>
-                <span className='text-base font-light text-green-500'>
-                  - R$ {getDiscount(rewardApplied.rewardDiscount).toFixed(2)}
-                </span>
-              </div>
-            )}
+            {rewardCartModal.currentItem &&
+              isReward &&
+              (rewardCartModal.currentItem as User_Rewards).rewardType ===
+                0 && (
+                <div className='flex justify-between px-2 '>
+                  <span className='text-base font-light'>Cupom: </span>
+                  <span className='text-base font-light text-green-500'>
+                    - R${' '}
+                    {getDiscount(
+                      (rewardCartModal.currentItem as User_Rewards)
+                        .rewardDiscount,
+                    ).toFixed(2)}
+                  </span>
+                </div>
+              )}
 
             {selected === 0 && (
               <div className='flex justify-between px-2 '>
@@ -384,6 +415,7 @@ const OrderModal = () => {
 
   const onClose = () => {
     setHasPlayed(false);
+    rewardCartModal.setCurrentItem(null);
     orderModal.onClose();
   };
 

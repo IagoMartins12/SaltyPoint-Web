@@ -159,6 +159,10 @@ export interface CouponCardType {
   coupon: Discount_cupom;
 }
 
+export interface SelectedCouponCardType {
+  item: Discount_cupom | User_Rewards;
+}
+
 export interface SearchProductBox {
   product: Product;
 }

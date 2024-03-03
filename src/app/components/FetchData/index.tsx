@@ -15,6 +15,7 @@ import {
   getProducts,
   getStates,
   getTypePagaments,
+  getUserInfos,
   getUserReward,
 } from '@/app/services';
 import { useEffect } from 'react';
@@ -72,31 +73,35 @@ export const FetchData = () => {
     if (isLogged) {
       const fetchData = async () => {
         try {
-          const [
-            addressData,
-            userData,
-            favoriteData,
-            cartProductData,
-            couponsData,
-            orderData,
-            rewardData,
-          ] = await Promise.all([
-            getAddress(),
-            getMe(),
-            getFavorites(),
-            getCartProduct(),
-            getCoupons(),
-            getOrders(),
-            getUserReward(),
-          ]);
+          const getData = await getUserInfos();
 
-          setCoupons(couponsData);
-          setAddress(addressData);
-          setUser(userData);
-          setFavorites(favoriteData);
-          setCart_product(cartProductData);
-          setOrders(orderData);
-          setUserReward(rewardData);
+          // const [
+          //   addressData,
+          //   userData,
+          //   favoriteData,
+          //   cartProductData,
+          //   couponsData,
+          //   orderData,
+          //   rewardData,
+          //   testeData,
+          // ] = await Promise.all([
+          //   getAddress(),
+          //   getMe(),
+          //   getFavorites(),
+          //   getCartProduct(),
+          //   getCoupons(),
+          //   getOrders(),
+          //   getUserReward(),
+          //   getUserInfos(),
+          // ]);
+
+          setCoupons(getData.coupons);
+          setAddress(getData.userAddress);
+          setUser(getData.user);
+          setFavorites(getData.favorites);
+          setCart_product(getData.cartProducts);
+          setOrders(getData.orders);
+          setUserReward(getData.rewards);
         } catch (error) {
           console.log(error);
         }

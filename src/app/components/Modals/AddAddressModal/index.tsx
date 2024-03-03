@@ -172,6 +172,7 @@ export const AddAddressModal = () => {
     setStep(0);
     addAddress.onClose();
   };
+
   const body = (
     <div className='flex flex-col w-11/12 mx-auto h-full '>
       <div className='flex flex-col gap-4 h-full '>
