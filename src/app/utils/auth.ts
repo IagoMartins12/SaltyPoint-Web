@@ -1,12 +1,20 @@
 export const getUserLocalStorage = () => {
-  const json = localStorage.getItem('secret');
+  if (typeof window !== 'undefined') {
+    const json = localStorage.getItem('secret');
 
-  if (!json) {
-    return null;
+    if (!json) {
+      return null;
+    }
+
+    const user = JSON.parse(json);
+    return user ?? null;
   }
 
-  const user = JSON.parse(json);
-  return user ?? null;
+  return null;
 };
 
-export const removeFromStorage = () => localStorage.removeItem('secret');
+export const removeFromStorage = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('secret');
+  }
+};

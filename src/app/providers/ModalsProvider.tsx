@@ -40,7 +40,6 @@ const ModalsProvider = () => {
       <ForgetPasswordModal />
       <SearchModal />
       <CouponsModal />
-
       <DeleteItemModal />
       <UserInfoModal />
       <ChangePasswordModal />

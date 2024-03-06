@@ -18,9 +18,29 @@ import {
   getUserInfos,
   getUserReward,
 } from '@/app/services';
+import {
+  Category,
+  General_data,
+  Product,
+  State,
+  Type_Pagament,
+} from '@/app/types/ModelsType';
 import { useEffect } from 'react';
 
-export const FetchData = () => {
+interface FetchProps {
+  products: Product[];
+  category: Category[];
+  states: State[];
+  generalData: General_data;
+  typePagament: Type_Pagament[];
+}
+export const FetchData: React.FC<FetchProps> = ({
+  category,
+  generalData,
+  products,
+  states,
+  typePagament,
+}) => {
   const {
     setCategorys,
     setProducts,
@@ -41,29 +61,29 @@ export const FetchData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const [
-          categoryData,
-          productData,
-          typePagamentData,
-          statesDate,
-          generalData,
-        ] = await Promise.all([
-          getCategories(),
-          getProducts(),
-          getTypePagaments(),
-          getStates(),
-          getGeneralData(),
-        ]);
+      // try {
+      // const [
+      //   categoryData,
+      //   productData,
+      //   typePagamentData,
+      //   statesDate,
+      //   generalData,
+      // ] = await Promise.all([
+      //   getCategories(),
+      //   getProducts(),
+      //   getTypePagaments(),
+      //   getStates(),
+      //   getGeneralData(),
+      // ]);
 
-        setCategorys(categoryData);
-        setProducts(productData);
-        setTypePagament(typePagamentData);
-        setStates(statesDate);
-        setGeneralData(generalData);
-      } catch (error) {
-        console.log(error);
-      }
+      setCategorys(category);
+      setProducts(products);
+      setTypePagament(typePagament);
+      setStates(states);
+      setGeneralData(generalData);
+      // } catch (error) {
+      //   console.log(error);
+      // }
     };
 
     fetchData();

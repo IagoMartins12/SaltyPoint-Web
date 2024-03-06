@@ -95,17 +95,7 @@ export const Hero3 = () => {
   }, [systemOpening]);
 
   if (!user) {
-    return (
-      <div></div>
-      // <div
-      //   className='flex flex-col w-11/12 mx-auto my-4 sm:my-2 gap-2'
-      //
-      // >
-      //   <p className='text-3xl font-normal'>
-      //     Faça o login para ver os seus pontos
-      //   </p>
-      // </div>
-    );
+    return <div></div>;
   }
 
   return (

@@ -191,14 +191,6 @@ export const PhoneInput: React.FC<AddressInputProps> = ({
 }) => {
   const [focus, setFocus] = useState(false);
 
-  const handleFocus = () => {
-    setFocus(true);
-  };
-
-  const handleBlur = () => {
-    setFocus(false);
-  };
-
   return (
     <div
       className={`flex flex-col gap-1 focus:outline-none  ${
