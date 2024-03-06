@@ -1,3 +1,5 @@
+'use client';
+
 import Modal from '../../Modal';
 import { useMyOrderModal } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';

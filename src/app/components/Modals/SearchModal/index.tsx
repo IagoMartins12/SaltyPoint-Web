@@ -1,3 +1,5 @@
+'use client';
+
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { SearchCategory } from '../../SearchCategory';

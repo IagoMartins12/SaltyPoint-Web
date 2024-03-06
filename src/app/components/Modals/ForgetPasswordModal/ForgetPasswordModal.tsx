@@ -1,3 +1,5 @@
+'use client';
+
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import Image from 'next/image';

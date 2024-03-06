@@ -1,3 +1,5 @@
+'use client';
+
 import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai';
@@ -8,7 +10,7 @@ import { useAddAddress, useAddress } from '@/app/hooks/modals/useModal';
 import toast from 'react-hot-toast';
 import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
-export const AddressModal = () => {
+const AddressModal = () => {
   const { address } = usePrivateStore();
   const addressModal = useAddress();
   const addAddress = useAddAddress();
@@ -118,3 +120,5 @@ export const AddressModal = () => {
     </>
   );
 };
+
+export default AddressModal;

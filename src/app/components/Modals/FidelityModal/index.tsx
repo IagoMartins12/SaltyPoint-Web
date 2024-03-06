@@ -1,3 +1,5 @@
+'use client';
+
 import { useFidelityModal, useLoginModal } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 import { RewardInfo } from '../../RewardInfo';

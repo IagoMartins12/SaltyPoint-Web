@@ -1,3 +1,5 @@
+'use client';
+
 import { useFavoriteModal } from '@/app/hooks/modals/useModal';
 
 import Modal from '../../Modal';

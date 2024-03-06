@@ -1,3 +1,5 @@
+'use client';
+
 import { useRewardModal } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 import { useEffect, useState } from 'react';

@@ -1,3 +1,5 @@
+'use client';
+
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '../../Modal';
 import { AddressInput, PhoneInput } from '../../Input';
@@ -14,7 +16,6 @@ import { User } from '@/app/types/ModelsType';
 import {
   useChangePasswordModal,
   useDeleteUser,
-  useOrderModal,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 
@@ -22,7 +23,6 @@ export const UserInfoModal = () => {
   const userInfoModal = useUserInfoModal();
   const changePasswordModal = useChangePasswordModal();
   const deleteModal = useDeleteUser();
-  const orderModal = useOrderModal();
 
   const { user, address, setUser } = usePrivateStore();
 

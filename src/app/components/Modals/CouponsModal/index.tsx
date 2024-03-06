@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 import { CouponCard } from '../../CouponCard';
 import Modal from '../../Modal';

@@ -1,3 +1,5 @@
+'use client';
+
 import toast from 'react-hot-toast';
 import { ModalWarning } from '../../ModalWarning';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';

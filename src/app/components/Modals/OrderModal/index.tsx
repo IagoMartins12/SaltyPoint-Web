@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+'use client';
+
+import React from 'react';
 import Modal from '../../Modal';
 import { CartProductCardOrder } from '../../CartProductCardOrder';
 import {
@@ -6,7 +8,6 @@ import {
   AiOutlineClose,
   AiOutlineCreditCard,
   AiOutlinePlus,
-  AiOutlineSearch,
 } from 'react-icons/ai';
 import { useCustomOrderModal } from './useCustomOrderModal';
 import { MdPix } from 'react-icons/md';
@@ -211,7 +212,7 @@ const OrderModal = () => {
 
           {/* Opções de pagamento */}
           <div className='flex flex-col gap-2 border-b-2'>
-            {typePagament.map((options, i) => (
+            {typePagament?.map((options, i) => (
               <div
                 className='flex justify-between p-4  items-center'
                 key={i}

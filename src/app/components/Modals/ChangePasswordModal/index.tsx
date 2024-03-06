@@ -1,3 +1,5 @@
+'use client';
+
 import { useChangePasswordModal } from '@/app/hooks/modals/useModal';
 import { AuthLoginButton } from '../../Buttons';
 import Modal from '../../Modal';
@@ -7,7 +9,7 @@ import toast from 'react-hot-toast';
 import { UpdatePasswordDto } from '@/app/types/Dtos';
 import { updatedPassword } from '@/app/services';
 
-export const ChangePasswordModal = () => {
+const ChangePasswordModal = () => {
   const changePasswordModal = useChangePasswordModal();
 
   const {

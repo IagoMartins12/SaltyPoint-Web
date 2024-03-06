@@ -1,5 +1,3 @@
-'use client';
-
 import { AddAddressModal } from '../components/Modals/AddAddressModal';
 import { AddressModal } from '../components/Modals/AddressModal';
 import { AppDownloadModal } from '../components/Modals/AppDownloadModal';

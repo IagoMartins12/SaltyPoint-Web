@@ -1,8 +1,10 @@
+'use client';
+
 import { useAppDownload } from '@/app/hooks/modals/useModal';
 import { AppleButton, GoogleButton } from '../../Buttons';
 import Modal from '../../Modal';
 
-export const AppDownloadModal = () => {
+const AppDownloadModal = () => {
   const appModal = useAppDownload();
 
   const body = (
@@ -38,3 +40,5 @@ export const AppDownloadModal = () => {
     </>
   );
 };
+
+export default AppDownloadModal;

@@ -1,7 +1,8 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import toast from 'react-hot-toast';
-
 import Modal from '../../Modal';
 import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 import { CouponSelectedCard } from '../../CouponSelectedCard';

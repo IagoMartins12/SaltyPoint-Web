@@ -1,5 +1,6 @@
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+'use client';
 
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFacebook } from 'react-icons/bs';

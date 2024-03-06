@@ -1,3 +1,5 @@
+'use client';
+
 import { usePrivacyTerms } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 

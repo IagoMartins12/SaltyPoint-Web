@@ -1,3 +1,5 @@
+'use client';
+
 import { useGeneralDataModal } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ModalWarning } from '../../ModalWarning';

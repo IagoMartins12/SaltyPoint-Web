@@ -1,3 +1,5 @@
+'use client';
+
 import { useAddress } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { deleteAddress } from '@/app/services';

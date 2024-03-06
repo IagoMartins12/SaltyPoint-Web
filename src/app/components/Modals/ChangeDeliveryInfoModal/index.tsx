@@ -1,3 +1,5 @@
+'use client';
+
 import {
   useAddAddress,
   useChangeDeliveryInfoModal,
@@ -17,9 +19,8 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-export const ChangeDeliveryInfoModal = () => {
+const ChangeDeliveryInfoModal = () => {
   const [selected, setSelected] = useState<string | null>(null);
-  const [userAddress, setUserAddress] = useState('');
 
   const changeDeliveryModal = useChangeDeliveryInfoModal();
   const addAddress = useAddAddress();
@@ -224,3 +225,5 @@ export const ChangeDeliveryInfoModal = () => {
     </>
   );
 };
+
+export default ChangeDeliveryInfoModal;

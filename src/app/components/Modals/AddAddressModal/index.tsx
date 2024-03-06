@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { getAddressPerCep, sendAddressUser, updatedMe } from '@/app/services';
@@ -14,14 +16,14 @@ import { checkIfAddressIsValid } from '@/app/utils';
 import Modal from '../../Modal';
 import { useAddAddress } from '@/app/hooks/modals/useModal';
 
-export enum STEPS {
+enum STEPS {
   CEP = 0,
   ADDRESS_INFO = 1,
   GEOLOCATION = 2,
   ADDRESS_PER_GEOLOCATION = 3,
 }
 
-export const AddAddressModal = () => {
+const AddAddressModal = () => {
   const [step, setStep] = useState(STEPS.CEP);
   const [isValid, setIsValid] = useState(false);
   const [isSelected, setIsSelected] = useState<null | number>(null);
@@ -228,3 +230,5 @@ export const AddAddressModal = () => {
     </>
   );
 };
+
+export default AddAddressModal;

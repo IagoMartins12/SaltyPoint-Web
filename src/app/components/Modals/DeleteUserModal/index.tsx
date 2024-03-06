@@ -1,3 +1,5 @@
+'use client';
+
 import { useDeleteUser, useUserInfoModal } from '@/app/hooks/modals/useModal';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { DeleteModal } from '../../ModalDelete';
