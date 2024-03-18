@@ -249,4 +249,6 @@ export type General_data = {
   isOpening: Boolean;
   pixKey: string;
   pixName: string;
+  deliveryFeeInside: number;
+  deliveryFeeOutside: number;
 };

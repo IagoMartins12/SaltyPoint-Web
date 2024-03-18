@@ -18,7 +18,7 @@ enum STEPS {
   STORE = 1,
 }
 
-export const RewardModal = () => {
+const RewardModal = () => {
   const [animatedPoints, setAnimatedPoints] = useState<number>(0);
   const [step, setStep] = useState(STEPS.INVENTORY);
   const [isActive, setIsActive] = useState<number | null>(null);
@@ -239,3 +239,5 @@ export const RewardModal = () => {
     </>
   );
 };
+
+export default RewardModal;

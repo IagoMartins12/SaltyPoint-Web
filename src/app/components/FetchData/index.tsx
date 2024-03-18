@@ -3,21 +3,7 @@
 import useAuth from '@/app/hooks/auth/useAuth';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import {
-  getAddress,
-  getCartProduct,
-  getCategories,
-  getCoupons,
-  getFavorites,
-  getGeneralData,
-  getMe,
-  getOrders,
-  getProducts,
-  getStates,
-  getTypePagaments,
-  getUserInfos,
-  getUserReward,
-} from '@/app/services';
+import { getUserInfos } from '@/app/services';
 import {
   Category,
   General_data,

@@ -11,7 +11,7 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { Discount_cupom } from '@/app/types/ModelsType';
 import Image from 'next/image';
 
-export const RewardCartModal = () => {
+const RewardCartModal = () => {
   const [isActive, setIsActive] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [myCoupons, setMyCoupons] = useState<Discount_cupom[] | null>(null);
@@ -160,3 +160,5 @@ export const RewardCartModal = () => {
     />
   );
 };
+
+export default RewardCartModal;

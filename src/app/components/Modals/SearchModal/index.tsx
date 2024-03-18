@@ -10,7 +10,7 @@ import Modal from '../../Modal';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
 import { categoriesToExclude } from '../../CategoryMenu';
 
-export const SearchModal = () => {
+const SearchModal = () => {
   const [productState, setProductState] = useState<[] | Product[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -99,3 +99,5 @@ export const SearchModal = () => {
     </>
   );
 };
+
+export default SearchModal;

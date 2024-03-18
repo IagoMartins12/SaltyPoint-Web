@@ -6,7 +6,7 @@ import Modal from '../../Modal';
 import { useCoupons } from '@/app/hooks/modals/useModal';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 
-export const CouponsModal = () => {
+const CouponsModal = () => {
   const couponModal = useCoupons();
 
   const { coupons } = usePrivateStore();
@@ -39,3 +39,5 @@ export const CouponsModal = () => {
     </>
   );
 };
+
+export default CouponsModal;

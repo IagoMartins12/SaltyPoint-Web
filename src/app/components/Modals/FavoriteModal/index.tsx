@@ -8,7 +8,7 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ProductCard } from '../../ProductCard';
 import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
-export const FavoriteModal = () => {
+const FavoriteModal = () => {
   const favoriteModal = useFavoriteModal();
   const { favorites } = usePrivateStore();
   const { products } = useGlobalStore();
@@ -42,3 +42,5 @@ export const FavoriteModal = () => {
     />
   );
 };
+
+export default FavoriteModal;

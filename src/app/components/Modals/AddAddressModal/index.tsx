@@ -16,7 +16,7 @@ import { checkIfAddressIsValid } from '@/app/utils';
 import Modal from '../../Modal';
 import { useAddAddress } from '@/app/hooks/modals/useModal';
 
-enum STEPS {
+export enum STEPS {
   CEP = 0,
   ADDRESS_INFO = 1,
   GEOLOCATION = 2,

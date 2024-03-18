@@ -5,7 +5,7 @@ import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ModalWarning } from '../../ModalWarning';
 import { AnimationClosed } from '../../Animations/AnimationClosed';
 
-export const NotOpenModal = () => {
+const NotOpenModal = () => {
   const generalDataModal = useGeneralDataModal();
   const { generalData } = useGlobalStore();
   const body = (
@@ -50,3 +50,5 @@ export const NotOpenModal = () => {
     </>
   );
 };
+
+export default NotOpenModal;

@@ -6,7 +6,7 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { OrderComponent } from '../../OrderComponent';
 import { AnimationEmpty } from '../../Animations/AnimationEmpty';
 
-export const MyOrdersModal = () => {
+const MyOrdersModal = () => {
   const myOrdersModal = useMyOrderModal();
 
   const { orders } = usePrivateStore();
@@ -33,3 +33,5 @@ export const MyOrdersModal = () => {
     </>
   );
 };
+
+export default MyOrdersModal;

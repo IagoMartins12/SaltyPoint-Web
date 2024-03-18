@@ -7,7 +7,7 @@ import { DeleteModal } from '../../ModalDelete';
 import { useDeleteCartItem } from '@/app/hooks/modals/useDelete';
 import { RemoveCartProductDto } from '@/app/types/Dtos';
 
-export const DeleteItemCartModal: React.FC = () => {
+const DeleteItemCartModal: React.FC = () => {
   const deleteModal = useDeleteCartItem();
   const { cart_product, setCart_product } = usePrivateStore();
 
@@ -80,3 +80,5 @@ export const DeleteItemCartModal: React.FC = () => {
     />
   );
 };
+
+export default DeleteItemCartModal;

@@ -30,6 +30,7 @@ export const CouponSelectedCard: React.FC<SelectedCouponCardType> = ({
             : 'borderColor'
         }`}
         onClick={() => {
+          removeItemCart();
           rewardCartModal.setCurrentItem(item);
           toast.success('Cupom aplicado');
         }}

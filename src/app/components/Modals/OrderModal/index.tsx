@@ -390,8 +390,8 @@ const OrderModal = () => {
                 <span className='text-base font-light text-gray-400'>
                   R${' '}
                   {getTaxa(getAddressInfo()?.district)
-                    ? APP_SETTINGS.taxaForaSolNascente.toFixed(2)
-                    : APP_SETTINGS.taxaSolNascente.toFixed(2)}
+                    ? generalData?.deliveryFeeOutside.toFixed(2)
+                    : generalData?.deliveryFeeInside.toFixed(2)}
                 </span>
               </div>
             )}

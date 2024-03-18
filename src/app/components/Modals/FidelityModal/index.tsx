@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { Reward } from '@/app/types/ModelsType';
 import { getRewards } from '@/app/services';
 
-export const FidelityModal = () => {
+const FidelityModal = () => {
   const [rewards, setRewards] = useState<[] | Reward[]>([]);
 
   const fidelityModal = useFidelityModal();
@@ -97,3 +97,5 @@ export const FidelityModal = () => {
     </>
   );
 };
+
+export default FidelityModal;

@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { AnimationReward } from '../../Animations/AnimationReward';
 import { BiDownArrowAlt } from 'react-icons/bi';
 
-export const WarningRewardModal: React.FC = () => {
+const WarningRewardModal: React.FC = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
 
   const warningModal = useWarningRewardModal();
@@ -140,3 +140,5 @@ export const WarningRewardModal: React.FC = () => {
     />
   );
 };
+
+export default WarningRewardModal;

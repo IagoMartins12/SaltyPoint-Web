@@ -19,7 +19,7 @@ import {
   useRegisterModal,
 } from '@/app/hooks/modals/useModal';
 
-export const LoginModal = () => {
+const LoginModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
@@ -175,3 +175,5 @@ export const LoginModal = () => {
     </>
   );
 };
+
+export default LoginModal;

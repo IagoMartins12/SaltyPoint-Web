@@ -10,7 +10,7 @@ import {
 import Modal from '../../Modal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
-export const TalkToUsModal = () => {
+const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
   const { generalData } = useGlobalStore();
   const { register, handleSubmit, reset } = useForm<FieldValues>({
@@ -127,3 +127,5 @@ export const TalkToUsModal = () => {
     />
   );
 };
+
+export default TalkToUsModal;

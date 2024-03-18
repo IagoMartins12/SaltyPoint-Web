@@ -14,7 +14,7 @@ import Image from 'next/image';
 import Modal from '../../Modal';
 import { useLoginModal, useRegisterModal } from '@/app/hooks/modals/useModal';
 
-export const RegisterModal = () => {
+const RegisterModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
@@ -167,3 +167,5 @@ export const RegisterModal = () => {
     </>
   );
 };
+
+export default RegisterModal;

@@ -8,7 +8,7 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { DeleteModal } from '../../ModalDelete';
 import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
 
-export const DeleteItemModal: React.FC = () => {
+const DeleteItemModal: React.FC = () => {
   const deleteModal = useDeleteAddress();
   const addressModal = useAddress();
   const { address, setAddress, user } = usePrivateStore();
@@ -86,3 +86,5 @@ export const DeleteItemModal: React.FC = () => {
     />
   );
 };
+
+export default DeleteItemModal;

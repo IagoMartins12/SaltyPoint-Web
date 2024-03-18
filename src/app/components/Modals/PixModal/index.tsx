@@ -4,7 +4,7 @@ import { usePixModal } from '@/app/hooks/modals/useModal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { ModalWarningMin } from '../../ModalWarningMin';
 
-export const PixModal = () => {
+const PixModal = () => {
   const pixModal = usePixModal();
   const { generalData } = useGlobalStore();
 
@@ -46,3 +46,5 @@ export const PixModal = () => {
     </>
   );
 };
+
+export default PixModal;

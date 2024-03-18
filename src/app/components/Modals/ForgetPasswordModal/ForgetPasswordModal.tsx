@@ -17,7 +17,7 @@ enum STEPS {
   RECEIVE_EMAIL = 0,
   SENDED_EMAIL = 1,
 }
-export const ForgetPasswordModal = () => {
+const ForgetPasswordModal = () => {
   const [step, setStep] = useState(STEPS.RECEIVE_EMAIL);
   const forgetPasswordModal = useForgetPasswordModal();
   const loginModal = useLoginModal();
@@ -169,3 +169,5 @@ export const ForgetPasswordModal = () => {
     />
   );
 };
+
+export default ForgetPasswordModal;

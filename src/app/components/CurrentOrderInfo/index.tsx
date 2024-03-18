@@ -10,6 +10,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
   const { address } = usePrivateStore();
   const { typePagament, states } = useGlobalStore();
 
+  const { generalData } = useGlobalStore();
   const getSubtotal = () => {
     const subtotal = order.orderItems.reduce((total, item) => {
       return total + parseFloat(item.value);
@@ -87,7 +88,10 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
           <div className='flex justify-between  '>
             <span className='text-base font-light'>Taxa: </span>
             <span className='text-base font-light text-gray-400'>
-              R$ {getTaxa(getAddressInfo()?.district) ? '6.00' : '3.00'}
+              R${' '}
+              {getTaxa(getAddressInfo()?.district)
+                ? generalData?.deliveryFeeOutside.toFixed(2)
+                : generalData?.deliveryFeeInside.toFixed(2)}
             </span>
           </div>
         )}

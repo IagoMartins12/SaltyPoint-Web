@@ -3,7 +3,7 @@
 import { usePrivacyTerms } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 
-export const TermPrivacyModal = () => {
+const TermPrivacyModal = () => {
   const termPrivacyModal = usePrivacyTerms();
 
   const body = (
@@ -85,3 +85,5 @@ export const TermPrivacyModal = () => {
     </>
   );
 };
+
+export default TermPrivacyModal;

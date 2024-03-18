@@ -24,8 +24,8 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 import { GoogleMapsApiResponse, Result } from './GeolocationType';
-import { STEPS } from '../components/Modals/AddAddressModal';
 import { Dispatch, SetStateAction } from 'react';
+import { STEPS } from '../components/Modals/AddAddressModal';
 
 export interface AuthButton {
   icon?: IconType;

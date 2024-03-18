@@ -19,7 +19,7 @@ import {
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
 
-export const UserInfoModal = () => {
+const UserInfoModal = () => {
   const userInfoModal = useUserInfoModal();
   const changePasswordModal = useChangePasswordModal();
   const deleteModal = useDeleteUser();
@@ -192,3 +192,5 @@ export const UserInfoModal = () => {
     </>
   );
 };
+
+export default UserInfoModal;

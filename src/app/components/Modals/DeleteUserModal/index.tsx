@@ -7,7 +7,7 @@ import { deleteMe } from '@/app/services';
 import toast from 'react-hot-toast';
 import useAuth, { removeToken } from '@/app/hooks/auth/useAuth';
 
-export const DeleteUserModal: React.FC = () => {
+const DeleteUserModal: React.FC = () => {
   const deleteModal = useDeleteUser();
   const userModal = useUserInfoModal();
   const auth = useAuth();
@@ -87,3 +87,5 @@ export const DeleteUserModal: React.FC = () => {
     />
   );
 };
+
+export default DeleteUserModal;

@@ -12,7 +12,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { AnimationCart } from '../../Animations/AnimationCart';
 
-export const CurrentOrderModal = () => {
+const CurrentOrderModal = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
   const myOrdersModal = useCurrentOrderModal();
 
@@ -103,3 +103,5 @@ export const CurrentOrderModal = () => {
     </>
   );
 };
+
+export default CurrentOrderModal;

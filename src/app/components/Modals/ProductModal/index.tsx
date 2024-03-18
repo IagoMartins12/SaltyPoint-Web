@@ -8,7 +8,7 @@ import { PizzaBody } from './PizzaBody';
 import { useCustomProductModal } from './useProductModal';
 import { Product } from '@/app/types/ModelsType';
 
-export const ProductModal = () => {
+const ProductModal = () => {
   const productModal = useProductModal();
   const { handleClose } = useCustomProductModal();
 
@@ -29,3 +29,5 @@ export const ProductModal = () => {
     </>
   );
 };
+
+export default ProductModal;
