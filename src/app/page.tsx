@@ -6,6 +6,7 @@ import { Header } from './components/Header';
 import { Hero3 } from './components/Hero';
 import Loader from './components/Loader';
 import { ProductMenu } from './components/ProductMenu';
+import ModalsProvider from './providers/ModalsProvider';
 import {
   getCategories,
   getGeneralData,
@@ -24,12 +25,15 @@ export default async function Home() {
       getGeneralData(),
     ]);
 
-  if (!product || !category || !typePagament || !states || !generalData) {
-    return <Loader />;
-  }
   return (
     <ClientOnly>
       <main id='hero'>
+        <Header />
+        <Hero3 />
+        <CategoryMenu />
+        <ProductMenu />
+        <ComeBack />
+        <ModalsProvider />
         <FetchData
           category={category}
           generalData={generalData}
@@ -37,12 +41,6 @@ export default async function Home() {
           states={states}
           typePagament={typePagament}
         />
-
-        <Header />
-        <Hero3 />
-        <CategoryMenu />
-        <ProductMenu />
-        <ComeBack />
       </main>
     </ClientOnly>
   );

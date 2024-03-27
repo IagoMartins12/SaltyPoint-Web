@@ -49,6 +49,12 @@ export type UpdatePasswordDto = {
   newPassword: string;
 };
 
+export type ResetPasswordDto = {
+  newPassword: string;
+  token: string;
+  email: string;
+};
+
 export type FavoritesDto = {
   product_id: string;
 };

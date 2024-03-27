@@ -15,6 +15,7 @@ const FidelityModal = () => {
   const fidelityModal = useFidelityModal();
   const loginModal = useLoginModal();
   const { user } = usePrivateStore();
+
   const openLogin = () => {
     fidelityModal.onClose();
     loginModal.onOpen();

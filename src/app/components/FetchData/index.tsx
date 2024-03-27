@@ -45,74 +45,36 @@ export const FetchData: React.FC<FetchProps> = ({
   } = usePrivateStore();
   const { isLogged } = useAuth();
 
+  const fetchData = async () => {
+    setCategorys(category);
+    setProducts(products);
+    setTypePagament(typePagament);
+    setStates(states);
+    setGeneralData(generalData);
+  };
+
+  const fetchAuthData = async () => {
+    try {
+      const getData = await getUserInfos();
+
+      setCoupons(getData.coupons);
+      setAddress(getData.userAddress);
+      setUser(getData.user);
+      setFavorites(getData.favorites);
+      setCart_product(getData.cartProducts);
+      setOrders(getData.orders);
+      setUserReward(getData.rewards);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      // try {
-      // const [
-      //   categoryData,
-      //   productData,
-      //   typePagamentData,
-      //   statesDate,
-      //   generalData,
-      // ] = await Promise.all([
-      //   getCategories(),
-      //   getProducts(),
-      //   getTypePagaments(),
-      //   getStates(),
-      //   getGeneralData(),
-      // ]);
-
-      setCategorys(category);
-      setProducts(products);
-      setTypePagament(typePagament);
-      setStates(states);
-      setGeneralData(generalData);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-    };
-
     fetchData();
   }, []);
 
   useEffect(() => {
     if (isLogged) {
-      const fetchData = async () => {
-        try {
-          const getData = await getUserInfos();
-
-          // const [
-          //   addressData,
-          //   userData,
-          //   favoriteData,
-          //   cartProductData,
-          //   couponsData,
-          //   orderData,
-          //   rewardData,
-          //   testeData,
-          // ] = await Promise.all([
-          //   getAddress(),
-          //   getMe(),
-          //   getFavorites(),
-          //   getCartProduct(),
-          //   getCoupons(),
-          //   getOrders(),
-          //   getUserReward(),
-          //   getUserInfos(),
-          // ]);
-
-          setCoupons(getData.coupons);
-          setAddress(getData.userAddress);
-          setUser(getData.user);
-          setFavorites(getData.favorites);
-          setCart_product(getData.cartProducts);
-          setOrders(getData.orders);
-          setUserReward(getData.rewards);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
       fetchData();
     }
   }, [isLogged]);

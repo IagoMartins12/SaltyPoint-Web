@@ -59,10 +59,10 @@ const ForgetPasswordModal = () => {
   };
 
   let imageContent = (
-    <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
+    <div className='aspect-video w-full h-2/5 sm:h-3/5  relative overflow-hidden rounded-xl'>
       <Image
         fill
-        className='sm:object-cover  !static '
+        className='object-cover  sm:px-8 sm:py-4 '
         src={`/forget.svg`}
         alt={'forget.svg'}
         sizes='100%'
@@ -71,13 +71,13 @@ const ForgetPasswordModal = () => {
   );
 
   let bodyContent = (
-    <div className='h-4/5 w-full'>
+    <div className='h-3/5 sm:h-2/5 w-full'>
       <div className='flex flex-col w-11/12 mx-auto  h-full sm:h-auto'>
         <div className='flex flex-col py-4 gap-y-3'>
           <h1 className='font-semibold text-xl text-center'>
             Esqueceu sua senha?
           </h1>
-          <p className='font-medium text-lg'>
+          <p className='font-medium text-lg text-center'>
             Não se preocupe, iremos enviar um email para você redefinir sua
             senha!
           </p>
@@ -114,7 +114,7 @@ const ForgetPasswordModal = () => {
 
   if (step === STEPS.SENDED_EMAIL) {
     bodyContent = (
-      <div className='h-4/5 w-full'>
+      <div className='h-3/5 sm:h-2/5 w-full'>
         <div className='flex flex-col w-11/12 mx-auto  h-full sm:h-auto'>
           <div className='flex flex-col py-4 gap-y-3'>
             <h1 className='font-semibold text-xl text-center'>
@@ -140,7 +140,7 @@ const ForgetPasswordModal = () => {
     );
 
     imageContent = (
-      <div className='aspect-video w-full h-1/5  relative overflow-hidden rounded-xl'>
+      <div className='aspect-video w-full h-4/5 sm:h-3/5  relative overflow-hidden rounded-xl'>
         <Image
           fill
           className='sm:object-cover  !static '
@@ -154,7 +154,7 @@ const ForgetPasswordModal = () => {
 
   const body = (
     <>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center items-center h-full'>
         {imageContent}
         {bodyContent}
       </div>

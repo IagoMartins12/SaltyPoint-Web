@@ -9,7 +9,7 @@ import { StyledInput, StyledInputPassword } from '../../Input';
 import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
 import { AiFillApple } from 'react-icons/ai';
 import { LoginUserDto } from '@/app/types/Dtos';
-import { loginUser } from '@/app/services';
+import { googleLogin, loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
 import Modal from '../../Modal';
 import Image from 'next/image';
@@ -47,6 +47,11 @@ const LoginModal = () => {
       password: '',
     },
   });
+
+  const handleGoogleLogin = async () => {
+    console.log('clicou');
+    const response = await googleLogin();
+  };
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const loginUserDto = data as LoginUserDto;
@@ -132,7 +137,7 @@ const LoginModal = () => {
                 text='Continuar com Google'
                 icon={FcGoogle}
                 bgColor='bg-[#4285F4] '
-                onClick={() => console.log('clicou')}
+                onClick={handleGoogleLogin}
               />
               <AuthLoginButtonRounded
                 text='Continuar com Facebook'

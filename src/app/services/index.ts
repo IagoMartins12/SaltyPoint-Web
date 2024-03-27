@@ -12,6 +12,7 @@ import {
   LoginUserDto,
   RecoverPasswordDto,
   RemoveCartProductDto,
+  ResetPasswordDto,
   UpdatePasswordDto,
   UpdateUserDto,
 } from '../types/Dtos';
@@ -101,7 +102,7 @@ export const getStates = async (): Promise<State[]> => {
 
 export const getCoupons = async (): Promise<Discount_cupom[]> => {
   try {
-    const response = await Api.get('/coupon');
+    const response = await Api.get('/coupons');
     return response.data as Discount_cupom[];
   } catch (error: any) {
     return error;
@@ -222,7 +223,16 @@ export const updatedMe = async (
 
 export const updatedPassword = async (updatePasswordDto: UpdatePasswordDto) => {
   try {
-    const response = await Api.patch('/resetPassword', updatePasswordDto);
+    const response = await Api.patch('/changePassword', updatePasswordDto);
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const resetPassword = async (resetPassword: ResetPasswordDto) => {
+  try {
+    const response = await Api.patch('/resetPassword', resetPassword);
     return response;
   } catch (error: any) {
     return error.response;
@@ -321,7 +331,7 @@ export const postReward = async (
 
 export const googleLogin = async () => {
   try {
-    const response = await Api.get('/social');
+    const response = await Api.get('/social/google');
     return response;
   } catch (error: any) {
     return error;

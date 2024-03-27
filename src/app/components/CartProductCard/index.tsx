@@ -81,9 +81,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
         </div>
       </div>
 
-      {!getProductName2(cart_product.id, cart_product.size).includes(
-        'Promoção',
-      ) ? (
+      {Number(cart_product.value) !== 0 ? (
         <div className='pt-1 z-40'>
           <AiOutlineDelete
             size={22}
