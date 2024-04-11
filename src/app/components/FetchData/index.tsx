@@ -20,7 +20,7 @@ interface FetchProps {
   generalData: General_data;
   typePagament: Type_Pagament[];
 }
-export const FetchData: React.FC<FetchProps> = ({
+const FetchData: React.FC<FetchProps> = ({
   category,
   generalData,
   products,
@@ -34,6 +34,7 @@ export const FetchData: React.FC<FetchProps> = ({
     setStates,
     setGeneralData,
   } = useGlobalStore();
+
   const {
     setAddress,
     setUser,
@@ -43,6 +44,7 @@ export const FetchData: React.FC<FetchProps> = ({
     setOrders,
     setUserReward,
   } = usePrivateStore();
+
   const { isLogged } = useAuth();
 
   const fetchData = async () => {
@@ -75,9 +77,11 @@ export const FetchData: React.FC<FetchProps> = ({
 
   useEffect(() => {
     if (isLogged) {
-      fetchData();
+      fetchAuthData();
     }
   }, [isLogged]);
 
   return <></>;
 };
+
+export default FetchData;

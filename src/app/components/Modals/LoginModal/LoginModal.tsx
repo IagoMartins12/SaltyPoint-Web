@@ -49,7 +49,6 @@ const LoginModal = () => {
   });
 
   const handleGoogleLogin = async () => {
-    console.log('clicou');
     const response = await googleLogin();
   };
 

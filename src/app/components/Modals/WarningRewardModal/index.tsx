@@ -33,7 +33,8 @@ const WarningRewardModal: React.FC = () => {
 
       const object = {
         rewardId: reward.id,
-      } as CreateRewardDto;
+      };
+
       const response = await postReward(object);
 
       if (response) {

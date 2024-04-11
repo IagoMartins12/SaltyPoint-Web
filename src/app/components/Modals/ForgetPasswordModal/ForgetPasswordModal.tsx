@@ -12,6 +12,7 @@ import {
   useLoginModal,
 } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
+import { PuffLoader } from 'react-spinners';
 
 enum STEPS {
   RECEIVE_EMAIL = 0,
@@ -19,6 +20,7 @@ enum STEPS {
 }
 const ForgetPasswordModal = () => {
   const [step, setStep] = useState(STEPS.RECEIVE_EMAIL);
+  const [loading, setLoading] = useState(false);
   const forgetPasswordModal = useForgetPasswordModal();
   const loginModal = useLoginModal();
   const { theme } = useTheme();
@@ -32,12 +34,13 @@ const ForgetPasswordModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     if (!data.email.includes('@')) return toast.error('Favor inserir email');
     try {
+      setLoading(true);
       const object = {
         to: data.email,
       };
 
       const response = await recoverPassword(object);
-
+      setLoading(false);
       if (response.status === 400) {
         return toast.error(response.data.message);
       }
@@ -95,10 +98,14 @@ const ForgetPasswordModal = () => {
 
           <div className='flex flex-col w-full gap-y-4'>
             <button
-              className=' bg-red-400 py-2  rounded-md text-white text-medium font-semibold'
+              className=' bg-red-400 py-2  rounded-md text-white text-medium font-semibold flex items-center justify-center'
               onClick={handleSubmit(onSubmit)}
             >
-              Enviar email
+              {loading ? (
+                <PuffLoader size={25} color='black' />
+              ) : (
+                <>Enviar email</>
+              )}
             </button>
             <button
               className={`py-2 rounded-md  text-medium font-semibold shadow-md `}

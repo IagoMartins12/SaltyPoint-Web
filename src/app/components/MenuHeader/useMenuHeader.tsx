@@ -10,7 +10,7 @@ import {
   AiOutlineQuestionCircle,
   AiOutlineUser,
 } from 'react-icons/ai';
-import { BiCrown, BiMessageAlt } from 'react-icons/bi';
+import { BiCrown } from 'react-icons/bi';
 import { BsBag } from 'react-icons/bs';
 import { HiOutlineDeviceMobile } from 'react-icons/hi';
 import { RiCoupon2Line } from 'react-icons/ri';
@@ -19,6 +19,7 @@ import {
   MdOutlineFavoriteBorder,
   MdOutlinePrivacyTip,
 } from 'react-icons/md';
+import { TiDocument } from 'react-icons/ti';
 import {
   useAddress,
   useAppDownload,
@@ -77,8 +78,8 @@ export const useMenuHeader = () => {
       },
     },
     {
-      label: 'Fale conosco',
-      icon: <BiMessageAlt size={iconsSize} />,
+      label: 'Dados gerais',
+      icon: <TiDocument size={iconsSize} />,
       onclick: () => {
         menuAction(talkToUsModal);
       },

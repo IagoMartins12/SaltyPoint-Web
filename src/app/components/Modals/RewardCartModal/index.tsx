@@ -10,6 +10,7 @@ import { useRewardCartModal } from '@/app/hooks/modals/useCoupon';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { Discount_cupom } from '@/app/types/ModelsType';
 import Image from 'next/image';
+import { EmptyResult } from '../../EmptyResult';
 
 const RewardCartModal = () => {
   const [isActive, setIsActive] = useState(0);
@@ -92,7 +93,7 @@ const RewardCartModal = () => {
       c.cupom_name.toUpperCase().includes(inputValue.toUpperCase()),
     );
     if (filteredCoupons.length === 0) {
-      return <AnimationEmpty text='Nenhum cupom disponível no momento' />;
+      return <EmptyResult text='Nenhum cupom disponivel no momento' />;
     }
     return filteredCoupons.map(coupon => (
       <CouponSelectedCard item={coupon} key={coupon.id} />
@@ -107,7 +108,7 @@ const RewardCartModal = () => {
           <div className='w-full flex gap-1'>
             {options.map((op, i) => (
               <div
-                className={`w-6/12 pb-1 border-b-2 ${
+                className={`w-6/12 pb-1 border-b-2 cursor-pointer ${
                   i === isActive ? 'border-b-red-500' : ''
                 }`}
                 key={i}
@@ -127,7 +128,7 @@ const RewardCartModal = () => {
                     <CouponSelectedCard reward={reward} key={reward.id} />
                   ))
                 ) : (
-                  <AnimationEmpty text='Nenhum cupom disponível no momento' />
+                  <EmptyResult text='Nenhuma recompensa disponivel no momento' />
                 )}
               </div>
             ) : (

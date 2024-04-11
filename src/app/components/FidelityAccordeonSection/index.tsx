@@ -23,7 +23,6 @@ const FidelityAccordeonSection = () => {
   const iconsSize = 18;
 
   const openTalkToUs = () => {
-    fidelityModal.onClose();
     talkToUs.onOpen();
   };
 

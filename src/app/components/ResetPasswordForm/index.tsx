@@ -96,7 +96,7 @@ export const ResetPasswordForm = () => {
             text='Redefinir senha'
             icon={BiLogInCircle}
             bgColor='bg-red-400'
-            onClick={() => console.log('clicou')}
+            onClick={() => {}}
             submit
           />
         </form>

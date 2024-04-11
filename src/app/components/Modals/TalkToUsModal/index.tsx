@@ -7,23 +7,36 @@ import {
   AiOutlinePhone,
   AiOutlineWhatsApp,
 } from 'react-icons/ai';
+import { FiClock } from 'react-icons/fi';
+
 import Modal from '../../Modal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { BsHouseDoor } from 'react-icons/bs';
 
 const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
   const { generalData } = useGlobalStore();
-  const { register, handleSubmit, reset } = useForm<FieldValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
-  });
+  // const { register, handleSubmit, reset } = useForm<FieldValues>({
+  //   defaultValues: {
+  //     name: '',
+  //     email: '',
+  //     message: '',
+  //   },
+  // });
 
-  const onSubmit: SubmitHandler<FieldValues> = async data => {};
+  // const onSubmit: SubmitHandler<FieldValues> = async data => {};
 
   const talkOptions = [
+    {
+      label: 'Endereço:',
+      text: `Rua estrada de ligação, 22. Residencial Sol Nascente`,
+      icon: <BsHouseDoor size={30} />,
+    },
+    {
+      label: 'Horario de serviço:',
+      text: `${generalData?.openingHours} - ${generalData?.closingHours}`,
+      icon: <FiClock size={30} />,
+    },
     {
       label: 'WhatsApp:',
       text: `+55 ${generalData?.cellphone}`,
@@ -46,27 +59,27 @@ const TalkToUsModal = () => {
     },
   ];
 
-  const emailOptions = [
-    {
-      id: 'name',
-      label: 'Nome',
-      type: 'text',
-    },
-    {
-      id: 'email',
-      label: 'Email',
-      type: 'email',
-    },
-    {
-      id: 'message',
-      label: 'Mensagem',
-      type: 'textarea',
-    },
-  ];
+  // const emailOptions = [
+  //   {
+  //     id: 'name',
+  //     label: 'Nome',
+  //     type: 'text',
+  //   },
+  //   {
+  //     id: 'email',
+  //     label: 'Email',
+  //     type: 'email',
+  //   },
+  //   {
+  //     id: 'message',
+  //     label: 'Mensagem',
+  //     type: 'textarea',
+  //   },
+  // ];
 
   const body = (
     <div className='flex flex-col gap-6 w-11/12 mx-auto'>
-      <form className='flex flex-col gap-3'>
+      {/* <form className='flex flex-col gap-3'>
         {emailOptions.map((option, i) => (
           <div className='flex flex-col gap-2' key={i}>
             <span>{option.label}</span>
@@ -92,15 +105,15 @@ const TalkToUsModal = () => {
         >
           <span className='font-semibold text-medium'>Enviar</span>
         </button>
-      </form>
+      </form> */}
 
-      <span className='text-xl font-medium'>Ou entre em contato:</span>
+      {/* <span className='text-xl font-medium'>Ou entre em contato:</span> */}
 
       <div className='flex w-full '>
         <div className='flex flex-col  justify-center items-start gap-6 w-full'>
           {talkOptions.map((option, i) => (
             <div
-              className='flex flex-row gap-2 sm:gap-5 items-center w-full '
+              className='flex flex-col sm:flex-row gap-2 sm:gap-5 items-start sm:items-center w-full '
               key={i + 1}
             >
               <div className='flex gap-4 items-center'>
@@ -123,7 +136,7 @@ const TalkToUsModal = () => {
       onClose={talkToUsModal.onClose}
       body={body}
       isOpen={talkToUsModal.isOpen}
-      title='Fale conosco'
+      title='Dados gerais'
     />
   );
 };

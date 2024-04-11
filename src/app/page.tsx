@@ -1,12 +1,10 @@
 import { CategoryMenu } from './components/CategoryMenu';
-import ClientOnly from './components/ClientOnly';
 import { ComeBack } from './components/ComeTop';
-import { FetchData } from './components/FetchData';
+import FetchData from './components/FetchData';
+
 import { Header } from './components/Header';
 import { Hero3 } from './components/Hero';
-import Loader from './components/Loader';
 import { ProductMenu } from './components/ProductMenu';
-import ModalsProvider from './providers/ModalsProvider';
 import {
   getCategories,
   getGeneralData,
@@ -14,6 +12,7 @@ import {
   getStates,
   getTypePagaments,
 } from './services';
+import dynamic from 'next/dynamic';
 
 export default async function Home() {
   const [product, category, typePagament, states, generalData] =
@@ -26,14 +25,8 @@ export default async function Home() {
     ]);
 
   return (
-    <ClientOnly>
+    <>
       <main id='hero'>
-        <Header />
-        <Hero3 />
-        <CategoryMenu />
-        <ProductMenu />
-        <ComeBack />
-        <ModalsProvider />
         <FetchData
           category={category}
           generalData={generalData}
@@ -41,7 +34,13 @@ export default async function Home() {
           states={states}
           typePagament={typePagament}
         />
+
+        <Header />
+        <Hero3 />
+        <CategoryMenu />
+        <ProductMenu />
+        <ComeBack />
       </main>
-    </ClientOnly>
+    </>
   );
 }

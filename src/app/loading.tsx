@@ -1,6 +1,6 @@
 import Loader from './components/Loader';
 
-const Loading = async () => {
+const Loading = () => {
   return (
     <div className='h-[100vh] w-full'>
       <Loader />

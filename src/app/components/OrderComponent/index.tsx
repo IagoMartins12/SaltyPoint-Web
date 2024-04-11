@@ -11,6 +11,7 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
 
   const { states } = useGlobalStore();
   const handleOnClick = () => {
+    //@ts-ignore
     currentOrderModal.setCurrentProduct(order);
     currentOrderModal.onOpen();
   };

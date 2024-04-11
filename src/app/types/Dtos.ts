@@ -90,6 +90,5 @@ export type CreateOrderDto = {
 };
 
 export type CreateRewardDto = {
-  orderId?: string;
   rewardId: string;
 };
