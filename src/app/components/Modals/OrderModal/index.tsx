@@ -39,6 +39,7 @@ const OrderModal = () => {
     orderModal,
     user,
     hasPlayed,
+    estimativeDate,
     getAddressInfo,
     setSelected,
     getTaxa,
@@ -64,6 +65,12 @@ const OrderModal = () => {
 
   const openUserInfo = () => {
     userInfo.onOpen();
+  };
+
+  const onClose = () => {
+    setHasPlayed(false);
+    rewardCartModal.setCurrentItem(null);
+    orderModal.onClose();
   };
 
   let body = (
@@ -368,6 +375,7 @@ const OrderModal = () => {
                 </span>
               </div>
             )}
+
             {rewardCartModal.currentItem &&
               isReward &&
               (rewardCartModal.currentItem as User_Rewards).rewardType ===
@@ -396,6 +404,17 @@ const OrderModal = () => {
               </div>
             )}
 
+            {estimativeDate ? (
+              <div className='flex justify-between px-2 '>
+                <span className='text-base font-light'>
+                  Tempo estimado de entrega:{' '}
+                </span>
+                <span className='text-base font-light text-gray-400'>
+                  {estimativeDate}
+                </span>
+              </div>
+            ) : null}
+
             <div className='flex justify-between px-2 '>
               <span className='text-2xl font-light'>Total: </span>
               <span className='text-2xl font-light '>
@@ -415,12 +434,6 @@ const OrderModal = () => {
   if (hasPlayed) {
     body = <AnimationOrder setHasPlayed={setHasPlayed} />;
   }
-
-  const onClose = () => {
-    setHasPlayed(false);
-    rewardCartModal.setCurrentItem(null);
-    orderModal.onClose();
-  };
 
   return (
     <>

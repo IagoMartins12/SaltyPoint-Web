@@ -346,3 +346,14 @@ export const getGeneralData = async () => {
     return error;
   }
 };
+
+export const getEstimativeDate = async (): Promise<number> => {
+  try {
+    const response = await Api.get(
+      'http://localhost:3333/order/estimativeDate',
+    );
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};

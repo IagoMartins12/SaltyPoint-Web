@@ -36,7 +36,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
     <div className='w-full flex gap-6 cardBG rounded-2xl justify-center p-4 relative min-h-[7rem]'>
       <div className='flex flex-col gap-4 w-full justify-center'>
         <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between '>
-          <span className='font-medium text-sm sm:text-lg pr-6 sm:pr-0'>
+          <span className='font-medium text-sm sm:text-lg pr-6  sm:pr-0'>
             {cart_product.quantity}x{' '}
             {getProductName2(cart_product.product_id, cart_product.size)}
           </span>
@@ -44,7 +44,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
             R$ {cart_product.value}
           </span>
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col pl-4'>
           {cart_product.product_id_2 ? (
             <>
               {[cart_product.product_id, cart_product.product_id_2].map(
