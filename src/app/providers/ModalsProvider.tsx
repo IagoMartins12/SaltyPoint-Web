@@ -66,6 +66,7 @@ const WarningRewardModal = dynamic(
 );
 
 const modalComponents = [
+  AddressModal,
   LoginModal,
   RegisterModal,
   TermPrivacyModal,
@@ -90,7 +91,6 @@ const modalComponents = [
   NotOpenModal,
   PixModal,
   ChangeDeliveryInfoModal,
-  AddressModal,
   AddAddressModal,
   RewardCartModal,
 ];

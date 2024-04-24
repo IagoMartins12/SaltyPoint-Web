@@ -24,7 +24,6 @@ export default function RootLayout({
         <ThemeProv>
           <ToasterProvider />
           <ModalsBackground />
-          <ModalsProvider />
           {children}
         </ThemeProv>
       </body>

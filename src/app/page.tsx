@@ -5,6 +5,7 @@ import FetchData from './components/FetchData';
 import { Header } from './components/Header';
 import { Hero3 } from './components/Hero';
 import { ProductMenu } from './components/ProductMenu';
+import ModalsProvider from './providers/ModalsProvider';
 import {
   getCategories,
   getGeneralData,
@@ -34,12 +35,12 @@ export default async function Home() {
           states={states}
           typePagament={typePagament}
         />
-
         <Header />
         <Hero3 />
         <CategoryMenu />
         <ProductMenu />
         <ComeBack />
+        <ModalsProvider />
       </main>
     </>
   );

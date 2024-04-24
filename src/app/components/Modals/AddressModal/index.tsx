@@ -16,13 +16,6 @@ const AddressModal = () => {
   const addAddress = useAddAddress();
   const deleteAddressModal = useDeleteAddress();
 
-  const handleOpenDeleteModal = (addressId: string) => {
-    deleteAddressModal.setCurrentItem(addressId);
-
-    addressModal.onClose();
-    deleteAddressModal.onOpen();
-  };
-
   const isValid = () => {
     const addressLenght = address.filter(
       address => address.isActive === 0,
@@ -79,7 +72,8 @@ const AddressModal = () => {
                       size={25}
                       className='cursor-pointer'
                       onClick={() => {
-                        handleOpenDeleteModal(address.id);
+                        deleteAddressModal.setCurrentItem(address.id);
+                        deleteAddressModal.onOpen();
                       }}
                       color='red'
                     />

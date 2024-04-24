@@ -144,7 +144,7 @@ export const PizzaBody = () => {
           fill
           src={(productModal.currentProduct as Product)?.product_image ?? ''}
           alt='Product image'
-          className='rounded-lg !sticky object-scale-down '
+          className='rounded-lg !sticky sm:object-scale-down '
           sizes='100%'
         />
         <FavoriteButton

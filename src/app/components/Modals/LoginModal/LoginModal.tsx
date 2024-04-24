@@ -58,7 +58,7 @@ const LoginModal = () => {
 
     if (response.status === 400 || response.status === 401) {
       return toast.error(response.data.message);
-    } else if (response.status === 200) {
+    } else if (response.status === 200 || response.status === 201) {
       toast.success('Login feito com sucesso!');
       setUserLocalStorage(response.data.access_token);
       reset();
@@ -69,7 +69,7 @@ const LoginModal = () => {
   };
 
   const body = (
-    <div className='flex flex-col-reverse sm:flex-row justify-around'>
+    <div className='flex flex-col-reverse sm:flex-row justify-around h-full'>
       <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-2'>
         <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
           <div>
@@ -126,7 +126,7 @@ const LoginModal = () => {
               onClick={() => console.log('clicou')}
               submit
             />
-            <div className='flex items-center justify-center  '>
+            {/* <div className='flex items-center justify-center  '>
               <hr className='w-3/12 mr-2' />
               <span className='text-center'>Ou entre com: </span>
               <hr className='w-3/12 ml-2' />
@@ -150,12 +150,12 @@ const LoginModal = () => {
                 bgColor='bg-black '
                 onClick={() => console.log('clicou')}
               />
-            </div>
+            </div> */}
           </div>
         </form>
       </div>
       <div className='w-full sm:w-5/12 lg:w-4/12 relative'>
-        <div className='aspect-video w-full h-48 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
+        <div className='aspect-video w-full h-64 sm:h-4/5 mt-4 sm:mt-10 relative overflow-hidden rounded-xl m-1'>
           <Image
             fill
             className='sm:object-cover -z-10 !static '

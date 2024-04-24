@@ -135,6 +135,7 @@ export const useCustomOrderModal = () => {
           : null,
     } as CreateOrderDto);
 
+    console.log('response', response);
     if (response) {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];

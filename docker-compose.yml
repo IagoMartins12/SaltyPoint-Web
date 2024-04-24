@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: SaltyPoint
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - /app/.next
+      # - .:/app
+    logging:
+      driver: json-file
+      options:
+        max-file: '10'
+        max-size: '100m'

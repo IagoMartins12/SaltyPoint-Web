@@ -99,7 +99,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
         <div className='flex justify-between  '>
           <span className='text-2xl font-light'>Total: </span>
           <span className='text-2xl font-light '>
-            R$ {order.total_amount.toFixed(2)}
+            R$ {order?.total_amount?.toFixed(2)}
           </span>
         </div>
       </div>
