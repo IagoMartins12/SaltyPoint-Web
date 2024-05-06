@@ -18,8 +18,11 @@ export const useCustomProductModal = () => {
   const [selectedProduct2, setSelectedProduct2] = useState<null | string>(null);
   const [selectedProduct3, setSelectedProduct3] = useState<null | string>(null);
 
-  const sizes = ['Pizza', 'Brotinho'];
+  const productModal = useProductModal();
+  const { products } = useGlobalStore();
+  const { reset } = useFormHook();
 
+  const sizes = ['Pizza', 'Brotinho'];
   const flavors = ['1 Sabor', '2 Sabores'];
   const brotinhoPrice = 10 * quantity;
 
@@ -29,11 +32,6 @@ export const useCustomProductModal = () => {
     setOtherProductsValue(0);
     setSelectedAction(null);
   };
-
-  const productModal = useProductModal();
-  const { products } = useGlobalStore();
-
-  const { reset } = useFormHook();
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -152,7 +150,7 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
-  }, [value, quantity, increaseQuantity, decreaseQuantity, selectedProduct2]);
+  }, [increaseQuantity, decreaseQuantity, selectedProduct2]);
 
   useEffect(() => {
     if (selectedProduct2 && productModal.currentProduct) {

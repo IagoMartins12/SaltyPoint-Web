@@ -2,18 +2,20 @@
 
 import { PuffLoader } from 'react-spinners';
 
-const Loader = () => {
+interface LoaderProps {
+  isMin?: boolean;
+}
+const Loader: React.FC<LoaderProps> = ({ isMin = false }) => {
   return (
     <div
-      className='
-      h-[70vh]
-      flex 
-      flex-col 
-      justify-center 
-      items-center 
-    '
+      className={`${
+        !isMin ? 'h-[70vh]' : ''
+      } flex flex-col justify-center items-center `}
     >
-      <PuffLoader size={100} color='red' />
+      <PuffLoader
+        size={!isMin ? 100 : 28}
+        color={`${!isMin ? 'red' : 'white'}`}
+      />
     </div>
   );
 };

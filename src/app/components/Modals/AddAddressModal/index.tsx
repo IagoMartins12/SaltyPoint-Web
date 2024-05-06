@@ -28,7 +28,7 @@ const AddAddressModal = () => {
   const [isValid, setIsValid] = useState(false);
   const [isSelected, setIsSelected] = useState<null | number>(null);
   const [result, setResult] = useState<Result | null>(null);
-
+  const [loading, setLoading] = useState(false);
   const addAddress = useAddAddress();
   const { address, setAddress, user, setUser } = usePrivateStore();
 
@@ -60,14 +60,16 @@ const AddAddressModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const validateCpf = data.cep.replace('-', '');
-
+    setLoading(true);
     const response = await getAddressPerCep(validateCpf);
 
     if (response?.erro) {
+      setLoading(false);
       return toast.error('CEP não encontrado');
     }
 
     if (response) {
+      setLoading(false);
       setStep(STEPS.ADDRESS_INFO);
       // Mapeia os campos do formulário com as propriedades de CEPInfoDto
       const fieldMappings: Record<string, keyof CEPInfoDto> = {
@@ -180,6 +182,7 @@ const AddAddressModal = () => {
       <div className='flex flex-col gap-4 h-full '>
         {step === STEPS.CEP && (
           <CepStep
+            loading={loading}
             errors={errors}
             handleOnChange={handleOnChange}
             handleSubmit={handleSubmit}

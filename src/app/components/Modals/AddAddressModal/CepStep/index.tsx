@@ -1,4 +1,5 @@
 import { CepInput } from '@/app/components/Input';
+import Loader from '@/app/components/Loader';
 import { CepStepProps } from '@/app/types/ComponentTypes';
 import { AiOutlineQuestionCircle, AiOutlineSearch } from 'react-icons/ai';
 
@@ -10,6 +11,7 @@ export const CepStep: React.FC<CepStepProps> = ({
   handleOnChange,
   isValid,
   setStep,
+  loading,
 }) => {
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
@@ -26,8 +28,14 @@ export const CepStep: React.FC<CepStepProps> = ({
         }`}
         disabled={!isValid}
       >
-        <AiOutlineSearch size={25} />
-        <span className='font-medium text-lg'>Buscar CEP</span>
+        {loading ? (
+          <Loader isMin />
+        ) : (
+          <>
+            <AiOutlineSearch size={25} />
+            <span className='font-medium text-lg'>Buscar CEP</span>
+          </>
+        )}
       </button>
 
       <button

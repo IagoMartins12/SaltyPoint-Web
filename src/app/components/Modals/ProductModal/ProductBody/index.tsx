@@ -12,18 +12,17 @@ import toast from 'react-hot-toast';
 import { Product } from '@/app/types/ModelsType';
 import { useLoginModal, useSearchModal } from '@/app/hooks/modals/useModal';
 import useAuth from '@/app/hooks/auth/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FavoriteButton } from '@/app/components/FavoriteButton';
 import { AnimationCart } from '@/app/components/Animations/AnimationCart';
 
 export const ProductBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [animatedValue, setAnimatedValue] = useState(0); // Valor animado
 
   const { handleSubmit, register } = useFormHook();
   const { cart_product, setCart_product, favorites } = usePrivateStore();
-
   const { isLogged } = useAuth();
-
   const loginModal = useLoginModal();
   const searchModal = useSearchModal();
   const productModal = useProductModal();
@@ -60,6 +59,36 @@ export const ProductBody = () => {
       p => p.product_id === productModal.currentProduct?.id,
     );
   };
+
+  useEffect(() => {
+    const targetValue = +value; // Converte o valor para número
+    const animationDuration = 400; // Duração da animação em milissegundos
+
+    const startAnimation = () => {
+      let startTimestamp: number;
+      const startValue = animatedValue; // Armazena o valor atual como valor inicial da animação
+
+      const animate = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+
+        const progress = timestamp - startTimestamp;
+        const percentage = Math.min(progress / animationDuration, 1);
+
+        // Calcula o valor animado atual com base no valor inicial e no valor final
+        const currentAnimatedValue =
+          startValue + (targetValue - startValue) * percentage;
+        setAnimatedValue(currentAnimatedValue);
+
+        if (percentage < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
+
+    startAnimation();
+  }, [value]);
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>
@@ -124,7 +153,7 @@ export const ProductBody = () => {
             disabled={!disabled}
           >
             <span>
-              Adicionar R$ <span>{value}</span>
+              Adicionar R$ <span>{animatedValue.toFixed(2) ?? value}</span>
             </span>
           </button>
         )}

@@ -92,6 +92,7 @@ export interface AddAddressGeoStepProps extends AddAddressInfoStepProps {
 }
 
 export interface CepStepProps {
+  loading: boolean;
   register: UseFormRegister<FieldValues>;
   onSubmit: SubmitHandler<FieldValues>;
   errors: FieldErrors<FieldValues>;

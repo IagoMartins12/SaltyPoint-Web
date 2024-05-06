@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextArea } from '@/app/components/Input';
 import { PizzaCard } from '@/app/components/PizzaCard';
 import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
@@ -23,6 +23,7 @@ import { AnimationCart } from '@/app/components/Animations/AnimationCart';
 export const PizzaBody = () => {
   const [hasPlayed, setHasPlayed] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [animatedValue, setAnimatedValue] = useState(0); // Valor animado
 
   const { products, categorys } = useGlobalStore();
   const { handleSubmit, register } = useFormHook();
@@ -136,6 +137,36 @@ export const PizzaBody = () => {
       ...p,
       name: p.name.replace('Pizza', 'Brotinho'),
     }));
+
+  useEffect(() => {
+    const targetValue = +value; // Converte o valor para número
+    const animationDuration = 300; // Duração da animação em milissegundos
+
+    const startAnimation = () => {
+      let startTimestamp: number;
+      const startValue = animatedValue; // Armazena o valor atual como valor inicial da animação
+
+      const animate = (timestamp: number) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+
+        const progress = timestamp - startTimestamp;
+        const percentage = Math.min(progress / animationDuration, 1);
+
+        // Calcula o valor animado atual com base no valor inicial e no valor final
+        const currentAnimatedValue =
+          startValue + (targetValue - startValue) * percentage;
+        setAnimatedValue(currentAnimatedValue);
+
+        if (percentage < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
+
+    startAnimation();
+  }, [value]);
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>
@@ -307,6 +338,7 @@ export const PizzaBody = () => {
           )}
         </div>
 
+        {/* Bordas  */}
         {getCategory && !getCategory.includes('Doces') && (
           <div id='cornicione' className='flex flex-col w-full'>
             <div className='flex flex-col w-full'>
@@ -375,7 +407,7 @@ export const PizzaBody = () => {
             disabled={!disabled}
           >
             <span>
-              Adicionar R$ <span>{value}</span>
+              Adicionar R$ <span>{animatedValue.toFixed(2) ?? value}</span>
             </span>
           </button>
         )}

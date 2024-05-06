@@ -30,8 +30,6 @@ export const RewardUserComponent: React.FC<RewardUserComponentProps> = ({
             {reward.rewardName}
           </span>
         </div>
-
-        <hr className='w-11/12 mx-auto py-4' />
       </div>
 
       <div className='h-1/5 w-full items-center justify-center flex'>

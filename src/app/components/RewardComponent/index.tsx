@@ -14,7 +14,7 @@ export const RewardComponent: React.FC<RewardComponentProps> = ({
         }
       }}
     >
-      <div className='h-4/5  '>
+      <div className='h-4/5'>
         <div className='h-5/6 relative p-3 rounded-lg '>
           <Image
             fill
@@ -30,8 +30,6 @@ export const RewardComponent: React.FC<RewardComponentProps> = ({
             {reward.name}
           </span>
         </div>
-
-        <hr className='w-11/12 mx-auto' />
       </div>
 
       <div className='h-1/5 w-full items-center justify-center flex'>
