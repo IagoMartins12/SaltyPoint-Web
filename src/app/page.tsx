@@ -1,7 +1,6 @@
 import { CategoryMenu } from './components/CategoryMenu';
 import { ComeBack } from './components/ComeTop';
 import FetchData from './components/FetchData';
-
 import { Header } from './components/Header';
 import { Hero3 } from './components/Hero';
 import { ProductMenu } from './components/ProductMenu';
@@ -13,7 +12,6 @@ import {
   getStates,
   getTypePagaments,
 } from './services';
-import dynamic from 'next/dynamic';
 
 export default async function Home() {
   const [product, category, typePagament, states, generalData] =
