@@ -92,6 +92,7 @@ export const Hero3 = () => {
     if (systemOpening === false) {
       generalDataModal.onOpen();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [systemOpening]);
 
   if (!user) {

@@ -150,6 +150,7 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [increaseQuantity, decreaseQuantity, selectedProduct2]);
 
   useEffect(() => {
@@ -163,7 +164,8 @@ export const useCustomProductModal = () => {
         setOtherProductsValue(maxValue);
       }
     }
-  }, [selectedProduct2]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProduct2, productModal.currentProduct]);
 
   return {
     quantity,

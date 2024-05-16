@@ -10,12 +10,14 @@ const ThemeSwitch = () => {
     setTheme(theme === 'light' || theme === undefined ? 'dark' : 'light');
   };
 
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setMounted(true);
 
     if (theme) setTheme(theme);
     else setTheme('light');
-  }, []);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); //eslint-disable-next-line react-hooks/exhaustive-deps
 
   if (!mounted) {
     return null;

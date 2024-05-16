@@ -1,16 +1,24 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { categoriesToExclude } from '../CategoryMenu';
 import { ProductCard } from '../ProductCard';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { Category } from '@/app/types/ModelsType';
 
 export const ProductMenu = () => {
-  const { categorys, products } = useGlobalStore();
-
-  const visibleCategories = categorys.filter(
-    category => !categoriesToExclude.includes(category.category_name),
+  const [visibleCategories, setVisibleCategories] = useState<Category[] | []>(
+    [],
   );
 
+  const { categorys, products } = useGlobalStore();
+
+  useEffect(() => {
+    const visibleCategories = categorys?.filter(
+      category => !categoriesToExclude.includes(category.category_name),
+    );
+    setVisibleCategories(visibleCategories);
+  }, [categorys]);
   return (
     <div className='w-11/12 mx-auto sm:pt-4 flex z-10 flex-col gap-8'>
       {visibleCategories.map(category => (

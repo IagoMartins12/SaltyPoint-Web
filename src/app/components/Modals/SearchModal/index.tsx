@@ -5,12 +5,16 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { SearchCategory } from '../../SearchCategory';
 import { useEffect, useState } from 'react';
 import { SearchProduct } from '../../SearchProduct';
-import { Product } from '@/app/types/ModelsType';
+import { Category, Product } from '@/app/types/ModelsType';
 import Modal from '../../Modal';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
 import { categoriesToExclude } from '../../CategoryMenu';
 
 const SearchModal = () => {
+  const [visibleCategories, setVisibleCategories] = useState<Category[] | []>(
+    [],
+  );
+
   const [productState, setProductState] = useState<[] | Product[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -44,9 +48,12 @@ const SearchModal = () => {
 
     setProductState(filteredProduct);
   };
-  const visibleCategories = categorys.filter(
-    category => !categoriesToExclude.includes(category.category_name),
-  );
+  useEffect(() => {
+    const visibleCategories = categorys?.filter(
+      category => !categoriesToExclude.includes(category.category_name),
+    );
+    setVisibleCategories(visibleCategories);
+  }, [categorys]);
 
   useEffect(() => {
     setProductState(products);

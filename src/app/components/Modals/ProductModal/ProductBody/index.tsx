@@ -88,7 +88,7 @@ export const ProductBody = () => {
     };
 
     startAnimation();
-  }, [value]);
+  }, [value, animatedValue]);
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>

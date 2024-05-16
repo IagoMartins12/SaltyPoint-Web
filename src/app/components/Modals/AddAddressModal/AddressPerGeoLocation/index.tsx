@@ -58,6 +58,7 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
     if (result.types.some(type => onlyDistrict.includes(type))) {
       setValue('district', result.address_components[1].long_name);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result]);
 
   return (

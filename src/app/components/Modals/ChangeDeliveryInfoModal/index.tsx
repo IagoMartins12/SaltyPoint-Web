@@ -103,6 +103,7 @@ const ChangeDeliveryInfoModal = () => {
       //@ts-ignore
       setSelected(user.user_Adress_id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const body = (

@@ -69,6 +69,7 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
     if (location.loaded) {
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, apiKey]);
 
   return (

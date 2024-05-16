@@ -107,6 +107,7 @@ export const Cart = () => {
   useEffect(() => {
     cartGuardian();
     // cartGuardianPizza();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart_product]);
   return (
     <>

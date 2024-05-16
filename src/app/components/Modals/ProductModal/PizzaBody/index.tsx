@@ -166,7 +166,7 @@ export const PizzaBody = () => {
     };
 
     startAnimation();
-  }, [value]);
+  }, [value, animatedValue]);
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>

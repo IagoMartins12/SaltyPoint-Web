@@ -310,6 +310,7 @@ export const useCustomOrderModal = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -328,6 +329,7 @@ export const useCustomOrderModal = () => {
         addItemToCart(newItem);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rewardCartModal.currentItem]);
 
   useEffect(() => {
@@ -335,6 +337,7 @@ export const useCustomOrderModal = () => {
       fetchCart();
       fetchEstimateData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderModal.isOpen]);
 
   return {

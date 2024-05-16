@@ -179,7 +179,7 @@ const UserInfoModal = () => {
     setValue('email', user?.email);
     setValue('phone', formatPhoneNumberUser(user?.phone || ''));
     setValue('userImage', user?.image);
-  }, [user]);
+  }, [user, setValue]);
 
   return (
     <>
