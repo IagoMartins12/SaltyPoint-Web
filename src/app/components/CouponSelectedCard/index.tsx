@@ -81,7 +81,7 @@ export const CouponSelectedCard: React.FC<SelectedCouponCardType> = ({
   if (reward) {
     return (
       <div
-        className={`h-[18vh] sm:h-[15vh] flex border-dashed border-2 w-full cursor-pointer ${
+        className={`min-h-[18vh] sm:min-h-[15vh]  flex border-dashed border-2 w-full cursor-pointer ${
           rewardCartModal.currentItem?.id === reward.id
             ? 'border-red-500'
             : 'borderColor'

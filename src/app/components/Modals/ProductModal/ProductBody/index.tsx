@@ -62,7 +62,7 @@ export const ProductBody = () => {
 
   useEffect(() => {
     const targetValue = +value; // Converte o valor para número
-    const animationDuration = 400; // Duração da animação em milissegundos
+    const animationDuration = 500; // Duração da animação em milissegundos
 
     const startAnimation = () => {
       let startTimestamp: number;
@@ -88,7 +88,7 @@ export const ProductBody = () => {
     };
 
     startAnimation();
-  }, [value, animatedValue]);
+  }, [value]);
 
   return (
     <div className='overflow-auto privacyScroll h-full flex flex-col gap-6'>

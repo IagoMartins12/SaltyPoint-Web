@@ -25,7 +25,6 @@ export const CategoryMenu = () => {
     handleSetSelected(categoryName);
   };
 
-  console.log('category', categorys);
   useEffect(() => {
     const visibleCategories = categorys?.filter(
       category => !categoriesToExclude.includes(category.category_name),

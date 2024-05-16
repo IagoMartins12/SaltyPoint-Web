@@ -11,11 +11,18 @@ const MyOrdersModal = () => {
 
   const { orders } = usePrivateStore();
 
+  const sortedOrders = [...orders].sort(
+    (a, b) =>
+      new Date(b.order_date).getTime() - new Date(a.order_date).getTime(),
+  );
+
   const body = (
     <div className='flex flex-col w-11/12 mx-auto gap-6 pb-6'>
       <div className='flex flex-col gap-6'>
-        {orders.length > 0 ? (
-          orders.map(order => <OrderComponent key={order.id} order={order} />)
+        {sortedOrders.length > 0 ? (
+          sortedOrders.map(order => (
+            <OrderComponent key={order.id} order={order} />
+          ))
         ) : (
           <AnimationEmpty text='Você ainda não fez nenhum pedido' />
         )}

@@ -8,8 +8,12 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { UpdatePasswordDto } from '@/app/types/Dtos';
 import { updatedPassword } from '@/app/services';
+import Loader from '../../Loader';
+import { useState } from 'react';
 
 const ChangePasswordModal = () => {
+  const [loading, setLoading] = useState(false);
+
   const changePasswordModal = useChangePasswordModal();
 
   const {
@@ -25,11 +29,13 @@ const ChangePasswordModal = () => {
     const object = {
       newPassword: data.newPassword,
     } as UpdatePasswordDto;
-
+    setLoading(true);
     const response = await updatedPassword(object);
     if (response.status === 200) {
+      setLoading(false);
       return toast.success('Senha alterada com sucesso');
     } else {
+      setLoading(false);
       return toast.error(response.data.message);
     }
   };
@@ -54,7 +60,7 @@ const ChangePasswordModal = () => {
       />
 
       <AuthLoginButton
-        text='Alterar senha'
+        text={loading ? <Loader isMin /> : 'Alterar'}
         bgColor='bg-red-400'
         onClick={handleSubmit(onSubmit)}
       />

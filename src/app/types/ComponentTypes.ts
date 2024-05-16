@@ -29,7 +29,7 @@ import { STEPS } from '../components/Modals/AddAddressModal';
 
 export interface AuthButton {
   icon?: IconType;
-  text: string;
+  text: string | JSX.Element;
   bgColor: string;
   onClick: () => void;
   submit?: boolean;

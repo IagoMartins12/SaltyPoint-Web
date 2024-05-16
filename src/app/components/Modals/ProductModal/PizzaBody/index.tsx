@@ -140,7 +140,7 @@ export const PizzaBody = () => {
 
   useEffect(() => {
     const targetValue = +value; // Converte o valor para número
-    const animationDuration = 300; // Duração da animação em milissegundos
+    const animationDuration = 500; // Duração da animação em milissegundos
 
     const startAnimation = () => {
       let startTimestamp: number;
@@ -166,7 +166,7 @@ export const PizzaBody = () => {
     };
 
     startAnimation();
-  }, [value, animatedValue]);
+  }, [value]);
 
   return (
     <div className=' h-full w-full flex flex-col gap-6 pb-6'>

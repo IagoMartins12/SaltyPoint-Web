@@ -31,6 +31,10 @@ import { MdOutlineDeliveryDining } from 'react-icons/md';
 
 export const useCustomOrderModal = () => {
   const [estimativeDate, setEstimativeData] = useState<null | string>(null);
+  const [estimativeDateBalcao, setEstimativeDataBalcao] = useState<
+    null | string
+  >(null);
+
   const [selected, setSelected] = useState<number | null>(null);
   const [typePagament, setTypePagament] = useState<Type_Pagament[] | []>([]);
   const [selectedTypePagament, setSelectedTypePagament] = useState<
@@ -63,7 +67,7 @@ export const useCustomOrderModal = () => {
   const userInfo = useUserInfoModal();
 
   const cartProductTotal = cart_product.reduce(
-    (total, item) => total + Number(item.value),
+    (total: number, item) => total + Number(item.value),
     0,
   );
 
@@ -137,7 +141,6 @@ export const useCustomOrderModal = () => {
           : null,
     } as CreateOrderDto);
 
-    console.log('response', response);
     if (response) {
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
@@ -275,37 +278,72 @@ export const useCustomOrderModal = () => {
   const fetchEstimateData = async () => {
     try {
       const estimateNumber = await getEstimativeDate();
-      const currentTime = new Date();
 
-      // Adiciona o estimateNumber à hora atual
-      const estimatedTimeStart = new Date(
-        currentTime.getTime() + estimateNumber * 60000,
-      );
-
-      // Adiciona 20 minutos ao tempo estimado para obter o horário final
-      const estimatedTimeEnd = new Date(
-        estimatedTimeStart.getTime() + 20 * 60000,
-      );
-
-      // Formata os horários para o formato desejado (HH:MM)
-      const formattedStartTime = `${String(
-        estimatedTimeStart.getHours(),
-      ).padStart(2, '0')}:${String(estimatedTimeStart.getMinutes()).padStart(
-        2,
-        '0',
-      )}`;
-      const formattedEndTime = `${String(estimatedTimeEnd.getHours()).padStart(
-        2,
-        '0',
-      )}:${String(estimatedTimeEnd.getMinutes()).padStart(2, '0')}`;
-
-      // Combina os horários formatados em um intervalo
-      const finalEstimatedTime = `${formattedStartTime} - ${formattedEndTime}`;
-
-      setEstimativeData(finalEstimatedTime);
+      getCalculateEstimativeData(estimateNumber);
+      getCalculateEstimativeDataBalcao(estimateNumber);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const getCalculateEstimativeData = (estimateNumber: number) => {
+    const currentTime = new Date();
+
+    // Adiciona o estimateNumber à hora atual
+    const estimatedTimeStart = new Date(
+      currentTime.getTime() + estimateNumber * 60000,
+    );
+
+    // Adiciona 20 minutos ao tempo estimado para obter o horário final
+    const estimatedTimeEnd = new Date(
+      estimatedTimeStart.getTime() + 20 * 60000,
+    );
+
+    // Formata os horários para o formato desejado (HH:MM)
+    const formattedStartTime = `${String(
+      estimatedTimeStart.getHours(),
+    ).padStart(2, '0')}:${String(estimatedTimeStart.getMinutes()).padStart(
+      2,
+      '0',
+    )}`;
+    const formattedEndTime = `${String(estimatedTimeEnd.getHours()).padStart(
+      2,
+      '0',
+    )}:${String(estimatedTimeEnd.getMinutes()).padStart(2, '0')}`;
+
+    // Combina os horários formatados em um intervalo
+    const finalEstimatedTime = `${formattedStartTime} - ${formattedEndTime}`;
+    setEstimativeData(finalEstimatedTime);
+  };
+
+  const getCalculateEstimativeDataBalcao = (estimateNumber: number) => {
+    const currentTime = new Date();
+
+    // Adiciona o estimateNumber à hora atual
+    const estimatedTimeStart = new Date(
+      currentTime.getTime() + (estimateNumber - 10) * 60000,
+    );
+
+    // Adiciona 20 minutos ao tempo estimado para obter o horário final
+    const estimatedTimeEnd = new Date(
+      estimatedTimeStart.getTime() + 20 * 60000,
+    );
+
+    // Formata os horários para o formato desejado (HH:MM)
+    const formattedStartTime = `${String(
+      estimatedTimeStart.getHours(),
+    ).padStart(2, '0')}:${String(estimatedTimeStart.getMinutes()).padStart(
+      2,
+      '0',
+    )}`;
+    const formattedEndTime = `${String(estimatedTimeEnd.getHours()).padStart(
+      2,
+      '0',
+    )}:${String(estimatedTimeEnd.getMinutes()).padStart(2, '0')}`;
+
+    // Combina os horários formatados em um intervalo
+    const finalEstimatedTime = `${formattedStartTime} - ${formattedEndTime}`;
+    setEstimativeDataBalcao(finalEstimatedTime);
   };
 
   useEffect(() => {
@@ -337,8 +375,7 @@ export const useCustomOrderModal = () => {
       fetchCart();
       fetchEstimateData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orderModal.isOpen]);
+  }, [orderModal.isOpen === true]);
 
   return {
     cart_product,
@@ -350,6 +387,7 @@ export const useCustomOrderModal = () => {
     user,
     hasPlayed,
     estimativeDate,
+    estimativeDateBalcao,
     getAddressInfo,
     setSelected,
     getTaxa,

@@ -13,7 +13,6 @@ import { useCustomOrderModal } from './useCustomOrderModal';
 import { MdPix } from 'react-icons/md';
 import { FaRegMoneyBillAlt } from 'react-icons/fa';
 import { handleSetSelected } from '@/app/utils';
-import { APP_SETTINGS } from '@/app/config';
 import { AnimationOrder } from '../../Animations/AnimationOrder';
 import { useGeneralDataInfo } from '@/app/hooks/generalData';
 import toast from 'react-hot-toast';
@@ -40,6 +39,7 @@ const OrderModal = () => {
     user,
     hasPlayed,
     estimativeDate,
+    estimativeDateBalcao,
     getAddressInfo,
     setSelected,
     getTaxa,
@@ -394,8 +394,8 @@ const OrderModal = () => {
 
             {selected === 0 && (
               <div className='flex justify-between px-2 '>
-                <span className='text-base font-light'>Taxa: </span>
-                <span className='text-base font-light text-gray-400'>
+                <span className='text-base font-light w-6/12'>Taxa: </span>
+                <span className='text-base font-light text-gray-400 '>
                   R${' '}
                   {getTaxa(getAddressInfo()?.district)
                     ? generalData?.deliveryFeeOutside.toFixed(2)
@@ -404,19 +404,25 @@ const OrderModal = () => {
               </div>
             )}
 
-            {estimativeDate ? (
+            {estimativeDate && (selected === 0 || selected === 1) ? (
               <div className='flex justify-between px-2 '>
-                <span className='text-base font-light'>
+                <span className='text-base font-light w-6/12'>
                   Tempo estimado de entrega:{' '}
                 </span>
-                <span className='text-base font-light text-gray-400'>
-                  {estimativeDate}
-                </span>
+                {selected === 0 ? (
+                  <span className='text-base font-light text-gray-400 '>
+                    {estimativeDate}
+                  </span>
+                ) : (
+                  <span className='text-base font-light text-gray-400 '>
+                    {estimativeDateBalcao}
+                  </span>
+                )}
               </div>
             ) : null}
 
             <div className='flex justify-between px-2 '>
-              <span className='text-2xl font-light'>Total: </span>
+              <span className='text-2xl font-light w-6/12'>Total: </span>
               <span className='text-2xl font-light '>
                 R$ {getTotal().toFixed(2)}
               </span>

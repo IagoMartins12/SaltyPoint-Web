@@ -103,7 +103,7 @@ const RewardModal = () => {
         </span>
 
         <button
-          className='px-4 py-1 border-2 border-red-500 rounded-3xl text-base whitespace-nowrap sm:text-lg font-semibold text-red-500'
+          className='px-2 md:px-4 py-1 border-2 border-red-500 rounded-3xl text-base whitespace-nowrap sm:text-lg font-semibold text-red-500'
           onClick={() => {
             setStep(1);
           }}
@@ -147,7 +147,7 @@ const RewardModal = () => {
           </span>
 
           <button
-            className='px-4 py-1 border-2 border-red-500 rounded-3xl text-base whitespace-nowrap sm:text-lg font-semibold text-red-500'
+            className='px-2 md:px-4 py-1 border-2 border-red-500 rounded-3xl text-base whitespace-nowrap sm:text-lg font-semibold text-red-500'
             onClick={() => {
               setStep(0);
             }}

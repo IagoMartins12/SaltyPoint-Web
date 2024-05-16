@@ -100,14 +100,15 @@ export const Hero3 = () => {
   }
 
   return (
-    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-8 gap-2'>
-      <p className='text-3xl font-normal'>
+    <div className='flex flex-col w-11/12 mx-auto my-4 sm:my-8 md:gap-2'>
+      <p className='text-xl md:text-3xl font-normal'>
         Olá, <span className='font-semibold'>{user.name}</span>
       </p>
 
       <div className='flex gap-5 items-center'>
         <p className='text-xl font-normal'>
-          Você possui: <span className='text-3xl '> {user.points} Pontos</span>
+          Você possui:{' '}
+          <span className=' text-xl md:text-3xl '> {user.points} Pontos</span>
         </p>
 
         <div

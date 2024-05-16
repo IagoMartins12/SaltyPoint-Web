@@ -4,7 +4,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Modal from '../../Modal';
 import { AddressInput, PhoneInput } from '../../Input';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileImage from '../../UserImage';
 import toast from 'react-hot-toast';
 import { SelectAddress } from '../../Selects';
@@ -18,8 +18,12 @@ import {
   useDeleteUser,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
+import { PuffLoader } from 'react-spinners';
+import Loader from '../../Loader';
 
 const UserInfoModal = () => {
+  const [loading, setLoading] = useState(false);
+
   const userInfoModal = useUserInfoModal();
   const changePasswordModal = useChangePasswordModal();
   const deleteModal = useDeleteUser();
@@ -55,6 +59,8 @@ const UserInfoModal = () => {
     if (data.phone.length !== 15 && data.phone)
       return toast.error('Insira um numero valido');
 
+    setLoading(true);
+
     const object = {
       name: data.name,
       phone: data.phone !== '' ? data.phone : null,
@@ -62,6 +68,7 @@ const UserInfoModal = () => {
     } as UpdateUserDto;
     try {
       await updatedMe(object);
+      setLoading(false);
 
       setUserWithCallback(oldUser => ({
         ...oldUser,
@@ -72,7 +79,7 @@ const UserInfoModal = () => {
 
       toast.success('Perfil atualizado com sucesso!');
     } catch (error) {
-      // Handle errors here
+      setLoading(false);
       console.error(error);
       toast.error('Erro ao atualizar o perfil.');
     }
@@ -94,7 +101,6 @@ const UserInfoModal = () => {
 
     try {
       await updatedMe(object);
-
       setUser({ ...user, image: value });
       toast.success('Foto atualizada!');
     } catch (error) {
@@ -146,7 +152,7 @@ const UserInfoModal = () => {
 
       <div className='flex flex-col gap-1'>
         <AuthLoginButton
-          text='Alterar'
+          text={loading ? <Loader isMin /> : 'Alterar'}
           bgColor='bg-red-400'
           onClick={handleSubmit(onSubmit)}
         />

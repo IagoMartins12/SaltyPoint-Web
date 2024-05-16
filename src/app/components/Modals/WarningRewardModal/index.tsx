@@ -50,23 +50,23 @@ const WarningRewardModal: React.FC = () => {
 
   let body = (
     <>
-      <div className='w-full items-center flex justify-center flex-col gap-10'>
-        <div className='w-24 h-24 rounded-full bg-yellow-300 items-center justify-center flex'>
+      <div className='w-full items-center flex justify-center flex-col gap-6 md:gap-10'>
+        <div className='w-20 md:w-24 h-20 md:h-24 rounded-full bg-yellow-300 items-center justify-center flex'>
           <AiOutlineWarning size={45} fill='black' />
         </div>
         <div className='flex flex-col items-center justify-center gap-3'>
-          <span className='text-2xl font-semibold'>
+          <span className='text-xl text-center md:text-2xl font-semibold'>
             Resgatar {warningModal.currentItem?.name}
           </span>
 
           {warningModal.currentItem && user ? (
-            <div>
-              <span className=' text-base sm:text-lg font-medium'>
+            <div className='flex items-center flex-col justify-center gap-4'>
+              <span className='text-center text-base sm:text-lg font-medium'>
                 Você está resgatando uma recompensa de{' '}
                 {warningModal.currentItem.quantity_points} pontos
               </span>
 
-              <div className='flex items-center justify-between mt-8 w-8/12 mx-auto'>
+              <div className='flex items-center justify-between w-8/12 mx-auto'>
                 <div className='flex flex-col  items-center justify-center'>
                   <span className='font-base text-sm'>Saldo atual: </span>
                   <div className='flex items-center justify-start gap-2 w-full'>
@@ -96,9 +96,10 @@ const WarningRewardModal: React.FC = () => {
             </div>
           ) : null}
         </div>
-        <div className='flex gap-4 w-full '>
+
+        <div className='flex flex-col md:flex-row gap-4 w-full '>
           <button
-            className='w-full py-3 bg-slate-200 rounded-2xl '
+            className='w-full py-[0.40rem] md:py-3 bg-slate-200 rounded-2xl '
             onClick={() => {
               handleCloseModal();
             }}
@@ -108,7 +109,7 @@ const WarningRewardModal: React.FC = () => {
             </span>
           </button>
           <button
-            className='w-full py-3 bg-red-500 rounded-2xl'
+            className='w-full py-[0.40rem] md:py-3 bg-red-500 rounded-2xl'
             onClick={() => {
               if (warningModal.currentItem) {
                 catchReward(warningModal.currentItem);
