@@ -44,7 +44,7 @@ export const CartProductCard: React.FC<CartProductCardType> = ({
             R$ {cart_product.value}
           </span>
         </div>
-        <div className='flex flex-col pl-4'>
+        <div className='flex flex-col md:pl-4'>
           {cart_product.product_id_2 ? (
             <>
               {[cart_product.product_id, cart_product.product_id_2].map(
