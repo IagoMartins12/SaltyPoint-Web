@@ -79,6 +79,7 @@ export interface CepInputProps {
 }
 
 export interface AddAddressInfoStepProps {
+  loading: boolean;
   register: UseFormRegister<FieldValues>;
   saveAddress: SubmitHandler<FieldValues>;
   errors: FieldErrors<FieldValues>;

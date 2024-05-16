@@ -1,4 +1,5 @@
 import { AddressInput } from '@/app/components/Input';
+import Loader from '@/app/components/Loader';
 import { AddressRadio } from '@/app/components/RadioButton';
 import { SelectDistrict } from '@/app/components/Selects';
 import { AddAddressGeoStepProps } from '@/app/types/ComponentTypes';
@@ -18,11 +19,12 @@ export const addressTypes = [
 
 export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
   errors,
+  loading,
+  result,
   register,
   saveAddress,
   handleSubmit,
   setIsSelected,
-  result,
   setValue,
 }) => {
   useEffect(() => {
@@ -134,7 +136,11 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
           type='submit'
           className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
         >
-          <span className='font-medium text-lg'>Salvar </span>
+          {loading ? (
+            <Loader isMin />
+          ) : (
+            <span className='font-medium text-lg'>Salvar </span>
+          )}
         </button>
       </div>
     </form>

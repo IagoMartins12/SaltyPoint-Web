@@ -1,10 +1,12 @@
 import { AddressInput } from '@/app/components/Input';
+import Loader from '@/app/components/Loader';
 import { AddressRadio } from '@/app/components/RadioButton';
 import { AddAddressInfoStepProps } from '@/app/types/ComponentTypes';
 import { BsHouseFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 
 export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
+  loading,
   errors,
   register,
   saveAddress,
@@ -93,7 +95,11 @@ export const AddressInfoStep: React.FC<AddAddressInfoStepProps> = ({
           type='submit'
           className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
         >
-          <span className='font-medium text-lg'>Salvar </span>
+          {loading ? (
+            <Loader isMin />
+          ) : (
+            <span className='font-medium text-lg'>Salvar </span>
+          )}
         </button>
       </div>
     </form>

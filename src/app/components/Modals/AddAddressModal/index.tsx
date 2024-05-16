@@ -94,6 +94,8 @@ const AddAddressModal = () => {
     if (!checkAddress)
       return toast.error('Esse bairro não está na nossa área de entrega.');
 
+    setLoading(true);
+
     const object = {
       address: data.address,
       cep: data.cep !== '' ? data.cep : null,
@@ -108,6 +110,7 @@ const AddAddressModal = () => {
     const response = await sendAddressUser(object);
 
     if (response.status === 201) {
+      setLoading(false);
       setAddress([...address, response.data]);
       setStep(0);
       addAddress.onClose();
@@ -126,6 +129,7 @@ const AddAddressModal = () => {
 
       return toast.success('Endereço criado!');
     } else {
+      setLoading(false);
       return toast.error('Erro ao cadastrar endereço');
     }
   };
@@ -195,6 +199,7 @@ const AddAddressModal = () => {
 
         {step === STEPS.ADDRESS_INFO && (
           <AddressInfoStep
+            loading={loading}
             errors={errors}
             handleSubmit={handleSubmit}
             register={register}
@@ -209,6 +214,7 @@ const AddAddressModal = () => {
 
         {step === STEPS.ADDRESS_PER_GEOLOCATION && (
           <AddressPerGeoLocation
+            loading={loading}
             errors={errors}
             handleSubmit={handleSubmit}
             register={register}

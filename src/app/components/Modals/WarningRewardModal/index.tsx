@@ -14,8 +14,10 @@ import { PiCrownLight } from 'react-icons/pi';
 import { useState } from 'react';
 import { AnimationReward } from '../../Animations/AnimationReward';
 import { BiDownArrowAlt } from 'react-icons/bi';
+import Loader from '../../Loader';
 
 const WarningRewardModal: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
 
   const warningModal = useWarningRewardModal();
@@ -34,16 +36,21 @@ const WarningRewardModal: React.FC = () => {
       const object = {
         rewardId: reward.id,
       };
+      setLoading(true);
 
       const response = await postReward(object);
 
       if (response) {
+        setLoading(false);
         setHasPlayed(true);
         const updatedRewards = [...userReward, response];
         setUserReward(updatedRewards);
         const updatedPoints = user?.points - reward.quantity_points;
         const updatedUser = { ...user, points: updatedPoints }; //
         setUser(updatedUser);
+      } else {
+        setLoading(false);
+        toast.error('Erro ao resgatar recompensa');
       }
     }
   };
@@ -117,7 +124,7 @@ const WarningRewardModal: React.FC = () => {
             }}
           >
             <span className='font-semibold text-white text-sm sm:text-lg'>
-              Resgatar recompensa
+              {loading ? <Loader isMin /> : 'Resgatar recompensa'}
             </span>
           </button>
         </div>
