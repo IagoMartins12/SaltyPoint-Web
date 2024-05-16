@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Api } from '../api/Api';
 import { OrderType } from '../types/ComponentTypes';
 import {
@@ -120,7 +119,7 @@ export const getOrders = async (): Promise<OrderType[]> => {
 
 export const getProducts = async (): Promise<Product[]> => {
   try {
-    const response = await axios.get('/product');
+    const response = await Api.get('/product');
     return response.data as Product[];
   } catch (error: any) {
     return error;
