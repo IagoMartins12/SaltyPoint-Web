@@ -75,7 +75,7 @@ export const sendAddressUser = async (addressUserDto: User_Adress) => {
 
 export const getCategories = async (): Promise<Category[]> => {
   try {
-    const response = await axios.get('http://localhost:3333/category');
+    const response = await Api.get('/category');
     return response.data as Category[];
   } catch (error: any) {
     return error;
@@ -84,7 +84,7 @@ export const getCategories = async (): Promise<Category[]> => {
 
 export const getTypePagaments = async (): Promise<Type_Pagament[]> => {
   try {
-    const response = await Api.get('http://localhost:3333/typePagament');
+    const response = await Api.get('/typePagament');
     return response.data as Type_Pagament[];
   } catch (error: any) {
     return error;
@@ -93,7 +93,7 @@ export const getTypePagaments = async (): Promise<Type_Pagament[]> => {
 
 export const getStates = async (): Promise<State[]> => {
   try {
-    const response = await Api.get('http://localhost:3333/state');
+    const response = await Api.get('/state');
     return response.data as State[];
   } catch (error: any) {
     return error;
@@ -120,7 +120,7 @@ export const getOrders = async (): Promise<OrderType[]> => {
 
 export const getProducts = async (): Promise<Product[]> => {
   try {
-    const response = await axios.get('http://localhost:3333/product');
+    const response = await axios.get('/product');
     return response.data as Product[];
   } catch (error: any) {
     return error;
@@ -340,7 +340,7 @@ export const googleLogin = async () => {
 
 export const getGeneralData = async () => {
   try {
-    const response = await Api.get('http://localhost:3333/general-data');
+    const response = await Api.get('/general-data');
     return response.data;
   } catch (error: any) {
     return error;
@@ -349,9 +349,7 @@ export const getGeneralData = async () => {
 
 export const getEstimativeDate = async (): Promise<number> => {
   try {
-    const response = await Api.get(
-      'http://localhost:3333/order/estimativeDate',
-    );
+    const response = await Api.get('/order/estimativeDate');
     return response.data;
   } catch (error: any) {
     return error;
