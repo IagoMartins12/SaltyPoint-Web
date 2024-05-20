@@ -32,6 +32,8 @@ export const CategoryMenu = () => {
     setVisibleCategories(visibleCategories);
   }, [categorys]);
 
+  console.log('category', categorys);
+
   return (
     <div className='w-11/12 mx-auto my-3 py-2 flex flex-row items-center hiddenScroll overflow-x-auto gap-3'>
       {visibleCategories.map(category => (
