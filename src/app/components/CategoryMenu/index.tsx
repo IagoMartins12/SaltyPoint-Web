@@ -5,6 +5,7 @@ import { CategoryBox } from '../CategoryBox';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { handleSetSelected } from '@/app/utils';
 import { Category } from '@/app/types/ModelsType';
+import SkeletonCategory from '../Skeletons/SkeletonCategory';
 
 export const categoriesToExclude = ['Bordas', 'Brindes', 'Promoções'];
 
@@ -32,7 +33,9 @@ export const CategoryMenu = () => {
     setVisibleCategories(visibleCategories);
   }, [categorys]);
 
-  console.log('category', categorys);
+  if (categorys.length <= 0) {
+    return <SkeletonCategory />;
+  }
 
   return (
     <div className='w-11/12 mx-auto my-3 py-2 flex flex-row items-center hiddenScroll overflow-x-auto gap-3'>

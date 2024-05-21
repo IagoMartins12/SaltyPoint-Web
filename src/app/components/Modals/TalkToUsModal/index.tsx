@@ -1,7 +1,6 @@
 'use client';
 
 import { useTalkToUsModal } from '@/app/hooks/modals/useModal';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   AiOutlineMail,
   AiOutlinePhone,
@@ -12,19 +11,11 @@ import { FiClock } from 'react-icons/fi';
 import Modal from '../../Modal';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { BsHouseDoor } from 'react-icons/bs';
+import SkeletonGeneralData from '../../Skeletons/SkeletonGeneralData';
 
 const TalkToUsModal = () => {
   const talkToUsModal = useTalkToUsModal();
   const { generalData } = useGlobalStore();
-  // const { register, handleSubmit, reset } = useForm<FieldValues>({
-  //   defaultValues: {
-  //     name: '',
-  //     email: '',
-  //     message: '',
-  //   },
-  // });
-
-  // const onSubmit: SubmitHandler<FieldValues> = async data => {};
 
   const talkOptions = [
     {
@@ -59,56 +50,8 @@ const TalkToUsModal = () => {
     },
   ];
 
-  // const emailOptions = [
-  //   {
-  //     id: 'name',
-  //     label: 'Nome',
-  //     type: 'text',
-  //   },
-  //   {
-  //     id: 'email',
-  //     label: 'Email',
-  //     type: 'email',
-  //   },
-  //   {
-  //     id: 'message',
-  //     label: 'Mensagem',
-  //     type: 'textarea',
-  //   },
-  // ];
-
-  const body = (
+  let body = (
     <div className='flex flex-col gap-6 w-11/12 mx-auto'>
-      {/* <form className='flex flex-col gap-3'>
-        {emailOptions.map((option, i) => (
-          <div className='flex flex-col gap-2' key={i}>
-            <span>{option.label}</span>
-            {option.type !== 'textarea' ? (
-              <input
-                type={option.type}
-                className='border-b-2 px-2 py-2 bg-transparent'
-                {...register(option.id, { required: true })}
-              />
-            ) : (
-              <textarea
-                rows={3}
-                className=' p-2 bg-transparent resize-none border-b-2'
-                id={option.id}
-                {...register(option.id, { required: true })}
-              />
-            )}
-          </div>
-        ))}
-        <button
-          className='mx-auto w-full px-1 py-3 rounded-md text-white bg-red-900 my-4 '
-          onClick={handleSubmit(onSubmit)}
-        >
-          <span className='font-semibold text-medium'>Enviar</span>
-        </button>
-      </form> */}
-
-      {/* <span className='text-xl font-medium'>Ou entre em contato:</span> */}
-
       <div className='flex w-full '>
         <div className='flex flex-col  justify-center items-start gap-6 w-full'>
           {talkOptions.map((option, i) => (
@@ -131,6 +74,8 @@ const TalkToUsModal = () => {
       </div>
     </div>
   );
+
+  if (!generalData) return (body = <SkeletonGeneralData />);
   return (
     <Modal
       onClose={talkToUsModal.onClose}

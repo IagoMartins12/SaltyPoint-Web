@@ -5,6 +5,7 @@ import { categoriesToExclude } from '../CategoryMenu';
 import { ProductCard } from '../ProductCard';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { Category } from '@/app/types/ModelsType';
+import SkeletonProducts from '../Skeletons/SkeletonProducts';
 
 export const ProductMenu = () => {
   const [visibleCategories, setVisibleCategories] = useState<Category[] | []>(
@@ -19,6 +20,11 @@ export const ProductMenu = () => {
     );
     setVisibleCategories(visibleCategories);
   }, [categorys]);
+
+  if (products.length <= 0) {
+    return <SkeletonProducts />;
+  }
+
   return (
     <div className='w-11/12 mx-auto sm:pt-4 flex z-10 flex-col gap-8'>
       {visibleCategories.map(category => (

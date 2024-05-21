@@ -18,12 +18,15 @@ import {
   useLoginModal,
   useRegisterModal,
 } from '@/app/hooks/modals/useModal';
+import SkeletonLogin from '../../Skeletons/SkeletonLogin';
+import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
   const auth = useAuth();
+  const { products } = useGlobalStore();
 
   const handleOpenRegisterModal = () => {
     loginModal.onClose();
@@ -48,10 +51,6 @@ const LoginModal = () => {
     },
   });
 
-  const handleGoogleLogin = async () => {
-    const response = await googleLogin();
-  };
-
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const loginUserDto = data as LoginUserDto;
     const response = await loginUser(loginUserDto);
@@ -68,7 +67,7 @@ const LoginModal = () => {
     }
   };
 
-  const body = (
+  let body = (
     <div className='flex flex-col-reverse sm:flex-row justify-around h-full'>
       <div className='flex flex-col w-full sm:w-7/12 lg:w-5/12 p-2'>
         <div className='w-11/12 mx-auto sm:mx-0 sm:w-auto'>
@@ -168,6 +167,9 @@ const LoginModal = () => {
     </div>
   );
 
+  if (products.length <= 1) {
+    body = <SkeletonLogin />;
+  }
   return (
     <>
       <Modal

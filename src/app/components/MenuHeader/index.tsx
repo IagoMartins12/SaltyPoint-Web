@@ -8,6 +8,7 @@ export const MenuHeader = () => {
   const { menuOptions, toggleMenu, userMenuOptions, leftMenu, authOptions } =
     useMenuHeader();
 
+  const currentYear = new Date().getFullYear();
   return (
     <>
       <div className=''>
@@ -64,7 +65,7 @@ export const MenuHeader = () => {
           <div className='mt-auto'>
             <ThemeSwitch />
             <p className='my-4 text-xs text-center text-gray-400'>
-              <span>Salty point © 2023</span>
+              <span>Salty point © {currentYear}</span>
             </p>
           </div>
         </nav>
