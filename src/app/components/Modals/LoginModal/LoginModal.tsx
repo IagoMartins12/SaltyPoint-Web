@@ -2,14 +2,11 @@
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { FcGoogle } from 'react-icons/fc';
-import { BsFacebook } from 'react-icons/bs';
 import { BiLogInCircle } from 'react-icons/bi';
 import { StyledInput, StyledInputPassword } from '../../Input';
-import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
-import { AiFillApple } from 'react-icons/ai';
+import { AuthLoginButton } from '../../Buttons';
 import { LoginUserDto } from '@/app/types/Dtos';
-import { googleLogin, loginUser } from '@/app/services';
+import { loginUser } from '@/app/services';
 import useAuth from '@/app/hooks/auth/useAuth';
 import Modal from '../../Modal';
 import Image from 'next/image';
@@ -20,8 +17,11 @@ import {
 } from '@/app/hooks/modals/useModal';
 import SkeletonLogin from '../../Skeletons/SkeletonLogin';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
+import { useState } from 'react';
+import Loader from '../../Loader';
 
 const LoginModal = () => {
+  const [loading, setLoading] = useState(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const forgetPasswordModal = useForgetPasswordModal();
@@ -52,17 +52,22 @@ const LoginModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
+    setLoading(true);
     const loginUserDto = data as LoginUserDto;
     const response = await loginUser(loginUserDto);
 
     if (response.status === 400 || response.status === 401) {
+      setLoading(false);
       return toast.error(response.data.message);
     } else if (response.status === 200 || response.status === 201) {
       toast.success('Login feito com sucesso!');
       setUserLocalStorage(response.data.access_token);
       reset();
+      setLoading(false);
+
       loginModal.onClose();
     } else {
+      setLoading(false);
       toast.error('Erro ao realizar login!');
     }
   };
@@ -119,37 +124,13 @@ const LoginModal = () => {
           </div>
           <div className='flex flex-col w-full gap-y-4'>
             <AuthLoginButton
-              text='Entrar'
-              icon={BiLogInCircle}
+              text={loading ? <Loader isMin /> : 'Entrar'}
+              icon={loading ? null : BiLogInCircle}
               bgColor='bg-red-400'
-              onClick={() => console.log('clicou')}
+              onClick={() => console.log('')}
               submit
+              disabled={loading ? true : false}
             />
-            {/* <div className='flex items-center justify-center  '>
-              <hr className='w-3/12 mr-2' />
-              <span className='text-center'>Ou entre com: </span>
-              <hr className='w-3/12 ml-2' />
-            </div>
-            <div className='flex items-center justify-evenly'>
-              <AuthLoginButtonRounded
-                text='Continuar com Google'
-                icon={FcGoogle}
-                bgColor='bg-[#4285F4] '
-                onClick={handleGoogleLogin}
-              />
-              <AuthLoginButtonRounded
-                text='Continuar com Facebook'
-                icon={BsFacebook}
-                bgColor='bg-blue-800 '
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButtonRounded
-                text='Continuar com Apple'
-                icon={AiFillApple}
-                bgColor='bg-black '
-                onClick={() => console.log('clicou')}
-              />
-            </div> */}
           </div>
         </form>
       </div>

@@ -7,8 +7,11 @@ import toast from 'react-hot-toast';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { DeleteModal } from '../../ModalDelete';
 import { useDeleteAddress } from '@/app/hooks/modals/useDelete';
+import { useState } from 'react';
+import Loader from '../../Loader';
 
 const DeleteItemModal: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const deleteModal = useDeleteAddress();
   const addressModal = useAddress();
   const { address, setAddress, user } = usePrivateStore();
@@ -20,9 +23,11 @@ const DeleteItemModal: React.FC = () => {
           'Não é possível excluir o endereço que está vinculado a sua conta!',
         );
       }
+      setLoading(true);
       const response = await deleteAddress(deleteModal.currentItem);
 
       if (response.status === 200) {
+        setLoading(false);
         const updatedAddressList = address.filter(
           address => address.id !== deleteModal.currentItem,
         );
@@ -30,6 +35,7 @@ const DeleteItemModal: React.FC = () => {
         handleOpenAddressModal();
         return toast.success('Endereço excluido');
       } else {
+        setLoading(false);
         return toast.error('Erro ao deletar endereço');
       }
     }
@@ -64,14 +70,19 @@ const DeleteItemModal: React.FC = () => {
             </span>
           </button>
           <button
+            disabled={loading ? true : false}
             className='w-full py-3 bg-red-500 rounded-2xl'
             onClick={() => {
               handleDeleteAddress();
             }}
           >
-            <span className='font-semibold text-white text-sm sm:text-lg'>
-              Deletar endereço
-            </span>
+            {loading ? (
+              <Loader isMin />
+            ) : (
+              <span className='font-semibold text-white text-sm sm:text-lg'>
+                Deletar endereço
+              </span>
+            )}
           </button>
         </div>
       </div>

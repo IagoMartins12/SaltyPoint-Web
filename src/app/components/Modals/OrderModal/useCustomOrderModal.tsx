@@ -24,7 +24,7 @@ import {
   User_Rewards,
 } from '@/app/types/ModelsType';
 import { handleSetSelected } from '@/app/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiStoreAlt } from 'react-icons/bi';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
@@ -41,6 +41,8 @@ export const useCustomOrderModal = () => {
     null | string
   >(null);
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const rewardCartModal = useRewardCartModal();
 
   //@ts-ignore
@@ -113,6 +115,8 @@ export const useCustomOrderModal = () => {
       }
     }
 
+    setLoading(true);
+
     const response = await createOrder({
       total_amount: getTotal(),
       type_pagament_id: selectedTypePagament,
@@ -141,7 +145,8 @@ export const useCustomOrderModal = () => {
           : null,
     } as CreateOrderDto);
 
-    if (response) {
+    if (response?.id) {
+      setLoading(false);
       const newOrder = { ...response, orderItems: cart_product };
       const updatedOrders = [...orders, newOrder];
       setHasPlayed(true);
@@ -164,6 +169,7 @@ export const useCustomOrderModal = () => {
       setOrders(updatedOrders);
       return;
     } else {
+      setLoading(false);
       toast.error('Erro ao fazer pedido');
     }
   };
@@ -346,12 +352,7 @@ export const useCustomOrderModal = () => {
     setEstimativeDataBalcao(finalEstimatedTime);
   };
 
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
+  const checkProduct = useCallback(() => {
     if (
       rewardCartModal.currentItem &&
       isReward &&
@@ -368,13 +369,23 @@ export const useCustomOrderModal = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rewardCartModal.currentItem]);
+  }, [rewardCartModal.currentItem, isReward, products]);
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    checkProduct();
+  }, [checkProduct]);
 
   useEffect(() => {
     if (user) {
       fetchCart();
       fetchEstimateData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderModal.isOpen === true]);
 
   return {
@@ -388,6 +399,8 @@ export const useCustomOrderModal = () => {
     hasPlayed,
     estimativeDate,
     estimativeDateBalcao,
+    loading,
+    setLoading,
     getAddressInfo,
     setSelected,
     getTaxa,

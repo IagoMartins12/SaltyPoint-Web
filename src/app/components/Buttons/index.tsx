@@ -36,10 +36,12 @@ export const AuthLoginButton: React.FC<AuthButton> = ({
   text,
   onClick,
   submit = false,
+  disabled,
 }) => {
   return (
     <div className='px-6 sm:px-0 w-full'>
       <button
+        disabled={disabled}
         type={submit ? 'submit' : 'button'}
         onClick={onClick}
         className={`text-white text-base font-semibold w-full ${bgColor} rounded-lg  px-5 py-2.5 text-center  items-center justify-center gap-4 flex mr-2 mb-2`}

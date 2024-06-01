@@ -63,6 +63,7 @@ const ChangePasswordModal = () => {
         text={loading ? <Loader isMin /> : 'Alterar'}
         bgColor='bg-red-400'
         onClick={handleSubmit(onSubmit)}
+        disabled={loading ? true : false}
       />
     </div>
   );

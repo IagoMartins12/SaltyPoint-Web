@@ -9,6 +9,7 @@ import { Category, Product } from '@/app/types/ModelsType';
 import Modal from '../../Modal';
 import { useSearchModal } from '@/app/hooks/modals/useModal';
 import { categoriesToExclude } from '../../CategoryMenu';
+import SkeletonSearchModal from '../../Skeletons/SkeletonSearchModal';
 
 const SearchModal = () => {
   const [visibleCategories, setVisibleCategories] = useState<Category[] | []>(
@@ -58,7 +59,8 @@ const SearchModal = () => {
   useEffect(() => {
     setProductState(products);
   }, [products]);
-  const body = (
+
+  let body = (
     <div className='flex flex-col gap-5 w-11/12 mx-auto'>
       <div className='relative flex w-full'>
         <input
@@ -95,6 +97,10 @@ const SearchModal = () => {
       </div>
     </div>
   );
+
+  if (products.length <= 0) {
+    body = <SkeletonSearchModal />;
+  }
   return (
     <>
       <Modal

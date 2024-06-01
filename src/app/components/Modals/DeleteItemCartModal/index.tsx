@@ -6,18 +6,23 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { DeleteModal } from '../../ModalDelete';
 import { useDeleteCartItem } from '@/app/hooks/modals/useDelete';
 import { RemoveCartProductDto } from '@/app/types/Dtos';
+import { useState } from 'react';
+import Loader from '../../Loader';
 
 const DeleteItemCartModal: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const deleteModal = useDeleteCartItem();
   const { cart_product, setCart_product } = usePrivateStore();
 
   const handleDeleteAddress = async () => {
     if (deleteModal.currentItem) {
+      setLoading(true);
       const response = await removeCartProduct({
         cart_product_id: deleteModal.currentItem,
       } as RemoveCartProductDto);
 
       if (response.status === 200) {
+        setLoading(false);
         const updateCart = cart_product.filter(
           cartProduct => cartProduct.id !== deleteModal.currentItem,
         );
@@ -25,6 +30,7 @@ const DeleteItemCartModal: React.FC = () => {
         handleOpenAddressModal();
         return toast.success('Produto excluido');
       } else {
+        setLoading(false);
         return toast.error('Erro ao deletar produto');
       }
     }
@@ -58,14 +64,19 @@ const DeleteItemCartModal: React.FC = () => {
             </span>
           </button>
           <button
+            disabled={loading ? true : false}
             className='w-full py-3 bg-red-500 rounded-2xl'
             onClick={() => {
               handleDeleteAddress();
             }}
           >
-            <span className='font-semibold text-white text-sm sm:text-lg'>
-              Deletar produto
-            </span>
+            {loading ? (
+              <Loader isMin />
+            ) : (
+              <span className='font-semibold text-white text-sm sm:text-lg'>
+                Deletar produto
+              </span>
+            )}
           </button>
         </div>
       </div>

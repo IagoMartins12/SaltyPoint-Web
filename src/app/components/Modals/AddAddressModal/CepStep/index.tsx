@@ -26,7 +26,7 @@ export const CepStep: React.FC<CepStepProps> = ({
         className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white ${
           isValid ? '' : 'opacity-60'
         }`}
-        disabled={!isValid}
+        disabled={!isValid || loading ? true : false}
       >
         {loading ? (
           <Loader isMin />

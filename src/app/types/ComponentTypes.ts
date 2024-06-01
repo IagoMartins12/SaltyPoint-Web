@@ -28,11 +28,12 @@ import { Dispatch, SetStateAction } from 'react';
 import { STEPS } from '../components/Modals/AddAddressModal';
 
 export interface AuthButton {
-  icon?: IconType;
+  icon?: IconType | null;
   text: string | JSX.Element;
   bgColor: string;
   onClick: () => void;
   submit?: boolean;
+  disabled?: boolean;
 }
 
 export interface AddressRadioButton {

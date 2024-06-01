@@ -43,6 +43,7 @@ const FetchData: React.FC<FetchProps> = () => {
   const { isLogged } = useAuth();
 
   const fetchData = async () => {
+    console.log('Fetching data');
     const [product, category, typePagament, states, generalData] =
       await Promise.all([
         getProducts(),

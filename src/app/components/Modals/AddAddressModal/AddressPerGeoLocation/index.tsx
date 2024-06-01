@@ -133,6 +133,7 @@ export const AddressPerGeoLocation: React.FC<AddAddressGeoStepProps> = ({
         </div>
 
         <button
+          disabled={loading ? true : false}
           type='submit'
           className={`flex gap-3 items-center justify-center w-full py-2 rounded-lg bg-red-600 text-white `}
         >

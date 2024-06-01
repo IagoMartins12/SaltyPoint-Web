@@ -13,6 +13,7 @@ import {
 } from '@/app/hooks/modals/useModal';
 import Modal from '../../Modal';
 import { PuffLoader } from 'react-spinners';
+import Loader from '../../Loader';
 
 enum STEPS {
   RECEIVE_EMAIL = 0,
@@ -98,14 +99,11 @@ const ForgetPasswordModal = () => {
 
           <div className='flex flex-col w-full gap-y-4'>
             <button
+              disabled={loading ? true : false}
               className=' bg-red-400 py-2  rounded-md text-white text-medium font-semibold flex items-center justify-center'
               onClick={handleSubmit(onSubmit)}
             >
-              {loading ? (
-                <PuffLoader size={25} color='black' />
-              ) : (
-                <>Enviar email</>
-              )}
+              {loading ? <Loader isMin /> : <>Enviar email</>}
             </button>
             <button
               className={`py-2 rounded-md  text-medium font-semibold shadow-md `}

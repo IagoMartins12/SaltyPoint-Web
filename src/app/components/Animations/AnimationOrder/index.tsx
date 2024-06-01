@@ -1,23 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLottie } from 'lottie-react';
 import orderAnimation from '../../../animations/orderAnimation.json';
-import { AnimationCommponentProps } from '@/app/types/ComponentTypes';
 import toast from 'react-hot-toast';
 import onSucess from '../../../animations/onSucess.json';
+import { useMyOrderModal, useOrderModal } from '@/app/hooks/modals/useModal';
 
-export const AnimationOrder: React.FC<AnimationCommponentProps> = ({
-  setHasPlayed,
-}) => {
+export const AnimationOrder = () => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
   const [animationData, setAnimationData] = useState<any>(orderAnimation);
   const secondAnimation = onSucess;
   const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const orderModal = useOrderModal();
+  const ordersModal = useMyOrderModal();
+
+  const callBack = useCallback(() => {
+    orderModal.onClose();
+    ordersModal.onOpen();
+  }, [orderModal, ordersModal]);
 
   useEffect(() => {
     if (showSuccessToast) {
       toast.success('Pedido feito com sucesso!');
+      setTimeout(() => {
+        callBack();
+      }, 1500);
     }
-  }, [showSuccessToast]);
+  }, [showSuccessToast, callBack]);
 
   const { View, play, destroy } = useLottie({
     animationData: animationData,
@@ -41,10 +49,6 @@ export const AnimationOrder: React.FC<AnimationCommponentProps> = ({
     if (!hasPlayed2) {
       setHasPlayed2(true);
     }
-
-    return () => {
-      // destroy(); // Limpa a animação quando o componente for desmontado
-    };
   }, [hasPlayed2, play, destroy]);
 
   return (

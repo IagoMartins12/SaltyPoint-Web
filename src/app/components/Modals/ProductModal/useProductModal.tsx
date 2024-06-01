@@ -4,7 +4,7 @@ import { useFormHook } from '@/app/hooks/customHooks/useFormHook';
 import { useProductModal } from '@/app/hooks/modals/useProduct';
 import useGlobalStore from '@/app/hooks/store/useGlobalStore';
 import { Product } from '@/app/types/ModelsType';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useCustomProductModal = () => {
   const [quantity, setQuantity] = useState(1);
@@ -24,7 +24,6 @@ export const useCustomProductModal = () => {
 
   const sizes = ['Pizza', 'Brotinho'];
   const flavors = ['1 Sabor', '2 Sabores'];
-  const brotinhoPrice = 10 * quantity;
 
   const removeSelected = (
     setSelectedAction: React.Dispatch<React.SetStateAction<string | null>>,
@@ -47,87 +46,62 @@ export const useCustomProductModal = () => {
     productModal.onClose();
     reset();
   };
+  /*
+  Chat, preciso que você refatore uma função. Essa função é complexa. e é usada para calcular o valor de um produto. 
+  Porem ela possui as seguintes funcionalidade:
+  A pizza pode possuir 3 produtos diferentes. currentProduct = produto atual, primeiro sabor. selectedProduct2 = opcional. Se trata do segundo produto selecionado (pizza meio a meio)
+  selectedProduct3 = opcional. Se trata do terceiro produto, que é uma borda. Ou seja, a pizza pode ter dois sabores e uma borda, ou pode ser so um sabor e sem borda
+  se um segundo produto for selecionado, a função precisa verificar o preço do segundo produto. Se for maior que o do primeiro produto, ele deve somar a diferença dos valores
+  se o valor do segundo produto for menor ou igual, o valor predominante vai continuar sendo do primeiro produto. 
+  Caso o usuario selecionar o 3 produto (selectedProduct3), ele vai somar o valor do terceiro produto com o valor atual (do primeiro e do segundo produto, levando como base o que eu falei anteriormente)
+  Porem, tem mais uma condição, que é o tamanho da pizza. Caso a pizza for tamanho 1 (selectedSize === 1), significa que é um brotinho, ou seja, vai diminuir o preço em 10
+  se for selectedSize === 0, é tamanho normal e nao vai mudar o valor. 
+  E o usuario pode digitar a quantidade de pizzas desejadas, que vai multiplar o valor pela quantidade
+  */
+  const brotinhoPrice = 10;
 
-  const checkValue = () => {
+  const checkValue = useCallback(() => {
     if (!productModal.currentProduct || quantity === 0) {
       return setValue((0).toFixed(2));
     }
 
-    let newValue = productModal.currentProduct.value * quantity;
+    let baseValue = productModal.currentProduct.value;
+    let additionalValue = 0;
 
-    //Se uma borda for selecionado
-    if (selectedProduct3 && productModal.currentProduct) {
-      const product = products.find(p => p.id === selectedProduct3);
-
-      if (!product) return;
-
-      //Se um segundo sabor for selecionado
-      if (
-        otherProductsValue !== 0 &&
-        +otherProductsValue > +productModal.currentProduct.value
-      ) {
-        if (selectedSize === 1) {
-          const newValue =
-            +otherProductsValue * quantity + product.value * quantity;
-          return setValue((newValue - brotinhoPrice).toFixed(2));
-        }
-        return setValue(
-          (+otherProductsValue * quantity + product.value * quantity).toFixed(
-            2,
-          ),
-        );
-      } else {
-        if (selectedSize === 1) {
-          return setValue(
-            (
-              productModal.currentProduct.value * quantity +
-              product.value * quantity -
-              brotinhoPrice
-            ).toFixed(2),
-          );
-        }
-
-        return setValue(
-          (
-            productModal.currentProduct.value * quantity +
-            product.value * quantity
-          ).toFixed(2),
-        );
+    // Se um segundo sabor for selecionado
+    if (selectedProduct2) {
+      const secondProduct = products.find(p => p.id === selectedProduct2);
+      if (secondProduct) {
+        additionalValue = Math.max(0, secondProduct.value - baseValue);
       }
     }
 
-    //Se um segundo sabor for selecionado
-    if (
-      otherProductsValue !== 0 &&
-      +otherProductsValue > productModal.currentProduct.value
-    ) {
-      if (selectedSize === 1) {
-        return setValue(
-          (+otherProductsValue * quantity - brotinhoPrice).toFixed(2),
-        );
+    // Se uma borda for selecionada
+    if (selectedProduct3) {
+      const thirdProduct = products.find(p => p.id === selectedProduct3);
+      if (thirdProduct) {
+        additionalValue += thirdProduct.value;
       }
-
-      return setValue((+otherProductsValue * quantity).toFixed(2));
     }
 
-    //Se nenhum outro produto foi selecionado
-    if (
-      selectedProduct3 === null &&
-      selectedProduct2 === null &&
-      productModal.currentProduct
-    ) {
-      if (selectedSize === 1) {
-        const newValue =
-          productModal.currentProduct.value * quantity - brotinhoPrice;
-        return setValue(newValue.toFixed(2));
-      }
+    // Cálculo do valor total
+    let newValue = (baseValue + additionalValue) * quantity;
 
-      const newValue = productModal.currentProduct.value * quantity;
-      return setValue(newValue.toFixed(2));
+    // Ajuste de preço para tamanho brotinho
+    if (selectedSize === 1) {
+      newValue -= brotinhoPrice * quantity;
     }
 
-    return setValue(newValue.toFixed(2));
-  };
+    setValue(newValue.toFixed(2));
+  }, [
+    productModal.currentProduct,
+    quantity,
+    selectedProduct2,
+    selectedProduct3,
+    selectedSize,
+    brotinhoPrice,
+    products,
+  ]);
 
   const checkDiference = (product: Product) => {
     if (!productModal.currentProduct) return;
@@ -150,8 +124,8 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [increaseQuantity, decreaseQuantity, selectedProduct2]);
+    console.log('renderizando');
+  }, [checkValue]);
 
   useEffect(() => {
     if (selectedProduct2 && productModal.currentProduct) {

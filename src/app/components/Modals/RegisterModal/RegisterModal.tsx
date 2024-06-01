@@ -2,19 +2,19 @@
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { FcGoogle } from 'react-icons/fc';
-import { BsFacebook } from 'react-icons/bs';
-import { AiFillApple } from 'react-icons/ai';
 import { BiLogInCircle } from 'react-icons/bi';
-import { createUser, googleLogin } from '@/app/services';
+import { createUser } from '@/app/services';
 import { CreateUserDto } from '@/app/types/Dtos';
 import { StyledInput, StyledInputPassword } from '../../Input';
-import { AuthLoginButton, AuthLoginButtonRounded } from '../../Buttons';
+import { AuthLoginButton } from '../../Buttons';
 import Image from 'next/image';
 import Modal from '../../Modal';
 import { useLoginModal, useRegisterModal } from '@/app/hooks/modals/useModal';
+import { useState } from 'react';
+import Loader from '../../Loader';
 
 const RegisterModal = () => {
+  const [loading, setLoading] = useState(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
 
@@ -23,12 +23,7 @@ const RegisterModal = () => {
     loginModal.onOpen();
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FieldValues>({
+  const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       name: '',
       email: '',
@@ -38,22 +33,22 @@ const RegisterModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     const createUserDto = data as CreateUserDto;
+    setLoading(true);
     const response = await createUser(createUserDto);
 
     if (response.status === 400) {
+      setLoading(false);
       return toast.error(response.data.message);
     } else if (response.status === 201) {
       toast.success('Conta criada com sucesso!');
       reset();
       registerModal.onClose();
       loginModal.onOpen();
+      setLoading(false);
     } else {
+      setLoading(false);
       toast.error('Erro ao realizar cadastro!');
     }
-  };
-
-  const handleGoogleLogin = async () => {
-    const response = await googleLogin();
   };
 
   const body = (
@@ -108,37 +103,12 @@ const RegisterModal = () => {
 
           <div className='flex flex-col w-full gap-y-4 mt-2'>
             <AuthLoginButton
-              text='Cadastrar'
-              icon={BiLogInCircle}
+              text={loading ? <Loader isMin /> : 'Cadastrar'}
+              icon={loading ? null : BiLogInCircle}
               bgColor='bg-red-400'
               onClick={handleSubmit(onSubmit)}
+              disabled={loading ? true : false}
             />
-            {/* <div className='flex items-center justify-center'>
-              <hr className='w-3/12 mr-2' />
-              <span className='text-center'>Ou se registre com: </span>
-              <hr className='w-3/12 ml-2' />
-            </div>
-
-            <div className='flex items-center justify-evenly'>
-              <AuthLoginButtonRounded
-                text='Continuar com Google'
-                icon={FcGoogle}
-                bgColor='bg-[#4285F4] '
-                onClick={handleGoogleLogin}
-              />
-              <AuthLoginButtonRounded
-                text='Continuar com Facebook'
-                icon={BsFacebook}
-                bgColor='bg-blue-800 '
-                onClick={() => console.log('clicou')}
-              />
-              <AuthLoginButtonRounded
-                text='Continuar com Apple'
-                icon={AiFillApple}
-                bgColor='bg-black '
-                onClick={() => console.log('clicou')}
-              />
-            </div> */}
           </div>
         </div>
       </div>

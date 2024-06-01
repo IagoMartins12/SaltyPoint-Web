@@ -18,8 +18,8 @@ import {
   useDeleteUser,
   useUserInfoModal,
 } from '@/app/hooks/modals/useModal';
-import { PuffLoader } from 'react-spinners';
 import Loader from '../../Loader';
+import SkeletonProfile from '../../Skeletons/SkeletonProfile';
 
 const UserInfoModal = () => {
   const [loading, setLoading] = useState(false);
@@ -110,7 +110,7 @@ const UserInfoModal = () => {
     }
   };
 
-  const body = (
+  let body = (
     <form
       className='flex flex-col gap-6 w-11/12 mx-auto Z-50'
       onSubmit={handleSubmit(onSubmit)}
@@ -155,6 +155,7 @@ const UserInfoModal = () => {
           text={loading ? <Loader isMin /> : 'Alterar'}
           bgColor='bg-red-400'
           onClick={handleSubmit(onSubmit)}
+          disabled={loading ? true : false}
         />
 
         <div
@@ -186,6 +187,10 @@ const UserInfoModal = () => {
     setValue('phone', formatPhoneNumberUser(user?.phone || ''));
     setValue('userImage', user?.image);
   }, [user, setValue]);
+
+  if (!user) {
+    body = <SkeletonProfile />;
+  }
 
   return (
     <>

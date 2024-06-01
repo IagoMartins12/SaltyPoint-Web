@@ -27,6 +27,7 @@ import { useRewardCartModal } from '@/app/hooks/modals/useCoupon';
 import { RiCoupon3Line } from 'react-icons/ri';
 import { Discount_cupom, User_Rewards } from '@/app/types/ModelsType';
 import { LuCrown } from 'react-icons/lu';
+import Loader from '../../Loader';
 
 const OrderModal = () => {
   const {
@@ -40,6 +41,8 @@ const OrderModal = () => {
     hasPlayed,
     estimativeDate,
     estimativeDateBalcao,
+    loading,
+    setLoading,
     getAddressInfo,
     setSelected,
     getTaxa,
@@ -178,10 +181,6 @@ const OrderModal = () => {
                         </span>
                         <span className='text-sm font-light'>
                           São paulo / SP
-                        </span>
-
-                        <span className='text-sm font-light'>
-                          {getAddressInfo()?.reference}
                         </span>
                       </div>
                     )}
@@ -429,8 +428,15 @@ const OrderModal = () => {
             </div>
           </div>
 
-          <button className='px-2 my-2 py-2 text-center w-full bg-red-400 rounded-xl'>
-            <span className='text-lg font-medium'>Fazer pedido</span>
+          <button
+            className='px-2 my-2 py-2 text-center w-full bg-red-400 rounded-xl'
+            disabled={loading ? true : false}
+          >
+            {loading ? (
+              <Loader isMin />
+            ) : (
+              <span className='text-lg font-medium'>Fazer pedido</span>
+            )}
           </button>
         </div>
       </form>
@@ -438,7 +444,7 @@ const OrderModal = () => {
   );
 
   if (hasPlayed) {
-    body = <AnimationOrder setHasPlayed={setHasPlayed} />;
+    body = <AnimationOrder />;
   }
 
   return (

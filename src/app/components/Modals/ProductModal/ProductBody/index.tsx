@@ -88,6 +88,7 @@ export const ProductBody = () => {
     };
 
     startAnimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   return (

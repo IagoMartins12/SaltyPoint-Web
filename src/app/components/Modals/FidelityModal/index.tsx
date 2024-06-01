@@ -8,6 +8,7 @@ import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { useEffect, useState } from 'react';
 import { Reward } from '@/app/types/ModelsType';
 import { getRewards } from '@/app/services';
+import SkeletonFidelityModal from '../../Skeletons/SkeletonFidelityModal';
 
 const FidelityModal = () => {
   const [rewards, setRewards] = useState<[] | Reward[]>([]);
@@ -38,7 +39,7 @@ const FidelityModal = () => {
     fetchReward();
   }, []);
 
-  const body = (
+  let body = (
     <div className='flex flex-col h-full w-full gap-8 pb-8'>
       <div className='flex flex-col gap-6 w-full h-52 items-center justify-center shadow-md rounded-lg px-4 py-4'>
         <p className='font-semibold text-xl text-center'>
@@ -72,17 +73,22 @@ const FidelityModal = () => {
       </div>
 
       <div className='shadow-md rounded-lg'>
-        {rewards.map((i, key) => (
-          <div key={key} className='px-4 py-1'>
-            <RewardInfo reward={i} />
-            {key !== 9 ? <hr className='w-11/12 py-1 mx-auto' /> : null}
-          </div>
-        ))}
+        {rewards.length > 0 ? (
+          <>
+            {rewards.map((i, key) => (
+              <div key={key} className='px-4 py-1'>
+                <RewardInfo reward={i} />
+                {key !== 9 ? <hr className='w-11/12 py-1 mx-auto' /> : null}
+              </div>
+            ))}
+          </>
+        ) : (
+          <SkeletonFidelityModal />
+        )}
       </div>
 
       <p className='text-center w-full '>*Prêmio não acumulativo</p>
 
-      {/* Substituir 'FidelityAccordeonSection' por um componente equivalente */}
       <FidelityAccordeonSection />
     </div>
   );

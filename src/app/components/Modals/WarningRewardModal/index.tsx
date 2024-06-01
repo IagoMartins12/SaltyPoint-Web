@@ -5,7 +5,6 @@ import { ModalWarning } from '../../ModalWarning';
 import { useWarningRewardModal } from '@/app/hooks/modals/useWarning';
 import usePrivateStore from '@/app/hooks/store/usePrivateStore';
 import { Reward } from '@/app/types/ModelsType';
-import { CreateRewardDto } from '@/app/types/Dtos';
 import { postReward } from '@/app/services';
 import { AiOutlineWarning } from 'react-icons/ai';
 import { RxDoubleArrowRight } from 'react-icons/rx';
@@ -116,6 +115,7 @@ const WarningRewardModal: React.FC = () => {
             </span>
           </button>
           <button
+            disabled={loading ? true : false}
             className='w-full py-[0.40rem] md:py-3 bg-red-500 rounded-2xl'
             onClick={() => {
               if (warningModal.currentItem) {

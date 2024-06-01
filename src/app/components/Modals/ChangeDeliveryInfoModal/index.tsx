@@ -18,9 +18,11 @@ import { PhoneInput } from '../../Input';
 import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { FaSuitcase } from 'react-icons/fa';
 import { AiOutlinePlus } from 'react-icons/ai';
+import Loader from '../../Loader';
 
 const ChangeDeliveryInfoModal = () => {
   const [selected, setSelected] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const changeDeliveryModal = useChangeDeliveryInfoModal();
   const addAddress = useAddAddress();
@@ -68,10 +70,11 @@ const ChangeDeliveryInfoModal = () => {
     ) {
       return changeDeliveryModal.onClose();
     }
+    setLoading(true);
 
     try {
       await updatedMe(object);
-
+      setLoading(false);
       setUserWithCallback(oldUser => ({
         ...oldUser,
         phone: data.phone !== '' ? data.phone : user.phone,
@@ -81,7 +84,7 @@ const ChangeDeliveryInfoModal = () => {
       toast.success('Perfil atualizado com sucesso!');
       return changeDeliveryModal.onClose();
     } catch (error) {
-      // Handle errors here
+      setLoading(false);
       console.error(error);
       toast.error('Erro ao atualizar o perfil.');
     }
@@ -208,9 +211,10 @@ const ChangeDeliveryInfoModal = () => {
 
       <div className='flex flex-col gap-1'>
         <AuthLoginButton
-          text='Alterar'
+          text={loading ? <Loader isMin /> : 'Alterar'}
           bgColor='bg-red-400'
           onClick={handleSubmit(onSubmit)}
+          disabled={loading ? true : false}
         />
       </div>
     </div>
