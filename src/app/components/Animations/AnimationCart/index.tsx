@@ -3,6 +3,7 @@ import { useLottie } from 'lottie-react';
 import cartAnimation from '../../../animations/cartAnimation.json';
 import { AnimationCommponentProps } from '@/app/types/ComponentTypes';
 import toast from 'react-hot-toast';
+import { useProductModal } from '@/app/hooks/modals/useProduct';
 
 export const AnimationCart: React.FC<AnimationCommponentProps> = ({
   setHasPlayed,
@@ -11,12 +12,15 @@ export const AnimationCart: React.FC<AnimationCommponentProps> = ({
 }) => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
 
+  const { onClose } = useProductModal();
   const onCloseFunction = () => {
     if (text) {
       toast.success(text);
     } else {
       toast.success('Produto adicionado');
     }
+
+    onClose();
     if (repeat) {
       setHasPlayed(false);
     }

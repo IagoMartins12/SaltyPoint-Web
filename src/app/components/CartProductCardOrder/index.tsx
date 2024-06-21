@@ -6,8 +6,7 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
 }) => {
   const { products } = useGlobalStore();
 
-  const getProductName2 = (productId: string, size: number | null) => {
-    let name: string;
+  const getProductName = (productId: string, size: number | null) => {
     const product = products.find(p => p.id === productId);
 
     if (!product) {
@@ -27,7 +26,7 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
         <div className='flex items-center justify-between'>
           <span className='font-medium text-lg'>
             {cart_product.quantity}x{' '}
-            {getProductName2(cart_product.product_id, cart_product.size)}
+            {getProductName(cart_product.product_id, cart_product.size)}
           </span>
           <span className='font-light text-base whitespace-nowrap'>
             {' '}
@@ -41,7 +40,7 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
                 (productId, index) => (
                   <li key={index} className='font-light text-base px-2'>
                     {cart_product.quantity}x 1/2{' '}
-                    {getProductName2(productId, cart_product.size)}
+                    {getProductName(productId, cart_product.size)}
                   </li>
                 ),
               )}
@@ -49,14 +48,14 @@ export const CartProductCardOrder: React.FC<CartProductCardType> = ({
           ) : (
             <li className='font-light text-base px-2 '>
               {cart_product.quantity}x{' '}
-              {getProductName2(cart_product.product_id, cart_product.size)}
+              {getProductName(cart_product.product_id, cart_product.size)}
             </li>
           )}
 
           {cart_product.product_id_3 ? (
             <li className='font-light text-base px-2'>
               {cart_product.quantity}x{' '}
-              {getProductName2(cart_product.product_id_3, cart_product.size)}
+              {getProductName(cart_product.product_id_3, cart_product.size)}
             </li>
           ) : null}
 

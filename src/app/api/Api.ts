@@ -2,8 +2,8 @@ import axios from 'axios';
 import { getUserLocalStorage } from '../utils/auth';
 
 export const Api = axios.create({
-  // baseURL: 'http://localhost:3333/',
-  baseURL: 'https://saltypoint-backend.onrender.com/',
+  baseURL: 'http://localhost:3333/',
+  // baseURL: 'https://saltypoint-backend.onrender.com/',
 });
 
 Api.interceptors.request.use(

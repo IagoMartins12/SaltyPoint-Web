@@ -280,12 +280,10 @@ export const removeCartProduct = async (
   }
 };
 
-export const createOrder = async (
-  createOrderDto: CreateOrderDto,
-): Promise<Order> => {
+export const createOrder = async (createOrderDto: CreateOrderDto) => {
   try {
     const response = await Api.post('/order/create', createOrderDto);
-    return response.data as Order;
+    return response.data;
   } catch (error: any) {
     return error;
   }

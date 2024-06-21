@@ -5,7 +5,10 @@ import toast from 'react-hot-toast';
 import onSucess from '../../../animations/onSucess.json';
 import { useMyOrderModal, useOrderModal } from '@/app/hooks/modals/useModal';
 
-export const AnimationOrder = () => {
+interface Props {
+  onFinish: () => void;
+}
+export const AnimationOrder: React.FC<Props> = ({ onFinish }) => {
   const [hasPlayed2, setHasPlayed2] = useState(false);
   const [animationData, setAnimationData] = useState<any>(orderAnimation);
   const secondAnimation = onSucess;
@@ -14,6 +17,7 @@ export const AnimationOrder = () => {
   const ordersModal = useMyOrderModal();
 
   const callBack = useCallback(() => {
+    onFinish();
     orderModal.onClose();
     ordersModal.onOpen();
   }, [orderModal, ordersModal]);

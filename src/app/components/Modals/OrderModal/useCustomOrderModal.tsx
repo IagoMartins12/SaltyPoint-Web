@@ -29,6 +29,16 @@ import toast from 'react-hot-toast';
 import { BiStoreAlt } from 'react-icons/bi';
 import { MdOutlineDeliveryDining } from 'react-icons/md';
 
+interface templateProps {
+  typePagament: string;
+  totalAmount: string;
+  items: string;
+  address: string;
+  estimativeHour: string | null;
+  reward: string | null;
+  discount: string | null;
+}
+
 export const useCustomOrderModal = () => {
   const [estimativeDate, setEstimativeData] = useState<null | string>(null);
   const [estimativeDateBalcao, setEstimativeDataBalcao] = useState<
@@ -49,6 +59,7 @@ export const useCustomOrderModal = () => {
   const isCoupon = !rewardCartModal.currentItem?.rewardPoints;
   //@ts-ignore
   const isReward = !!rewardCartModal.currentItem?.rewardPoints;
+
   const {
     cart_product,
     coupons,
@@ -81,18 +92,145 @@ export const useCustomOrderModal = () => {
   const handleOpenAddressModal = () => {
     if (address.length === 0) {
       toast.error('É necessario possuir ao minimo um endereço cadastrado');
-      // orderModal.onClose();
       return addressModal.onOpen();
     }
 
     if (address.length !== 0 && !user?.user_Adress_id) {
       toast.error('É necessario vincular um endereço a sua conta ');
-      // orderModal.onClose();
       return userInfo.onOpen();
     }
   };
 
+  const getTypePagament = (id: string) => {
+    return (
+      typePagament.find(type => type.id === id)?.type_pagament_name ??
+      'Forma de pagamento não encontrada'
+    );
+  };
+
+  const getProductName = (productId: string, size: number | null) => {
+    const product = products.find(p => p.id === productId);
+
+    if (!product) {
+      return 'Produto desconhecido';
+    }
+
+    if (size === 1) {
+      return product?.name.replace('Pizza', 'Brotinho');
+    } else {
+      return product?.name;
+    }
+  };
+
+  const getItems = () => {
+    return cart_product
+      .map(product => {
+        let itemString = `\n*${product.quantity}x ${getProductName(
+          product.product_id,
+          product.size,
+        )} - R$ ${product.value}*`;
+
+        if (product.product_id_2) {
+          itemString += `*
+      ${[product.product_id, product.product_id_2].map(
+        productId =>
+          `${product.quantity}x 1/2 ${getProductName(productId, product.size)}`,
+      ).join(`
+      `)}*`;
+        }
+
+        if (product.product_id_3) {
+          itemString += `
+      *${product.quantity}x ${getProductName(
+            product.product_id_3,
+            product.size,
+          )}*`;
+        }
+
+        if (product.observation) {
+          itemString += `
+      *Observação: ${product.observation}*`;
+        }
+
+        return itemString;
+      })
+      .join('\n');
+  };
+
+  const getTemplate = () => {
+    let template: templateProps = {
+      address: '',
+      items: '',
+      totalAmount: '',
+      typePagament: '',
+      estimativeHour: '',
+      discount: null,
+      reward: null,
+    };
+
+    if (rewardCartModal.currentItem) {
+      if (
+        isReward &&
+        (rewardCartModal.currentItem as User_Rewards).rewardType === 0
+      ) {
+        template.discount = `*Desconto aplicado:* R$ ${getDiscount(
+          (rewardCartModal.currentItem as User_Rewards).rewardDiscount,
+        ).toFixed(2)}`;
+        template.reward = `*Recompensa resgatada:* ${
+          (rewardCartModal.currentItem as User_Rewards).rewardName
+        }`;
+      }
+
+      if (isReward) {
+        template.reward = `*Recompensa resgatada:* ${
+          (rewardCartModal.currentItem as User_Rewards).rewardName
+        }`;
+        console.log(template.reward);
+      }
+
+      if (isCoupon) {
+        template.discount = `*Desconto aplicado:* ${
+          (rewardCartModal.currentItem as Discount_cupom).cupom_name
+        }
+        \n*Valor do desconto:* R$ ${getDiscount(
+          (rewardCartModal.currentItem as Discount_cupom).discount,
+        ).toFixed(2)}`;
+      }
+    }
+
+    if (selected === 0 && user?.user_Adress_id) {
+      const addr = address.find(a => a.id === user?.user_Adress_id);
+
+      if (addr) {
+        template.address = `*Delivery:* ${addr.address}, ${addr.number} - ${addr.district} - ${addr.city} / ${addr.uf}`;
+      }
+    } else {
+      template.address = '*Retirada no balcão*';
+    }
+
+    template.totalAmount = `R$ ${getTotal().toFixed(2)}`;
+    if (selectedTypePagament) {
+      template.typePagament = getTypePagament(selectedTypePagament);
+    }
+    template.items = getItems();
+    template.estimativeHour =
+      selected === 0 ? estimativeDate : estimativeDateBalcao;
+
+    const templateString = `Pedido feito! Agradecemos pela preferencia. \nSeu pedido ja chegou em nossa central, segue os dados do pedido:
+     ${template.items}
+     \n*Tempo estimado de entrega:* ${template.estimativeHour}
+     \n*Forma de pagamento:* ${template.typePagament}
+     \n${template.address}
+     \n*Total:* ${template.totalAmount}
+     ${template.discount ? `\n${template.discount}` : ''}
+     ${template.reward ? `\n${template.reward}` : ''}
+     \nCaso não reconheça o pedido, pedimos por gentileza que entre em contato com nosso número.`;
+
+    return templateString;
+  };
   const onSubmit = async () => {
+    const template = getTemplate();
+
     if (!user?.phone) {
       toast.error('Por favor, insira um telefone antes de finalizar o pedido');
       orderModal.onClose();
@@ -143,8 +281,10 @@ export const useCustomOrderModal = () => {
         rewardCartModal.currentItem && isReward
           ? rewardCartModal.currentItem.id
           : null,
+      template: template,
     } as CreateOrderDto);
 
+    console.log('response', response);
     if (response?.id) {
       setLoading(false);
       const newOrder = { ...response, orderItems: cart_product };
@@ -168,6 +308,9 @@ export const useCustomOrderModal = () => {
       setCart_product([]);
       setOrders(updatedOrders);
       return;
+    } else if (response.response.data.statusCode === 400) {
+      setLoading(false);
+      toast.error(response.response.data.message);
     } else {
       setLoading(false);
       toast.error('Erro ao fazer pedido');

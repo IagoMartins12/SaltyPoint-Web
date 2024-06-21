@@ -76,6 +76,10 @@ const OrderModal = () => {
     orderModal.onClose();
   };
 
+  const onFinish = () => {
+    setHasPlayed(false);
+  };
+
   let body = (
     <div className='overflow-auto privacyScroll pb-8'>
       <form
@@ -444,7 +448,7 @@ const OrderModal = () => {
   );
 
   if (hasPlayed) {
-    body = <AnimationOrder />;
+    body = <AnimationOrder onFinish={onFinish} />;
   }
 
   return (
