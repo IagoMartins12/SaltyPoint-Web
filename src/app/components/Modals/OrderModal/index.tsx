@@ -409,16 +409,24 @@ const OrderModal = () => {
 
             {estimativeDate && (selected === 0 || selected === 1) ? (
               <div className='flex justify-between px-2 '>
-                <span className='text-base font-light w-6/12'>
-                  Tempo estimado de entrega:{' '}
-                </span>
-                {selected === 0 ? (
-                  <span className='text-base font-light text-gray-400 '>
-                    {estimativeDate}
-                  </span>
+                {systemOpening ? (
+                  <>
+                    <span className='text-base font-light w-6/12'>
+                      Tempo estimado de entrega:{' '}
+                    </span>
+                    {selected === 0 ? (
+                      <span className='text-base font-light text-gray-400 '>
+                        {estimativeDate}
+                      </span>
+                    ) : (
+                      <span className='text-base font-light text-gray-400 '>
+                        {estimativeDateBalcao}
+                      </span>
+                    )}
+                  </>
                 ) : (
-                  <span className='text-base font-light text-gray-400 '>
-                    {estimativeDateBalcao}
+                  <span className='text-base font-bold w-full text-center my-4'>
+                    Não estamos em horário de entrega
                   </span>
                 )}
               </div>
@@ -433,7 +441,9 @@ const OrderModal = () => {
           </div>
 
           <button
-            className='px-2 my-2 py-2 text-center w-full bg-red-400 rounded-xl'
+            className={`px-2 my-2 py-2 text-center w-full rounded-xl ${
+              !systemOpening ? 'bg-gray-500' : 'bg-red-400 '
+            }`}
             disabled={loading ? true : false}
           >
             {loading ? (

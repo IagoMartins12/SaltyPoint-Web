@@ -10,7 +10,7 @@ export const ProductCard: React.FC<ProductCardType> = ({
 
   return (
     <div
-      className={`flex  cardBG  h-[26vh] sm:h-[23vh] p-2 shadow-md rounded-2xl cursor-pointer  ${
+      className={`flex  cardBG  h-[25vh] sm:h-[23vh] p-2 shadow-md rounded-2xl cursor-pointer  ${
         fullWidth ? 'w-[100%]' : 'w-full md:w-[48%] xl:w-[32%]'
       }`}
       onClick={() => {

@@ -10,9 +10,9 @@ export const useCustomProductModal = () => {
   const [quantity, setQuantity] = useState(1);
   const [disabled, setDisabled] = useState(true);
   const [value, setValue] = useState<number | string>(0);
-  const [otherProductsValue, setOtherProductsValue] = useState<number | string>(
-    0,
-  );
+  // const [otherProductsValue, setOtherProductsValue] = useState<number | string>(
+  //   0,
+  // );
   const [selectedSize, setSelectedSize] = useState(0);
   const [selectedFlavor, setSelectedFlavor] = useState('');
   const [selectedProduct2, setSelectedProduct2] = useState<null | string>(null);
@@ -28,7 +28,7 @@ export const useCustomProductModal = () => {
   const removeSelected = (
     setSelectedAction: React.Dispatch<React.SetStateAction<string | null>>,
   ) => {
-    setOtherProductsValue(0);
+    // setOtherProductsValue(0);
     setSelectedAction(null);
   };
 
@@ -124,7 +124,6 @@ export const useCustomProductModal = () => {
 
   useEffect(() => {
     checkValue();
-    console.log('renderizando');
   }, [checkValue]);
 
   useEffect(() => {
@@ -135,7 +134,7 @@ export const useCustomProductModal = () => {
           productModal.currentProduct?.value,
           product.value,
         );
-        setOtherProductsValue(maxValue);
+        // setOtherProductsValue(maxValue);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

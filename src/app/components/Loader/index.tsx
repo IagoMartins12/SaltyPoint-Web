@@ -13,7 +13,7 @@ const Loader: React.FC<LoaderProps> = ({ isMin = false }) => {
       } flex flex-col justify-center items-center `}
     >
       <PuffLoader
-        size={!isMin ? 100 : 26}
+        size={!isMin ? 100 : 23}
         color={`${!isMin ? 'red' : 'white'}`}
       />
     </div>

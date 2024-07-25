@@ -13,7 +13,7 @@ const SkeletonProducts = () => {
             {[6, 7, 8, 9, 10, 11, 12, 13, 14].map(index => (
               <div
                 key={index}
-                className={`flex  cardBG  h-[26vh] sm:h-[23vh] p-2 shadow-md rounded-2xl w-full md:w-[48%] xl:w-[32%] `}
+                className={`flex cardBG h-[26vh] sm:h-[23vh] p-2 shadow-md rounded-2xl w-full md:w-[48%] xl:w-[32%] `}
               >
                 <div className={` w-6/12 sm:w-5/12 h-full rounded-xl`}>
                   <Skeleton className='h-full w-full items-center' />

@@ -45,6 +45,8 @@ export const GetGeoLocation: React.FC<GeoLocationProps> = ({
     setStep(3);
   };
 
+  console.log('GeoAddress', GeoAddress);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

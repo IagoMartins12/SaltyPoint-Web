@@ -5,10 +5,6 @@ import Image from 'next/image';
 import { useCallback } from 'react';
 import { FcPlus } from 'react-icons/fc';
 
-declare global {
-  var cloudinary: any;
-}
-
 const uploadPreset = 'evuh89yc';
 
 interface ProfileImageProps {
@@ -30,6 +26,10 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ onChange, value }) => {
       uploadPreset={uploadPreset}
       options={{
         maxFiles: 1,
+        sources: ['local'],
+        fieldName: 'Selecionar',
+        defaultSource: 'local',
+        language: 'pt-BR',
       }}
     >
       {({ open }) => {

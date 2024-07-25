@@ -255,6 +255,7 @@ option {
 .aspect-ratio {
   aspect-ratio: 2/1;
 }
+
 @media (max-width: 1500px) {
   .cart-open {
     transform: translateX(-76%);

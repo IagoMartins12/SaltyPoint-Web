@@ -24,7 +24,7 @@ const TalkToUsModal = () => {
       icon: <BsHouseDoor size={30} />,
     },
     {
-      label: 'Horario de serviço:',
+      label: 'Horario de atendimento:',
       text: `${generalData?.openingHours} - ${generalData?.closingHours}`,
       icon: <FiClock size={30} />,
     },
@@ -75,7 +75,7 @@ const TalkToUsModal = () => {
     </div>
   );
 
-  if (!generalData) return (body = <SkeletonGeneralData />);
+  // if (!generalData) return (body = <SkeletonGeneralData />);
   return (
     <Modal
       onClose={talkToUsModal.onClose}

@@ -21,7 +21,7 @@ export const ProductMenu = () => {
     setVisibleCategories(visibleCategories);
   }, [categorys]);
 
-  if (products.length <= 0) {
+  if (products?.length <= 0 && products) {
     return <SkeletonProducts />;
   }
 

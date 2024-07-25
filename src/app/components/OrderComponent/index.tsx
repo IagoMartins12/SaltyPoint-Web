@@ -39,17 +39,12 @@ export const OrderComponent: React.FC<OrderComponentType> = ({ order }) => {
         <div className='w-11/12 mx-auto h-[50%] flex gap-3 items-center justify-between border-b-2 py-4 '>
           <div className='flex gap-3'>
             <div className='w-14 h-14 rounded-full relative'>
-              <Image
-                fill
-                src='/logo.png'
-                alt='/logo.png'
-                className='rounded-full'
-              />
+              <Image fill src='/logo.png' alt='logo' className='rounded-full' />
             </div>
 
             <div className='flex flex-col gap-1 '>
               <span className='font-medium text-xl'>Pizzaria Salty Point</span>
-              <span className={`font-light text-sm ${color}`}>
+              <span className={`font-semibold text-sm ${color}`}>
                 {getState()}
               </span>
             </div>

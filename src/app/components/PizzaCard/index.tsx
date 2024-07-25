@@ -18,7 +18,9 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
   const productModal = useProductModal();
 
   return (
-    <label className={`flex min-h-[12vh] rounded-2xl cursor-pointer w-[100%]`}>
+    <label
+      className={`flex min-h-[20vh] sm:min-h-[12vh] rounded-2xl cursor-pointer w-[100%]`}
+    >
       <input
         type='radio'
         name='selectedProduct2'
@@ -35,12 +37,12 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
         style={{ display: 'none' }}
       />
       <div
-        className={`flex min-h-[10%] rounded-2xl cursor-pointer w-[100%] ${
+        className={`flex rounded-2xl cursor-pointer w-[100%] ${
           selectedProduct2 === product.id ? '' : ''
         }`}
       >
         {/* Conteúdo do componente PizzaCart */}
-        <div className='relative w-3/12 h-full'>
+        <div className='relative w-[30%] h-full'>
           <div className=' w-full h-full relative'>
             <Image
               fill
@@ -52,7 +54,7 @@ export const PizzaCard: React.FC<PizzaProductModalType> = ({
           </div>
         </div>
 
-        <div className='flex flex-col w-9/12 h-full gap-4 py-2 px-5 justify-between'>
+        <div className='flex flex-col w-[70%] h-full gap-4 py-2 px-5 justify-between'>
           <div className='flex flex-col gap-4'>
             <span className='font-semibold text-base sm:text-lg'>
               {product.name}

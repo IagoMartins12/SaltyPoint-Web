@@ -27,8 +27,14 @@ export const ProductBody = () => {
   const searchModal = useSearchModal();
   const productModal = useProductModal();
 
-  const { decreaseQuantity, increaseQuantity, quantity, disabled, value } =
-    useCustomProductModal();
+  const {
+    decreaseQuantity,
+    increaseQuantity,
+    setDisabled,
+    quantity,
+    disabled,
+    value,
+  } = useCustomProductModal();
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     if (!isLogged) {
@@ -40,12 +46,14 @@ export const ProductBody = () => {
       return toast.error('Faça o login para adicionar produtos');
     }
 
+    setDisabled(true);
     const response = await addCartProduct({
       product_id: productModal.currentProduct?.id,
       observation: data.observation,
       quantity: quantity,
       value: value,
     } as CartProductDto);
+    setDisabled(false);
 
     if (response) {
       const updatedCartProduct = [...cart_product, response];

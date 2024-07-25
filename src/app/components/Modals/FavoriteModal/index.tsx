@@ -13,17 +13,17 @@ const FavoriteModal = () => {
   const { favorites } = usePrivateStore();
   const { products } = useGlobalStore();
   const body = (
-    <div className='flex flex-col gap-6 w-11/12 mx-auto h-full'>
+    <div className=' h-full'>
       {favorites.length > 0 ? (
-        favorites.map(favorite => (
-          <div className='flex gap-x-2 gap-y-6 flex-wrap ' key={favorite.id}>
-            {products
+        <div className='flex gap-x-2 gap-6 flex-wrap'>
+          {favorites.map(favorite =>
+            products
               .filter(p => p.id === favorite.product_id)
               .map(product => (
                 <ProductCard product={product} key={product.id} fullWidth />
-              ))}
-          </div>
-        ))
+              )),
+          )}
+        </div>
       ) : (
         <div className='w-full h-3/5 sm:h-4/5'>
           <AnimationEmpty text='Você ainda não favoritou nenhum produto' />

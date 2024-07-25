@@ -188,7 +188,7 @@ const ChangeDeliveryInfoModal = () => {
           </div>
         ) : (
           <div className='flex flex-col items-center gap-8 w-full mt-8'>
-            <span className='text-xl font-semibold'>
+            <span className='text-xl font-semibold text-center'>
               Você ainda não possui nenhum endereço cadastrado
             </span>
 

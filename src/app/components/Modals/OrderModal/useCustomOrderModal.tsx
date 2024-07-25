@@ -228,6 +228,7 @@ export const useCustomOrderModal = () => {
 
     return templateString;
   };
+
   const onSubmit = async () => {
     const template = getTemplate();
 

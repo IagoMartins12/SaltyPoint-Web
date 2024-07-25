@@ -11,13 +11,6 @@ import {
   getTypePagaments,
   getUserInfos,
 } from '@/app/services';
-import {
-  Category,
-  General_data,
-  Product,
-  State,
-  Type_Pagament,
-} from '@/app/types/ModelsType';
 import { useEffect } from 'react';
 
 interface FetchProps {}
@@ -43,7 +36,6 @@ const FetchData: React.FC<FetchProps> = () => {
   const { isLogged } = useAuth();
 
   const fetchData = async () => {
-    console.log('Fetching data');
     const [product, category, typePagament, states, generalData] =
       await Promise.all([
         getProducts(),

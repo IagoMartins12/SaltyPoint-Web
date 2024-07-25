@@ -15,7 +15,7 @@ export const Header = () => {
       <div>
         <Image
           src='/logo.png'
-          alt='/logo.png'
+          alt='logo'
           width={80}
           height={80}
           className='!w-[55px] sm:!w-[80px] !h-[55px] sm:!h-[80px] '
