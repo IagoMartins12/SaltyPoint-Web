@@ -16,7 +16,7 @@ export const CouponSelectedCard: React.FC<SelectedCouponCardType> = ({
   const rewardCartModal = useRewardCartModal();
 
   const removeItemCart = () => {
-    const filteredCart = cart_product.filter(
+    const filteredCart = cart_product?.filter(
       item => item.observation !== 'Recompensa',
     );
     setCart_product(filteredCart);

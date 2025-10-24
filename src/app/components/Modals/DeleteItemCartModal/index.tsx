@@ -23,7 +23,7 @@ const DeleteItemCartModal: React.FC = () => {
 
       if (response.status === 200) {
         setLoading(false);
-        const updateCart = cart_product.filter(
+        const updateCart = cart_product?.filter(
           cartProduct => cartProduct.id !== deleteModal.currentItem,
         );
         setCart_product(updateCart);

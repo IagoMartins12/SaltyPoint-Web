@@ -11,7 +11,7 @@ export const CartIcon = () => {
         <Cart />
       </div>
       <span className='h-3 w-3 bottom-0 right-4 top-0 text-center text-xs absolute rounded-full'>
-        {cart_product.length}
+        {cart_product?.length}
       </span>
     </div>
   );

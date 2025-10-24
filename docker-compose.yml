@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: SaltyPoint
+    container_name: Painel
     ports:
       - '3000:3000'
     volumes:
