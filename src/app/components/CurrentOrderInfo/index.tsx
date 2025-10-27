@@ -49,6 +49,7 @@ export const CurrentOrderInfo: React.FC<OrderComponentType> = ({ order }) => {
     );
   };
 
+  console.log('order', { order, states });
   const getState = () => {
     return (
       states.find(s => s.id === order.state_id)?.state_name ??

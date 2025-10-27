@@ -42,7 +42,6 @@ export type UpdateUserDto = {
   image?: string;
   name?: string;
   phone?: string;
-  user_Adress_id?: string;
 };
 
 export type UpdatePasswordDto = {
@@ -84,7 +83,7 @@ export type CreateOrderDto = {
   discount_coupon_id?: string;
   reward_id?: string;
   address_id?: string | null;
-  state_id: string;
+  state_id?: string;
   discount_value?: number | null;
   contact_phone: string;
 };

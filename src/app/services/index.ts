@@ -214,8 +214,10 @@ export const updatedMe = async (
 ): Promise<UpdateUserDto> => {
   try {
     const response = await Api.patch('/me/update', updateUserDto);
+    console.log('RESPONSE', { response, updateUserDto });
     return response.data;
   } catch (error: any) {
+    console.log('error', error);
     return error.response;
   }
 };
@@ -260,9 +262,11 @@ export const addCartProduct = async (
   cartProductDto: CartProductDto,
 ): Promise<Cart_product> => {
   try {
+    console.log('caartt', cartProductDto);
     const response = await Api.post('/cart/add', cartProductDto);
     return response.data;
   } catch (error: any) {
+    console.log('error', error);
     return error;
   }
 };

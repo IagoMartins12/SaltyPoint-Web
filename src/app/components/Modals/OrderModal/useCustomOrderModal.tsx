@@ -265,7 +265,7 @@ export const useCustomOrderModal = () => {
         rewardCartModal.currentItem && isCoupon
           ? rewardCartModal.currentItem.id
           : null,
-      state_id: '6526e4b833e69bf2bb97bc9e', //Em análise,
+      state_id: '68ffbcd429e873b341b9326d', //Em análise,
       discount_value:
         rewardCartModal.currentItem && isCoupon
           ? getDiscount(
@@ -284,8 +284,6 @@ export const useCustomOrderModal = () => {
           : null,
       template: template,
     } as CreateOrderDto);
-
-    console.log('response', response);
     if (response?.id) {
       setLoading(false);
       const newOrder = { ...response, orderItems: cart_product };

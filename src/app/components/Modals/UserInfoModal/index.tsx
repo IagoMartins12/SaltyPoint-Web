@@ -55,6 +55,7 @@ const UserInfoModal = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
+    console.log(data);
     if (!user) return;
     if (data.phone.length !== 15 && data.phone)
       return toast.error('Insira um numero valido');
@@ -66,6 +67,8 @@ const UserInfoModal = () => {
       phone: data.phone !== '' ? data.phone : null,
       user_Adress_id: data.address !== '' ? data.address : null,
     } as UpdateUserDto;
+
+    console.log('objet', object);
     try {
       await updatedMe(object);
       setLoading(false);
