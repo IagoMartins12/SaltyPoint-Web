@@ -39,6 +39,7 @@ export type AddressUserDto = {
 };
 
 export type UpdateUserDto = {
+  user_Adress_id?: string | null | undefined;
   image?: string;
   name?: string;
   phone?: string;
